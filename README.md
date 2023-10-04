@@ -36,7 +36,7 @@ The service uses the following technologies:
 ## QUICK START
 
         clone EV-dashboard project from gitlab repository git@gitlab.com:ev-chargers-ui/ev-dashboard.git
-        ev-dashboard
+        cd ev-dashboard
 
 ## ABSOLUTE IMPORTS CONFIGURATION
 
