@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import '~/shared/ui/components/styles/_mixins.scss';
+import React, { useState } from 'react';
+
+import '~/app/styles/_mixins.scss';
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <h1>Vite + React</h1>
+      <h1 data-testid='app-component'>Vite + React</h1>
       <div className='card'>
         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
         <p>
