@@ -1,0 +1,10 @@
+*.css
+build
+coverage
+node_modules
+__tests__
+__mocks__
+/.git
+/.ide
+public
+README.md
