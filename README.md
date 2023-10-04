@@ -36,7 +36,14 @@ The service uses the following technologies:
 ## QUICK START
 
         clone EV-dashboard project from gitlab repository git@gitlab.com:ev-chargers-ui/ev-dashboard.git
-        cd frontend
+        ev-dashboard
+
+## ABSOLUTE IMPORTS CONFIGURATION
+
+In this project, we've set up a convenient absolute import system to make our imports cleaner and more readable. Instead of using relative paths like `../../components/Button`, you can use the following syntax:
+
+```javascript
+import Button from '~/components/Button';
 
 Next:
 
