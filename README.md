@@ -1,27 +1,53 @@
-# React + TypeScript + Vite
+## INSTALLATION
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Please make sure the release file is unpacked under a Web-accessible
+directory. You shall see the following files and directories:
 
-Currently, two official plugins are available:
+        public/
+        __tests__
+        src/
+        README
+        package.json
+        tsconfig.json
+        vite.config.js
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## REQUIREMENTS
 
-## Expanding the ESLint configuration
+Platform: cross-platform solution, linux, windows, macOS, other.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Programming language used React JS / TypeScript
 
-- Configure the top-level `parserOptions` property like this:
+The service uses the following technologies:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+        node -v version 18.13.0 and yarn 1.22.19
+        nvm current version 0.39.1
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## BASE DEPENDENCIES
+
+        typescript
+        vite
+        mobx to dispatch asynchronous actions.
+        react-router fully-featured routing library for the React JavaScript library
+        react-router-dom fully-featured routing library for the React JavaScript library
+        antDesign & scss & sass for component styling
+        jest for testing components react-testing-library
+        moment for encoding dates
+
+## QUICK START
+
+        clone EV-dashboard project from gitlab repository git@gitlab.com:ev-chargers-ui/ev-dashboard.git
+        cd frontend
+
+Next:
+
+        RUN yarn/npm install
+        RUN yarn/npm run dev
+        RUN yarn/npm execute-husky
+
+For testing:
+
+        Run yarn/npm test -- -u   
+
+## UPDATE RESULTS
+
+V1.0.0 version, 04-10-2023
