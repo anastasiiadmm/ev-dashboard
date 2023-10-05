@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import "@testing-library/jest-dom";
+import '@testing-library/jest-dom';
 import '../__mocks__/matchMedia.mock'
 
 import App from '../src/app/App';
