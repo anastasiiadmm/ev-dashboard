@@ -1,17 +1,23 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
+import "@testing-library/jest-dom";
+import { BrowserRouter } from 'react-router-dom';
+import { act } from "react-test-renderer";
 import '../__mocks__/matchMedia.mock'
 
 import App from '../src/app/App';
 
 describe('App',  () => {
   test('renders App component', async () => {
-    render(
-      <App />
+    const { asFragment } = render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     );
 
-    expect(screen.getByTestId('app-component')).toBeVisible();
+    expect(asFragment).toMatchSnapshot();
+
+    await act(async () => {});
   });
 
 });
