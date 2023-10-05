@@ -1,22 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Route, Routes } from 'react-router';
+import { observer } from 'mobx-react-lite';
 
+import Auth from '~/features/auth/Auth';
 import '~/app/styles/_mixins.scss';
 
-function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <>
-      <h1 data-testid='app-component'>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-    </>
-  );
-}
+const App: React.FC = observer(() => {
+  return <Routes>{<Route path='*' element={<Auth />} />}</Routes>;
+});
 
 export default App;

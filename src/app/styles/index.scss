@@ -1,9 +1,12 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+@use '../../app/styles/_variables.scss' as variables;
+
+#root {
+  font-family: Poppins, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  width: 100%;
+  background-color: variables.$bg-color;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -13,11 +16,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: variables.$link-turquoise-color;
   text-decoration: inherit;
 
   &:hover {
-    color: #535bf2;
+    color: variables.$button-bg-color;
   }
 }
 
@@ -46,11 +49,73 @@ button {
   transition: border-color 0.25s;
 
   &:hover {
-    border-color: #646cff;
+    color: variables.$button-bg-color;
   }
 
   &:focus,
   &:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
   }
+}
+
+//antd styles
+
+.ant-btn-link {
+  color: variables.$link-turquoise-color;
+  outline: none;
+
+  &:hover {
+    color: variables.$button-bg-color;
+  }
+}
+
+:where(.css-dev-only-do-not-override-capl5l).ant-btn-link:not(:disabled):not(
+    .ant-btn-disabled
+  ):active {
+  color: variables.$button-bg-color !important;
+}
+
+:where(.css-dev-only-do-not-override-capl5l)[class^='ant-col'],
+:where(.css-dev-only-do-not-override-capl5l)[class*=' ant-col'] {
+  font-family:
+    Poppins,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    'Noto Color Emoji' !important;
+  font-size: 14px !important;
+  box-sizing: border-box !important;
+  line-height: normal;
+  color: #323232;
+}
+
+:where(.css-dev-only-do-not-override-capl5l).ant-input {
+  font-family:
+    Poppins,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    'Noto Color Emoji' !important;
+}
+
+:where(.css-dev-only-do-not-override-capl5l).ant-btn-primary:disabled,
+:where(.css-dev-only-do-not-override-capl5l).ant-btn-primary.ant-btn-disabled {
+  border-color: variables.$button-bg-color;
+  color: variables.$white-color;
+  background-color: variables.$button-bg-color;
+  font-size: 14px;
 }
