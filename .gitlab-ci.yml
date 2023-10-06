@@ -76,7 +76,7 @@ test:
     name: testing
   script:
     - echo "Running tests"
-    - docker-compose -f docker-compose-tests.yml build $SERVICE_NAME
+    - docker-compose -f docker-compose-tests.yml build --no-cache $SERVICE_NAME
     - docker-compose -f docker-compose-tests.yml run --rm $SERVICE_NAME
     - test_exit_code=$?
     - if [ $test_exit_code -ne 0 ]; then exit $test_exit_code; fi
