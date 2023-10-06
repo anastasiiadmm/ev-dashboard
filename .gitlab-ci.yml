@@ -74,8 +74,6 @@ test:
   stage: test
   environment:
     name: testing
-  before_script:
-    - docker login -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY_URL
   script:
     - echo "Running tests"
     - docker-compose -f docker-compose-tests.yml build $SERVICE_NAME
