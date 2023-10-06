@@ -43,17 +43,6 @@
     "react-test-renderer": "^18.2.0",
     "sass": "^1.68.0"
   },
-  "babel": {
-    "presets": [
-      ["@babel/preset-env", { "loose": true }],
-      ["@babel/preset-react", { "runtime": "automatic" }],
-      "@babel/preset-typescript"
-    ],
-    "plugins": [
-      ["@babel/plugin-proposal-decorators", { "legacy": true }],
-      ["@babel/plugin-transform-class-properties", { "loose": true }]
-    ]
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
