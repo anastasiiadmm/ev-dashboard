@@ -1,6 +1,8 @@
 variables:
   DEPLOY_USER: "infrastructure"
   SERVICE_NAME: "ev-dashboard"
+  DOMAIN_DEV: "ev.ltestl.com"
+  NETWORK: "ev-dashboard"
 
 .add-ssh-private-key-script: &add-ssh-private-key
   - apk update
@@ -13,12 +15,12 @@ variables:
   - ssh-keyscan -p 22 -H $DEPLOY_SERVER >> ~/.ssh/known_hosts
 
 .build-and-push-script: &build-and-push
-  - docker build -t $SERVICE_NAME --cache-from $DOCKER_REGISTRY_URL/latest -f dockerfiles/Dockerfile .
-  - docker tag $SERVICE_NAME $DOCKER_REGISTRY_URL/$CI_COMMIT_SHORT_SHA
-  - docker tag $SERVICE_NAME $DOCKER_REGISTRY_URL/latest
-  - docker push $DOCKER_REGISTRY_URL/$CI_COMMIT_SHORT_SHA
-  - docker push $DOCKER_REGISTRY_URL/latest
-  - echo $DOCKER_REGISTRY_URL/$CI_COMMIT_SHORT_SHA
+  - docker build -t $SERVICE_NAME --cache-from $CI_REGISTRY_IMAGE/latest -f dockerfiles/Dockerfile .
+  - docker tag $SERVICE_NAME $CI_REGISTRY_IMAGE/$CI_COMMIT_SHORT_SHA
+  - docker tag $SERVICE_NAME $CI_REGISTRY_IMAGE/latest
+  - docker push $CI_REGISTRY_IMAGE/$CI_COMMIT_SHORT_SHA
+  - docker push $CI_REGISTRY_IMAGE/latest
+  - echo $CI_REGISTRY_IMAGE/$CI_COMMIT_SHORT_SHA
 
 .create-and-copy-compose-script: &create_and_copy_compose
   - apk update
@@ -42,12 +44,23 @@ variables:
 .build_template: &build_job
   image: docker:stable
   tags:
-    - ui
+    - $RUNNER_TAG
   stage: build
   before_script:
-    - docker login -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY_URL
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     *build-and-push
+
+.deploy_template: &deploy_job
+  image: docker:stable
+  tags:
+    - $RUNNER_TAG
+  stage: deploy
+  before_script:
+    - *add-ssh-private-key
+  script:
+    - *create_and_copy_compose
+    - *deploy_compose
 
 stages:
   - test
@@ -57,7 +70,7 @@ stages:
 test:
   image: docker/compose:latest
   tags:
-    - ui
+    - $RUNNER_TAG
   stage: test
   environment:
     name: testing
@@ -81,3 +94,45 @@ build&push-dev:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
+build&push-staging:
+  <<: *build_job
+  only:
+    refs:
+      - staging
+  variables:
+    REACT_APP_ENVIRONMENT: staging
+    DOMAIN_NAME: $DOMAIN_STAGING
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+
+deploy-dev:
+  image: docker:git
+  tags:
+    - $RUNNER_TAG
+  stage: deploy
+  only:
+    refs:
+      - dev
+  variables:
+    DEPLOY_SERVER: $DEPLOY_SERVER_DEV
+    DOMAIN_NAME: $DOMAIN_DEV
+  before_script:
+    - *add-ssh-private-key
+  script:
+    - *create_and_copy_compose
+    - *deploy_compose
+
+deploy-staging:
+  <<: *deploy_job
+  only:
+    refs:
+      - staging
+  variables:
+    DEPLOY_SERVER: $DEPLOY_SERVER_STAGING
+    DOMAIN_NAME: $DOMAIN_STAGING
+  before_script:
+    -   *add-ssh-private-key
+  script:
+    - *create_and_copy_compose
+    - *deploy_compose
