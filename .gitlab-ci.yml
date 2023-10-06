@@ -2,7 +2,7 @@ variables:
   DEPLOY_USER: "infrastructure"
   SERVICE_NAME: "ev-dashboard"
   DOMAIN_DEV: "ev.ltestl.com"
-  NETWORK: "ev-dashboard"
+  NETWORK: "ev-network"
 
 .add-ssh-private-key-script: &add-ssh-private-key
   - apk update
@@ -123,16 +123,3 @@ deploy-dev:
     - *create_and_copy_compose
     - *deploy_compose
 
-deploy-staging:
-  <<: *deploy_job
-  only:
-    refs:
-      - staging
-  variables:
-    DEPLOY_SERVER: $DEPLOY_SERVER_STAGING
-    DOMAIN_NAME: $DOMAIN_STAGING
-  before_script:
-    -   *add-ssh-private-key
-  script:
-    - *create_and_copy_compose
-    - *deploy_compose
