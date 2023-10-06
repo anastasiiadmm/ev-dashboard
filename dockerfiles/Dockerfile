@@ -1,5 +1,4 @@
-FROM node:18-alpine3.16 as build
-RUN apk add --update python3 make g++\ && rm -rf /var/cache/apk/*
+FROM node:18-slim as build
 
 WORKDIR /app_build
 

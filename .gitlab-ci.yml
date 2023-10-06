@@ -89,20 +89,6 @@ build&push-dev:
   variables:
     REACT_APP_ENVIRONMENT: development
     DOMAIN_NAME: $DOMAIN_DEV
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-
-build&push-staging:
-  <<: *build_job
-  only:
-    refs:
-      - staging
-  variables:
-    REACT_APP_ENVIRONMENT: staging
-    DOMAIN_NAME: $DOMAIN_STAGING
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-
 
 deploy-dev:
   image: docker:git
