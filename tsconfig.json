@@ -2,6 +2,7 @@
   "compilerOptions": {
     "types": ["jest", "node", "@testing-library/jest-dom"],
     "target": "ES2020",
+    "experimentalDecorators": true,
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",

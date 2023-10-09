@@ -5,6 +5,14 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Auth from "../../src/features/auth/Auth";
 
+jest.mock('~/shared/utils/config', () => ({
+  apiURL: 'http://localhost/8000',
+}));
+
+beforeAll(() => {
+  process.env.NODE_ENV = 'test';
+});
+
 jest.mock('antd/lib/form/Form', () => {
   const actualForm = jest.requireActual('antd/lib/form/Form');
   return {
