@@ -1,14 +1,16 @@
 import bem from 'easy-bem';
 import { Button, Col, Form, Row, Typography } from 'antd';
 import { useState, ChangeEvent } from 'react';
+import { observer } from 'mobx-react-lite';
 
 import logo from '~/assets/images/logo.svg';
 import FormField from '~/shared/ui/components/FormFIeld/FormField';
 import '~/features/auth/Auth.scss';
+import { authStore } from '~/store/store';
 
 const { Text } = Typography;
 
-const Auth = () => {
+const Auth = observer(() => {
   const b = bem('Auth');
   const [form] = Form.useForm();
   const [checked, setChecked] = useState(true);
@@ -17,7 +19,10 @@ const Auth = () => {
     setChecked(e.target.checked);
   };
 
-  const onFinish = async () => {};
+  const onFinish = async (values) => {
+    console.log(values);
+    await authStore.loginUser(values);
+  };
 
   return (
     <Row justify='space-between' data-testid='auth-component' className={b()}>
@@ -47,21 +52,21 @@ const Auth = () => {
                   data-testid='email_id_login'
                   type='email'
                   id='email_id'
-                  name='username'
+                  name='email'
                   rules={[
                     {
                       required: true,
-                      message: 'Заполните логин',
+                      message: 'Заполните почту',
                     },
                   ]}
-                  placeholder='Логин'
+                  placeholder='Электронная почта'
                 />
 
                 <FormField
                   data-testid='password_id'
                   type='password'
                   name='password'
-                  placeholder='Пароль'
+                  placeholder='Ваш пароль'
                 />
 
                 <FormField
@@ -74,7 +79,7 @@ const Auth = () => {
                   onChange={onChangeCheckbox}
                 />
 
-                <Button disabled type='primary' htmlType='submit' className={b('login-button')}>
+                <Button type='primary' htmlType='submit' className={b('login-button')}>
                   Войти
                 </Button>
               </Form>
@@ -84,6 +89,6 @@ const Auth = () => {
       </div>
     </Row>
   );
-};
+});
 
 export default Auth;
