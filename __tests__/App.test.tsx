@@ -5,6 +5,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { act } from "react-test-renderer";
 import '../__mocks__/matchMedia.mock'
 
+jest.mock('~/shared/utils/config', () => ({
+  apiURL: 'http://localhost/8000',
+}));
+
 import App from '../src/app/App';
 
 describe('App',  () => {
