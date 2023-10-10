@@ -12,6 +12,8 @@ import {
 import { authStore } from '~/store/store';
 import { tokensLocalStorage } from '~/shared/utils/config';
 import Auth from '~/features/auth/Auth';
+import ResetPassword from '~/features/auth/ResetPassword/ResetPassword';
+import ChangePassword from '~/features/auth/ChangePassword/ChangePassword';
 
 const routers: RouteObject[] = [
   {
@@ -58,7 +60,15 @@ const App: React.FC = observer(() => {
   return tokenConfigs ? (
     <div>{router}</div>
   ) : (
-    <Routes>{tokenConfigs ? null : <Route path='*' element={<Auth />} />}</Routes>
+    <Routes>
+      {tokenConfigs ? null : (
+        <>
+          <Route path='*' element={<Auth />} />
+          <Route path='/reset-password' element={<ResetPassword />} />
+          <Route path='/change-password' element={<ChangePassword />} />
+        </>
+      )}
+    </Routes>
   );
 });
 

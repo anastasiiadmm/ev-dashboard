@@ -1,28 +1,53 @@
+import React, { useState } from 'react';
 import bem from 'easy-bem';
 import { Button, Col, Form, Row, Typography } from 'antd';
-import { useState, ChangeEvent } from 'react';
-import { observer } from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
 
 import logo from '~/assets/images/logo.svg';
 import FormField from '~/shared/ui/components/FormFIeld/FormField';
-import '~/features/auth/Auth.scss';
-import { authStore } from '~/store/store';
+import '~/features/auth/ResetPassword/ResetPassword.scss';
 
 const { Text } = Typography;
 
-const Auth = observer(() => {
-  const b = bem('Auth');
+const ResetPassword = () => {
+  const b = bem('ResetPassword');
   const [form] = Form.useForm();
-  const [checked, setChecked] = useState(true);
+  const [showSuccessComponent, setShowSuccessComponent] = useState(false);
 
-  const onChangeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
-    setChecked(e.target.checked);
+  const onFinishFailed = () => {
+    setShowSuccessComponent(false);
   };
 
-  const onFinish = async (values) => {
-    await authStore.loginUser(values);
+  const onFinish = () => {
+    setShowSuccessComponent(true);
   };
+
+  if (showSuccessComponent) {
+    return (
+      <Row justify='space-between' data-testid='auth-component' className={b()}>
+        <div className={b('auth-block')}>
+          <Col
+            xs={{ span: 20, offset: 2 }}
+            md={{ span: 24, offset: 2 }}
+            lg={{ span: 22, offset: 1 }}
+          >
+            <div>
+              <img src={logo} alt='logo' className={b('logo-image')} />
+              <div className={b('success-block')}>
+                <Text className={b('title')}>
+                  На вашу почту <b>joe@mail.com</b> было отправлено письмо с информацией о сбросе
+                  пароля.
+                </Text>
+                <Text className={b('title')}>
+                  Перейдите в свою почту, чтобы продолжить процедуру сброса пароля.
+                </Text>
+              </div>
+            </div>
+          </Col>
+        </div>
+      </Row>
+    );
+  }
 
   return (
     <Row justify='space-between' data-testid='auth-component' className={b()}>
@@ -33,18 +58,15 @@ const Auth = observer(() => {
             <div>
               <Row className={b('buttons-row')}>
                 <Text strong className={b('title')}>
-                  Авторизация
+                  Восстановление пароля
                 </Text>
-                <Link to='/reset-password'>
-                  <Button type='link' className={b('register-button')}>
-                    Забыли пароль?
-                  </Button>
-                </Link>
               </Row>
 
               <Form
+                scrollToFirstError
                 form={form}
                 initialValues={{ remember: true }}
+                onFinishFailed={onFinishFailed}
                 onFinish={onFinish}
                 autoComplete='off'
                 layout='vertical'
@@ -68,26 +90,14 @@ const Auth = observer(() => {
                   placeholder='Электронная почта'
                 />
 
-                <FormField
-                  data-testid='password_id'
-                  type='password'
-                  name='password'
-                  placeholder='Ваш пароль'
-                />
-
-                <FormField
-                  className='checkbox-styles'
-                  id='remember_id'
-                  type='checkbox'
-                  label={<span style={{ color: '#59647A' }}>Запомнить меня</span>}
-                  valuePropName='password'
-                  checked={checked}
-                  onChange={onChangeCheckbox}
-                />
-
                 <Button type='primary' htmlType='submit' className={b('login-button')}>
-                  Войти
+                  Продолжить
                 </Button>
+                <Link to='/'>
+                  <Button type='link' className={b('back-button')}>
+                    Назад
+                  </Button>
+                </Link>
               </Form>
             </div>
           </div>
@@ -95,6 +105,6 @@ const Auth = observer(() => {
       </div>
     </Row>
   );
-});
+};
 
-export default Auth;
+export default ResetPassword;

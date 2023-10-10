@@ -36,7 +36,7 @@ const PasswordField: React.FC<Props> = ({
       rules={[
         {
           required: true,
-          message: 'Подтвердите пароль',
+          message: 'Неправильный пароль',
         },
         ({ getFieldValue }) => ({
           validator(_, value) {
@@ -76,7 +76,7 @@ const PasswordField: React.FC<Props> = ({
       rules={[
         {
           required: true,
-          message: 'Подтвердите пароль',
+          message: 'Неправильный пароль',
         },
         {
           min: 8,
