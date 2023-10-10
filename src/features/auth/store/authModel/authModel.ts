@@ -79,7 +79,7 @@ class AuthStore implements AuthState {
     this.tokens = defaultTokens;
     this.user = null;
     this.loading = false;
-    this.success = null;
+    this.success = false;
     this.error = null;
     this.commonError = null;
   }

@@ -8,6 +8,7 @@ import logo from '~/assets/images/logo.svg';
 import FormField from '~/shared/ui/components/FormFIeld/FormField';
 import '~/features/auth/Auth.scss';
 import { authStore } from '~/store/store';
+import { IUser } from '~/types/interfaces/IUser';
 
 const { Text } = Typography;
 
@@ -21,7 +22,7 @@ const Auth = observer(() => {
     setChecked(e.target.checked);
   };
 
-  const onFinish = async (values) => {
+  const onFinish = async (values: IUser) => {
     await authStore.loginUser(values);
     if (authStore.success) {
       navigate('/');
