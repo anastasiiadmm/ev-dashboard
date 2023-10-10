@@ -54,7 +54,7 @@ const App: React.FC = observer(() => {
   }, [handleStorageEvent]);
 
   if (authStore.tokens.access && authStore.tokens.refresh) {
-    return <div>{router}</div>;
+    return router;
   } else {
     return (
       <Routes>
