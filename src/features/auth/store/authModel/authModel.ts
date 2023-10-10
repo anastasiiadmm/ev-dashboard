@@ -26,12 +26,12 @@ interface MessageError {
 }
 
 class AuthStore implements AuthState {
-  tokens = getUserLocalStorage() || defaultTokens;
-  user = null;
-  loading = false;
-  success = false;
-  error = null;
-  commonError = null;
+  tokens: IJWTokens = getUserLocalStorage() || defaultTokens;
+  user: IUser | null = null;
+  loading: boolean = false;
+  success: boolean = false;
+  error: string | null = null;
+  commonError: IError | null = null;
 
   constructor() {
     makeAutoObservable(this);
