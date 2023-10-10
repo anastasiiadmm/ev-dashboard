@@ -20,6 +20,11 @@ interface AuthState {
   commonError: IError | null;
 }
 
+interface MessageError {
+  message: string;
+  details?: string;
+}
+
 class AuthStore implements AuthState {
   tokens = getUserLocalStorage() || defaultTokens;
   user = null;
@@ -51,11 +56,12 @@ class AuthStore implements AuthState {
         this.error = null;
         this.commonError = null;
       });
-    } catch (e: { message: string }) {
+    } catch (e) {
+      const error = e as MessageError;
       runInAction(() => {
         this.loading = false;
         this.success = false;
-        this.error = e?.message;
+        this.error = error?.message;
       });
     }
   }
