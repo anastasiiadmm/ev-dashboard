@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
 import {
@@ -34,23 +34,29 @@ class AuthStore implements AuthState {
 
   async loginUser(loginData: IUser) {
     try {
-      this.loading = true;
-      this.success = false;
-      this.commonError = null;
+      runInAction(() => {
+        this.loading = true;
+        this.success = false;
+        this.commonError = null;
+      });
 
       const resp = await axiosApi.post(`/accounts/login/`, loginData);
       addLocalStorage({ access: resp.data.access, refresh: resp.data.refresh });
 
-      this.tokens.access = resp.data.access;
-      this.tokens.refresh = resp.data.refresh;
-      this.loading = false;
-      this.success = true;
-      this.error = null;
-      this.commonError = null;
-    } catch (e) {
-      this.loading = false;
-      this.success = false;
-      this.error = e?.message;
+      runInAction(() => {
+        this.tokens.access = resp.data.access;
+        this.tokens.refresh = resp.data.refresh;
+        this.loading = false;
+        this.success = true;
+        this.error = null;
+        this.commonError = null;
+      });
+    } catch (e: { message: string }) {
+      runInAction(() => {
+        this.loading = false;
+        this.success = false;
+        this.error = e?.message;
+      });
     }
   }
 
