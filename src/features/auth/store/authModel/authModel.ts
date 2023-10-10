@@ -15,7 +15,7 @@ interface AuthState {
   tokens: IJWTokens;
   user: IUser | null;
   loading: boolean;
-  success: boolean | null;
+  success: boolean;
   error: IError | null;
   commonError: IError | null;
 }
@@ -24,7 +24,7 @@ class AuthStore implements AuthState {
   tokens = getUserLocalStorage() || defaultTokens;
   user = null;
   loading = false;
-  success = null;
+  success = false;
   error = null;
   commonError = null;
 
@@ -50,7 +50,7 @@ class AuthStore implements AuthState {
     } catch (e) {
       this.loading = false;
       this.success = false;
-      this.error = { detail: e.message };
+      this.error = { detail: (e as Error).message };
     }
   }
 
