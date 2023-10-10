@@ -61,7 +61,7 @@ class AuthStore implements AuthState {
       runInAction(() => {
         this.loading = false;
         this.success = false;
-        this.error = error?.message;
+        this.error = error?.message || null;
       });
     }
   }
