@@ -16,7 +16,7 @@ interface AuthState {
   user: IUser | null;
   loading: boolean;
   success: boolean;
-  error: IError | null;
+  error: string | null;
   commonError: IError | null;
 }
 
@@ -50,7 +50,7 @@ class AuthStore implements AuthState {
     } catch (e) {
       this.loading = false;
       this.success = false;
-      this.error = { detail: (e as Error).message };
+      this.error = e?.message;
     }
   }
 
