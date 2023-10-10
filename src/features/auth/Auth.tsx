@@ -2,6 +2,7 @@ import bem from 'easy-bem';
 import { Button, Col, Form, Row, Typography } from 'antd';
 import { useState, ChangeEvent } from 'react';
 import { observer } from 'mobx-react-lite';
+import { useNavigate } from 'react-router-dom';
 
 import logo from '~/assets/images/logo.svg';
 import FormField from '~/shared/ui/components/FormFIeld/FormField';
@@ -12,6 +13,7 @@ const { Text } = Typography;
 
 const Auth = observer(() => {
   const b = bem('Auth');
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [checked, setChecked] = useState(true);
 
@@ -20,8 +22,10 @@ const Auth = observer(() => {
   };
 
   const onFinish = async (values) => {
-    console.log(values);
     await authStore.loginUser(values);
+    if (authStore.success) {
+      navigate('/');
+    }
   };
 
   return (
@@ -79,7 +83,12 @@ const Auth = observer(() => {
                   onChange={onChangeCheckbox}
                 />
 
-                <Button type='primary' htmlType='submit' className={b('login-button')}>
+                <Button
+                  loading={authStore.loading}
+                  type='primary'
+                  htmlType='submit'
+                  className={b('login-button')}
+                >
                   Войти
                 </Button>
               </Form>

@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from 'react';
 import { Route, RouteObject, Routes, useRoutes } from 'react-router';
 import { observer } from 'mobx-react-lite';
 
-import { useTokenConfigs } from '~/shared/hooks/useTokenConfigs';
 import Home from '~/features/Home/Home';
 import {
   defaultLocalStorage,
@@ -22,7 +21,6 @@ const routers: RouteObject[] = [
 
 const App: React.FC = observer(() => {
   const router = useRoutes(routers);
-  const tokenConfigs = useTokenConfigs();
 
   const initializeApp = useCallback(() => {
     const tokensLocal = getUserLocalStorage();
@@ -55,11 +53,15 @@ const App: React.FC = observer(() => {
     };
   }, [handleStorageEvent]);
 
-  return tokenConfigs ? (
-    <div>{router}</div>
-  ) : (
-    <Routes>{tokenConfigs ? null : <Route path='*' element={<Auth />} />}</Routes>
-  );
+  if (authStore.tokens.access && authStore.tokens.refresh) {
+    return <div>{router}</div>;
+  } else {
+    return (
+      <Routes>
+        <Route path='*' element={<Auth />} />
+      </Routes>
+    );
+  }
 });
 
 export default App;
