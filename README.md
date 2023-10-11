@@ -38,6 +38,10 @@ The service uses the following technologies:
         clone EV-dashboard project from gitlab repository git@gitlab.com:ev-chargers-ui/ev-dashboard.git
         cd ev-dashboard
 
+## ENVIRONMENT CONFIGURATION
+
+        VITE_API_URL=YOUR_API_URL_HERE
+
 ## ABSOLUTE IMPORTS CONFIGURATION
 
 In this project, we've set up a convenient absolute import system to make our imports cleaner and more readable. Instead of using relative paths like `../../components/Button`, you can use the following syntax:
