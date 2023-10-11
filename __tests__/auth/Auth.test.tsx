@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import { BrowserRouter } from 'react-router-dom';
 
-import Auth from "../../src/features/auth/Auth";
+import Auth from "../../src/features/auth/Auth/Auth";
 
 jest.mock('~/shared/utils/config', () => ({
   apiURL: 'http://localhost/8000',

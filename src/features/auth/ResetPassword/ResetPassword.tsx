@@ -4,8 +4,7 @@ import { Button, Col, Form, Row, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 
 import logo from '~/assets/images/logo.svg';
-import FormField from '~/shared/ui/components/FormFIeld/FormField';
-import '~/features/auth/ResetPassword/ResetPassword.scss';
+import { FormField } from '~/shared/ui/components';
 
 const { Text } = Typography;
 
