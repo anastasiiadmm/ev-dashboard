@@ -8,7 +8,7 @@ import {
   getUserLocalStorage,
   logoutLocalStorage,
 } from '~/shared/utils/storage';
-import { authStore } from '~/shared/api/store/store';
+import { authStore } from '~/shared/api/store';
 import { tokensLocalStorage } from '~/shared/utils/config';
 import Auth from '~/features/auth/Auth';
 
