@@ -2,17 +2,19 @@ import bem from 'easy-bem';
 import { Button, Col, Form, Row, Typography } from 'antd';
 import { useState, ChangeEvent } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import logo from '~/assets/images/logo.svg';
 import FormField from '~/shared/ui/components/FormFIeld/FormField';
 import '~/features/auth/Auth.scss';
-import { authStore } from '~/store/store';
+import { authStore } from '~/shared/api/store';
+import { IUser } from '~/shared/types/interfaces/IUser';
 
 const { Text } = Typography;
 
 const Auth = observer(() => {
   const b = bem('Auth');
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [checked, setChecked] = useState(true);
 
@@ -20,8 +22,11 @@ const Auth = observer(() => {
     setChecked(e.target.checked);
   };
 
-  const onFinish = async (values) => {
+  const onFinish = async (values: IUser) => {
     await authStore.loginUser(values);
+    if (authStore.success) {
+      navigate('/');
+    }
   };
 
   return (
@@ -35,11 +40,9 @@ const Auth = observer(() => {
                 <Text strong className={b('title')}>
                   Авторизация
                 </Text>
-                <Link to='/reset-password'>
-                  <Button type='link' className={b('register-button')}>
-                    Забыли пароль?
-                  </Button>
-                </Link>
+                <Button type='link' className={b('register-button')}>
+                  Забыли пароль?
+                </Button>
               </Row>
 
               <Form
@@ -58,11 +61,7 @@ const Auth = observer(() => {
                   rules={[
                     {
                       required: true,
-                      message: 'Неверный адрес электронной почты',
-                    },
-                    {
-                      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: 'Неверный адрес электронной почты',
+                      message: 'Заполните почту',
                     },
                   ]}
                   placeholder='Электронная почта'
@@ -85,7 +84,12 @@ const Auth = observer(() => {
                   onChange={onChangeCheckbox}
                 />
 
-                <Button type='primary' htmlType='submit' className={b('login-button')}>
+                <Button
+                  loading={authStore.loading}
+                  type='primary'
+                  htmlType='submit'
+                  className={b('login-button')}
+                >
                   Войти
                 </Button>
               </Form>

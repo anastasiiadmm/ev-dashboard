@@ -2,18 +2,15 @@ import React, { useCallback, useEffect } from 'react';
 import { Route, RouteObject, Routes, useRoutes } from 'react-router';
 import { observer } from 'mobx-react-lite';
 
-import { useTokenConfigs } from '~/shared/hooks/useTokenConfigs';
 import Home from '~/features/Home/Home';
 import {
   defaultLocalStorage,
   getUserLocalStorage,
   logoutLocalStorage,
 } from '~/shared/utils/storage';
-import { authStore } from '~/store/store';
+import { authStore } from '~/shared/api/store';
 import { tokensLocalStorage } from '~/shared/utils/config';
 import Auth from '~/features/auth/Auth';
-import ResetPassword from '~/features/auth/ResetPassword/ResetPassword';
-import ChangePassword from '~/features/auth/ChangePassword/ChangePassword';
 
 const routers: RouteObject[] = [
   {
@@ -24,7 +21,6 @@ const routers: RouteObject[] = [
 
 const App: React.FC = observer(() => {
   const router = useRoutes(routers);
-  const tokenConfigs = useTokenConfigs();
 
   const initializeApp = useCallback(() => {
     const tokensLocal = getUserLocalStorage();
@@ -57,19 +53,15 @@ const App: React.FC = observer(() => {
     };
   }, [handleStorageEvent]);
 
-  return tokenConfigs ? (
-    <div>{router}</div>
-  ) : (
-    <Routes>
-      {tokenConfigs ? null : (
-        <>
-          <Route path='*' element={<Auth />} />
-          <Route path='/reset-password' element={<ResetPassword />} />
-          <Route path='/change-password' element={<ChangePassword />} />
-        </>
-      )}
-    </Routes>
-  );
+  if (authStore.tokens.access && authStore.tokens.refresh) {
+    return router;
+  } else {
+    return (
+      <Routes>
+        <Route path='*' element={<Auth />} />
+      </Routes>
+    );
+  }
 });
 
 export default App;

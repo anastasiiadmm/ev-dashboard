@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
 import {
@@ -7,26 +7,31 @@ import {
   getUserLocalStorage,
   logoutLocalStorage,
 } from '~/shared/utils/storage';
-import { IJWTokens } from '~/types/interfaces/IJWTokens';
-import { IUser } from '~/types/interfaces/IUser';
-import { IError } from '~/types/interfaces/IError';
+import { IJWTokens } from '~/shared/types/interfaces/IJWTokens';
+import { IUser } from '~/shared/types/interfaces/IUser';
+import { IError } from '~/shared/types/interfaces/IError';
 
 interface AuthState {
   tokens: IJWTokens;
   user: IUser | null;
   loading: boolean;
-  success: boolean | null;
-  error: IError | null;
+  success: boolean;
+  error: string | null;
   commonError: IError | null;
 }
 
+interface MessageError {
+  message: string;
+  details?: string;
+}
+
 class AuthStore implements AuthState {
-  tokens = getUserLocalStorage() || defaultTokens;
-  user = null;
-  loading = false;
-  success = null;
-  error = null;
-  commonError = null;
+  tokens: IJWTokens = getUserLocalStorage() || defaultTokens;
+  user: IUser | null = null;
+  loading: boolean = false;
+  success: boolean = false;
+  error: string | null = null;
+  commonError: IError | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -34,23 +39,30 @@ class AuthStore implements AuthState {
 
   async loginUser(loginData: IUser) {
     try {
-      this.loading = true;
-      this.success = false;
-      this.commonError = null;
+      runInAction(() => {
+        this.loading = true;
+        this.success = false;
+        this.commonError = null;
+      });
 
       const resp = await axiosApi.post(`/accounts/login/`, loginData);
       addLocalStorage({ access: resp.data.access, refresh: resp.data.refresh });
 
-      this.tokens.access = resp.data.access;
-      this.tokens.refresh = resp.data.refresh;
-      this.loading = false;
-      this.success = true;
-      this.error = null;
-      this.commonError = null;
+      runInAction(() => {
+        this.tokens.access = resp.data.access;
+        this.tokens.refresh = resp.data.refresh;
+        this.loading = false;
+        this.success = true;
+        this.error = null;
+        this.commonError = null;
+      });
     } catch (e) {
-      this.loading = false;
-      this.success = false;
-      this.error = { detail: e.message };
+      const error = e as MessageError;
+      runInAction(() => {
+        this.loading = false;
+        this.success = false;
+        this.error = error?.message || null;
+      });
     }
   }
 
@@ -79,7 +91,7 @@ class AuthStore implements AuthState {
     this.tokens = defaultTokens;
     this.user = null;
     this.loading = false;
-    this.success = null;
+    this.success = false;
     this.error = null;
     this.commonError = null;
   }
