@@ -8,9 +8,9 @@ import {
   getUserLocalStorage,
   logoutLocalStorage,
 } from '~/shared/utils/storage';
-import { authStore } from '~/shared/api/store';
 import { tokensLocalStorage } from '~/shared/utils/config';
-import Auth from '~/features/auth/Auth';
+import { authStore } from '~/shared/api/store';
+import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
 
 const routers: RouteObject[] = [
   {
@@ -59,6 +59,8 @@ const App: React.FC = observer(() => {
     return (
       <Routes>
         <Route path='*' element={<Auth />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
+        <Route path='/change-password' element={<ChangePassword />} />
       </Routes>
     );
   }

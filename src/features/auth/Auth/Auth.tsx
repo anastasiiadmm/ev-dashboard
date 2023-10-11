@@ -1,14 +1,14 @@
 import bem from 'easy-bem';
 import { Button, Col, Form, Row, Typography } from 'antd';
-import { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { observer } from 'mobx-react-lite';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import logo from '~/assets/images/logo.svg';
-import FormField from '~/shared/ui/components/FormFIeld/FormField';
-import '~/features/auth/Auth.scss';
+import '~/features/auth/Auth/Auth.scss';
 import { authStore } from '~/shared/api/store';
 import { IUser } from '~/features/auth/interfaces/IUser';
+import { FormField } from '~/shared/ui/components';
 
 const { Text } = Typography;
 
@@ -40,9 +40,11 @@ const Auth = observer(() => {
                 <Text strong className={b('title')}>
                   Авторизация
                 </Text>
-                <Button type='link' className={b('register-button')}>
-                  Забыли пароль?
-                </Button>
+                <Link to='/reset-password'>
+                  <Button type='link' className={b('register-button')}>
+                    Забыли пароль?
+                  </Button>
+                </Link>
               </Row>
 
               <Form
@@ -61,7 +63,11 @@ const Auth = observer(() => {
                   rules={[
                     {
                       required: true,
-                      message: 'Заполните почту',
+                      message: 'Неверный адрес электронной почты',
+                    },
+                    {
+                      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: 'Неверный адрес электронной почты',
                     },
                   ]}
                   placeholder='Электронная почта'
