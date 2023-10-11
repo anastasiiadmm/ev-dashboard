@@ -8,7 +8,7 @@ import logo from '~/assets/images/logo.svg';
 import FormField from '~/shared/ui/components/FormFIeld/FormField';
 import '~/features/auth/Auth.scss';
 import { authStore } from '~/shared/api/store';
-import { IUser } from '~/shared/types/interfaces/IUser';
+import { IUser } from '~/features/auth/interfaces/IUser';
 
 const { Text } = Typography;
 
