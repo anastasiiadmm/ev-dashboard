@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import logo from '~/assets/images/logo.svg';
 import FormField from '~/shared/ui/components/FormFIeld/FormField';
 import '~/features/auth/Auth.scss';
-import { authStore } from '~/store/store';
-import { IUser } from '~/types/interfaces/IUser';
+import { authStore } from '~/shared/api/store/store';
+import { IUser } from '~/shared/types/interfaces/IUser';
 
 const { Text } = Typography;
 

@@ -7,9 +7,9 @@ import {
   getUserLocalStorage,
   logoutLocalStorage,
 } from '~/shared/utils/storage';
-import { IJWTokens } from '~/types/interfaces/IJWTokens';
-import { IUser } from '~/types/interfaces/IUser';
-import { IError } from '~/types/interfaces/IError';
+import { IJWTokens } from '~/shared/types/interfaces/IJWTokens';
+import { IUser } from '~/shared/types/interfaces/IUser';
+import { IError } from '~/shared/types/interfaces/IError';
 
 interface AuthState {
   tokens: IJWTokens;
