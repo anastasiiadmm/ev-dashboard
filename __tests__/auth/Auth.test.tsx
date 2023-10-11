@@ -21,7 +21,7 @@ jest.mock('antd/lib/form/Form', () => {
   };
 });
 
-jest.mock('../../src/features/auth/Auth', () => () => <div>Mocked Auth</div>);
+jest.mock('../../src/features/auth/Auth/Auth', () => () => <div>Mocked Auth</div>);
 
 describe('tests for Auth components',  () => {
   test('Render component toMatchSnapshot()', () => {
