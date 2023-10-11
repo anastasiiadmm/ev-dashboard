@@ -1,6 +1,6 @@
 import bem from 'easy-bem';
 import { Button, Col, Form, Row, Typography } from 'antd';
-import { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useNavigate, Link } from 'react-router-dom';
 

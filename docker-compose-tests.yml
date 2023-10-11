@@ -4,7 +4,7 @@ services:
   ev-dashboard:
     build:
       context: .
-      dockerfile: dockerfiles/Dockerfile.test
+      dockerfile: dockerfiles/app/Dockerfile.test
     environment:
       - REACT_APP_ENVIRONMENT=testing
       - REACT_APP_API_URL=0.0.0.0:8000
