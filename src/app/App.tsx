@@ -9,9 +9,8 @@ import {
   logoutLocalStorage,
 } from '~/shared/utils/storage';
 import { tokensLocalStorage } from '~/shared/utils/config';
-import Auth from '~/features/auth/Auth/Auth';
 import { authStore } from '~/shared/api/store';
-import { ChangePassword, ResetPassword } from '~/shared/ui/components';
+import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
 
 const routers: RouteObject[] = [
   {

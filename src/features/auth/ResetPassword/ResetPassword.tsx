@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import logo from '~/assets/images/logo.svg';
 import { FormField } from '~/shared/ui/components';
+import '~/features/auth/ResetPassword/ResetPassword.scss';
 
 const { Text } = Typography;
 

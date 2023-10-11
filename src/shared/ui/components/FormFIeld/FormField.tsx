@@ -1,9 +1,11 @@
 import React from 'react';
 
-import EmailField from '~/shared/ui/components/Fields/EmailField/EmailField';
-import PasswordField from '~/shared/ui/components/Fields/PasswordField/PasswordField';
-import DefaultField from '~/shared/ui/components/Fields/DefaultField/DefaultField';
-import CheckboxField from '~/shared/ui/components/Fields/CheckboxField/CheckboxField';
+import {
+  EmailField,
+  PasswordField,
+  CheckboxField,
+  DefaultField,
+} from '~/shared/ui/components/index';
 
 interface Props {
   type?: string;
