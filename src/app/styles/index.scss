@@ -60,6 +60,10 @@ button {
 
 //antd styles
 
+.ant-menu {
+  font-weight: variables.$font-600;
+}
+
 .ant-btn-link {
   color: variables.$link-turquoise-color;
   outline: none;
@@ -109,4 +113,16 @@ button {
   color: variables.$white-color;
   background-color: variables.$button-bg-color;
   font-size: 14px;
+}
+
+.ant-menu-light .ant-menu-item-selected,
+.ant-menu-light > .ant-menu .ant-menu-item-selected {
+  background-color: variables.$active-link-menu-bg;
+}
+
+.ant-menu-light.ant-menu-root.ant-menu-inline,
+.ant-menu-light > .ant-menu.ant-menu-root.ant-menu-inline,
+.ant-menu-light.ant-menu-root.ant-menu-vertical,
+.ant-menu-light > .ant-menu.ant-menu-root.ant-menu-vertical {
+  border-inline-end: none;
 }

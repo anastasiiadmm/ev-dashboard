@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from 'react';
 import { Route, RouteObject, Routes, useRoutes } from 'react-router';
 import { observer } from 'mobx-react-lite';
 
-import Home from '~/features/Home/Home';
 import {
   defaultLocalStorage,
   getUserLocalStorage,
@@ -11,6 +10,7 @@ import {
 import { tokensLocalStorage } from '~/shared/utils/config';
 import { authStore } from '~/shared/api/store';
 import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
+import { Home } from '~/features/main';
 
 const routers: RouteObject[] = [
   {
