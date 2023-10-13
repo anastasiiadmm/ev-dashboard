@@ -56,7 +56,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const [siderWidth, setSiderWidth] = useState(250);
+  const [siderWidth, setSiderWidth] = useState(240);
   const [activeKey, setActiveKey] = useState<string | null>('/');
 
   function getItem(
