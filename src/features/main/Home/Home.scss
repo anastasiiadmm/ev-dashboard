@@ -1,17 +1,2 @@
 .Home {
-  &__logo-button-block {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    justify-content: space-between;
-
-    &--smallScreen {
-      flex-direction: column;
-      gap: 15px;
-    }
-  }
-
-  &__button-style {
-    padding: 0;
-  }
 }

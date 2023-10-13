@@ -11,6 +11,7 @@ import { tokensLocalStorage } from '~/shared/utils/config';
 import { authStore } from '~/shared/api/store';
 import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
 import { Home } from '~/features/main';
+import { LayoutComponent } from '~/shared/ui/components';
 
 const routers: RouteObject[] = [
   {
@@ -54,7 +55,7 @@ const App: React.FC = observer(() => {
   }, [handleStorageEvent]);
 
   if (authStore.tokens.access && authStore.tokens.refresh) {
-    return router;
+    return <LayoutComponent>{router}</LayoutComponent>;
   } else {
     return (
       <Routes>
