@@ -3,6 +3,7 @@ import type { MenuProps } from 'antd';
 import { Button, Layout, Menu, theme } from 'antd';
 import bem from 'easy-bem';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import '~/shared/ui/components/LayoutComponent/LayoutComponent.scss';
 import {
@@ -41,6 +42,8 @@ import {
   users,
   usersActive,
 } from '~/assets/images';
+import { authStore } from '~/shared/api/store';
+import { logoutLocalStorage } from '~/shared/utils/storage';
 
 const { Header, Content, Sider } = Layout;
 
@@ -52,6 +55,7 @@ type Props = {
 
 const LayoutComponent: React.FC<Props> = ({ children }) => {
   const b = bem('LayoutComponent');
+  const push = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -214,7 +218,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     ),
     getItem(
       'Выйти',
-      '22',
+      '/logout',
       <img src={logout} alt='logout' />,
       <img src={logoutActive} alt='logoutActive' />,
     ),
@@ -227,6 +231,13 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
       setSiderWidth(240);
     }
   }, [collapsed]);
+
+  const logoutHandler = () => {
+    push('/');
+    logoutLocalStorage();
+    authStore.logoutUser();
+    window.location.reload();
+  };
 
   return (
     <Layout style={{ minHeight: '100vh' }} className={b('')}>
@@ -277,6 +288,11 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
               .filter((item) => item?.key === activeKey)
               .map((item) => item?.key as string)}
             onClick={({ key }) => {
+              if (key === '/logout') {
+                logoutHandler();
+                return;
+              }
+
               const matchingItem = items.find((item) => item && item.key === key);
               if (!matchingItem) {
                 setActiveKey(null);
