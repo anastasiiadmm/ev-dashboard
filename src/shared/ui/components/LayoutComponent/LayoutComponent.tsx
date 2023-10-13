@@ -219,8 +219,8 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
             mode='inline'
             items={items}
             selectedKeys={items
-              .filter((item) => item && item.key === activeKey)
-              .map((item) => item.key as string)}
+              .filter((item) => item?.key === activeKey)
+              .map((item) => item?.key as string)}
             onClick={({ key }) => {
               const matchingItem = items.find((item) => item && item.key === key);
               if (!matchingItem) {
@@ -234,8 +234,8 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
             mode='inline'
             items={logoutItems}
             selectedKeys={logoutItems
-              .filter((item) => item && item.key === activeKey)
-              .map((item) => item.key as string)}
+              .filter((item) => item?.key === activeKey)
+              .map((item) => item?.key as string)}
             onClick={({ key }) => {
               const matchingItem = items.find((item) => item && item.key === key);
               if (!matchingItem) {
