@@ -1,0 +1,25 @@
+.LayoutComponent {
+  &__logo-button-block {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    justify-content: space-between;
+
+    &--smallScreen {
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+
+  &__button-style {
+    padding: 0;
+  }
+
+  &__menu-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    max-height: 83vh;
+  }
+}

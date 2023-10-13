@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from 'react';
 import { Route, RouteObject, Routes, useRoutes } from 'react-router';
 import { observer } from 'mobx-react-lite';
 
-import Home from '~/features/Home/Home';
 import {
   defaultLocalStorage,
   getUserLocalStorage,
@@ -11,6 +10,8 @@ import {
 import { tokensLocalStorage } from '~/shared/utils/config';
 import { authStore } from '~/shared/api/store';
 import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
+import { Home } from '~/features/main';
+import { LayoutComponent } from '~/shared/ui/components';
 
 const routers: RouteObject[] = [
   {
@@ -54,7 +55,7 @@ const App: React.FC = observer(() => {
   }, [handleStorageEvent]);
 
   if (authStore.tokens.access && authStore.tokens.refresh) {
-    return router;
+    return <LayoutComponent>{router}</LayoutComponent>;
   } else {
     return (
       <Routes>

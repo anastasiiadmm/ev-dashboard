@@ -1,3 +1,4 @@
+export { default as LayoutComponent } from './LayoutComponent/LayoutComponent';
 export { default as FormField } from './FormFIeld/FormField';
 export { default as PasswordField } from './Fields/PasswordField/PasswordField';
 export { default as EmailField } from './Fields/EmailField/EmailField';

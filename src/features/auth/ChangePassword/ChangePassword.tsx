@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Col, Form, Row, Typography } from 'antd';
 import bem from 'easy-bem';
 
-import logo from '~/assets/images/logo.svg';
+import { logo } from '~/assets/images';
 import { FormField } from '~/shared/ui/components';
 
 const { Text } = Typography;
