@@ -3,7 +3,7 @@ import bem from 'easy-bem';
 import { Button, Col, Form, Row, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 
-import logo from '~/assets/images/logo.svg';
+import { logo } from '~/assets/images';
 import { FormField } from '~/shared/ui/components';
 import '~/features/auth/ResetPassword/ResetPassword.scss';
 

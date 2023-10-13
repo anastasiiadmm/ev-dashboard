@@ -4,40 +4,43 @@ import { Button, Layout, Menu, theme } from 'antd';
 import bem from 'easy-bem';
 import { Link } from 'react-router-dom';
 
-import arrowLeft from '~/assets/images/icons/arrow-left.svg';
-import arrowRight from '~/assets/images/icons/arrow-right.svg';
-import circle from '~/assets/images/icons/circle.svg';
-import heatMap from '~/assets/images/icons/heatmap.svg';
-import heatMapActive from '~/assets/images/icons/heatmap-active.svg';
-import rates from '~/assets/images/icons/rates.svg';
-import ratesActive from '~/assets/images/icons/rates-active.svg';
-import main from '~/assets/images/icons/home.svg';
-import mainActive from '~/assets/images/icons/home-active.svg';
-import speakerPhone from '~/assets/images/icons/speakerphone.svg';
-import speakerPhoneActive from '~/assets/images/icons/speakerphone-active.svg';
-import tag from '~/assets/images/icons/tag.svg';
-import tagActive from '~/assets/images/icons/tag-active.svg';
-import template from '~/assets/images/icons/template.svg';
-import templateActive from '~/assets/images/icons/template-active.svg';
-import identification from '~/assets/images/icons/identification.svg';
-import identificationActive from '~/assets/images/icons/identification-active.svg';
-import logo from '~/assets/images/logo.svg';
-import logoPrimary from '~/assets/images/icons/we_way_logo_primary.svg';
-import promoCode from '~/assets/images/icons/promocode.svg';
-import promoCodeActive from '~/assets/images/icons/promocode-active.svg';
-import users from '~/assets/images/icons/users.svg';
-import laptop from '~/assets/images/icons/Laptop.svg';
-import laptopActive from '~/assets/images/icons/laptop-active.svg';
-import officeBuilding from '~/assets/images/icons/office-building.svg';
-import officeBuildingActive from '~/assets/images/icons/office-building-active.svg';
-import referrals from '~/assets/images/icons/rreferrals.svg';
-import referralsActive from '~/assets/images/icons/rreferrals-active.svg';
-import settings from '~/assets/images/icons/settings.svg';
-import settingsActive from '~/assets/images/icons/settings-active.svg';
-import logout from '~/assets/images/icons/logout.svg';
-import logoutActive from '~/assets/images/icons/logout-active.svg';
-import usersActive from '~/assets/images/icons/user-group-active.svg';
 import '~/shared/ui/components/LayoutComponent/LayoutComponent.scss';
+import {
+  arrowLeft,
+  arrowRight,
+  circle,
+  circleActive,
+  heatMap,
+  heatMapActive,
+  identification,
+  identificationActive,
+  laptop,
+  laptopActive,
+  logo,
+  logoPrimary,
+  logout,
+  logoutActive,
+  main,
+  mainActive,
+  officeBuilding,
+  officeBuildingActive,
+  promoCode,
+  promoCodeActive,
+  rates,
+  ratesActive,
+  referrals,
+  referralsActive,
+  settings,
+  settingsActive,
+  speakerPhone,
+  speakerPhoneActive,
+  tag,
+  tagActive,
+  template,
+  templateActive,
+  users,
+  usersActive,
+} from '~/assets/images';
 
 const { Header, Content, Sider } = Layout;
 
@@ -64,16 +67,18 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     children?: MenuItem[],
   ): MenuItem {
     const isItemActive = activeKey === key;
+    const isParentActive =
+      activeIcon && children?.some((child) => child && child.key === activeKey);
+    const shouldUseActiveIcon = isItemActive || isParentActive;
 
-    const isParentActive = activeIcon
-      ? children?.some((child) => child && child.key === activeKey)
-      : false;
+    const itemStyle = isItemActive ? { backgroundColor: '#ECFFFD', color: '#22A599' } : {};
 
     return {
       key,
-      icon: (isItemActive || isParentActive) && activeIcon ? activeIcon : icon,
+      icon: shouldUseActiveIcon && activeIcon ? activeIcon : icon,
       children,
       label,
+      style: itemStyle,
     } as MenuItem;
   }
 
@@ -90,8 +95,18 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
       <img src={identification} alt='identification' />,
       <img src={identificationActive} alt='identificationActive' />,
       [
-        getItem('Мерчанты', '3', <img src={circle} alt='circle' />),
-        getItem('Отчет по Мерчантам', '4', <img src={circle} alt='circle' />),
+        getItem(
+          'Мерчанты',
+          '3',
+          <img src={circle} alt='circle' />,
+          <img src={circleActive} alt='circleActive' />,
+        ),
+        getItem(
+          'Отчет по Мерчантам',
+          '4',
+          <img src={circle} alt='circle' />,
+          <img src={circleActive} alt='circleActive' />,
+        ),
       ],
     ),
     getItem(
@@ -100,9 +115,24 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
       <img src={users} alt='users' />,
       <img src={usersActive} alt='usersActive' />,
       [
-        getItem('Пользователи', '5', <img src={circle} alt='circle' />),
-        getItem('Список зарядов пользователей', '6', <img src={circle} alt='circle' />),
-        getItem('Выписка с баланса пользователей', '16', <img src={circle} alt='circle' />),
+        getItem(
+          'Пользователи',
+          '5',
+          <img src={circle} alt='circle' />,
+          <img src={circleActive} alt='circleActive' />,
+        ),
+        getItem(
+          'Список зарядов пользователей',
+          '6',
+          <img src={circle} alt='circle' />,
+          <img src={circleActive} alt='circleActive' />,
+        ),
+        getItem(
+          'Выписка с баланса пользователей',
+          '16',
+          <img src={circle} alt='circle' />,
+          <img src={circleActive} alt='circleActive' />,
+        ),
       ],
     ),
     getItem(
@@ -129,8 +159,18 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
       <img src={speakerPhone} alt='speakerPhone' />,
       <img src={speakerPhoneActive} alt='speakerPhoneActive' />,
       [
-        getItem('Список Акций', '9', <img src={circle} alt='circle' />),
-        getItem('Отчет по акциям', '10', <img src={circle} alt='circle' />),
+        getItem(
+          'Список Акций',
+          '9',
+          <img src={circle} alt='circle' />,
+          <img src={circleActive} alt='circleActive' />,
+        ),
+        getItem(
+          'Отчет по акциям',
+          '10',
+          <img src={circle} alt='circle' />,
+          <img src={circleActive} alt='circleActive' />,
+        ),
       ],
     ),
     getItem(
@@ -182,9 +222,9 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     if (collapsed) {
-      setSiderWidth(80);
+      setSiderWidth(68);
     } else {
-      setSiderWidth(250);
+      setSiderWidth(240);
     }
   }, [collapsed]);
 

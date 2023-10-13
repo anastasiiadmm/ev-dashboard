@@ -137,10 +137,28 @@ button {
 .ant-menu-vertical .ant-menu-item,
 .ant-menu-inline .ant-menu-submenu-title,
 .ant-menu-vertical .ant-menu-submenu-title {
-  padding-left: 23px !important;
+  padding-left: 14px !important;
 }
 
 .ant-menu ul,
 .ant-menu ol {
   font-weight: variables.$font-400;
+}
+
+.ant-menu-inline .ant-menu-item,
+.ant-menu-vertical .ant-menu-item,
+.ant-menu-inline .ant-menu-submenu-title,
+.ant-menu-vertical .ant-menu-submenu-title {
+  width: calc(100% - 33px);
+  margin: 0 16px;
+}
+
+.ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline,
+.ant-menu-light > .ant-menu.ant-menu-inline .ant-menu-sub.ant-menu-inline {
+  background: none;
+}
+
+button:focus,
+button:focus-visible {
+  outline: none;
 }
