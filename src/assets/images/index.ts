@@ -1,5 +1,3 @@
-// ~/assets/images/svg/icons/index.ts
-
 // Default icons
 export { default as arrowLeft } from './svg/icons/default/arrow-left.svg';
 export { default as arrowRight } from './svg/icons/default/arrow-right.svg';
