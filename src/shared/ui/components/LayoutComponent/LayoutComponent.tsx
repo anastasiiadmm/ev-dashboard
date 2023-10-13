@@ -65,7 +65,9 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
   ): MenuItem {
     const isItemActive = activeKey === key;
 
-    const isParentActive = activeIcon ? children?.some((child) => child.key === activeKey) : false;
+    const isParentActive = activeIcon
+      ? children?.some((child) => child && child.key === activeKey)
+      : false;
 
     return {
       key,
@@ -216,14 +218,18 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
             defaultSelectedKeys={['/']}
             mode='inline'
             items={items}
-            selectedKeys={items.some((item) => item.key === activeKey) ? [activeKey] : []}
+            selectedKeys={items
+              .filter((item) => item.key === activeKey)
+              .map((item) => item.key as string)}
             onClick={({ key }) => setActiveKey(key as string)}
           />
 
           <Menu
             mode='inline'
             items={logoutItems}
-            selectedKeys={logoutItems.some((item) => item.key === activeKey) ? [activeKey] : []}
+            selectedKeys={logoutItems
+              .filter((item) => item.key === activeKey)
+              .map((item) => item.key as string)}
             onClick={({ key }) => {
               if (!items.some((item) => item.key === key)) {
                 setActiveKey(null);
