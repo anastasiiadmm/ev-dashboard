@@ -219,19 +219,26 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
             mode='inline'
             items={items}
             selectedKeys={items
-              .filter((item) => item.key === activeKey)
+              .filter((item) => item && item.key === activeKey)
               .map((item) => item.key as string)}
-            onClick={({ key }) => setActiveKey(key as string)}
+            onClick={({ key }) => {
+              const matchingItem = items.find((item) => item && item.key === key);
+              if (!matchingItem) {
+                setActiveKey(null);
+              }
+              setActiveKey(key as string);
+            }}
           />
 
           <Menu
             mode='inline'
             items={logoutItems}
             selectedKeys={logoutItems
-              .filter((item) => item.key === activeKey)
+              .filter((item) => item && item.key === activeKey)
               .map((item) => item.key as string)}
             onClick={({ key }) => {
-              if (!items.some((item) => item.key === key)) {
+              const matchingItem = items.find((item) => item && item.key === key);
+              if (!matchingItem) {
                 setActiveKey(null);
               }
               setActiveKey(key as string);
