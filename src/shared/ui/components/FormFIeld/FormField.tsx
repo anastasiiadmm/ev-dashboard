@@ -5,6 +5,7 @@ import {
   PasswordField,
   CheckboxField,
   DefaultField,
+  SelectField,
 } from '~/shared/ui/components/index';
 
 interface Props {
@@ -20,6 +21,8 @@ const FormField: React.FC<Props> = ({ type, ...props }) => {
       return <PasswordField {...props} />;
     case 'checkbox':
       return <CheckboxField {...props} />;
+    case 'select':
+      return <SelectField {...props} />;
     default:
       return <DefaultField {...props} />;
   }

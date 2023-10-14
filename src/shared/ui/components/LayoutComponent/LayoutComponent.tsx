@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import type { MenuProps } from 'antd';
-import { Button, Layout, Menu, theme } from 'antd';
+import { Button, Layout, Menu, theme, Typography } from 'antd';
 import bem from 'easy-bem';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 
-import '~/shared/ui/components/LayoutComponent/LayoutComponent.scss';
 import {
   arrowLeft,
   arrowRight,
@@ -44,8 +43,13 @@ import {
 } from '~/assets/images';
 import { authStore } from '~/shared/api/store';
 import { logoutLocalStorage } from '~/shared/utils/storage';
+import LanguageSelect from '~/shared/ui/components/Fields/LanguageSelect/LanguageSelect';
+import tesla from '~/assets/images/svg/icons/default/tesla.svg';
+import { FormField } from '~/shared/ui/components';
+import '~/shared/ui/components/LayoutComponent/LayoutComponent.scss';
 
 const { Header, Content, Sider } = Layout;
+const { Title } = Typography;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -62,6 +66,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
   } = theme.useToken();
   const [siderWidth, setSiderWidth] = useState(240);
   const [activeKey, setActiveKey] = useState<string | null>('/');
+  const [selectedLabel, setSelectedLabel] = useState('Главная');
 
   function getItem(
     label: React.ReactNode,
@@ -239,6 +244,21 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     window.location.reload();
   };
 
+  const findMenuItemByKey = (key: React.Key, items: MenuItem[]): MenuItem | null => {
+    for (const item of items) {
+      if (item.key === key) {
+        return item;
+      }
+      if (item.children) {
+        const childItem = findMenuItemByKey(key, item.children);
+        if (childItem) return childItem;
+      }
+    }
+    return null;
+  };
+
+  const handleChange = () => {};
+
   return (
     <Layout style={{ minHeight: '100vh' }} className={b('')}>
       <Sider width={siderWidth} theme='light' collapsed={collapsed}>
@@ -273,11 +293,14 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
               .filter((item) => item?.key === activeKey)
               .map((item) => item?.key as string)}
             onClick={({ key }) => {
-              const matchingItem = items.find((item) => item && item.key === key);
+              const matchingItem = findMenuItemByKey(key, items);
               if (!matchingItem) {
                 setActiveKey(null);
+                setSelectedLabel('');
+              } else {
+                setSelectedLabel(matchingItem.label as string);
+                setActiveKey(key as string);
               }
-              setActiveKey(key as string);
             }}
           />
 
@@ -293,17 +316,38 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
                 return;
               }
 
-              const matchingItem = items.find((item) => item && item.key === key);
-              if (!matchingItem) {
+              const matchingLogoutItem = findMenuItemByKey(key, logoutItems);
+              if (!matchingLogoutItem) {
                 setActiveKey(null);
+                setSelectedLabel('');
+              } else {
+                setSelectedLabel(matchingLogoutItem.label as string);
+                setActiveKey(key as string);
               }
-              setActiveKey(key as string);
             }}
           />
         </div>
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
+        <Header
+          style={{ padding: '0 22px', background: colorBgContainer }}
+          className={b('header-block')}
+        >
+          <Title level={3} style={{ margin: 0 }}>
+            {selectedLabel}
+          </Title>
+          <div className={b('select-block')}>
+            <LanguageSelect />
+            <FormField
+              bordered={false}
+              type='select'
+              defaultValue='company'
+              customStyle={{ width: 200 }}
+              onChange={handleChange}
+              options={[{ value: 'company', label: 'Tesla company', icon: tesla }]}
+            />
+          </div>
+        </Header>
         <Content style={{ margin: '0 16px' }}>{children}</Content>
       </Layout>
     </Layout>
