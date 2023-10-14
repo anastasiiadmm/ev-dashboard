@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import type { MenuProps } from 'antd';
 import { Button, Layout, Menu, theme, Typography } from 'antd';
 import bem from 'easy-bem';
 import { Link } from 'react-router-dom';
@@ -51,7 +50,14 @@ import '~/shared/ui/components/LayoutComponent/LayoutComponent.scss';
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = {
+  key: React.Key;
+  icon: React.ReactNode;
+  activeIcon?: React.ReactNode;
+  label: React.ReactNode;
+  children?: MenuItem[];
+  style?: React.CSSProperties;
+};
 
 type Props = {
   children: React.ReactNode;
@@ -294,12 +300,12 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
               .map((item) => item?.key as string)}
             onClick={({ key }) => {
               const matchingItem = findMenuItemByKey(key, items);
-              if (!matchingItem) {
-                setActiveKey(null);
-                setSelectedLabel('');
-              } else {
+              if (matchingItem) {
                 setSelectedLabel(matchingItem.label as string);
                 setActiveKey(key as string);
+              } else {
+                setActiveKey(null);
+                setSelectedLabel('');
               }
             }}
           />
@@ -315,14 +321,13 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
                 logoutHandler();
                 return;
               }
-
-              const matchingLogoutItem = findMenuItemByKey(key, logoutItems);
-              if (!matchingLogoutItem) {
+              const matchingItem = findMenuItemByKey(key, items);
+              if (matchingItem) {
+                setSelectedLabel(matchingItem.label as string);
+                setActiveKey(key as string);
+              } else {
                 setActiveKey(null);
                 setSelectedLabel('');
-              } else {
-                setSelectedLabel(matchingLogoutItem.label as string);
-                setActiveKey(key as string);
               }
             }}
           />
