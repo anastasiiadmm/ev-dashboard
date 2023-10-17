@@ -353,7 +353,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
             />
           </div>
         </Header>
-        <Content style={{ margin: '0 16px' }}>{children}</Content>
+        <Content style={{ margin: '20px' }}>{children}</Content>
       </Layout>
     </Layout>
   );
