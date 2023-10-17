@@ -61,7 +61,7 @@ build&push-dev:
   stage: build
   only:
     refs:
-      - development
+      - dev
   variables:
     VITE_API_URL: development
   before_script:
@@ -76,7 +76,7 @@ deploy-dev:
   stage: deploy
   only:
     refs:
-      - development
+      - dev
   variables:
     DEPLOY_SERVER: $DEPLOY_SERVER_DEV
     EXTRA_SERVICE_PARAMS: $EXTRA_SERVICE_PARAMS_DEV
