@@ -30,18 +30,16 @@ const AnchorComponent: React.FC<Props> = ({ items, handleAnchorClick, currentAnc
   const b = bem('AnchorComponent');
 
   const renderItem = (item: AnchorItem) => {
-    if (item?.isSeparator) {
-      return null;
-    }
     const isSpecial = item.key === 'this-week' || item.key === 'last-week';
-    const badge = <Badge status='success' />;
+    const badge = isSpecial ? <Badge status='success' style={{ margin: '0 5px 0 20px' }} /> : null;
+
     return {
       key: item.key,
       href: item.href,
       title: (
-        <span>
-          {isSpecial && badge}
-          {item.title}
+        <span className={item.key === 'this-week' ? b('border-style') : ''}>
+          {badge}
+          <span>{item.title}</span>
         </span>
       ),
     };

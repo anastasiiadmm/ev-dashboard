@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import bem from 'easy-bem';
-import { Typography } from 'antd';
+import { Button, Divider, Typography } from 'antd';
 
 import trendingUp from '~/assets/images/svg/icons/default/trending-up.svg';
 import trendingDown from '~/assets/images/svg/icons/default/trending-down.svg';
+import userGroup from '~/assets/images/svg/icons/default/user-group.svg';
+import identification from '~/assets/images/svg/icons/default/identification.svg';
 import CardComponent from '~/shared/ui/components/CardComponent/CardComponent';
 import AnchorComponent from '~/shared/ui/components/AnchorComponent/AnchorComponent';
 import ChartComponent from '~/shared/ui/components/ChartComponent/ChartComponent';
 import '~/features/main/Home/Home.scss';
+import TimelineComponent from '~/shared/ui/components/TimelineComponent/TimelineComponent';
 
 const { Title, Text } = Typography;
 
@@ -47,6 +50,80 @@ const items = [
     key: 'last-week',
     href: '#last-week',
     title: 'Предыдущая неделя',
+  },
+];
+
+const cardInfoItems = [
+  {
+    id: 1,
+    title: 'Заголовок',
+    text: 'Как принято считать, ключевые особенности структуры проекта будут в равной степени предоставлены сами себе.',
+    date: '17.07.2023 14-00',
+    icon: trendingUp,
+  },
+  {
+    id: 2,
+    title: 'Заголовок',
+    text: 'Как принято считать, ключевые особенности структуры проекта будут в равной степени предоставлены сами себе. ',
+    date: '17.07.2023 14-00',
+    icon: trendingUp,
+  },
+];
+
+const timelineItems = [
+  {
+    dot: <img src={userGroup} alt='userGroup' />,
+    children: (
+      <div style={{ display: 'flex', gap: 8 }}>
+        <Text style={{ display: 'block' }}>Добавлен новый пользователь</Text>
+        <p style={{ color: '#22A599', margin: 0 }}>#18774</p>
+      </div>
+    ),
+  },
+  {
+    dot: <img src={userGroup} alt='userGroup' />,
+    children: (
+      <div style={{ display: 'flex', gap: 8 }}>
+        <Text style={{ display: 'block' }}>Добавлен новый пользователь</Text>
+        <p style={{ color: '#22A599', margin: 0 }}>#18771</p>
+      </div>
+    ),
+  },
+  {
+    dot: <img src={identification} alt='identification' />,
+    children: (
+      <div style={{ display: 'flex', gap: 8 }}>
+        <Text style={{ display: 'block' }}>Добавлен новый мерчант</Text>
+        <p style={{ color: '#22A599', margin: 0 }}>#18771</p>
+      </div>
+    ),
+  },
+  {
+    dot: <img src={identification} alt='identification' />,
+    children: (
+      <div style={{ display: 'flex', gap: 8 }}>
+        <Text style={{ display: 'block' }}>Добавлен новый мерчант</Text>
+        <p style={{ color: '#22A599', margin: 0 }}>#18771</p>
+      </div>
+    ),
+  },
+  {
+    dot: <img src={identification} alt='identification' />,
+    children: (
+      <div style={{ display: 'flex', gap: 8 }}>
+        <Text style={{ display: 'block' }}>Добавлен новый мерчант</Text>
+        <p style={{ color: '#22A599', margin: 0 }}>#18771</p>
+      </div>
+    ),
+  },
+  {
+    dot: <img src={identification} alt='identification' />,
+    children: (
+      <div style={{ display: 'flex', gap: 8 }}>
+        <Text style={{ display: 'block' }}>Добавлен новый мерчант</Text>
+        <p style={{ color: '#22A599', margin: 0 }}>#18771</p>
+      </div>
+    ),
   },
 ];
 
@@ -134,6 +211,38 @@ const Home = () => {
             }}
           />
         </div>
+      </div>
+
+      <div className={b('card-info-items')}>
+        <CardComponent width={{ width: 640 }} className={b('card-text-block')}>
+          <Title level={5} style={{ margin: '0 0 20px 0', textTransform: 'uppercase' }}>
+            Текст
+          </Title>
+          {cardInfoItems?.map((card) => {
+            return (
+              <div key={card.id} className={b('card-info-block')}>
+                <Title level={5} style={{ margin: '0 0 8px 0' }}>
+                  {card.title}
+                </Title>
+                <Text style={{ margin: 0 }}>{card.text}</Text>
+                <Text type='secondary'>{card.date}</Text>
+                <Button type='link' style={{ textAlign: 'left', padding: 0 }}>
+                  Читать далее
+                </Button>
+                <Divider style={{ margin: '20px 0' }} />
+              </div>
+            );
+          })}
+        </CardComponent>
+        <CardComponent
+          width={{ width: 550, height: 'fit-content' }}
+          className={b('card-text-block')}
+        >
+          <Title level={5} style={{ margin: '0 0 20px 0', textTransform: 'uppercase' }}>
+            Timeline
+          </Title>
+          <TimelineComponent items={timelineItems} />
+        </CardComponent>
       </div>
     </div>
   );

@@ -39,6 +39,30 @@
     height: 265px;
   }
 
+  &__card-info-items {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__card-text-block {
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__text-block-components {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__card-info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
   .ant-anchor-wrapper-horizontal .ant-anchor .ant-anchor-ink {
     background-color: transparent;
   }
@@ -61,5 +85,9 @@
   .ant-card .ant-card-body {
     border-radius: variables.$border-radius;
     border: 1px solid variables.$border-color;
+  }
+
+  .ant-timeline .ant-timeline-item {
+    padding-bottom: 30px;
   }
 }

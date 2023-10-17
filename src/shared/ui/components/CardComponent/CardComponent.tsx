@@ -4,6 +4,7 @@ import { Card } from 'antd';
 type Props = {
   children: React.ReactNode;
   width?: React.ReactNode;
+  height?: React.ReactNode;
 };
 
 const CardComponent: React.FC<Props> = ({ children, width }) => {
