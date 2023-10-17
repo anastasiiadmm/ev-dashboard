@@ -30,6 +30,7 @@ const AnchorComponent: React.FC<Props> = ({ items, handleAnchorClick, currentAnc
   const b = bem('AnchorComponent');
 
   const renderItem = (item: AnchorItem) => {
+    if (!item.href) return null;
     const isSpecial = item.key === 'this-week' || item.key === 'last-week';
     const badge = isSpecial ? <Badge status='success' style={{ margin: '0 5px 0 20px' }} /> : null;
 
@@ -41,18 +42,22 @@ const AnchorComponent: React.FC<Props> = ({ items, handleAnchorClick, currentAnc
           {badge}
           <span>{item.title}</span>
         </span>
-      ),
+      ) as React.JSX.Element,
     };
   };
+
+  const validItems = items
+    .filter((item) => !!item.href)
+    .map(renderItem)
+    .filter((item): item is { key: string; href: string; title: React.JSX.Element } => !!item);
 
   return (
     <div className={b('')}>
       <Anchor
         direction='horizontal'
-        current={currentAnchor}
         onClick={handleAnchorClick}
         getCurrentAnchor={() => currentAnchor}
-        items={items.map(renderItem).filter(Boolean)}
+        items={validItems}
       />
     </div>
   );

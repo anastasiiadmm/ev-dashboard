@@ -3,12 +3,16 @@ import { Card } from 'antd';
 
 type Props = {
   children: React.ReactNode;
-  width?: React.ReactNode;
-  height?: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 };
 
-const CardComponent: React.FC<Props> = ({ children, width }) => {
-  return <Card style={width}>{children}</Card>;
+const CardComponent: React.FC<Props> = ({ children, style, className }) => {
+  return (
+    <Card style={style} className={className}>
+      {children}
+    </Card>
+  );
 };
 
 export default CardComponent;

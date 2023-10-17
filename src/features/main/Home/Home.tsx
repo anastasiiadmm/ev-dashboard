@@ -134,7 +134,7 @@ const Home = () => {
   const handleAnchorClick = (
     e: React.MouseEvent<HTMLElement>,
     link: {
-      title: string;
+      title: React.ReactNode;
       href: string;
     },
   ) => {
@@ -147,7 +147,7 @@ const Home = () => {
       <div className={b('card-block')}>
         {cardItems.map((card) => {
           return (
-            <CardComponent width={{ width: 256 }} key={card.id}>
+            <CardComponent style={{ width: 256 }} key={card.id}>
               <Title level={5} style={{ margin: '0 0 8px 0' }}>
                 {card.name}
               </Title>
@@ -214,7 +214,7 @@ const Home = () => {
       </div>
 
       <div className={b('card-info-items')}>
-        <CardComponent width={{ width: 640 }} className={b('card-text-block')}>
+        <CardComponent style={{ width: 640 }} className={b('card-text-block')}>
           <Title level={5} style={{ margin: '0 0 20px 0', textTransform: 'uppercase' }}>
             Текст
           </Title>
@@ -235,7 +235,7 @@ const Home = () => {
           })}
         </CardComponent>
         <CardComponent
-          width={{ width: 550, height: 'fit-content' }}
+          style={{ width: 550, height: 'fit-content' }}
           className={b('card-text-block')}
         >
           <Title level={5} style={{ margin: '0 0 20px 0', textTransform: 'uppercase' }}>
