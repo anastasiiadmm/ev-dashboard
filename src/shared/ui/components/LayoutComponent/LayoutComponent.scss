@@ -1,6 +1,15 @@
 @use '../../../../app/styles/_mixins.scss';
 
 .LayoutComponent {
+  > aside {
+    max-height: 100vh;
+  }
+
+  > div {
+    max-height: 100vh;
+    overflow: auto;
+  }
+
   &__logo-button-block {
     display: flex;
     align-items: center;
