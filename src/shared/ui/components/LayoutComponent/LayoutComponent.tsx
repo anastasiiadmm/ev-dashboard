@@ -43,8 +43,6 @@ import {
 import { authStore } from '~/shared/api/store';
 import { logoutLocalStorage } from '~/shared/utils/storage';
 import LanguageSelect from '~/shared/ui/components/Fields/LanguageSelect/LanguageSelect';
-import tesla from '~/assets/images/svg/icons/default/tesla.svg';
-import { FormField } from '~/shared/ui/components';
 import '~/shared/ui/components/LayoutComponent/LayoutComponent.scss';
 
 const { Header, Content, Sider } = Layout;
@@ -263,8 +261,6 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     return null;
   };
 
-  const handleChange = () => {};
-
   return (
     <Layout style={{ minHeight: '100vh' }} className={b('')}>
       <Sider width={siderWidth} theme='light' collapsed={collapsed}>
@@ -343,17 +339,12 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
           </Title>
           <div className={b('select-block')}>
             <LanguageSelect />
-            <FormField
-              bordered={false}
-              type='select'
-              defaultValue='company'
-              customStyle={{ width: 200 }}
-              onChange={handleChange}
-              options={[{ value: 'company', label: 'Tesla company', icon: tesla }]}
-            />
+            <Title level={5} style={{ margin: ' 0 10px' }}>
+              Tesla company
+            </Title>
           </div>
         </Header>
-        <Content style={{ margin: '0 16px' }}>{children}</Content>
+        <Content style={{ margin: '20px' }}>{children}</Content>
       </Layout>
     </Layout>
   );

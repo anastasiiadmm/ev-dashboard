@@ -1,0 +1,13 @@
+.AnchorComponent {
+  padding: 20px;
+
+  &__border-style {
+    display: inline-block;
+    border-left: 1px solid #1c1c1c33;
+    height: 25px;
+  }
+
+  .ant-affix {
+    position: absolute !important;
+  }
+}

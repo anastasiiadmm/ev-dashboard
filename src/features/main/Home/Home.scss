@@ -1,2 +1,93 @@
+@use '../../../app/styles/variables' as variables;
+
 .Home {
+  &__card-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__card-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__card-amount {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+  }
+
+  &__anchor-component {
+    margin: 20px 0;
+    background: variables.$white-color;
+    border-radius: variables.$border-radius;
+    border: 1px solid variables.$border-color;
+  }
+
+  &__anchor-items {
+    background: variables.$white-color;
+    min-height: 265px;
+    padding: 20px;
+  }
+
+  &__anchor-item {
+    width: 100%;
+    height: 265px;
+  }
+
+  &__card-info-items {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__card-text-block {
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__text-block-components {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__card-info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ant-anchor-wrapper-horizontal .ant-anchor .ant-anchor-ink {
+    background-color: transparent;
+  }
+
+  .ant-anchor-wrapper .ant-anchor .ant-anchor-link-active > .ant-anchor-link-title {
+    color: variables.$black-color;
+    font-weight: variables.$font-600;
+    font-size: 14px;
+  }
+
+  .ant-anchor-wrapper .ant-anchor .ant-anchor-link-title {
+    font-weight: variables.$font-400;
+    color: variables.$second-color;
+  }
+
+  .ant-anchor-wrapper-horizontal::before {
+    border-bottom: none;
+  }
+
+  .ant-card .ant-card-body {
+    border-radius: variables.$border-radius;
+    border: 1px solid variables.$border-color;
+  }
+
+  .ant-timeline .ant-timeline-item {
+    padding-bottom: 30px;
+  }
 }
