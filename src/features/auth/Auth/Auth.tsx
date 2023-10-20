@@ -5,8 +5,8 @@ import { observer } from 'mobx-react-lite';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { logo } from '~/assets/images';
-import { authStore } from '~/shared/api/store';
 import { IUser } from '~/features/auth/interfaces/IUser';
+import { authStore } from '~/shared/api/store';
 import { FormField } from '~/shared/ui/components';
 import '~/features/auth/Auth/Auth.scss';
 
