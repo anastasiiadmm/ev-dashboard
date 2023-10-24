@@ -21,6 +21,7 @@ i18n.use(initReactI18next).init({
   lng: 'ru',
   fallbackLng: 'ru',
   interpolation: { escapeValue: false },
+  react: { useSuspense: false },
 });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

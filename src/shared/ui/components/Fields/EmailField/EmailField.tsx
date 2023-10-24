@@ -1,7 +1,6 @@
 import { Form, Input } from 'antd';
 import React from 'react';
-
-interface Rule {}
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   id?: string;
@@ -9,7 +8,6 @@ interface Props {
   label?: string;
   name?: string;
   placeholder?: string;
-  rules?: Rule[];
   inputClassName?: string;
   bordered?: boolean;
   readOnly?: boolean;
@@ -20,13 +18,29 @@ const EmailField: React.FC<Props> = ({
   label,
   name,
   placeholder,
-  rules,
   className,
   inputClassName,
   onChange,
 }) => {
+  const { t, i18n } = useTranslation();
+
   return (
-    <Form.Item label={label} name={name} className={className} rules={rules}>
+    <Form.Item
+      key={i18n.language}
+      label={label}
+      name={name}
+      className={className}
+      rules={[
+        {
+          type: 'email',
+          message: t('errors.the_input_is_not_valid_email'),
+        },
+        {
+          required: true,
+          message: t('errors.enter_your_email_address'),
+        },
+      ]}
+    >
       <Input
         className={`input-styles ${inputClassName}`}
         placeholder={placeholder}
