@@ -23,7 +23,7 @@ function LanguageSelect() {
       options={[
         { value: 'en', label: 'ENG', icon: eng },
         { value: 'ru', label: 'RU', icon: rus },
-        { value: 'ky', label: 'KY', icon: kg },
+        { value: 'ky', label: 'KG', icon: kg },
       ]}
     />
   );
