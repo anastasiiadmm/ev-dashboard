@@ -12,11 +12,16 @@ import { authStore } from '~/shared/api/store';
 import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
 import { Home } from '~/features/main';
 import { LayoutComponent } from '~/shared/ui/components';
+import Merchants from '~/features/merchants/Merchants';
 
 const routers: RouteObject[] = [
   {
     path: '/',
     element: <Home />,
+  },
+  {
+    path: '/merchants',
+    element: <Merchants />,
   },
 ];
 

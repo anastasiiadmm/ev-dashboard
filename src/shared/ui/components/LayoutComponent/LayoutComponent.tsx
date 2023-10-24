@@ -110,7 +110,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
       [
         getItem(
           'Мерчанты',
-          '3',
+          '/merchants',
           <img src={circle} alt='circle' />,
           <img src={circleActive} alt='circleActive' />,
         ),
@@ -303,6 +303,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
                 setActiveKey(null);
                 setSelectedLabel('');
               }
+              push(key);
             }}
           />
 

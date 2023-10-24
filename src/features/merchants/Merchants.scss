@@ -1,0 +1,40 @@
+@use '../../app/styles/variables' as variables;
+
+.Merchants {
+  .ant-input-group > .ant-input:first-child,
+  .ant-input-group .ant-input-group-addon:first-child {
+    border-start-end-radius: 8px;
+    border-end-end-radius: 8px;
+  }
+
+  .ant-input-group {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .ant-input-lg {
+    padding: 7px 11px 7px 46px;
+  }
+
+  .ant-input-search
+    > .ant-input-group
+    > .ant-input-group-addon:last-child
+    .ant-input-search-button {
+    border-start-start-radius: 8px;
+    border-end-start-radius: 8px;
+  }
+
+  .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child {
+    inset-inline-start: 1px;
+  }
+
+  .ant-input {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+
+  .ant-btn-default {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+}
