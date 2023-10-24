@@ -1,6 +1,7 @@
 import { Form, Input } from 'antd';
 import bem from 'easy-bem';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   id?: string;
@@ -26,9 +27,11 @@ const PasswordField: React.FC<Props> = ({
   required = true,
 }) => {
   const b = bem('PasswordField');
+  const { i18n } = useTranslation();
 
   return name === 'confirm_password' ? (
     <Form.Item
+      key={i18n.language}
       className={className || b()}
       label={label}
       name={name}
@@ -58,7 +61,7 @@ const PasswordField: React.FC<Props> = ({
       />
     </Form.Item>
   ) : !required ? (
-    <Form.Item id={id} className={className || b()} label={label} name={name}>
+    <Form.Item key={i18n.language} id={id} className={className || b()} label={label} name={name}>
       <Input.Password
         placeholder={placeholder}
         className={inputClassName}
@@ -69,6 +72,7 @@ const PasswordField: React.FC<Props> = ({
     </Form.Item>
   ) : (
     <Form.Item
+      key={i18n.language}
       id={id}
       className={className || b()}
       label={label}

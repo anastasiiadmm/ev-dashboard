@@ -3,10 +3,11 @@ import { Button, Col, Form, Row, Typography } from 'antd';
 import React, { useState, ChangeEvent } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { logo } from '~/assets/images';
-import { authStore } from '~/shared/api/store';
 import { IUser } from '~/features/auth/interfaces/IUser';
+import { authStore } from '~/shared/api/store';
 import { FormField } from '~/shared/ui/components';
 import '~/features/auth/Auth/Auth.scss';
 
@@ -14,6 +15,7 @@ const { Text } = Typography;
 
 const Auth = observer(() => {
   const b = bem('Auth');
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [checked, setChecked] = useState(true);
@@ -38,11 +40,11 @@ const Auth = observer(() => {
             <div>
               <Row className={b('buttons-row')}>
                 <Text strong className={b('title')}>
-                  Авторизация
+                  {t('login.sign_in')}
                 </Text>
                 <Link to='/reset-password'>
                   <Button type='link' className={b('register-button')}>
-                    Забыли пароль?
+                    {t('login.forgot_password')}
                   </Button>
                 </Link>
               </Row>
@@ -60,31 +62,21 @@ const Auth = observer(() => {
                   type='email'
                   id='email_id'
                   name='email'
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Неверный адрес электронной почты',
-                    },
-                    {
-                      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: 'Неверный адрес электронной почты',
-                    },
-                  ]}
-                  placeholder='Электронная почта'
+                  placeholder={t('login.email')}
                 />
 
                 <FormField
                   data-testid='password_id'
                   type='password'
                   name='password'
-                  placeholder='Ваш пароль'
+                  placeholder={t('login.your_password')}
                 />
 
                 <FormField
                   className='checkbox-styles'
                   id='remember_id'
                   type='checkbox'
-                  label={<span style={{ color: '#59647A' }}>Запомнить меня</span>}
+                  label={<span style={{ color: '#59647A' }}>{t('login.remember_me')}</span>}
                   valuePropName='password'
                   checked={checked}
                   onChange={onChangeCheckbox}
@@ -96,7 +88,7 @@ const Auth = observer(() => {
                   htmlType='submit'
                   className={b('login-button')}
                 >
-                  Войти
+                  {t('login.sign_in_button')}
                 </Button>
               </Form>
             </div>

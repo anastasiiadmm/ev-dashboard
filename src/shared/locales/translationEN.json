@@ -1,0 +1,14 @@
+{
+  "errors": {
+    "enter_your_email_address": "Enter your email address",
+    "the_input_is_not_valid_email": "Your email address is not valid"
+  },
+  "login": {
+    "sign_in": "Sign in",
+    "forgot_password": "Forgot password?",
+    "email": "Email",
+    "your_password": "Your password",
+    "remember_me": "Remember me",
+    "sign_in_button": "Sign in"
+  }
+}
