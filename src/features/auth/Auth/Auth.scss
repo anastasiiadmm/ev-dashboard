@@ -7,6 +7,12 @@
   justify-content: center;
   align-items: center;
 
+  &__localization-block {
+    position: absolute;
+    right: 57px;
+    top: 30px;
+  }
+
   &__auth-block {
     width: 400px;
     background-color: variables.$white-color;

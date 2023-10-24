@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { Route, RouteObject, Routes, useRoutes } from 'react-router';
 import { observer } from 'mobx-react-lite';
+import bem from 'easy-bem';
 
 import {
   defaultLocalStorage,
@@ -12,6 +13,7 @@ import { authStore } from '~/shared/api/store';
 import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
 import { Home } from '~/features/main';
 import { LayoutComponent } from '~/shared/ui/components';
+import LanguageSelect from '~/shared/ui/components/Fields/LanguageSelect/LanguageSelect';
 import Merchants from '~/features/merchants/Merchants';
 
 const routers: RouteObject[] = [
@@ -26,6 +28,7 @@ const routers: RouteObject[] = [
 ];
 
 const App: React.FC = observer(() => {
+  const b = bem('Auth');
   const router = useRoutes(routers);
 
   const initializeApp = useCallback(() => {
@@ -63,11 +66,16 @@ const App: React.FC = observer(() => {
     return <LayoutComponent>{router}</LayoutComponent>;
   } else {
     return (
-      <Routes>
-        <Route path='*' element={<Auth />} />
-        <Route path='/reset-password' element={<ResetPassword />} />
-        <Route path='/change-password' element={<ChangePassword />} />
-      </Routes>
+      <>
+        <div className={b('localization-block')}>
+          <LanguageSelect />
+        </div>
+        <Routes>
+          <Route path='*' element={<Auth />} />
+          <Route path='/reset-password' element={<ResetPassword />} />
+          <Route path='/change-password' element={<ChangePassword />} />
+        </Routes>
+      </>
     );
   }
 });
