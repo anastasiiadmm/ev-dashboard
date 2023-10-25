@@ -5,14 +5,14 @@ import { Key } from 'antd/lib/table/interface';
 import NotFoundImages from '~/shared/ui/components/NotFoundImages/NotFoundImages';
 import { PaginationComponent } from '~/shared/ui/components';
 import { IColumn, IMerchant } from '~/features/merchants/interfaces/IMerchant';
-import { Pagination } from '~/shared/types/interfaces/Pagination';
+import { IPagination } from '~/shared/types/interfaces/IPagination';
 
 interface Props {
   data: IMerchant[];
   columns: IColumn[];
   rowKey: (record: IMerchant) => Key;
   loading: boolean;
-  params?: Pagination | null;
+  params?: IPagination | null;
   pagePrevHandler?: (() => void | undefined) | undefined;
   pageNextHandler?: (() => void | undefined) | undefined;
   disabledButton?: boolean;
