@@ -20,12 +20,12 @@ export { default as officeBuilding } from './svg/icons/default/office-building.s
 export { default as referrals } from './svg/icons/default/rreferrals.svg';
 export { default as settings } from './svg/icons/default/settings.svg';
 export { default as logout } from './svg/icons/default/logout.svg';
-export { default as add } from '../../assets/images/svg/icons/default/add.svg';
-export { default as plus } from '../../assets/images/svg/icons/default/blue-plus.svg';
-export { default as active } from '../../assets/images/svg/icons/default/check-circle.svg';
-export { default as status } from '../../assets/images/svg/icons/default/Component 1.svg';
-export { default as x } from '../../assets/images/svg/icons/default/x-circle.svg';
-export { default as search } from '../../assets/images/svg/icons/default/search.svg';
+export { default as add } from './svg/icons/default/add.svg';
+export { default as plus } from './svg/icons/default/blue-plus.svg';
+export { default as active } from './svg/icons/default/check-circle.svg';
+export { default as status } from './svg/icons/default/Component 1.svg';
+export { default as x } from './svg/icons/default/x-circle.svg';
+export { default as search } from './svg/icons/default/search.svg';
 
 // Active icons
 export { default as circleActive } from './svg/icons/active/circle-active.svg';
