@@ -3,7 +3,7 @@
 .Merchants {
   &__search-pagination-block {
     z-index: 10;
-    width: 83.2%;
+    width: -webkit-fill-available;
     background: variables.$white-color;
     position: absolute;
     top: 64px;
