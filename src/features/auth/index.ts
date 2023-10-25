@@ -1,3 +1,3 @@
 export { default as Auth } from '~/features/auth/Auth/Auth';
-export { default as ResetPassword } from '~/features/auth/components/ResetPassword/ResetPassword';
-export { default as ChangePassword } from '~/features/auth/components/ChangePassword/ChangePassword';
+export { default as ResetPassword } from '~/features/auth/Auth/ResetPassword/ResetPassword';
+export { default as ChangePassword } from '~/features/auth/Auth/ChangePassword/ChangePassword';
