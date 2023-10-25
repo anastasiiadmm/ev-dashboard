@@ -1,8 +1,8 @@
-import { Button, Form, Row } from 'antd';
+import { Button, Form, Row, Tooltip } from 'antd';
 import React from 'react';
 import bem from 'easy-bem';
 
-import { add, plus, active, status, x, search } from '~/assets/images';
+import { add, plus, active, status, x, search, informationCircle } from '~/assets/images';
 import { FormField, TableComponent } from '~/shared/ui/components';
 import { IColumn, IMerchant } from '~/features/merchants/interfaces/IMerchant';
 import './Merchants.scss';
@@ -71,7 +71,18 @@ const Merchants = () => {
     {
       title: 'Действие',
       render: () => {
-        return <Button className={b('add-button')} icon={<img src={plus} alt='plus' />} />;
+        return (
+          <Tooltip
+            placement='left'
+            title={
+              <p className={b('tooltip-style')}>
+                <img src={informationCircle} alt='informationCircle' /> Добавить станцию
+              </p>
+            }
+          >
+            <Button className={b('add-button')} icon={<img src={plus} alt='plus' />} />
+          </Tooltip>
+        );
       },
     },
   ] as IColumn[];

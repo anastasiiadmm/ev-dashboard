@@ -143,6 +143,13 @@
     bottom: 0;
   }
 
+  &__tooltip-style {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
   .ant-form-item {
     margin-bottom: 0;
   }
