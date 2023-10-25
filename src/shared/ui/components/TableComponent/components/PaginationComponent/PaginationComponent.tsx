@@ -4,11 +4,11 @@ import { Button, Form } from 'antd';
 
 import { chevronRight, chevronLeft } from '~/assets/images/index';
 import { FormField } from '~/shared/ui/components';
-import { Pagination } from '~/shared/types/interfaces/Pagination';
+import { IPagination } from '~/shared/types/interfaces/IPagination';
 import './PaginationComponent.scss';
 
 interface Props {
-  params: Pagination | null | undefined;
+  params: IPagination | null | undefined;
   pagePrevHandler?: (() => void | undefined) | undefined;
   pageNextHandler?: (() => void | undefined) | undefined;
 }

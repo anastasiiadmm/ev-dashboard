@@ -2,12 +2,12 @@ import React from 'react';
 
 import {
   AutoCompleteComponent,
-  EmailField,
-  PasswordField,
   CheckboxField,
   DefaultField,
+  EmailField,
+  PasswordField,
   SelectField,
-} from '~/shared/ui/components/index';
+} from '~/shared/ui/components/Fields';
 
 interface Props {
   type?: string;

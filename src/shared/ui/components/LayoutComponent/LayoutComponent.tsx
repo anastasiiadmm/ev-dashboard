@@ -42,8 +42,8 @@ import {
 } from '~/assets/images';
 import { authStore } from '~/shared/api/store';
 import { logoutLocalStorage } from '~/shared/utils/storage';
-import LanguageSelect from '~/shared/ui/components/Fields/LanguageSelect/LanguageSelect';
 import '~/shared/ui/components/LayoutComponent/LayoutComponent.scss';
+import { LanguageSelect } from '~/shared/ui/components/Fields';
 
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
