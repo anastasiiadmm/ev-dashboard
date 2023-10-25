@@ -1,6 +1,8 @@
 // Default icons
 export { default as arrowLeft } from './svg/icons/default/arrow-left.svg';
 export { default as arrowRight } from './svg/icons/default/arrow-right.svg';
+export { default as chevronRight } from './svg/icons/default/chevron-right.svg';
+export { default as chevronLeft } from './svg/icons/default/chevron-left.svg';
 export { default as circle } from './svg/icons/default/circle.svg';
 export { default as heatMap } from './svg/icons/default/heatmap.svg';
 export { default as rates } from './svg/icons/default/rates.svg';
@@ -18,6 +20,12 @@ export { default as officeBuilding } from './svg/icons/default/office-building.s
 export { default as referrals } from './svg/icons/default/rreferrals.svg';
 export { default as settings } from './svg/icons/default/settings.svg';
 export { default as logout } from './svg/icons/default/logout.svg';
+export { default as add } from './svg/icons/default/add.svg';
+export { default as plus } from './svg/icons/default/blue-plus.svg';
+export { default as active } from './svg/icons/default/check-circle.svg';
+export { default as status } from './svg/icons/default/Component 1.svg';
+export { default as x } from './svg/icons/default/x-circle.svg';
+export { default as search } from './svg/icons/default/search.svg';
 
 // Active icons
 export { default as circleActive } from './svg/icons/active/circle-active.svg';
@@ -35,3 +43,6 @@ export { default as referralsActive } from './svg/icons/active/rreferrals-active
 export { default as settingsActive } from './svg/icons/active/settings-active.svg';
 export { default as logoutActive } from './svg/icons/active/logout-active.svg';
 export { default as usersActive } from './svg/icons/active/user-group-active.svg';
+
+// images
+export { default as notFoundImage } from './png/images/Add tasks-pana 1.png';

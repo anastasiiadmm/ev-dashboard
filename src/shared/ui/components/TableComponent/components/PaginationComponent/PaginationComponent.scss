@@ -1,0 +1,30 @@
+@use '../../../../../../app/styles/variables' as variables;
+
+.PaginationComponent {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+
+  &__num-block {
+    display: flex;
+    align-items: center;
+    > div {
+      margin: 0;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    display: inline-block;
+    color: variables.$second-color;
+  }
+
+  &__input-style {
+    width: 56px;
+    margin: 0 10px;
+    background: variables.$white-color !important;
+    border-color: variables.$border-color !important;
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Layout, Menu, theme, Typography } from 'antd';
 import bem from 'easy-bem';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 
 import {
@@ -42,8 +42,8 @@ import {
 } from '~/assets/images';
 import { authStore } from '~/shared/api/store';
 import { logoutLocalStorage } from '~/shared/utils/storage';
-import LanguageSelect from '~/shared/ui/components/Fields/LanguageSelect/LanguageSelect';
 import '~/shared/ui/components/LayoutComponent/LayoutComponent.scss';
+import { LanguageSelect } from '~/shared/ui/components/Fields';
 
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
@@ -64,6 +64,7 @@ type Props = {
 const LayoutComponent: React.FC<Props> = ({ children }) => {
   const b = bem('LayoutComponent');
   const push = useNavigate();
+  const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -72,13 +73,13 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
   const [activeKey, setActiveKey] = useState<string | null>('/');
   const [selectedLabel, setSelectedLabel] = useState('Главная');
 
-  function getItem(
+  const getItem = (
     label: React.ReactNode,
     key: React.Key,
     icon: React.ReactNode,
     activeIcon?: React.ReactNode,
     children?: MenuItem[],
-  ): MenuItem {
+  ): MenuItem => {
     const isItemActive = activeKey === key;
     const isParentActive =
       activeIcon && children?.some((child) => child && child.key === activeKey);
@@ -93,7 +94,15 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
       label,
       style: itemStyle,
     } as MenuItem;
-  }
+  };
+
+  useEffect(() => {
+    setActiveKey(location.pathname);
+    const matchingItem = findMenuItemByKey(location.pathname, items);
+    if (matchingItem) {
+      setSelectedLabel(matchingItem.label as string);
+    }
+  }, [location.pathname]);
 
   const items: MenuItem[] = [
     getItem(
@@ -110,7 +119,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
       [
         getItem(
           'Мерчанты',
-          '3',
+          '/merchants',
           <img src={circle} alt='circle' />,
           <img src={circleActive} alt='circleActive' />,
         ),
@@ -303,6 +312,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
                 setActiveKey(null);
                 setSelectedLabel('');
               }
+              push(key);
             }}
           />
 

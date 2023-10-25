@@ -37,7 +37,9 @@ const SelectField: React.FC<Props> = ({
       {options?.map((option) => (
         <Select.Option key={option.value} value={option.value} disabled={option.disabled}>
           <div style={{ display: 'flex', alignItems: 'center', fontWeight: 600 }}>
-            <img src={option?.icon} alt={option.label} style={{ marginRight: '8px' }} />
+            {option?.icon && (
+              <img src={option?.icon} alt={option.label} style={{ marginRight: '8px' }} />
+            )}
             {option.label}
           </div>
         </Select.Option>
