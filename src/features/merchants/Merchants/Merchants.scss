@@ -1,0 +1,149 @@
+@use '../../../app/styles/variables' as variables;
+
+.Merchants {
+  &__search-pagination-block {
+    z-index: 10;
+    width: 100%;
+    background: variables.$white-color;
+    position: absolute;
+    top: 64px;
+    left: 240px;
+    padding: 16px 16px 22px 16px;
+    border-top: 1px solid variables.$gray-bg-color;
+    border-left: 1px solid variables.$gray-bg-color;
+  }
+
+  &__table-block {
+    width: 100%;
+    position: relative;
+    margin-top: 73px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__button-style {
+    display: flex;
+    align-items: center;
+    width: 180px;
+    align-self: self-end;
+    margin-bottom: 18px;
+  }
+
+  &__add-button {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    background: variables.$active-link-menu-bg !important;
+    border-color: variables.$active-link-menu-bg !important;
+  }
+
+  &__title {
+    margin: 0;
+    color: variables.$link-turquoise-color;
+  }
+
+  .ant-input-group > .ant-input:first-child,
+  .ant-input-group .ant-input-group-addon:first-child {
+    border-start-end-radius: 8px;
+    border-end-end-radius: 8px;
+  }
+
+  .ant-input-group {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .ant-input-lg {
+    padding: 7px 11px 7px 46px;
+  }
+
+  .ant-input-search
+    > .ant-input-group
+    > .ant-input-group-addon:last-child
+    .ant-input-search-button {
+    border-start-start-radius: 8px;
+    border-end-start-radius: 8px;
+  }
+
+  .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child {
+    inset-inline-start: 1px;
+  }
+
+  .ant-input-affix-wrapper {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+
+  .ant-input {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+
+  &__deactivate-button {
+    background-color: variables.$white-color !important;
+    border-color: variables.$white-color !important;
+    color: variables.$red-bg;
+  }
+
+  .ant-btn-default {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+
+  .ant-table-wrapper .ant-table-cell,
+  .ant-table-wrapper .ant-table-thead > tr > th,
+  .ant-table-wrapper .ant-table-tbody > tr > th,
+  .ant-table-wrapper .ant-table-tbody > tr > td,
+  .ant-table-wrapper tfoot > tr > th,
+  .ant-table-wrapper tfoot > tr > td {
+    padding: 4px 16px !important;
+  }
+
+  .ant-table-wrapper .ant-table {
+    font-size: 12px;
+  }
+
+  .crop-text {
+    width: 100px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  &__text {
+    margin: 0;
+  }
+
+  .ant-table-wrapper .ant-table-tbody > tr > th,
+  .ant-table-wrapper .ant-table-tbody > tr > td {
+    position: relative;
+  }
+
+  .ant-table-wrapper .ant-table-tbody > tr > th:not(:last-child)::before,
+  .ant-table-wrapper .ant-table-tbody > tr > td:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 16px;
+    width: 1px;
+    height: 15px;
+    background-color: variables.$border-table;
+  }
+
+  &__center-block {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  &__pagination-block {
+    margin-top: 16px;
+    position: absolute;
+    bottom: 0;
+  }
+
+  .ant-form-item {
+    margin-bottom: 0;
+  }
+}

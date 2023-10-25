@@ -14,7 +14,7 @@ import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
 import { Home } from '~/features/main';
 import { LayoutComponent } from '~/shared/ui/components';
 import LanguageSelect from '~/shared/ui/components/Fields/LanguageSelect/LanguageSelect';
-import Merchants from '~/features/merchants/Merchants';
+import Merchants from '~/features/merchants/Merchants/Merchants';
 
 const routers: RouteObject[] = [
   {

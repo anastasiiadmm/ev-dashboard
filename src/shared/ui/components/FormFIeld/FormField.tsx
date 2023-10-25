@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  AutoCompleteComponent,
   EmailField,
   PasswordField,
   CheckboxField,
@@ -23,6 +24,8 @@ const FormField: React.FC<Props> = ({ type, ...props }) => {
       return <CheckboxField {...props} />;
     case 'select':
       return <SelectField {...props} />;
+    case 'autocomplete':
+      return <AutoCompleteComponent {...props} />;
     default:
       return <DefaultField {...props} />;
   }
