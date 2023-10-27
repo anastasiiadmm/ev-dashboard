@@ -20,7 +20,7 @@ const Create = () => {
 
   const items = [
     { title: 'Мерчанты', href: '/merchants' },
-    { title: 'Создание мерчанта', href: '/create-merchant' },
+    { title: 'Создание мерчанта', href: '/merchants/create-merchant' },
   ];
 
   const onFinish = () => {};

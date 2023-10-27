@@ -26,7 +26,7 @@ const routers: RouteObject[] = [
     element: <Merchants />,
   },
   {
-    path: '/create-merchant',
+    path: '/merchants/create-merchant',
     element: <Create />,
   },
 ];
