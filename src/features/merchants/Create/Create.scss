@@ -1,6 +1,8 @@
 @use '../../../app/styles/variables' as variables;
 
 .Create {
+  margin: 20px;
+
   &__cards-block {
     display: flex;
     gap: 24px;

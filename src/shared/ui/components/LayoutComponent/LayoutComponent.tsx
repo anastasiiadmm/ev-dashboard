@@ -42,8 +42,8 @@ import {
 } from '~/assets/images';
 import { authStore } from '~/shared/api/store';
 import { logoutLocalStorage } from '~/shared/utils/storage';
-import '~/shared/ui/components/LayoutComponent/LayoutComponent.scss';
 import { LanguageSelect } from '~/shared/ui/components/Fields';
+import '~/shared/ui/components/LayoutComponent/LayoutComponent.scss';
 
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
@@ -354,7 +354,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
             </Title>
           </div>
         </Header>
-        <Content style={{ margin: '20px' }}>{children}</Content>
+        <Content style={{ overflow: 'auto' }}>{children}</Content>
       </Layout>
     </Layout>
   );
