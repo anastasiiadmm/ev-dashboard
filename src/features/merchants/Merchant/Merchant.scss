@@ -1,0 +1,49 @@
+@use '../../../app/styles/variables' as variables;
+
+.Merchant {
+  &__card-text-block {
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__title-info-block {
+    margin: 0 0 5px;
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  &__title-info {
+    margin: 0 0 5px;
+    font-weight: 600;
+    line-height: 18px;
+    text-transform: uppercase;
+  }
+
+  &__text-info-block {
+    font-size: 14px;
+    font-weight: 500;
+    color: #707A94;
+  }
+
+  &__button-style {
+    display: flex;
+    align-items: center;
+    height: 34px;
+    align-self: self-end;
+    padding: 8px 32px 8px 32px
+  }
+
+  .ant-card, .ant-tabs {
+    width: 100%;
+  }
+
+  .ant-tabs-top > .ant-tabs-nav {
+    margin: 1px 0 16px !important;
+  }
+
+  .ant-tabs .ant-tabs-tab {
+    padding: 8px 10px !important;
+  }
+}
