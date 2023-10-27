@@ -6,9 +6,7 @@ import {
   DefaultField,
   EmailField,
   PasswordField,
-  PhoneField,
   SelectField,
-  SwitchField,
 } from '~/shared/ui/components/Fields';
 
 interface Props {
@@ -28,10 +26,6 @@ const FormField: React.FC<Props> = ({ type, ...props }) => {
       return <SelectField {...props} />;
     case 'autocomplete':
       return <AutoCompleteComponent {...props} />;
-    case 'phone':
-      return <PhoneField {...props} />;
-    case 'switch':
-      return <SwitchField {...props} />;
     default:
       return <DefaultField {...props} />;
   }
