@@ -2,20 +2,21 @@
 
 .Merchants {
   &__search-pagination-block {
-    box-sizing: border-box !important;
-    z-index: 999;
-    width: calc(100% + 40px);
-    margin: 0;
-    background: #ffffff;
+    z-index: 10;
+    width: 100%;
+    background: variables.$white-color;
+    position: fixed;
+    top: 64px;
+    left: 240px;
     padding: 16px 16px 22px 16px;
-    border-top: 1px solid #f1f2f3;
-    border-left: 1px solid #f1f2f3;
+    border-top: 1px solid variables.$gray-bg-color;
+    border-left: 1px solid variables.$gray-bg-color;
   }
 
   &__table-block {
     width: 100%;
     position: relative;
-    margin: 20px;
+    margin-top: 73px;
     display: flex;
     flex-direction: column;
   }

@@ -8,6 +8,10 @@
 
   > div {
     max-height: 100vh;
+
+    > main {
+      overflow: auto;
+    }
   }
 
   &__logo-button-block {
