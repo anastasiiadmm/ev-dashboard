@@ -21,11 +21,21 @@
     flex-direction: column;
   }
 
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__add-block {
+    display: flex;
+    align-self: self-end;
+  }
+
   &__button-style {
     display: flex;
     align-items: center;
     width: 180px;
-    align-self: self-end;
     margin-bottom: 18px;
   }
 

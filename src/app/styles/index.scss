@@ -182,3 +182,17 @@ button:focus-visible {
   height: 38px;
   line-height: 44px;
 }
+
+.ant-form-item .ant-form-item-label > label {
+  color: variables.$second-color;
+}
+
+.ant-input {
+  color: variables.$second-color;
+  border-color: variables.$border-table;
+}
+
+.ant-card .ant-card-body {
+  border: 1px solid variables.$border-color;
+  border-radius: 8px;
+}
