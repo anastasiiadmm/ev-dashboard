@@ -1,12 +1,12 @@
 import { Button, Form, Row } from 'antd';
 import React from 'react';
 import bem from 'easy-bem';
+import { Link } from "react-router-dom";
 
 import { add, plus, active, status, x, search } from '~/assets/images';
 import { FormField, TableComponent } from '~/shared/ui/components';
 import { IColumn, IMerchant } from '~/features/merchants/interfaces';
 import './Merchants.scss';
-import { Link } from "react-router-dom";
 
 const Merchants = () => {
   const b = bem('Merchants');
