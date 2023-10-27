@@ -25,18 +25,16 @@ i18n.use(initReactI18next).init({
 });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: '#22A699',
-          colorTextLabel: '#323232',
-        },
-      }}
-    >
-      <BrowserRouter basename='/'>
-        <App />
-      </BrowserRouter>
-    </ConfigProvider>
-  </React.StrictMode>,
+  <ConfigProvider
+    theme={{
+      token: {
+        colorPrimary: '#22A699',
+        colorTextLabel: '#323232',
+      },
+    }}
+  >
+    <BrowserRouter basename='/'>
+      <App />
+    </BrowserRouter>
+  </ConfigProvider>,
 );
