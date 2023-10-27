@@ -5,6 +5,11 @@ import bem from 'easy-bem';
 
 import './BreadcrumbComponent.scss';
 
+interface MyBreadcrumbItem {
+  label?: React.ReactNode;
+  separator?: string | React.ReactNode;
+}
+
 interface Props {
   items: {
     title: string | React.ReactNode;
@@ -30,7 +35,9 @@ const BreadcrumbComponent: React.FC<Props> = ({ items }) => {
     <Breadcrumb
       className={b('')}
       items={breadcrumbItems}
-      itemRender={(route, params, routes) => {
+      itemRender={(route: MyBreadcrumbItem, _, routes: MyBreadcrumbItem[]) => {
+        console.log('route', route);
+        console.log('routes', routes);
         const last = routes.indexOf(route) === routes.length - 1;
         return last ? <span>{route.label}</span> : route.label;
       }}
