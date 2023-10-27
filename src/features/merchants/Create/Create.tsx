@@ -40,7 +40,7 @@ const Create = () => {
             onFinish={onFinish}
             autoComplete='off'
             layout='vertical'
-            size='middle'
+            size='default'
           >
             <p className={b('info')}>Информация о мерчанте</p>
             <div className={b('display-block')}>
@@ -211,7 +211,7 @@ const Create = () => {
             onFinish={onFinish}
             autoComplete='off'
             layout='vertical'
-            size='middle'
+            size='default'
           >
             {languageItems.map((item) => {
               return (

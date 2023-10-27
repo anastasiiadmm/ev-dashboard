@@ -24,15 +24,9 @@ const PaginationComponent: React.FC<Props> = ({ params, pagePrevHandler, pageNex
 
   return (
     <div className={b('')}>
-      <div style={{ display: 'inline-flex', alignItems: 'center' }}>
+      <div>
         <p className={b('title')}>Показывать по</p>{' '}
-        <FormField
-          customStyle={{ width: 65 }}
-          data-testid='select_id'
-          type='select'
-          defaultValue={10}
-          options={options}
-        />
+        <FormField data-testid='select_id' type='select' defaultValue={10} options={options} />
       </div>
       <div className={b('num-block')}>
         <p className={b('title')}>Стр.</p>
