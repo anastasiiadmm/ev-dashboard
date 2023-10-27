@@ -54,7 +54,6 @@ const Create = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'Введите наименование',
                     },
                   ]}
                 />
@@ -68,7 +67,6 @@ const Create = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'Введите № договора',
                     },
                   ]}
                 />
@@ -83,7 +81,6 @@ const Create = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'Введите юридическое лицо',
                     },
                   ]}
                 />
@@ -97,7 +94,6 @@ const Create = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'Введите % по агентскому договору',
                     },
                   ]}
                 />
@@ -116,7 +112,6 @@ const Create = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Введите номер телефона',
                   },
                 ]}
               />
@@ -140,12 +135,11 @@ const Create = () => {
                   data-testid='name_id'
                   id='name_id'
                   name='name'
-                  placeholder='Страна'
-                  label='Страна'
+                  placeholder='Наименование'
+                  label='Наименование'
                   rules={[
                     {
                       required: true,
-                      message: 'Введите страну',
                     },
                   ]}
                 />
@@ -156,12 +150,11 @@ const Create = () => {
                   data-testid='document_id'
                   id='document_id'
                   name='document'
-                  placeholder='Район'
-                  label='Район'
+                  placeholder='№ договора'
+                  label='№ договора*'
                   rules={[
                     {
                       required: true,
-                      message: 'Введите район',
                     },
                   ]}
                 />
@@ -173,12 +166,11 @@ const Create = () => {
                   data-testid='entity_id'
                   id='entity_id'
                   name='entity'
-                  placeholder='Город'
-                  label='Город'
+                  placeholder='Юридическое лицо'
+                  label='Юридическое лицо'
                   rules={[
                     {
                       required: true,
-                      message: 'Введите город',
                     },
                   ]}
                 />
@@ -192,7 +184,6 @@ const Create = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'Введите улицу',
                     },
                   ]}
                 />
@@ -224,7 +215,7 @@ const Create = () => {
           >
             {languageItems.map((item) => {
               return (
-                <CardComponent className={b('language-item')} key={item.name}>
+                <CardComponent className={b('language-item')}>
                   <img src={item.icon} alt={item.name} />
                   <div className={b('button-info')}>
                     <Text style={{ margin: 0 }}>{item.name}</Text>
