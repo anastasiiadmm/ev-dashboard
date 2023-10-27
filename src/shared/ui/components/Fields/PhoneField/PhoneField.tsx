@@ -42,7 +42,7 @@ const PhoneField: React.FC<Props> = ({
         autoComplete='off'
         data-testid='phone-field-input'
       >
-        {(inputProps) => (
+        {(inputProps: React.InputHTMLAttributes<HTMLInputElement>) => (
           <Input {...inputProps} className={inputClassName} placeholder={placeholder} />
         )}
       </InputMask>
