@@ -265,7 +265,10 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     window.location.reload();
   };
 
-  const findMenuItemByKey = (key, items) => {
+  const findMenuItemByKey = (
+    key: React.Key,
+    items: MenuItem[]
+  ): MenuItem | null => {
     for (const item of items) {
       if (item.key.toString() === key.toString()) {
         return item;
