@@ -100,6 +100,31 @@ button {
   color: variables.$red-bg;
 }
 
+.custom-radio .ant-radio-input {
+  display: none;
+}
+
+.ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url('../../assets/images/svg/icons/default/check.svg') no-repeat center center;
+  background-size: contain;
+  margin-right: -3px;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.ant-radio-wrapper .ant-radio-checked .ant-radio-inner::after {
+  opacity: 0;
+}
+
+.ant-radio-wrapper .ant-radio-checked::after {
+  outline: none;
+  border: none;
+}
+
 :where(.css-dev-only-do-not-override-capl5l).ant-btn-link:not(:disabled):not(
     .ant-btn-disabled
   ):active {
