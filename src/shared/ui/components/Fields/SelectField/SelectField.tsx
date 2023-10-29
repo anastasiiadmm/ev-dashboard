@@ -31,9 +31,10 @@ const SelectField: React.FC<Props> = ({
   customStyle,
   suffixIconData,
   dropdownStyle,
+                                        className
 }) => {
   return (
-    <Form.Item name={name} label={label} rules={rules}>
+    <Form.Item name={name} label={label} rules={rules} className={`${className} custom-label`}>
       <Select
         bordered={bordered}
         disabled={disabled}

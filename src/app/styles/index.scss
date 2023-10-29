@@ -92,6 +92,14 @@ button {
   }
 }
 
+.custom-label .ant-form-item-required::before {
+  content: '*';
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  color: variables.$red-bg;
+}
+
 :where(.css-dev-only-do-not-override-capl5l).ant-btn-link:not(:disabled):not(
     .ant-btn-disabled
   ):active {

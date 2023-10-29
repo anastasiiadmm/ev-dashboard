@@ -64,7 +64,7 @@ const Create = () => {
                   id='document_id'
                   name='document'
                   placeholder='№ договора'
-                  label='№ договора*'
+                  label='№ договора'
                   rules={[
                     {
                       required: true,
@@ -137,9 +137,9 @@ const Create = () => {
                 <FormField
                   customStyle={{ width: '100%' }}
                   type='select'
-                  data-testid='name_id'
-                  id='name_id'
-                  name='name'
+                  data-testid='country_id'
+                  id='country_id'
+                  name='country'
                   placeholder='Страна'
                   label='Страна'
                   rules={[
@@ -153,9 +153,9 @@ const Create = () => {
                 <FormField
                   customStyle={{ width: '100%' }}
                   type='select'
-                  data-testid='document_id'
-                  id='document_id'
-                  name='document'
+                  data-testid='district_id'
+                  id='district_id'
+                  name='district'
                   placeholder='Район'
                   label='Район'
                   rules={[
@@ -170,9 +170,9 @@ const Create = () => {
                 <FormField
                   customStyle={{ width: '100%' }}
                   type='select'
-                  data-testid='entity_id'
-                  id='entity_id'
-                  name='entity'
+                  data-testid='city_id'
+                  id='city_id'
+                  name='city'
                   placeholder='Город'
                   label='Город'
                   rules={[
@@ -184,9 +184,9 @@ const Create = () => {
                 />
 
                 <FormField
-                  data-testid='district_id'
-                  id='district_id'
-                  name='district'
+                  data-testid='street_id'
+                  id='street_id'
+                  name='street'
                   placeholder='Улица'
                   label='Улица'
                   rules={[

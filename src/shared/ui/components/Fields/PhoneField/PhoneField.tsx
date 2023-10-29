@@ -32,7 +32,7 @@ const PhoneField: React.FC<Props> = ({
       data-testid='phone-field'
       name={name}
       label={label}
-      className={className}
+      className={`${className} custom-label`}
       rules={rules}
     >
       <InputMask

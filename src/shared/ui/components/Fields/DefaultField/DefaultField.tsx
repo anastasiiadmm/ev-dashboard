@@ -30,7 +30,7 @@ const DefaultField: React.FC<Props> = ({
   prefix,
 }) => {
   return (
-    <Form.Item style={style} label={label} name={name} rules={[...rules]} className={className}>
+    <Form.Item style={style} label={label} name={name} rules={[...rules]} className={`${className} custom-label`}>
       <Input
         name={name}
         defaultValue={defaultValue}

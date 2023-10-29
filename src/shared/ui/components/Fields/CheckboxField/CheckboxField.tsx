@@ -24,7 +24,7 @@ const CheckboxField: React.FC<Props> = ({
   return (
     <Form.Item
       name={name}
-      className={className}
+      className={`${className} custom-label`}
       valuePropName={valuePropName}
       wrapperCol={{ offset: 0, span: 16 }}
     >
