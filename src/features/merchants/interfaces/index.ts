@@ -1,1 +1,1 @@
-export { IMerchant, IMerchantInfo, IColumn, ITabs } from './IMerchant';
+export type { IMerchant, IMerchantInfo, IColumn, ITabs } from './IMerchant';

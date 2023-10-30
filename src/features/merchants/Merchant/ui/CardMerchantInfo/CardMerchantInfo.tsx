@@ -5,11 +5,12 @@ import { CardComponent } from '~/shared/ui/components';
 import { TextBlock } from '~/features/merchants/Merchant/ui';
 
 import { edit } from '~/assets/images';
+import { IMerchantInfo } from '~/features/merchants/interfaces';
 
-const { Title, Text } = Typography;
+const { Title} = Typography;
 
 type Props = {
-  merchant: object;
+  merchant: IMerchantInfo;
   classNameTitle?: string;
   classNameButton?: string;
   style?: React.CSSProperties;

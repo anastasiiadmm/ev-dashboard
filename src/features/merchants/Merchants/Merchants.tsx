@@ -37,15 +37,15 @@ const Merchants = () => {
     {
       title: 'Локация',
       dataIndex: 'address_ru',
-      render: (text) => {
-        return <p className={b('text crop-text')}>{text}</p>;
+      render: ({ address_ru }) => {
+        return <p className={b('text crop-text')}>{address_ru}</p>;
       },
     },
     {
       title: 'Юр лицо',
       dataIndex: 'entity',
-      render: (text) => {
-        return <p className={b('text crop-text')}>{text}</p>;
+      render: ({ entity }) => {
+        return <p className={b('text crop-text')}>{entity}</p>;
       },
     },
     {

@@ -1,17 +1,18 @@
 import React from 'react';
-import { Flex, Row, Typography } from 'antd';
+import { Row, Typography } from 'antd';
 import bem from 'easy-bem';
 import dayjs from 'dayjs';
 
 import { CardComponent } from '~/shared/ui/components';
 import { TextBlock } from '~/features/merchants/Merchant/ui';
+import { IMerchantInfo } from '~/features/merchants/interfaces';
 
 import './CardMerchantHeader.scss';
 
 const { Title, Text } = Typography;
 
 type Props = {
-  merchant: object;
+  merchant: IMerchantInfo;
   className?: string;
 };
 

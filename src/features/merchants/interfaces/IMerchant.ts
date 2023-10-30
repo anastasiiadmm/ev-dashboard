@@ -39,7 +39,7 @@ export interface IMerchantInfo {
 export interface IColumn {
   title: string | JSX.Element;
   dataIndex: string;
-  render?: (text: string) => JSX.Element;
+  render?: (render: IMerchant) => JSX.Element;
   width?: number;
 }
 export interface ITabs {

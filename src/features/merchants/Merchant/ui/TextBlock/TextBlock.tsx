@@ -7,8 +7,8 @@ import './TextBlock.scss';
 const { Text } = Typography;
 
 type Props = {
-  title: string;
-  text: string;
+  title: string | number | undefined;
+  text: string | number | undefined;
   styleBlock?:  React.CSSProperties;
   styleTitle?:  React.CSSProperties;
   styleText?:  React.CSSProperties;
