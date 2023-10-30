@@ -213,7 +213,9 @@ const Create = () => {
           <Title level={4} style={{ margin: 0 }}>
             Данные нужно указать на нескольких языках
           </Title>
-          <Text style={{ marginBottom: 20 }}>Это нужно и описание почему так нужно сделать</Text>
+          <Text style={{ marginBottom: 20 }}>
+            Для корректного отображения в пользовательских приложениях
+          </Text>
           <Form
             form={form}
             initialValues={{ remember: true }}
