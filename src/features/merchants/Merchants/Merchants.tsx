@@ -1,14 +1,16 @@
 import { Button, Form, Row } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import bem from 'easy-bem';
 
 import { add, plus, active, status, x, search } from '~/assets/images';
-import { FormField, TableComponent } from '~/shared/ui/components';
+import { FormField, ModalComponent, TableComponent } from '~/shared/ui/components';
 import { IColumn, IMerchant } from '~/features/merchants/interfaces/IMerchant';
+import { ActiveInactiveModal } from '~/shared/ui/components/ModalComponent';
 import './Merchants.scss';
 
 const Merchants = () => {
   const b = bem('Merchants');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const columns: IColumn[] = [
     {
@@ -133,6 +135,18 @@ const Merchants = () => {
   const pagePrevHandler = () => {};
   const pageNextHandler = () => {};
 
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <Row justify='space-between' data-testid='auth-component' className={b()}>
       <Row className={b('search-pagination-block')}>
@@ -163,11 +177,15 @@ const Merchants = () => {
         />
 
         <div className={b('pagination-block')}>
-          <Button className={b('deactivate-button')} type='default'>
+          <Button className={b('deactivate-button')} type='default' onClick={showModal}>
             Деактивировать (3)
           </Button>
         </div>
       </Row>
+
+      <ModalComponent isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel}>
+        <ActiveInactiveModal />
+      </ModalComponent>
     </Row>
   );
 };
