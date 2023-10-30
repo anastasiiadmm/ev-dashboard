@@ -5,7 +5,7 @@ import bem from 'easy-bem';
 
 import { add, plus, active, status, x, search, infoCircle } from '~/assets/images';
 import { FormField, TableComponent } from '~/shared/ui/components';
-import { IColumn, IMerchant } from '~/features/merchants/interfaces/IMerchant';
+import { IColumn, IMerchant } from '~/features/merchants/interfaces';
 
 import './Merchants.scss';
 
