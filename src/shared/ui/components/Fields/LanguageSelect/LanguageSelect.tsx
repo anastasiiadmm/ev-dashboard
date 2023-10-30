@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import i18n from 'i18next';
 
-import eng from '~/assets/images/svg/icons/default/ENG.svg';
-import rus from '~/assets/images/svg/icons/default/RU.svg';
-import kg from '~/assets/images/svg/icons/default/KG.svg';
+import { eng, kg, rus } from '~/assets/images';
 import { FormField } from '~/shared/ui/components';
 
 function LanguageSelect() {

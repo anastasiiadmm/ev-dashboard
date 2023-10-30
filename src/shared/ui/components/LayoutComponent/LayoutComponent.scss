@@ -8,10 +8,6 @@
 
   > div {
     max-height: 100vh;
-
-    > main {
-      overflow: auto;
-    }
   }
 
   &__logo-button-block {
@@ -48,6 +44,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    > div {
+      margin-bottom: 0;
+    }
   }
 
   @include mixins.bp(large) {

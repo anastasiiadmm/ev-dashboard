@@ -1,10 +1,12 @@
-import { Button, Form, Row } from 'antd';
+import { Button, Form, Row, Tooltip } from 'antd';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import bem from 'easy-bem';
 
-import { add, plus, active, status, x, search } from '~/assets/images';
+import { add, plus, active, status, x, search, infoCircle } from '~/assets/images';
 import { FormField, TableComponent } from '~/shared/ui/components';
 import { IColumn, IMerchant } from '~/features/merchants/interfaces/IMerchant';
+
 import './Merchants.scss';
 
 const Merchants = () => {
@@ -71,7 +73,20 @@ const Merchants = () => {
     {
       title: 'Действие',
       render: () => {
-        return <Button className={b('add-button')} icon={<img src={plus} alt='plus' />} />;
+        return (
+          <Tooltip
+            color='#707A94'
+            placement='left'
+            title={
+              <div className={b('info')}>
+                <img src={infoCircle} alt='infoCircle' />
+                <p>Добавить станцию</p>
+              </div>
+            }
+          >
+            <Button className={b('add-button')} icon={<img src={plus} alt='plus' />} />
+          </Tooltip>
+        );
       },
     },
   ] as IColumn[];
@@ -149,9 +164,11 @@ const Merchants = () => {
         </div>
       </Row>
       <Row className={b('table-block')}>
-        <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
-          Добавить мерчанта
-        </Button>
+        <Link to='/merchants/create-merchant' className={b('add-block')}>
+          <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
+            Добавить мерчанта
+          </Button>
+        </Link>
 
         <TableComponent
           rowKey={(record: IMerchant) => record.id.toString()}

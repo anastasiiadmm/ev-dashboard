@@ -6,12 +6,13 @@ interface Props {
   style?: CSSProperties | undefined;
   options?: [];
   size?: SizeType;
+  className?: string;
   placeholder?: string;
 }
 
-const AutoCompleteComponent: React.FC<Props> = ({ style, options, size, placeholder }) => {
+const AutoCompleteComponent: React.FC<Props> = ({ className, style, options, size, placeholder }) => {
   return (
-    <AutoComplete style={style} options={options}>
+    <AutoComplete style={style} className={`${className} custom-label`} options={options}>
       <Input.Search size={size} placeholder={placeholder} />
     </AutoComplete>
   );

@@ -1,6 +1,8 @@
 @use '../../../app/styles/variables' as variables;
 
 .Home {
+  margin: 20px;
+
   &__card-block {
     display: flex;
     align-items: center;

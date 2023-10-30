@@ -32,7 +32,7 @@ const PasswordField: React.FC<Props> = ({
   return name === 'confirm_password' ? (
     <Form.Item
       key={i18n.language}
-      className={className || b()}
+      className={`${className} custom-label`}
       label={label}
       name={name}
       dependencies={dependencies}
