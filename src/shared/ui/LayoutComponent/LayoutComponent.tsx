@@ -42,8 +42,8 @@ import {
 } from '~/assets/images';
 import { authStore } from '~/shared/api/store';
 import { logoutLocalStorage } from '~/shared/utils/storage';
-import '~/shared/ui/LayoutComponent/LayoutComponent.scss';
 import { LanguageSelect } from '~/shared/ui/Fields';
+import './LayoutComponent.scss';
 
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
@@ -80,12 +80,18 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     activeIcon?: React.ReactNode,
     children?: MenuItem[],
   ): MenuItem => {
-    const isItemActive = activeKey === key;
-    const isParentActive =
-      activeIcon && children?.some((child) => child && child.key === activeKey);
-    const shouldUseActiveIcon = isItemActive || isParentActive;
+    const isRootPath = key.toString() === '/';
+    const isActive = isRootPath
+      ? location.pathname === key.toString()
+      : location.pathname.startsWith(key.toString());
 
-    const itemStyle = isItemActive ? { backgroundColor: '#ECFFFD', color: '#22A599' } : {};
+    const isParentActive =
+      activeIcon &&
+      children?.some((child) => child && location.pathname.startsWith(child.key.toString()));
+
+    const shouldUseActiveIcon = isActive || isParentActive;
+
+    const itemStyle = isActive ? { backgroundColor: '#ECFFFD', color: '#22A599' } : {};
 
     return {
       key,
@@ -95,14 +101,6 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
       style: itemStyle,
     } as MenuItem;
   };
-
-  useEffect(() => {
-    setActiveKey(location.pathname);
-    const matchingItem = findMenuItemByKey(location.pathname, items);
-    if (matchingItem) {
-      setSelectedLabel(matchingItem.label as string);
-    }
-  }, [location.pathname]);
 
   const items: MenuItem[] = [
     getItem(
@@ -227,6 +225,17 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     ),
   ];
 
+  useEffect(() => {
+    const matchingItem = findMenuItemByKey(location.pathname, items);
+    if (matchingItem) {
+      setSelectedLabel(matchingItem.label as string);
+      setActiveKey(matchingItem.key as string);
+    } else {
+      setActiveKey(null);
+      setSelectedLabel('');
+    }
+  }, [location.pathname, items]);
+
   const logoutItems: MenuItem[] = [
     getItem(
       'Настройки',
@@ -259,12 +268,15 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
 
   const findMenuItemByKey = (key: React.Key, items: MenuItem[]): MenuItem | null => {
     for (const item of items) {
-      if (item.key === key) {
+      if (item.key.toString() === key.toString()) {
         return item;
       }
       if (item.children) {
         const childItem = findMenuItemByKey(key, item.children);
         if (childItem) return childItem;
+      }
+      if (item.key !== '/' && key.toString().startsWith(item.key.toString())) {
+        return item;
       }
     }
     return null;
@@ -354,7 +366,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
             </Title>
           </div>
         </Header>
-        <Content style={{ margin: '20px' }}>{children}</Content>
+        <Content style={{ overflow: 'auto' }}>{children}</Content>
       </Layout>
     </Layout>
   );

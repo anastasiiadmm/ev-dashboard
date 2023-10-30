@@ -2,12 +2,11 @@
 
 .Merchants {
   &__search-pagination-block {
-    z-index: 10;
-    width: 100%;
-    background: variables.$white-color;
-    position: absolute;
-    top: 64px;
-    left: 240px;
+    box-sizing: border-box !important;
+    z-index: 999;
+    width: calc(100% + 40px);
+    margin: 0;
+    background: #ffffff;
     padding: 16px 16px 22px 16px;
     border-top: 1px solid variables.$gray-bg-color;
     border-left: 1px solid variables.$gray-bg-color;
@@ -16,16 +15,26 @@
   &__table-block {
     width: 100%;
     position: relative;
-    margin-top: 73px;
+    margin: 20px;
     display: flex;
     flex-direction: column;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__add-block {
+    display: flex;
+    align-self: self-end;
   }
 
   &__button-style {
     display: flex;
     align-items: center;
     width: 180px;
-    align-self: self-end;
     margin-bottom: 18px;
   }
 
@@ -102,7 +111,7 @@
   .ant-table-wrapper .ant-table-tbody > tr > td,
   .ant-table-wrapper tfoot > tr > th,
   .ant-table-wrapper tfoot > tr > td {
-    padding: 4px 16px !important;
+    padding: 4px 6px !important;
   }
 
   .ant-table-wrapper .ant-table {
@@ -147,6 +156,13 @@
     margin-top: 16px;
     position: absolute;
     bottom: 0;
+  }
+
+  &__tooltip-style {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
 
   .ant-form-item {

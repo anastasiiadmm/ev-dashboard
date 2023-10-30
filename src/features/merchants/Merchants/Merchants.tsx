@@ -1,12 +1,13 @@
 import { Button, Form, Row } from 'antd';
 import React, { useState } from 'react';
 import bem from 'easy-bem';
+import { Link } from 'react-router-dom';
 
-import { add, plus, active, status, x, search, inactive } from '~/assets/images';
+import { add, plus, active, status, x, search, infoCircle, inactive } from '~/assets/images';
 import { FormField, ModalComponent, TableComponent } from '~/shared/ui';
-import { IColumn, IMerchant } from '~/features/merchants/interfaces/IMerchant';
-import './Merchants.scss';
+import { IColumn, IMerchant } from '~/features/merchants/interfaces';
 import { ActiveInactiveModal } from '~/features/merchants';
+import './Merchants.scss';
 
 const Merchants = () => {
   const b = bem('Merchants');
@@ -22,9 +23,12 @@ const Merchants = () => {
     },
     {
       title: 'Наименование',
-      dataIndex: 'name_ru',
-      render: (text) => {
-        return <p className={b('title crop-text')}>{text}</p>;
+      render: (record) => {
+        return (
+          <Link to={`/merchants/merchant/${record?.id}`} className={b('title crop-text')}>
+            {record?.name_ru}
+          </Link>
+        );
       },
     },
     {
@@ -41,16 +45,14 @@ const Merchants = () => {
     },
     {
       title: 'Локация',
-      dataIndex: 'address_ru',
-      render: (text) => {
-        return <p className={b('text crop-text')}>{text}</p>;
+      render: (record) => {
+        return <p className={b('text crop-text')}>{record?.address_ru}</p>;
       },
     },
     {
       title: 'Юр лицо',
-      dataIndex: 'entity',
-      render: (text) => {
-        return <p className={b('text crop-text')}>{text}</p>;
+      render: (record) => {
+        return <p className={b('text crop-text')}>{record?.entity}</p>;
       },
     },
     {
@@ -76,7 +78,20 @@ const Merchants = () => {
     {
       title: 'Действие',
       render: () => {
-        return <Button className={b('add-button')} icon={<img src={plus} alt='plus' />} />;
+        return (
+          <Tooltip
+            color='#707A94'
+            placement='left'
+            title={
+              <div className={b('info')}>
+                <img src={infoCircle} alt='infoCircle' />
+                <p>Добавить станцию</p>
+              </div>
+            }
+          >
+            <Button className={b('add-button')} icon={<img src={plus} alt='plus' />} />
+          </Tooltip>
+        );
       },
     },
   ] as IColumn[];
@@ -180,9 +195,11 @@ const Merchants = () => {
         </div>
       </Row>
       <Row className={b('table-block')}>
-        <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
-          Добавить мерчанта
-        </Button>
+        <Link to='/merchants/create-merchant' className={b('add-block')}>
+          <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
+            Добавить мерчанта
+          </Button>
+        </Link>
 
         <TableComponent
           rowKey={(record: IMerchant) => record.id.toString()}

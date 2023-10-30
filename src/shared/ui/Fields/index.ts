@@ -5,3 +5,5 @@ export { default as DefaultField } from './DefaultField/DefaultField';
 export { default as SelectField } from './SelectField/SelectField';
 export { default as AutoCompleteComponent } from './AutoCompleteComponent/AutoCompleteComponent';
 export { default as LanguageSelect } from './LanguageSelect/LanguageSelect';
+export { default as PhoneField } from './PhoneField/PhoneField';
+export { default as SwitchField } from './SwitchField/SwitchField';

@@ -21,14 +21,22 @@ export { default as referrals } from './svg/icons/default/rreferrals.svg';
 export { default as settings } from './svg/icons/default/settings.svg';
 export { default as logout } from './svg/icons/default/logout.svg';
 export { default as add } from './svg/icons/default/add.svg';
+export { default as edit } from './svg/icons/default/edit.svg';
 export { default as plus } from './svg/icons/default/blue-plus.svg';
 export { default as active } from './svg/icons/default/check-circle.svg';
 export { default as status } from './svg/icons/default/Component 1.svg';
 export { default as x } from './svg/icons/default/x-circle.svg';
 export { default as search } from './svg/icons/default/search.svg';
+export { default as infoCircle } from './svg/icons/default/information-circle.svg';
+export { default as eng } from './svg/icons/default/ENG.svg';
+export { default as rus } from './svg/icons/default/RU.svg';
+export { default as kg } from './svg/icons/default/KG.svg';
 export { default as warning } from './svg/icons/default/warning.svg';
 export { default as greenCheck } from './svg/icons/default/greenCheck.svg';
 export { default as inactive } from './svg/icons/default/inactive.svg';
+export { default as trendingUp } from './svg/icons/default/trending-up.svg';
+export { default as trendingDown } from './svg/icons/default/trending-down.svg';
+export { default as userGroup } from './svg/icons/default/user-group.svg';
 
 // Active icons
 export { default as circleActive } from './svg/icons/active/circle-active.svg';

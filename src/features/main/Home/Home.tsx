@@ -2,15 +2,9 @@ import React, { useState } from 'react';
 import bem from 'easy-bem';
 import { Button, Divider, Typography } from 'antd';
 
-import trendingUp from '~/assets/images/svg/icons/default/trending-up.svg';
-import trendingDown from '~/assets/images/svg/icons/default/trending-down.svg';
-import userGroup from '~/assets/images/svg/icons/default/user-group.svg';
-import identification from '~/assets/images/svg/icons/default/identification.svg';
-import CardComponent from '~/shared/ui/CardComponent/CardComponent';
-import AnchorComponent from '~/shared/ui/AnchorComponent/AnchorComponent';
-import ChartComponent from '~/shared/ui/ChartComponent/ChartComponent';
-import '~/features/main/Home/Home.scss';
-import TimelineComponent from '~/shared/ui/TimelineComponent/TimelineComponent';
+import { identification, trendingDown, trendingUp, userGroup } from '~/assets/images';
+import { AnchorComponent, CardComponent, ChartComponent, TimelineComponent } from '~/shared/ui';
+import './Home.scss';
 
 const { Title, Text } = Typography;
 

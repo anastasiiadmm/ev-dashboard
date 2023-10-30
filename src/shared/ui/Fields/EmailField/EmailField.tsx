@@ -29,7 +29,7 @@ const EmailField: React.FC<Props> = ({
       key={i18n.language}
       label={label}
       name={name}
-      className={className}
+      className={`${className} custom-label`}
       rules={[
         {
           type: 'email',
