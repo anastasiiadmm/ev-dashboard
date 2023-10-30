@@ -2,7 +2,10 @@ import { Form, Input } from 'antd';
 import React from 'react';
 import InputMask from 'react-input-mask';
 
-interface Rule {}
+interface Rule {
+  required: boolean;
+  message: string;
+}
 
 interface Props {
   id?: string;

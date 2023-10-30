@@ -14,14 +14,14 @@ const languageItems = [
   { name: 'Английский', lang: 'Англисча', icon: eng },
 ];
 
+const items = [
+  { title: 'Мерчанты', href: '/merchants' },
+  { title: 'Создание мерчанта', href: '/merchants/create-merchant' },
+];
+
 const Create = () => {
   const b = bem('Create');
   const [form] = Form.useForm();
-
-  const items = [
-    { title: 'Мерчанты', href: '/merchants' },
-    { title: 'Создание мерчанта', href: '/merchants/create-merchant' },
-  ];
 
   const onFinish = () => {};
 
