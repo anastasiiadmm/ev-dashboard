@@ -57,7 +57,6 @@ class AuthStore implements AuthState {
         this.commonError = null;
       });
     } catch (e) {
-      console.error(e);
       const error = e as MessageError;
       runInAction(() => {
         this.loading = false;
