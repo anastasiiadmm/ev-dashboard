@@ -7,7 +7,11 @@ import './ActiveInactiveModal.scss';
 
 const { Title, Text } = Typography;
 
-const ActiveInactiveModal = () => {
+interface Props {
+  handleOkCancel?: () => void;
+}
+
+const ActiveInactiveModal: React.FC<Props> = ({ handleOkCancel }) => {
   const b = bem('ActiveInactiveModal');
 
   return (
@@ -16,11 +20,15 @@ const ActiveInactiveModal = () => {
         <img src={warning} alt='warning' />
       </div>
       <div className={b('modal-info-block')}>
-        <Title level={4}>Деактивировать?</Title>
+        <Title level={4} className={b('title')}>
+          Деактивировать?
+        </Title>
         <Text>Выбранные Вами мерчанты будут не активны.</Text>
-        <div>
-          <Button>Отменить</Button>
-          <Button>Да</Button>
+        <div className={b('buttons-block')}>
+          <Button className={b('cancel-button')} onClick={handleOkCancel}>
+            Отменить
+          </Button>
+          <Button type='primary'>Да</Button>
         </div>
       </div>
     </div>

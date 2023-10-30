@@ -139,12 +139,8 @@ const Merchants = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const handleOkCancel = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   return (
@@ -183,8 +179,13 @@ const Merchants = () => {
         </div>
       </Row>
 
-      <ModalComponent isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel}>
-        <ActiveInactiveModal />
+      <ModalComponent
+        width={311}
+        isModalOpen={isModalOpen}
+        handleOk={handleOkCancel}
+        handleCancel={handleOkCancel}
+      >
+        <ActiveInactiveModal handleOkCancel={handleOkCancel} />
       </ModalComponent>
     </Row>
   );

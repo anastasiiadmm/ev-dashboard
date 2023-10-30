@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Modal } from 'antd';
 
 interface Props {
   title?: string;
+  width?: number;
   isModalOpen: boolean;
   handleOk: () => void;
   handleCancel?: () => void;
-  children: React.FC;
+  children: ReactNode;
 }
 
 const ModalComponent: React.FC<Props> = ({
@@ -15,9 +16,11 @@ const ModalComponent: React.FC<Props> = ({
   handleCancel,
   children,
   title,
+  width,
 }) => {
   return (
     <Modal
+      width={width}
       closeIcon={false}
       title={title}
       open={isModalOpen}
