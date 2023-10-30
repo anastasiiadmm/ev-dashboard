@@ -1,0 +1,11 @@
+@use '../../../../../app/styles/variables' as variables;
+
+.TextBlock {
+  &__title {
+    color: variables.$title-color;
+  }
+
+  &__text {
+    color: variables.$text-color;
+  }
+}

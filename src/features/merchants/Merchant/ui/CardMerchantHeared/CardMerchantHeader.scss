@@ -1,0 +1,15 @@
+.CardMerchantHeader {
+  &__title-info {
+    margin: 0 0 5px;
+    font-weight: 600;
+    line-height: 18px;
+    text-transform: uppercase;
+  }
+
+  &__text-info-block {
+    font-size: 14px;
+    font-weight: 500;
+    color: #707A94;
+    margin-bottom: 20px;
+  }
+}

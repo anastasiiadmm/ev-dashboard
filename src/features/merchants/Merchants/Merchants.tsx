@@ -5,7 +5,7 @@ import bem from 'easy-bem';
 
 import { add, plus, active, status, x, search, infoCircle } from '~/assets/images';
 import { FormField, TableComponent } from '~/shared/ui/components';
-import { IColumn, IMerchant } from '~/features/merchants/interfaces/IMerchant';
+import { IColumn, IMerchant } from '~/features/merchants/interfaces';
 
 import './Merchants.scss';
 
@@ -19,9 +19,8 @@ const Merchants = () => {
     },
     {
       title: 'Наименование',
-      dataIndex: 'name_ru',
-      render: (text) => {
-        return <p className={b('title crop-text')}>{text}</p>;
+      render: (record) => {
+        return <Link to={`/merchants/merchant/${record?.id}`} className={b('title crop-text')}>{record?.name_ru}</Link>;
       },
     },
     {
@@ -38,16 +37,14 @@ const Merchants = () => {
     },
     {
       title: 'Локация',
-      dataIndex: 'address_ru',
-      render: (text) => {
-        return <p className={b('text crop-text')}>{text}</p>;
+      render: (record) => {
+        return <p className={b('text crop-text')}>{record?.address_ru}</p>;
       },
     },
     {
       title: 'Юр лицо',
-      dataIndex: 'entity',
-      render: (text) => {
-        return <p className={b('text crop-text')}>{text}</p>;
+      render: (record) => {
+        return <p className={b('text crop-text')}>{record?.entity}</p>;
       },
     },
     {
