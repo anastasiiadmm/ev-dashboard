@@ -6,11 +6,13 @@ import trendingUp from '~/assets/images/svg/icons/default/trending-up.svg';
 import trendingDown from '~/assets/images/svg/icons/default/trending-down.svg';
 import userGroup from '~/assets/images/svg/icons/default/user-group.svg';
 import identification from '~/assets/images/svg/icons/default/identification.svg';
-import CardComponent from '~/shared/ui/components/CardComponent/CardComponent';
-import AnchorComponent from '~/shared/ui/components/AnchorComponent/AnchorComponent';
-import ChartComponent from '~/shared/ui/components/ChartComponent/ChartComponent';
+import {
+  AnchorComponent,
+  CardComponent,
+  ChartComponent,
+  TimelineComponent,
+} from '~/shared/ui/components';
 import '~/features/main/Home/Home.scss';
-import TimelineComponent from '~/shared/ui/components/TimelineComponent/TimelineComponent';
 
 const { Title, Text } = Typography;
 

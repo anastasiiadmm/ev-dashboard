@@ -1,6 +1,7 @@
 @use '../../../app/styles/variables' as variables;
 
 .Merchant {
+  padding: 28px 20px;
   &__card-text-block {
     > div {
       display: flex;

@@ -13,7 +13,7 @@ import { authStore } from '~/shared/api/store';
 import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
 import { Home } from '~/features/main';
 import { LayoutComponent } from '~/shared/ui/components';
-import { Merchant, Merchants } from '~/features/merchants';
+import { Create, Merchant, Merchants } from '~/features/merchants';
 import { LanguageSelect } from '~/shared/ui/components/Fields';
 
 const routers: RouteObject[] = [
@@ -28,6 +28,10 @@ const routers: RouteObject[] = [
   {
     path: '/merchants/merchant/:id',
     element: <Merchant />,
+  },
+  {
+    path: '/merchants/create-merchant',
+    element: <Create />,
   },
 ];
 
