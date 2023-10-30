@@ -1,5 +1,5 @@
-@use '../../../../app/styles/_variables.scss';
-@use '../../../../app/styles/_mixins.scss';
+@use '../../../app/styles/variables';
+@use '../../../app/styles/mixins';
 
 .LayoutComponent {
   > aside {

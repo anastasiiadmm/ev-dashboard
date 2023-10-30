@@ -27,6 +27,8 @@ export { default as status } from './svg/icons/default/Component 1.svg';
 export { default as x } from './svg/icons/default/x-circle.svg';
 export { default as search } from './svg/icons/default/search.svg';
 export { default as warning } from './svg/icons/default/warning.svg';
+export { default as greenCheck } from './svg/icons/default/greenCheck.svg';
+export { default as inactive } from './svg/icons/default/inactive.svg';
 
 // Active icons
 export { default as circleActive } from './svg/icons/active/circle-active.svg';

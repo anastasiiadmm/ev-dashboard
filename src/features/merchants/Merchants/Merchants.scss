@@ -85,6 +85,12 @@
     color: variables.$red-bg;
   }
 
+  &__activate-button {
+    background-color: variables.$white-color !important;
+    border-color: variables.$white-color !important;
+    color: variables.$link-turquoise-color;
+  }
+
   .ant-btn-default {
     background-color: variables.$gray-bg-color;
     border-color: variables.$gray-bg-color;

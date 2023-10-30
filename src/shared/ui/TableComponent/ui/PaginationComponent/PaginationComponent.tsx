@@ -2,8 +2,8 @@ import React from 'react';
 import bem from 'easy-bem';
 import { Button, Form } from 'antd';
 
-import { chevronRight, chevronLeft } from '~/assets/images/index';
-import { FormField } from '~/shared/ui/components';
+import { chevronRight, chevronLeft } from '~/assets/images';
+import { FormField } from '~/shared/ui';
 import { IPagination } from '~/shared/types/interfaces/IPagination';
 import './PaginationComponent.scss';
 

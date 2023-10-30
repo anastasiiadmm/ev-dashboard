@@ -3,7 +3,7 @@ import { Button, Col, Form, Row, Typography } from 'antd';
 import bem from 'easy-bem';
 
 import { logo } from '~/assets/images';
-import { FormField } from '~/shared/ui/components';
+import { FormField } from '~/shared/ui';
 
 const { Text } = Typography;
 

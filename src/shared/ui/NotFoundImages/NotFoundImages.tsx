@@ -1,7 +1,7 @@
 import React from 'react';
 import { Empty } from 'antd';
 
-import { notFoundImage } from '~/assets/images/index';
+import { notFoundImage } from '~/assets/images';
 
 const NotFoundImages = () => {
   return (

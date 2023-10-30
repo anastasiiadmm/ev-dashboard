@@ -7,7 +7,7 @@ import {
   EmailField,
   PasswordField,
   SelectField,
-} from '~/shared/ui/components/Fields';
+} from '~/shared/ui/Fields';
 
 interface Props {
   type?: string;

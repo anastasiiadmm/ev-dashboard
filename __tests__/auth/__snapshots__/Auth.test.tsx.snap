@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`tests for Auth components Render component toMatchSnapshot() 1`] = `
+exports[`tests for Auth ui Render component toMatchSnapshot() 1`] = `
 <DocumentFragment>
   <div>
     Mocked Auth

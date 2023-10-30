@@ -4,7 +4,7 @@ import i18n from 'i18next';
 import eng from '~/assets/images/svg/icons/default/ENG.svg';
 import rus from '~/assets/images/svg/icons/default/RU.svg';
 import kg from '~/assets/images/svg/icons/default/KG.svg';
-import { FormField } from '~/shared/ui/components';
+import { FormField } from '~/shared/ui';
 
 function LanguageSelect() {
   const [lang, setLang] = useState('ru');
