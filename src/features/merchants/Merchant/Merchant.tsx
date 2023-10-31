@@ -3,7 +3,7 @@ import { Row, Tabs } from 'antd';
 import bem from 'easy-bem';
 import dayjs from 'dayjs';
 
-import { CardMerchantHeader, CardMerchantInfo } from 'features/merchants/Merchant/ui';
+import { CardMerchantHeader, CardMerchantInfo, TableStations } from 'features/merchants/Merchant/ui';
 import { IMerchantInfo, ITabs } from '~/features/merchants/interfaces';
 
 import './Merchant.scss';
@@ -42,7 +42,9 @@ const Merchant = () => {
     {
       key: '2',
       label: 'Станции',
-      children: 'Список станций',
+      children: (
+        <TableStations />
+      ),
     },
   ];
 
