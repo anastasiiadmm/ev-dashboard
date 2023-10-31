@@ -1,16 +1,20 @@
 import { Button, Form, Row, Tooltip } from 'antd';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import bem from 'easy-bem';
+import { Link } from 'react-router-dom';
 
-import { add, plus, active, status, x, search, infoCircle } from '~/assets/images';
-import { FormField, TableComponent } from '~/shared/ui/components';
+import { add, plus, active, status, x, search, infoCircle, inactive } from '~/assets/images';
+import { FormField, ModalComponent, TableComponent } from '~/shared/ui';
 import { IColumn, IMerchant } from '~/features/merchants/interfaces';
-
+import { ActiveInactiveModal } from '~/features/merchants';
 import './Merchants.scss';
 
 const Merchants = () => {
   const b = bem('Merchants');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [isDeactivateButton, setIsDeactivateButton] = useState(true);
+  const [isDisabledButton, setIsDisabledButton] = useState(true);
 
   const columns: IColumn[] = [
     {
@@ -20,7 +24,11 @@ const Merchants = () => {
     {
       title: 'Наименование',
       render: (record) => {
-        return <Link to={`/merchants/merchant/${record?.id}`} className={b('title crop-text')}>{record?.name_ru}</Link>;
+        return (
+          <Link to={`/merchants/merchant/${record?.id}`} className={b('title crop-text')}>
+            {record?.name_ru}
+          </Link>
+        );
       },
     },
     {
@@ -50,8 +58,8 @@ const Merchants = () => {
     {
       title: 'Статус',
       dataIndex: 'active',
-      render: () => {
-        return <img className={b('center-block')} src={status} alt='status' />;
+      render: (text) => {
+        return <img className={b('center-block')} src={text ? status : inactive} alt='status' />;
       },
     },
     {
@@ -101,7 +109,7 @@ const Merchants = () => {
       inactive_stations: 0,
       agreement_number: '15',
       entity: 'Длинное название юридического лица',
-      active: true,
+      active: false,
       country: 0,
       district: 0,
       city: 0,
@@ -145,6 +153,32 @@ const Merchants = () => {
   const pagePrevHandler = () => {};
   const pageNextHandler = () => {};
 
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOkCancel = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    setSelectedRowKeys(newSelectedRowKeys);
+    const selectedStatuses = newSelectedRowKeys.map((key) => {
+      const selectedMerchant = data.find((item) => item.id === parseInt(key.toString()));
+      return selectedMerchant ? selectedMerchant.active : false;
+    });
+    const hasActiveTrue = selectedStatuses.includes(true);
+    const hasActiveFalse = selectedStatuses.includes(false);
+    const hasMixedStatus = hasActiveTrue && hasActiveFalse;
+    setIsDeactivateButton(hasActiveTrue && !hasActiveFalse);
+    setIsDisabledButton(hasMixedStatus);
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+
   return (
     <Row justify='space-between' data-testid='auth-component' className={b()}>
       <Row className={b('search-pagination-block')}>
@@ -169,6 +203,7 @@ const Merchants = () => {
 
         <TableComponent
           rowKey={(record: IMerchant) => record.id.toString()}
+          rowSelection={rowSelection}
           loading={false}
           data={data}
           columns={columns}
@@ -176,12 +211,36 @@ const Merchants = () => {
           pageNextHandler={pageNextHandler}
         />
 
-        <div className={b('pagination-block')}>
-          <Button className={b('deactivate-button')} type='default'>
-            Деактивировать (3)
-          </Button>
-        </div>
+        {!!selectedRowKeys.length && (
+          <div className={b('pagination-block')}>
+            <Button
+              className={isDeactivateButton ? b('deactivate-button') : b('activate-button')}
+              type='default'
+              onClick={showModal}
+              disabled={isDisabledButton}
+            >
+              {isDeactivateButton ? 'Деактивировать' : 'Активировать'} ({selectedRowKeys.length})
+            </Button>
+          </div>
+        )}
       </Row>
+
+      <ModalComponent
+        width={311}
+        isModalOpen={isModalOpen}
+        handleOk={handleOkCancel}
+        handleCancel={handleOkCancel}
+      >
+        <ActiveInactiveModal
+          textTitle={isDeactivateButton ? 'Деактивировать' : 'Активировать'}
+          infoText={
+            isDeactivateButton
+              ? 'Выбранные Вами мерчанты будут не активны.'
+              : 'Выбранные Вами мерчанты будут активны.'
+          }
+          handleOkCancel={handleOkCancel}
+        />
+      </ModalComponent>
     </Row>
   );
 };

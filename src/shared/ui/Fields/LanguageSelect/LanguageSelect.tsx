@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import i18n from 'i18next';
 
 import { eng, kg, rus } from '~/assets/images';
-import { FormField } from '~/shared/ui/components';
+import { FormField } from '~/shared/ui';
 
 function LanguageSelect() {
   const [lang, setLang] = useState('ru');

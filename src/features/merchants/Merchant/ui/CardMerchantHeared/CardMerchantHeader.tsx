@@ -3,7 +3,7 @@ import { Row, Typography } from 'antd';
 import bem from 'easy-bem';
 import dayjs from 'dayjs';
 
-import { CardComponent } from '~/shared/ui/components';
+import { CardComponent } from '~/shared/ui';
 import { TextBlock } from '~/features/merchants/Merchant/ui';
 import { IMerchantInfo } from '~/features/merchants/interfaces';
 
@@ -23,15 +23,9 @@ const CardMerchantHeader: React.FC<Props> = ({ merchant, className }) => {
       <Title level={5} className={b('title-info-block')}>
         {merchant?.name}
       </Title>
-      <Text className={b('text-info-block')}>
-        {merchant?.legal_name}
-      </Text>
+      <Text className={b('text-info-block')}>{merchant?.legal_name}</Text>
       <Row>
-        <TextBlock
-          styleBlock={{ marginRight: '44px' }}
-          title='ID Мерчанта'
-          text={merchant?.id}
-        />
+        <TextBlock styleBlock={{ marginRight: '44px' }} title='ID Мерчанта' text={merchant?.id} />
         <TextBlock
           styleBlock={{ marginRight: '44px' }}
           title='Кем был создан'

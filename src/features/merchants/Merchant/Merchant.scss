@@ -26,7 +26,7 @@
   &__text-info-block {
     font-size: 14px;
     font-weight: 500;
-    color: #707A94;
+    color: #707a94;
   }
 
   &__button-style {
@@ -34,10 +34,11 @@
     align-items: center;
     height: 34px;
     align-self: self-end;
-    padding: 8px 32px 8px 32px
+    padding: 8px 32px 8px 32px;
   }
 
-  .ant-card, .ant-tabs {
+  .ant-card,
+  .ant-tabs {
     width: 100%;
   }
 

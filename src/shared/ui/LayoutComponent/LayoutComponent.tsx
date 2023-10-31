@@ -42,8 +42,8 @@ import {
 } from '~/assets/images';
 import { authStore } from '~/shared/api/store';
 import { logoutLocalStorage } from '~/shared/utils/storage';
-import { LanguageSelect } from '~/shared/ui/components/Fields';
-import '~/shared/ui/components/LayoutComponent/LayoutComponent.scss';
+import { LanguageSelect } from '~/shared/ui/Fields';
+import './LayoutComponent.scss';
 
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
@@ -86,7 +86,8 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
       : location.pathname.startsWith(key.toString());
 
     const isParentActive =
-      activeIcon && children?.some((child) => child && location.pathname.startsWith(child.key.toString()));
+      activeIcon &&
+      children?.some((child) => child && location.pathname.startsWith(child.key.toString()));
 
     const shouldUseActiveIcon = isActive || isParentActive;
 
@@ -265,10 +266,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     window.location.reload();
   };
 
-  const findMenuItemByKey = (
-    key: React.Key,
-    items: MenuItem[]
-  ): MenuItem | null => {
+  const findMenuItemByKey = (key: React.Key, items: MenuItem[]): MenuItem | null => {
     for (const item of items) {
       if (item.key.toString() === key.toString()) {
         return item;
