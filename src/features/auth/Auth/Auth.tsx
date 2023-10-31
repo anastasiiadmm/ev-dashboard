@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { logo } from '~/assets/images';
 import { IUser } from '~/features/auth/interfaces/IUser';
 import { authStore } from '~/shared/api/store';
-import { FormField } from '~/shared/ui/components';
+import { FormField } from '~/shared/ui';
 import '~/features/auth/Auth/Auth.scss';
 
 const { Text } = Typography;

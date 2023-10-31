@@ -23,7 +23,7 @@ jest.mock('antd/lib/form/Form', () => {
 
 jest.mock('../../src/features/auth/Auth/Auth', () => () => <div>Mocked Auth</div>);
 
-describe('tests for Auth components',  () => {
+describe('tests for Auth ui',  () => {
   test('Render component toMatchSnapshot()', () => {
     const { asFragment } = render(
       <BrowserRouter>

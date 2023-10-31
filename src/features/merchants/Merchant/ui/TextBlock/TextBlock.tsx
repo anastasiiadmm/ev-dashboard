@@ -9,9 +9,9 @@ const { Text } = Typography;
 type Props = {
   title: string | number | undefined;
   text: string | number | undefined;
-  styleBlock?:  React.CSSProperties;
-  styleTitle?:  React.CSSProperties;
-  styleText?:  React.CSSProperties;
+  styleBlock?: React.CSSProperties;
+  styleTitle?: React.CSSProperties;
+  styleText?: React.CSSProperties;
 };
 
 const TextBlock: React.FC<Props> = ({ title, text, styleBlock, styleTitle, styleText }) => {

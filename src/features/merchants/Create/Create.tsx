@@ -3,7 +3,7 @@ import bem from 'easy-bem';
 import { Button, Form, Radio, Typography } from 'antd';
 
 import { eng, kg, rus } from '~/assets/images';
-import { BreadcrumbComponent, CardComponent, FormField } from '~/shared/ui/components';
+import { BreadcrumbComponent, CardComponent, FormField } from '~/shared/ui';
 import './Create.scss';
 
 const { Title, Text } = Typography;

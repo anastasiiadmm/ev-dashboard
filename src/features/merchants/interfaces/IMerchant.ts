@@ -17,23 +17,23 @@ export interface IMerchant {
 }
 
 export interface IMerchantInfo {
-  id: number,
-  number_stations: number,
-  active_stations: number,
-  inactive_stations: number,
-  name: string,
-  legal_name: string,
-  email: string,
-  rate: string,
-  agreement_number: string,
-  address: string,
-  phone: string,
-  active: boolean,
-  country: string,
-  district: string,
-  city: string,
-  created_by: string,
-  created_at: string,
+  id: number;
+  number_stations: number;
+  active_stations: number;
+  inactive_stations: number;
+  name: string;
+  legal_name: string;
+  email: string;
+  rate: string;
+  agreement_number: string;
+  address: string;
+  phone: string;
+  active: boolean;
+  country: string;
+  district: string;
+  city: string;
+  created_by: string;
+  created_at: string;
 }
 
 export interface IColumn {
@@ -43,7 +43,7 @@ export interface IColumn {
   width?: number;
 }
 export interface ITabs {
-  key: string,
-  label: string,
+  key: string;
+  label: string;
   children: string | JSX.Element;
 }

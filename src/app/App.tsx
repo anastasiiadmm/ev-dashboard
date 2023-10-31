@@ -12,9 +12,9 @@ import { tokensLocalStorage } from '~/shared/utils/config';
 import { authStore } from '~/shared/api/store';
 import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
 import { Home } from '~/features/main';
-import { LayoutComponent } from '~/shared/ui/components';
+import { LayoutComponent } from '~/shared/ui';
+import { LanguageSelect } from '~/shared/ui/Fields';
 import { Create, Merchant, Merchants } from '~/features/merchants';
-import { LanguageSelect } from '~/shared/ui/components/Fields';
 
 const routers: RouteObject[] = [
   {

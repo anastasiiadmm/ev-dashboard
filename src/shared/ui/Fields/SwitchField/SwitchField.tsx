@@ -13,7 +13,12 @@ interface Props {
 
 const SwitchField: React.FC<Props> = ({ label, rules, className, inputClassName, text }) => {
   return (
-    <Form.Item className={`${className} custom-label`} rules={rules} label={label} valuePropName='checked'>
+    <Form.Item
+      className={`${className} custom-label`}
+      rules={rules}
+      label={label}
+      valuePropName='checked'
+    >
       <Switch className={inputClassName} /> <p className='switch-text'>{text}</p>
     </Form.Item>
   );

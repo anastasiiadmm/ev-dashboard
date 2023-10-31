@@ -31,6 +31,12 @@ export { default as infoCircle } from './svg/icons/default/information-circle.sv
 export { default as eng } from './svg/icons/default/ENG.svg';
 export { default as rus } from './svg/icons/default/RU.svg';
 export { default as kg } from './svg/icons/default/KG.svg';
+export { default as warning } from './svg/icons/default/warning.svg';
+export { default as greenCheck } from './svg/icons/default/greenCheck.svg';
+export { default as inactive } from './svg/icons/default/inactive.svg';
+export { default as trendingUp } from './svg/icons/default/trending-up.svg';
+export { default as trendingDown } from './svg/icons/default/trending-down.svg';
+export { default as userGroup } from './svg/icons/default/user-group.svg';
 
 // Active icons
 export { default as circleActive } from './svg/icons/active/circle-active.svg';

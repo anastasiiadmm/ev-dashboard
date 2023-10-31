@@ -1,13 +1,12 @@
 import React from 'react';
 import { Button, Flex, Row, Typography } from 'antd';
 
-import { CardComponent } from '~/shared/ui/components';
+import { CardComponent } from '~/shared/ui';
 import { TextBlock } from '~/features/merchants/Merchant/ui';
-
 import { edit } from '~/assets/images';
 import { IMerchantInfo } from '~/features/merchants/interfaces';
 
-const { Title} = Typography;
+const { Title } = Typography;
 
 type Props = {
   merchant: IMerchantInfo;
@@ -16,7 +15,7 @@ type Props = {
   style?: React.CSSProperties;
 };
 
-const CardMerchantInfo: React.FC<Props>  = ({ merchant, classNameTitle, classNameButton }) => {
+const CardMerchantInfo: React.FC<Props> = ({ merchant, classNameTitle, classNameButton }) => {
   return (
     <CardComponent>
       <Row>
@@ -49,41 +48,17 @@ const CardMerchantInfo: React.FC<Props>  = ({ merchant, classNameTitle, classNam
           <Title level={5} className={classNameTitle}>
             Контакты
           </Title>
-          <TextBlock
-            styleText={{ marginBottom: '24px' }}
-            title='Телефон'
-            text={merchant?.phone}
-          />
-          <TextBlock
-            styleText={{ marginBottom: '24px' }}
-            title='Email'
-            text={merchant?.email}
-          />
+          <TextBlock styleText={{ marginBottom: '24px' }} title='Телефон' text={merchant?.phone} />
+          <TextBlock styleText={{ marginBottom: '24px' }} title='Email' text={merchant?.email} />
         </Flex>
         <Flex vertical style={{ marginRight: '44px' }}>
           <Title level={5} className={classNameTitle}>
             Локация
           </Title>
-          <TextBlock
-            styleText={{ marginBottom: '24px' }}
-            title='Страна'
-            text={merchant?.country}
-          />
-          <TextBlock
-            styleText={{ marginBottom: '24px' }}
-            title='Город'
-            text={merchant?.city}
-          />
-          <TextBlock
-            styleText={{ marginBottom: '24px' }}
-            title='Район'
-            text={merchant?.district}
-          />
-          <TextBlock
-            styleText={{ marginBottom: '24px' }}
-            title='Улица'
-            text={merchant?.address}
-          />
+          <TextBlock styleText={{ marginBottom: '24px' }} title='Страна' text={merchant?.country} />
+          <TextBlock styleText={{ marginBottom: '24px' }} title='Город' text={merchant?.city} />
+          <TextBlock styleText={{ marginBottom: '24px' }} title='Район' text={merchant?.district} />
+          <TextBlock styleText={{ marginBottom: '24px' }} title='Улица' text={merchant?.address} />
         </Flex>
         <Flex vertical style={{ marginRight: '44px' }}>
           <Title level={5} className={classNameTitle}>

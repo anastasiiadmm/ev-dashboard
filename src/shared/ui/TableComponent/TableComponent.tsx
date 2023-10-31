@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Table } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 
-import NotFoundImages from '~/shared/ui/components/NotFoundImages/NotFoundImages';
-import { PaginationComponent } from '~/shared/ui/components';
+import NotFoundImages from '~/shared/ui/NotFoundImages/NotFoundImages';
+import { PaginationComponent } from '~/shared/ui';
 import { IColumn, IMerchant } from '~/features/merchants/interfaces/IMerchant';
 import { IPagination } from '~/shared/types/interfaces/IPagination';
 
@@ -11,6 +11,10 @@ interface Props {
   data: IMerchant[];
   columns: IColumn[];
   rowKey: (record: IMerchant) => Key;
+  rowSelection: {
+    selectedRowKeys: React.Key[];
+    onChange: (selectedRowKeys: React.Key[]) => void;
+  };
   loading: boolean;
   params?: IPagination | null;
   pagePrevHandler?: (() => void | undefined) | undefined;
@@ -30,9 +34,8 @@ const TableComponent: React.FC<Props> = ({
   params,
   pagePrevHandler,
   pageNextHandler,
+  rowSelection,
 }) => {
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-
   const rowClassName = (_: IMerchant, index: number) => {
     if (index % 2 === 0) {
       return '';
@@ -42,15 +45,6 @@ const TableComponent: React.FC<Props> = ({
 
   const locale = {
     emptyText: <NotFoundImages />,
-  };
-
-  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
   };
 
   return (
