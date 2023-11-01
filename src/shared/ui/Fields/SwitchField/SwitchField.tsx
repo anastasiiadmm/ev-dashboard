@@ -8,10 +8,24 @@ interface Props {
   text?: string;
   rules?: Rule[];
   className?: string;
+  onChange?: (checked: boolean) => void;
   inputClassName?: string;
 }
 
-const SwitchField: React.FC<Props> = ({ label, rules, className, inputClassName, text }) => {
+const SwitchField: React.FC<Props> = ({
+  onChange,
+  label,
+  rules,
+  className,
+  inputClassName,
+  text,
+}) => {
+  const handleChange = (checked) => {
+    if (onChange) {
+      onChange(checked);
+    }
+  };
+
   return (
     <Form.Item
       className={`${className} custom-label`}
@@ -19,7 +33,8 @@ const SwitchField: React.FC<Props> = ({ label, rules, className, inputClassName,
       label={label}
       valuePropName='checked'
     >
-      <Switch className={inputClassName} /> <p className='switch-text'>{text}</p>
+      <Switch onChange={handleChange} className={inputClassName} />{' '}
+      <p className='switch-text'>{text}</p>
     </Form.Item>
   );
 };

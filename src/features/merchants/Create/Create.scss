@@ -61,6 +61,10 @@
     }
   }
 
+  &__lang-block {
+    width: 310px !important;
+  }
+
   &__button-info {
     width: 240px;
     height: 40px;
@@ -73,5 +77,26 @@
     background-color: variables.$gray-light-bg-color;
     color: variables.$black-color;
     border: none;
+  }
+
+  .active-border {
+    border: 1px solid variables.$title-color;
+  }
+
+  &__alert-styles {
+    margin: 20px 0;
+    padding: 12px;
+
+    .ant-alert-message {
+      color: variables.$red-color;
+      font-size: 12px;
+      font-weight: variables.$font-600;
+      text-transform: uppercase;
+    }
+
+    .ant-alert-description {
+      color: variables.$red-color;
+      font-size: 12px;
+    }
   }
 }

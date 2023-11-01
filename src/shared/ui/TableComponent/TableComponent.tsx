@@ -5,7 +5,7 @@ import { Key } from 'antd/lib/table/interface';
 import NotFoundImages from '~/shared/ui/NotFoundImages/NotFoundImages';
 import { PaginationComponent } from '~/shared/ui';
 import { IColumn, IMerchant } from '~/features/merchants/interfaces/IMerchant';
-import { IPagination } from '~/shared/types/interfaces/IPagination';
+import { IPagination } from '~/shared/interfaces/IPagination';
 
 interface Props {
   data: IMerchant[];
