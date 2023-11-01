@@ -91,17 +91,11 @@ const Create = observer(() => {
     try {
       await form.validateFields();
       setError(false);
-
-      // Переход к следующему языку в списке
       let nextLanguageIndex =
         sortedLanguageItems.findIndex((item) => item.value === selectedLanguage) + 1;
-
-      // Если текущий выбранный язык последний в списке, начинаем сначала
       if (nextLanguageIndex >= sortedLanguageItems.length) {
         nextLanguageIndex = 0;
       }
-
-      // Установка следующего языка в качестве выбранного
       setSelectedLanguage(sortedLanguageItems[nextLanguageIndex].value);
     } catch (errorInfo) {
       setError(true);
