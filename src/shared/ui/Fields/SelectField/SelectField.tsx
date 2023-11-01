@@ -15,6 +15,7 @@ interface Props {
   suffixIconData?: React.ReactNode;
   prefixIcon?: React.ReactNode;
   dropdownStyle?: CSSProperties | undefined;
+  customStyle?: CSSProperties | undefined;
   options?: OptionType[];
   rules?: IRule[];
   error?: boolean;

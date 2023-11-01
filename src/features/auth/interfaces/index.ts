@@ -1,2 +1,2 @@
-export { IJWTokens } from './IJWTokens';
-export { IUser } from './IUser';
+export type { IJWTokens } from './IJWTokens';
+export type { IUser } from './IUser';

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import bem from 'easy-bem';
 import { Button, Form, Radio, Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
@@ -75,12 +75,12 @@ const Create = observer(() => {
     commonStore.fetchLocations(queryString);
   }, [isCountrySelected, isCitySelected]);
 
-  const handleLanguageSelect = (lang) => {
+  const handleLanguageSelect = (lang: string) => {
     setSelectedLanguage(lang);
   };
 
-  const handleFormChange = (key, eventOrValue) => {
-    const value = eventOrValue && eventOrValue.target ? eventOrValue.target.value : eventOrValue;
+  const handleFormChange = (key: string, eventOrValue: string | ChangeEvent<HTMLInputElement>) => {
+    const value = typeof eventOrValue === 'string' ? eventOrValue : eventOrValue.target.value;
     setFormData((prevData) => ({
       ...prevData,
       [key]: value,
@@ -155,7 +155,9 @@ const Create = observer(() => {
                     },
                   ]}
                   error={error}
-                  onChange={(e) => handleFormChange(`name_${selectedLanguage}`, e.target.value)}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    handleFormChange(`name_${selectedLanguage}`, e.target.value)
+                  }
                 />
 
                 <FormField
@@ -170,7 +172,9 @@ const Create = observer(() => {
                     },
                   ]}
                   error={error}
-                  onChange={(e) => handleFormChange('agreement_number', e.target.value)}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    handleFormChange('agreement_number', e.target.value)
+                  }
                 />
               </div>
               <div>
@@ -186,7 +190,7 @@ const Create = observer(() => {
                     },
                   ]}
                   error={error}
-                  onChange={(e) =>
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     handleFormChange(`legal_name_${selectedLanguage}`, e.target.value)
                   }
                 />
@@ -203,7 +207,9 @@ const Create = observer(() => {
                     },
                   ]}
                   error={error}
-                  onChange={(e) => handleFormChange('rate', e.target.value)}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    handleFormChange('rate', e.target.value)
+                  }
                 />
               </div>
             </div>
@@ -224,7 +230,9 @@ const Create = observer(() => {
                   },
                 ]}
                 error={error}
-                onChange={(e) => handleFormChange('phone', e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  handleFormChange('phone', e.target.value)
+                }
               />
 
               <FormField
@@ -234,7 +242,9 @@ const Create = observer(() => {
                 name='email'
                 label='Ваш email'
                 placeholder='Введите email'
-                onChange={(e) => handleFormChange('email', e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  handleFormChange('email', e.target.value)
+                }
               />
             </div>
 
@@ -257,7 +267,9 @@ const Create = observer(() => {
                   ]}
                   error={error}
                   options={countries}
-                  handleChange={(e) => handleFormChange('country', e)}
+                  handleChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    handleFormChange('country', e)
+                  }
                 />
 
                 <FormField
@@ -277,7 +289,9 @@ const Create = observer(() => {
                   error={error}
                   disabled={!isCitySelected}
                   options={districts}
-                  handleChange={(e) => handleFormChange('district', e)}
+                  handleChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    handleFormChange('district', e)
+                  }
                 />
               </div>
               <div>
@@ -298,7 +312,7 @@ const Create = observer(() => {
                   error={error}
                   disabled={!isCountrySelected}
                   options={settlements}
-                  handleChange={(e) => handleFormChange('city', e)}
+                  handleChange={(e: ChangeEvent<HTMLInputElement>) => handleFormChange('city', e)}
                 />
 
                 <FormField
@@ -314,7 +328,9 @@ const Create = observer(() => {
                     },
                   ]}
                   error={error}
-                  onChange={(e) => handleFormChange(`address_${selectedLanguage}`, e.target.value)}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    handleFormChange(`address_${selectedLanguage}`, e.target.value)
+                  }
                 />
               </div>
             </div>
@@ -326,7 +342,9 @@ const Create = observer(() => {
               name='active'
               text='Активный'
               label='Статус'
-              onChange={(checked) => handleFormChange('active', checked)}
+              onChange={(checked: ChangeEvent<HTMLInputElement>) =>
+                handleFormChange('active', checked)
+              }
             />
           </Form>
         </CardComponent>

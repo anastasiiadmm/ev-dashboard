@@ -20,7 +20,7 @@ const SwitchField: React.FC<Props> = ({
   inputClassName,
   text,
 }) => {
-  const handleChange = (checked) => {
+  const handleChange = (checked: boolean) => {
     if (onChange) {
       onChange(checked);
     }

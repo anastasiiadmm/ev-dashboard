@@ -21,7 +21,7 @@ class CommonStore implements CommonState {
   districts = null;
   settlements = null;
   loading = false;
-  error = null;
+  error: string | null = null;
 
   constructor() {
     makeAutoObservable(this);

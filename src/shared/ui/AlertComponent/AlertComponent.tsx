@@ -5,7 +5,7 @@ interface Props {
   message: string;
   description: string;
   className?: string;
-  type: string;
+  type: 'success' | 'error' | 'warning' | 'info' | undefined;
   showIcon?: boolean;
   closable?: boolean;
 }
