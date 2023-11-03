@@ -182,7 +182,7 @@ const Create = observer(() => {
   };
 
   return (
-    <div className={b('')}>
+    <div className={b('')} data-testid='create-component'>
       <BreadcrumbComponent items={items} />
       <div className={b('cards-block')}>
         <CardComponent>

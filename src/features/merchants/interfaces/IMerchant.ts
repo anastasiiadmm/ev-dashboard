@@ -36,22 +36,6 @@ export interface ICreateMerchant {
   city: number;
 }
 
-// export const Merchants {
-//   // id: num;
-//   // number_stations: 0;
-//   //   active_stations: 0;
-//   //   inactive_stations: 0;
-//   //   location: string;
-//   //   active: true,
-//   //   name: "string",
-//   //   legal_name: "string",
-//   //   rate: "string",
-//   //   agreement_number: "string",
-//   //   address: "string",
-//   //   phone: "string",
-//   //   email: "user@example.com"
-// }
-
 export interface IMerchantInfo {
   id: number;
   number_stations: number;
