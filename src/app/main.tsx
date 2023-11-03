@@ -33,7 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       },
     }}
   >
-    <BrowserRouter basename='/'>
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </ConfigProvider>,

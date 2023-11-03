@@ -10,10 +10,12 @@ interface Props {
   label?: string;
   defaultValue?: string;
   name?: string;
+  inputType?: string;
   rules?: Rule[];
   placeholder?: string;
   inputClassName?: string;
   onChange?: () => void;
+  error?: boolean;
   prefix?: React.ReactNode;
 }
 
@@ -26,6 +28,8 @@ const DefaultField: React.FC<Props> = ({
   placeholder,
   className,
   inputClassName,
+  error = false,
+  inputType,
   onChange,
   prefix,
 }) => {
@@ -36,8 +40,11 @@ const DefaultField: React.FC<Props> = ({
       name={name}
       rules={[...rules]}
       className={`${className} custom-label`}
+      validateStatus={error ? 'error' : undefined}
+      help={error ? '' : undefined}
     >
       <Input
+        type={inputType}
         name={name}
         defaultValue={defaultValue}
         placeholder={placeholder}

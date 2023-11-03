@@ -3,7 +3,7 @@ import 'dayjs/locale/ru';
 import bem from 'easy-bem';
 import { observer } from 'mobx-react-lite';
 import React, { useCallback, useEffect } from 'react';
-import { Route, RouteObject, Routes, useRoutes } from 'react-router';
+import { Route, Routes } from 'react-router';
 
 import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
 import { Home } from '~/features/main';
@@ -18,28 +18,8 @@ import {
   logoutLocalStorage,
 } from '~/shared/utils/storage';
 
-const routers: RouteObject[] = [
-  {
-    path: '/',
-    element: <Home />,
-  },
-  {
-    path: '/merchants',
-    element: <Merchants />,
-  },
-  {
-    path: '/merchants/merchant/:id',
-    element: <Merchant />,
-  },
-  {
-    path: '/merchants/create-merchant',
-    element: <Create />,
-  },
-];
-
 const App: React.FC = observer(() => {
   const b = bem('Auth');
-  const router = useRoutes(routers);
   dayjs.locale('ru');
 
   const initializeApp = useCallback(() => {
@@ -74,7 +54,18 @@ const App: React.FC = observer(() => {
   }, [handleStorageEvent]);
 
   if (authStore.tokens.access && authStore.tokens.refresh) {
-    return <LayoutComponent>{router}</LayoutComponent>;
+    return (
+      <LayoutComponent>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/merchants'>
+            <Route index element={<Merchants />} />
+            <Route path='/merchants/merchant/:id' element={<Merchant />} />
+            <Route path='/merchants/create-merchant' element={<Create />} />
+          </Route>
+        </Routes>
+      </LayoutComponent>
+    );
   } else {
     return (
       <>
