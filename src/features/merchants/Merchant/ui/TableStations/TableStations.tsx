@@ -1,13 +1,24 @@
-import React from 'react';
-import bem from 'easy-bem';
-import { IColumn, IMerchant } from '~/features/merchants/interfaces';
-import { Link } from 'react-router-dom';
-import { active, add, infoCircle, plus, status, x } from '~/assets/images';
 import { Button, Row, Tooltip } from 'antd';
-import { TableComponent } from '~/shared/ui/components';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
+import bem from 'easy-bem';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { add, inactive, infoCircle, plus, status } from '~/assets/images';
+import { ActiveInactiveModal } from '~/features/merchants';
+import { IColumn, IStation } from '~/features/merchants/interfaces';
+import { TableCell } from '~/features/merchants/Merchant/ui';
+import { ModalComponent, TableComponent } from '~/shared/ui';
+
+import './TableStations.scss';
 
 const TableStations = () => {
   const b = bem('TableStations');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [isDeactivateButton, setIsDeactivateButton] = useState(true);
+  const [isDisabledButton, setIsDisabledButton] = useState(true);
 
   const columns: IColumn[] = [
     {
@@ -16,53 +27,67 @@ const TableStations = () => {
     },
     {
       title: 'Наименование',
-      render: (record) => {
-        return <Link to={`/merchants/merchant/${record?.id}`} className={b('title crop-text')}>{record?.name_ru}</Link>;
+      render: (record: IStation) => {
+        return (
+          <Link to={`/merchants/merchant/${record?.id}`} className={b('title crop-text')}>
+            {record?.name}
+          </Link>
+        );
       },
-    },
-    {
-      title: '№ договора',
-      dataIndex: 'legal_name_ru',
-    },
-    {
-      title: '%',
-      dataIndex: 'rate',
-    },
-    {
-      title: 'Контакты',
-      dataIndex: 'phone',
     },
     {
       title: 'Локация',
-      render: (record) => {
-        return <p className={b('text crop-text')}>{record?.address_ru}</p>;
+      render: (record: IStation) => {
+        return <p className={b('text crop-text')}>{record?.location}</p>;
       },
     },
     {
-      title: 'Юр лицо',
-      render: (record) => {
-        return <p className={b('text crop-text')}>{record?.entity}</p>;
+      title: 'Режим работы',
+      width: 120,
+      render: (record: IStation) => {
+        let schedule: string = 'Не стандартный режим работы';
+        const days = record.schedule;
+        const areNumbersNotInOrder = (arr: number[]) => {
+          return arr.every((value, index, array) => index === 0 || value === array[index - 1] + 1);
+        };
+        if (days.length && days.length === 1 && areNumbersNotInOrder(days[0].days)) {
+          const week: number[] = [0, 1, 2, 3, 4, 5, 6];
+          const date = week.slice(1);
+          date.splice(week.length, 0, 0);
+          const weekend: number[] = date.filter(
+            (element: number) => !days[0].days.includes(element),
+          );
+          const formattedDays: string[] = weekend.map((day: number) =>
+            dayjs().day(day).format('dd'),
+          );
+          schedule = `${days[0].open} выходной: ${formattedDays.join(' - ')}`;
+        }
+        return <p className={b('text crop-text')}>{schedule}</p>;
       },
     },
     {
       title: 'Статус',
-      dataIndex: 'active',
-      render: () => {
-        return <img className={b('center-block')} src={status} alt='status' />;
+      dataIndex: 'status',
+      render: (text: number) => {
+        return <img className={b('center-block')} src={!text ? status : inactive} alt='status' />;
       },
     },
     {
-      title: 'Кол-во станций',
-      dataIndex: 'number_stations',
-      width: 30,
+      title: 'Конекторы',
+      render: (record: IStation) => {
+        const connectors = record.connectors.join(', ');
+        return <p className={b('text crop-text')}>{connectors}</p>;
+      },
     },
     {
-      title: <img src={active} alt='active' />,
-      dataIndex: 'active_stations',
+      title: 'Теги',
+      width: 170,
+      render: (record: IStation) => <TableCell data={record.tags} />,
     },
     {
-      title: <img src={x} alt='x' />,
-      dataIndex: 'inactive_stations',
+      title: 'Инфраструктура',
+      width: 180,
+      render: (record: IStation) => <TableCell data={record.surroundings} />,
     },
     {
       title: 'Действие',
@@ -85,78 +110,210 @@ const TableStations = () => {
     },
   ] as IColumn[];
 
-  const data: IMerchant[] = [
+  const data: IStation[] = [
     {
       id: 1,
-      name_ru: 'Длинное наименование станции',
-      legal_name_ru: 'W16/06/2023',
-      rate: '15',
-      phone: '+996 999 444 444',
-      address_ru: 'Кыргызстан, Бишкек, название длинное',
-      number_stations: 42,
-      active_stations: 32,
-      inactive_stations: 0,
-      agreement_number: '15',
-      entity: 'Длинное название юридического лица',
-      active: true,
-      country: 0,
-      district: 0,
-      city: 0,
+      name: 'Наименование длинное станции Ким',
+      location: 'Кыргызстан, Бишкек, название длинное',
+      schedule: [
+        {
+          days: [1, 2, 3, 4, 5],
+          open: '09:00 - 23:00',
+          breaks: ['12:00 - 13:00'],
+        },
+      ],
+      status: 0,
+      connectors: ['Tesla', 'CCS'],
+      tags: [
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+      ],
+      surroundings: [
+        'Кафе',
+        'школа',
+        'Кафе',
+        'школа',
+        'Кафе',
+        'школа',
+        'Кафе',
+        'школа',
+        'Кафе',
+        'школа',
+      ],
     },
     {
       id: 2,
-      name_ru: 'Длинное наименование станции',
-      legal_name_ru: 'W16/06/2023',
-      rate: '15',
-      phone: '+996 999 444 444',
-      address_ru: 'Кыргызстан, Бишкек, название длинное',
-      number_stations: 42,
-      active_stations: 32,
-      inactive_stations: 0,
-      agreement_number: '15',
-      entity: 'Длинное название юридического лица',
-      active: true,
-      country: 0,
-      district: 0,
-      city: 0,
+      name: 'Наименование длинное станции Ким',
+      location: 'Кыргызстан, Бишкек, название длинное',
+      schedule: [
+        {
+          days: [1, 2, 3],
+          open: '09:00 - 23:00',
+          breaks: ['12:00 - 13:00'],
+        },
+        {
+          days: [4, 5, 6],
+          open: '11:00 - 23:00',
+          breaks: ['12:00 - 13:00'],
+        },
+        {
+          days: [0],
+          open: '13:00 - 20:00',
+          breaks: ['15:00 - 16:00'],
+        },
+      ],
+      status: 1,
+      connectors: ['Tesla', 'CCS'],
+      tags: [
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+      ],
+      surroundings: [
+        'Кафе',
+        'школа',
+        'Кафе',
+        'школа',
+        'Кафе',
+        'школа',
+        'Кафе',
+        'школа',
+        'Кафе',
+        'школа',
+      ],
     },
     {
       id: 3,
-      name_ru: 'Длинное наименование станции',
-      legal_name_ru: 'W16/06/2023',
-      rate: '15',
-      phone: '+996 999 444 444',
-      address_ru: 'Кыргызстан, Бишкек, название длинное',
-      number_stations: 42,
-      active_stations: 32,
-      inactive_stations: 0,
-      agreement_number: '15',
-      entity: 'Длинное название юридического лица',
-      active: true,
-      country: 0,
-      district: 0,
-      city: 0,
+      name: 'Наименование длинное станции Ким',
+      location: 'Кыргызстан, Бишкек, название длинное',
+      schedule: [
+        {
+          days: [1, 2, 3, 4, 5, 6],
+          open: '06:00 - 23:00',
+          breaks: ['12:00 - 13:00'],
+        },
+      ],
+      status: 0,
+      connectors: ['Tesla', 'CCS'],
+      tags: [
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+        '#Быстрая',
+      ],
+      surroundings: [
+        'Кафе',
+        'школа',
+        'Кафе',
+        'школа',
+        'Кафе',
+        'школа',
+        'Кафе',
+        'школа',
+        'Кафе',
+        'школа',
+      ],
     },
   ];
 
   const pagePrevHandler = () => {};
   const pageNextHandler = () => {};
-  return (
-    <Row className={b('table-block')}>
-      <Link to='/merchants/create-merchant' className={b('add-block')}>
-        <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
-          Добавить мерчанта
-        </Button>
-      </Link>
 
-      <TableComponent
-        rowKey={(record: IMerchant) => record.id.toString()}
-        loading={false}
-        data={data}
-        columns={columns}
-        pagePrevHandler={pagePrevHandler}
-        pageNextHandler={pageNextHandler}
-      />
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOkCancel = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    setSelectedRowKeys(newSelectedRowKeys);
+    const selectedStatuses = newSelectedRowKeys.map((key) => {
+      const selectedMerchant = data.find((item) => item.id === parseInt(key.toString()));
+      return selectedMerchant ? selectedMerchant?.status : 1;
+    });
+    const hasActiveTrue = selectedStatuses.includes(0);
+    const hasActiveFalse = selectedStatuses.includes(1);
+    const hasMixedStatus = hasActiveTrue && hasActiveFalse;
+    setIsDeactivateButton(hasActiveTrue && !hasActiveFalse);
+    setIsDisabledButton(hasMixedStatus);
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+
+  return (
+    <Row justify='space-between' data-testid='auth-component' className={b()}>
+      <Row className={b('table-block')}>
+        <Link to='/merchants' className={b('add-block')}>
+          <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
+            Добавить станцию
+          </Button>
+        </Link>
+
+        <TableComponent
+          rowKey={(record) => record.id.toString()}
+          rowSelection={rowSelection}
+          loading={false}
+          data={data}
+          columns={columns}
+          pagePrevHandler={pagePrevHandler}
+          pageNextHandler={pageNextHandler}
+        />
+
+        {!!selectedRowKeys.length && (
+          <div className={b('pagination-block')}>
+            <Button
+              className={isDeactivateButton ? b('deactivate-button') : b('activate-button')}
+              type='default'
+              onClick={showModal}
+              disabled={isDisabledButton}
+            >
+              {isDeactivateButton ? 'Деактивировать' : 'Активировать'} ({selectedRowKeys.length})
+            </Button>
+          </div>
+        )}
+
+        <ModalComponent
+          width={311}
+          isModalOpen={isModalOpen}
+          handleOk={handleOkCancel}
+          handleCancel={handleOkCancel}
+        >
+          <ActiveInactiveModal
+            textTitle={isDeactivateButton ? 'Деактивировать' : 'Активировать'}
+            infoText={
+              isDeactivateButton
+                ? 'Выбранные Вами станции будут не активны.'
+                : 'Выбранные Вами станции будут активны.'
+            }
+            handleOkCancel={handleOkCancel}
+          />
+        </ModalComponent>
+      </Row>
     </Row>
   );
 };

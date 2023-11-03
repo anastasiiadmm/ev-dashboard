@@ -1,20 +1,22 @@
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
+import bem from 'easy-bem';
+import { observer } from 'mobx-react-lite';
 import React, { useCallback, useEffect } from 'react';
 import { Route, RouteObject, Routes, useRoutes } from 'react-router';
-import { observer } from 'mobx-react-lite';
-import bem from 'easy-bem';
 
+import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
+import { Home } from '~/features/main';
+import { Create, Merchant, Merchants } from '~/features/merchants';
+import { authStore } from '~/shared/api/store';
+import { LayoutComponent } from '~/shared/ui';
+import { LanguageSelect } from '~/shared/ui/Fields';
+import { tokensLocalStorage } from '~/shared/utils/config';
 import {
   defaultLocalStorage,
   getUserLocalStorage,
   logoutLocalStorage,
 } from '~/shared/utils/storage';
-import { tokensLocalStorage } from '~/shared/utils/config';
-import { authStore } from '~/shared/api/store';
-import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
-import { Home } from '~/features/main';
-import { LayoutComponent } from '~/shared/ui';
-import { LanguageSelect } from '~/shared/ui/Fields';
-import { Create, Merchant, Merchants } from '~/features/merchants';
 
 const routers: RouteObject[] = [
   {
@@ -38,6 +40,7 @@ const routers: RouteObject[] = [
 const App: React.FC = observer(() => {
   const b = bem('Auth');
   const router = useRoutes(routers);
+  dayjs.locale('ru');
 
   const initializeApp = useCallback(() => {
     const tokensLocal = getUserLocalStorage();

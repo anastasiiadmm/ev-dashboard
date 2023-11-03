@@ -23,7 +23,7 @@ const Merchants = () => {
     },
     {
       title: 'Наименование',
-      render: (record) => {
+      render: (record: IMerchant) => {
         return (
           <Link to={`/merchants/merchant/${record?.id}`} className={b('title crop-text')}>
             {record?.name_ru}
@@ -45,20 +45,20 @@ const Merchants = () => {
     },
     {
       title: 'Локация',
-      render: (record) => {
+      render: (record: IMerchant) => {
         return <p className={b('text crop-text')}>{record?.address_ru}</p>;
       },
     },
     {
       title: 'Юр лицо',
-      render: (record) => {
+      render: (record: IMerchant) => {
         return <p className={b('text crop-text')}>{record?.entity}</p>;
       },
     },
     {
       title: 'Статус',
       dataIndex: 'active',
-      render: (text) => {
+      render: (text: boolean) => {
         return <img className={b('center-block')} src={text ? status : inactive} alt='status' />;
       },
     },
@@ -202,7 +202,7 @@ const Merchants = () => {
         </Link>
 
         <TableComponent
-          rowKey={(record: IMerchant) => record.id.toString()}
+          rowKey={(record) => record.id.toString()}
           rowSelection={rowSelection}
           loading={false}
           data={data}
