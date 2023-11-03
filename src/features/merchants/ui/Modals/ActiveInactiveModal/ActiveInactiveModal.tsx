@@ -9,6 +9,7 @@ const { Title, Text } = Typography;
 
 interface Props {
   handleOkCancel?: () => void;
+  handleAgreeHandler?: () => void;
   hasCancelButton?: boolean;
   successModal?: boolean;
   textTitle: string;
@@ -18,6 +19,7 @@ interface Props {
 const ActiveInactiveModal: React.FC<Props> = ({
   hasCancelButton = true,
   successModal = false,
+  handleAgreeHandler,
   handleOkCancel,
   textTitle,
   infoText,
@@ -44,7 +46,9 @@ const ActiveInactiveModal: React.FC<Props> = ({
               Отменить
             </Button>
           )}
-          <Button type='primary'>Да</Button>
+          <Button type='primary' onClick={handleAgreeHandler}>
+            Да
+          </Button>
         </div>
       </div>
     </div>

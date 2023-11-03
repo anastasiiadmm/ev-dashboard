@@ -1,16 +1,24 @@
 import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import bem from 'easy-bem';
 import { Button, Form, Radio, Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
 
 import { eng, kg, rus } from '~/assets/images';
-import { AlertComponent, BreadcrumbComponent, CardComponent, FormField } from '~/shared/ui';
+import {
+  AlertComponent,
+  BreadcrumbComponent,
+  CardComponent,
+  FormField,
+  ModalComponent,
+} from '~/shared/ui';
 import { useCurrentLocale } from '~/shared/hooks';
 import { ICreateMerchant } from '~/features/merchants/interfaces';
 import { commonStore } from '~/shared/api/store';
 import { getParams } from '~/shared/utils/helper';
 import './Create.scss';
+import { ActiveInactiveModal } from '~/features/merchants';
 
 const { Title, Text } = Typography;
 
@@ -36,6 +44,7 @@ const Create = observer(() => {
     districtsLoading,
   } = toJS(commonStore);
   const [form] = Form.useForm();
+  const navigate = useNavigate();
   const currentLocale = useCurrentLocale();
   const [selectedLanguage, setSelectedLanguage] = useState(currentLocale);
   const [formData, setFormData] = useState<ICreateMerchant>({
@@ -67,6 +76,7 @@ const Create = observer(() => {
     ky: false,
   });
   const isAllSelected = Object.values(radioButtonStates).every((value) => value);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     let locationType;
@@ -128,6 +138,18 @@ const Create = observer(() => {
       return 0;
     });
   }, [currentLocale]);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOkCancel = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const handleAgreeHandler = () => {
+    navigate('/merchants');
+  };
 
   const onFinish = () => {
     // try {
@@ -418,12 +440,26 @@ const Create = observer(() => {
                 Далее
               </Button>
             )}
-            <Button type='default' className={b('cancel-button')}>
+            <Button type='default' className={b('cancel-button')} onClick={showModal}>
               Отменить
             </Button>
           </div>
         </CardComponent>
       </div>
+
+      <ModalComponent
+        width={400}
+        isModalOpen={isModalOpen}
+        handleOk={handleOkCancel}
+        handleCancel={handleOkCancel}
+      >
+        <ActiveInactiveModal
+          textTitle='Вы действительно хотите отменить изменения?'
+          infoText='После отмены все данные будут утеряны.'
+          handleOkCancel={handleOkCancel}
+          handleAgreeHandler={handleAgreeHandler}
+        />
+      </ModalComponent>
     </div>
   );
 });
