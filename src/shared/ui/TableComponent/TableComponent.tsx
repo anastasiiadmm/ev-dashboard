@@ -1,16 +1,19 @@
 import React from 'react';
 import { Table } from 'antd';
 import { Key } from 'antd/lib/table/interface';
+import bem from 'easy-bem';
 
 import NotFoundImages from '~/shared/ui/NotFoundImages/NotFoundImages';
 import { PaginationComponent } from '~/shared/ui';
-import { IColumn, IMerchant } from '~/features/merchants/interfaces/IMerchant';
+import { IColumn, IMerchant, IStation } from '~/features/merchants/interfaces/IMerchant';
 import { IPagination } from '~/shared/interfaces/IPagination';
 
+import './TableComponent.scss';
+
 interface Props {
-  data: IMerchant[];
+  data: (IMerchant | IStation)[];
   columns: IColumn[];
-  rowKey: (record: IMerchant) => Key;
+  rowKey: (record: IMerchant | IStation) => Key;
   rowSelection: {
     selectedRowKeys: React.Key[];
     onChange: (selectedRowKeys: React.Key[]) => void;
@@ -36,7 +39,8 @@ const TableComponent: React.FC<Props> = ({
   pageNextHandler,
   rowSelection,
 }) => {
-  const rowClassName = (_: IMerchant, index: number) => {
+  const b = bem('TableComponent');
+  const rowClassName = (_: IMerchant | IStation, index: number) => {
     if (index % 2 === 0) {
       return '';
     }
@@ -48,7 +52,7 @@ const TableComponent: React.FC<Props> = ({
   };
 
   return (
-    <>
+    <div className={b()}>
       <Table
         rowKey={rowKey}
         scroll={scroll}
@@ -65,7 +69,7 @@ const TableComponent: React.FC<Props> = ({
         pagePrevHandler={pagePrevHandler}
         pageNextHandler={pageNextHandler}
       />
-    </>
+    </div>
   );
 };
 

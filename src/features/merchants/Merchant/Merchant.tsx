@@ -3,8 +3,9 @@ import { Row, Tabs } from 'antd';
 import bem from 'easy-bem';
 import dayjs from 'dayjs';
 
+import { CardMerchantHeader, CardMerchantInfo, TableStations } from 'features/merchants/Merchant/ui';
 import { IMerchantInfo, ITabs } from '~/features/merchants/interfaces';
-import { CardMerchantHeader, CardMerchantInfo } from '~/features/merchants/Merchant/ui';
+
 import './Merchant.scss';
 
 const merchantItems: IMerchantInfo = {
@@ -45,7 +46,9 @@ const Merchant = () => {
     {
       key: '2',
       label: 'Станции',
-      children: 'Список станций',
+      children: (
+        <TableStations />
+      ),
     },
   ];
 

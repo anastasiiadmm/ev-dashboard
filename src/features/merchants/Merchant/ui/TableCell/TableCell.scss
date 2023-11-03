@@ -1,0 +1,26 @@
+@use '../../../../../app/styles/variables' as variables;
+
+.TableCell {
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 7px;
+  }
+
+  .tag-text {
+    margin: auto 0;
+    padding: 4px 8px;
+    border-radius: 8px;
+    background-color: variables.$gray-light-bg-color;
+  }
+
+  &__text {
+    margin: 0;
+  }
+
+  &__show-more-button {
+    padding: 4px 8px;
+    border-radius: 8px;
+    background-color: variables.$gray-light-bg-color;
+  }
+}

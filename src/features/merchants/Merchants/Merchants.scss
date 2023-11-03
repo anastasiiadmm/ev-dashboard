@@ -105,19 +105,6 @@
     border-color: variables.$gray-bg-color;
   }
 
-  .ant-table-wrapper .ant-table-cell,
-  .ant-table-wrapper .ant-table-thead > tr > th,
-  .ant-table-wrapper .ant-table-tbody > tr > th,
-  .ant-table-wrapper .ant-table-tbody > tr > td,
-  .ant-table-wrapper tfoot > tr > th,
-  .ant-table-wrapper tfoot > tr > td {
-    padding: 4px 6px !important;
-  }
-
-  .ant-table-wrapper .ant-table {
-    font-size: 12px;
-  }
-
   .crop-text {
     width: 100px;
     display: -webkit-box;
@@ -128,22 +115,6 @@
 
   &__text {
     margin: 0;
-  }
-
-  .ant-table-wrapper .ant-table-tbody > tr > th,
-  .ant-table-wrapper .ant-table-tbody > tr > td {
-    position: relative;
-  }
-
-  .ant-table-wrapper .ant-table-tbody > tr > th:not(:last-child)::before,
-  .ant-table-wrapper .ant-table-tbody > tr > td:not(:last-child)::before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 16px;
-    width: 1px;
-    height: 15px;
-    background-color: variables.$border-table;
   }
 
   &__center-block {
@@ -163,14 +134,5 @@
     display: flex;
     align-items: center;
     gap: 6px;
-  }
-
-  .ant-form-item {
-    margin-bottom: 0;
-  }
-
-  .ant-table-wrapper table {
-    border-radius: initial;
-    border: 1px solid variables.$border-table;
   }
 }
