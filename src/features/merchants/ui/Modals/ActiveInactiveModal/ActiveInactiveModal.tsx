@@ -40,14 +40,14 @@ const ActiveInactiveModal: React.FC<Props> = ({
           {textTitle}
         </Title>
         <Text>{infoText}</Text>
-        <div className={b('buttons-block')}>
+        <div className={b('buttons-block') + successModal ? 'float-style' : ''}>
           {hasCancelButton && (
             <Button className={b('cancel-button')} onClick={handleOkCancel}>
               Отменить
             </Button>
           )}
           <Button type='primary' onClick={handleAgreeHandler}>
-            Да
+            {successModal ? 'Хорошо' : 'Да'}
           </Button>
         </div>
       </div>

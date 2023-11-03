@@ -10,6 +10,7 @@ interface Props {
   label?: string;
   defaultValue?: string;
   name?: string;
+  inputType?: string;
   rules?: Rule[];
   placeholder?: string;
   inputClassName?: string;
@@ -28,6 +29,7 @@ const DefaultField: React.FC<Props> = ({
   className,
   inputClassName,
   error = false,
+  inputType,
   onChange,
   prefix,
 }) => {
@@ -42,6 +44,7 @@ const DefaultField: React.FC<Props> = ({
       help={error ? '' : undefined}
     >
       <Input
+        type={inputType}
         name={name}
         defaultValue={defaultValue}
         placeholder={placeholder}

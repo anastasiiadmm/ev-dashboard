@@ -15,10 +15,10 @@ import {
 } from '~/shared/ui';
 import { useCurrentLocale } from '~/shared/hooks';
 import { ICreateMerchant } from '~/features/merchants/interfaces';
-import { commonStore } from '~/shared/api/store';
+import { commonStore, merchantStore } from '~/shared/api/store';
 import { getParams } from '~/shared/utils/helper';
-import './Create.scss';
 import { ActiveInactiveModal } from '~/features/merchants';
+import './Create.scss';
 
 const { Title, Text } = Typography;
 
@@ -43,12 +43,14 @@ const Create = observer(() => {
     districts,
     districtsLoading,
   } = toJS(commonStore);
+  const { createMerchantSuccess } = toJS(merchantStore);
+  console.log('createMerchantSuccess', createMerchantSuccess);
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const currentLocale = useCurrentLocale();
   const [selectedLanguage, setSelectedLanguage] = useState(currentLocale);
   const [formData, setFormData] = useState<ICreateMerchant>({
-    active: true,
+    active: false,
     name_ru: '',
     name_en: '',
     name_ky: '',
@@ -77,6 +79,16 @@ const Create = observer(() => {
   });
   const isAllSelected = Object.values(radioButtonStates).every((value) => value);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
+
+  useEffect(() => {
+    if (createMerchantSuccess) {
+      showSuccessModal();
+    }
+    return () => {
+      merchantStore.createMerchantSuccess = false;
+    };
+  }, [createMerchantSuccess]);
 
   useEffect(() => {
     let locationType;
@@ -151,11 +163,22 @@ const Create = observer(() => {
     navigate('/merchants');
   };
 
-  const onFinish = () => {
-    // try {
-    //   if (isAllSelected && !error) {
-    //   }
-    // } catch (e) {}
+  const showSuccessModal = () => {
+    setIsModalSuccessOpen(true);
+  };
+
+  const handleOkSuccessCancel = () => {
+    setIsModalSuccessOpen(!isModalOpen);
+  };
+
+  const onFinish = async () => {
+    try {
+      await merchantStore.postCreateMerchant(formData);
+    } catch (error) {
+      if (error) {
+        setError(true);
+      }
+    }
   };
 
   return (
@@ -248,6 +271,7 @@ const Create = observer(() => {
                   data-testid='percent_id'
                   id='percent_id'
                   name='rate'
+                  inputType='number'
                   placeholder='% по агентскому договору'
                   label='% по агентскому договору'
                   rules={[
@@ -457,6 +481,22 @@ const Create = observer(() => {
           textTitle='Вы действительно хотите отменить изменения?'
           infoText='После отмены все данные будут утеряны.'
           handleOkCancel={handleOkCancel}
+          handleAgreeHandler={handleAgreeHandler}
+        />
+      </ModalComponent>
+
+      <ModalComponent
+        width={400}
+        isModalOpen={isModalSuccessOpen}
+        handleOk={handleOkSuccessCancel}
+        handleCancel={handleOkSuccessCancel}
+      >
+        <ActiveInactiveModal
+          hasCancelButton={false}
+          successModal
+          textTitle='Мерчант был создан'
+          infoText='Новая учётная запись мерчанта была успешно создана.'
+          handleOkCancel={handleOkSuccessCancel}
           handleAgreeHandler={handleAgreeHandler}
         />
       </ModalComponent>
