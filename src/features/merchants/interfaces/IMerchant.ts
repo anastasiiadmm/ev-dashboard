@@ -16,6 +16,26 @@ export interface IMerchant {
   city: number;
 }
 
+export interface ICreateMerchant {
+  active: boolean;
+  name_ru: string;
+  name_en: string;
+  name_ky: string;
+  legal_name_ru: string;
+  legal_name_en: string;
+  legal_name_ky: string;
+  rate: string;
+  agreement_number: string;
+  address_ru: string;
+  address_en: string;
+  address_ky: string;
+  phone: string;
+  email: string;
+  country: number;
+  district: number;
+  city: number;
+}
+
 export interface IMerchantInfo {
   id: number;
   number_stations: number;

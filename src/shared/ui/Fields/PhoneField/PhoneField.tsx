@@ -2,10 +2,7 @@ import { Form, Input } from 'antd';
 import React from 'react';
 import InputMask from 'react-input-mask';
 
-interface Rule {
-  required: boolean;
-  message: string;
-}
+import { IRule } from '~/shared/interfaces';
 
 interface Props {
   id?: string;
@@ -18,7 +15,8 @@ interface Props {
   dependencies?: string[] | undefined;
   formatter?: string;
   onChange?: () => void;
-  rules?: Rule[];
+  rules?: IRule[];
+  error?: boolean;
 }
 
 const PhoneField: React.FC<Props> = ({
@@ -29,6 +27,7 @@ const PhoneField: React.FC<Props> = ({
   inputClassName,
   onChange,
   rules,
+  error = false,
 }) => {
   return (
     <Form.Item
@@ -37,6 +36,8 @@ const PhoneField: React.FC<Props> = ({
       label={label}
       className={`${className} custom-label`}
       rules={rules}
+      validateStatus={error ? 'error' : undefined}
+      help={error ? '' : undefined}
     >
       <InputMask
         name={name}

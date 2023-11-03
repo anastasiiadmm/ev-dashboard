@@ -1,7 +1,7 @@
 import { Select, Form } from 'antd';
 import React, { CSSProperties } from 'react';
 
-interface Rule {}
+import { IRule, OptionType } from '~/shared/interfaces';
 
 interface Props {
   bordered?: boolean;
@@ -10,13 +10,16 @@ interface Props {
   name?: string;
   label?: string;
   disabled?: boolean;
-  customStyle?: CSSProperties;
+  optionStyles?: CSSProperties | undefined;
   className?: string;
   suffixIconData?: React.ReactNode;
   prefixIcon?: React.ReactNode;
   dropdownStyle?: CSSProperties | undefined;
-  options?: { value: string; label: string; icon?: string; disabled?: boolean }[];
-  rules?: Rule[];
+  customStyle?: CSSProperties | undefined;
+  options?: OptionType[];
+  rules?: IRule[];
+  error?: boolean;
+  loading?: boolean;
 }
 
 const SelectField: React.FC<Props> = ({
@@ -24,6 +27,7 @@ const SelectField: React.FC<Props> = ({
   label,
   rules,
   bordered = true,
+  loading,
   handleChange,
   disabled,
   defaultValue,
@@ -32,10 +36,19 @@ const SelectField: React.FC<Props> = ({
   suffixIconData,
   dropdownStyle,
   className,
+  error = false,
 }) => {
   return (
-    <Form.Item name={name} label={label} rules={rules} className={`${className} custom-label`}>
+    <Form.Item
+      name={name}
+      label={label}
+      rules={rules}
+      className={`${className} custom-label`}
+      validateStatus={error ? 'error' : undefined}
+      help={error ? '' : undefined}
+    >
       <Select
+        loading={loading}
         bordered={bordered}
         disabled={disabled}
         defaultValue={defaultValue}
@@ -44,16 +57,20 @@ const SelectField: React.FC<Props> = ({
         suffixIcon={suffixIconData}
         dropdownStyle={dropdownStyle}
       >
-        {options?.map((option) => (
-          <Select.Option key={option.value} value={option.value} disabled={option.disabled}>
-            <div style={{ display: 'flex', alignItems: 'center', fontWeight: 600 }}>
-              {option?.icon && (
-                <img src={option?.icon} alt={option.label} style={{ marginRight: '8px' }} />
-              )}
-              {option.label}
-            </div>
-          </Select.Option>
-        ))}
+        {options?.map((option) => {
+          const key = 'value' in option ? option.value : option.id;
+          const label = 'label' in option ? option.label : option.name;
+          const icon = 'icon' in option ? option.icon : undefined;
+
+          return (
+            <Select.Option key={key} value={key} disabled={option.disabled}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                {icon && <img src={icon} alt={label} style={{ marginRight: '8px' }} />}
+                {label}
+              </div>
+            </Select.Option>
+          );
+        })}
       </Select>
     </Form.Item>
   );

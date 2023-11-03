@@ -4,7 +4,7 @@ import { Button, Form } from 'antd';
 
 import { chevronRight, chevronLeft } from '~/assets/images';
 import { FormField } from '~/shared/ui';
-import { IPagination } from '~/shared/types/interfaces/IPagination';
+import { IPagination } from '~/shared/interfaces';
 import './PaginationComponent.scss';
 
 interface Props {

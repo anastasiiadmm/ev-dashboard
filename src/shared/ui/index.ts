@@ -8,3 +8,4 @@ export { default as PaginationComponent } from './TableComponent/ui/PaginationCo
 export { default as ModalComponent } from './ModalComponent/ModalComponent';
 export { default as BreadcrumbComponent } from './BreadcrumbComponent/BreadcrumbComponent';
 export { default as CardComponent } from './CardComponent/CardComponent';
+export { default as AlertComponent } from './AlertComponent/AlertComponent';

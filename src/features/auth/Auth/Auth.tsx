@@ -63,6 +63,16 @@ const Auth = observer(() => {
                   id='email_id'
                   name='email'
                   placeholder={t('login.email')}
+                  rules={[
+                    {
+                      type: 'email',
+                      message: t('errors.the_input_is_not_valid_email'),
+                    },
+                    {
+                      required: true,
+                      message: t('errors.enter_your_email_address'),
+                    },
+                  ]}
                 />
 
                 <FormField
