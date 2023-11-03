@@ -19,6 +19,7 @@ interface Props {
   options?: OptionType[];
   rules?: IRule[];
   error?: boolean;
+  loading?: boolean;
 }
 
 const SelectField: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const SelectField: React.FC<Props> = ({
   label,
   rules,
   bordered = true,
+  loading,
   handleChange,
   disabled,
   defaultValue,
@@ -46,6 +48,7 @@ const SelectField: React.FC<Props> = ({
       help={error ? '' : undefined}
     >
       <Select
+        loading={loading}
         bordered={bordered}
         disabled={disabled}
         defaultValue={defaultValue}

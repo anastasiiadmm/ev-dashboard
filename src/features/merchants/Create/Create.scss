@@ -99,4 +99,40 @@
       font-size: 12px;
     }
   }
+
+  .custom-radio .ant-radio-input {
+    display: none;
+  }
+
+  &__radio-styles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .radio-group-button > span > span {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('../../../assets/images/svg/icons/default/check.svg') no-repeat center center;
+    background-size: contain;
+    margin-right: -3px;
+    border-color: transparent;
+    background-color: transparent;
+  }
+
+  .ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+    background-color: variables.$white-color;
+    border-color: variables.$gray-color;
+  }
+
+  .ant-radio-wrapper .ant-radio-checked .ant-radio-inner::after {
+    opacity: 0;
+  }
+
+  .ant-radio-wrapper .ant-radio-checked::after {
+    outline: none;
+    border: none;
+  }
 }

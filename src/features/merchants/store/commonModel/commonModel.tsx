@@ -5,8 +5,11 @@ import { ICommon } from '~/features/merchants/interfaces';
 
 interface CommonState {
   countries: ICommon[] | null;
+  countriesLoading: boolean;
   districts: ICommon[] | null;
+  districtsLoading: boolean;
   settlements: ICommon[] | null;
+  settlementsLoading: boolean;
   loading: boolean;
   error: string | null;
 }
@@ -18,8 +21,11 @@ interface MessageError {
 
 class CommonStore implements CommonState {
   countries = null;
+  countriesLoading = false;
   districts = null;
+  districtsLoading = false;
   settlements = null;
+  settlementsLoading = false;
   loading = false;
   error: string | null = null;
 
@@ -28,23 +34,41 @@ class CommonStore implements CommonState {
   }
 
   fetchLocations = async (query: string) => {
+    const params = new URLSearchParams(query);
+    const locationType = params.get('location_type');
+
+    switch (locationType) {
+      case 'countries':
+        this.countriesLoading = true;
+        break;
+      case 'districts':
+        this.districtsLoading = true;
+        break;
+      case 'settlements':
+        this.settlementsLoading = true;
+        break;
+      default:
+        break;
+    }
+
     this.setLoading(true);
+
     try {
       const resp = await axiosApi.get(`/common/locations/${query}`);
-
-      const params = new URLSearchParams(query);
-      const locationType = params.get('location_type');
 
       runInAction(() => {
         switch (locationType) {
           case 'countries':
             this.countries = resp.data;
+            this.countriesLoading = false;
             break;
           case 'districts':
             this.districts = resp.data;
+            this.districtsLoading = false;
             break;
           case 'settlements':
             this.settlements = resp.data;
+            this.settlementsLoading = false;
             break;
           default:
             break;
