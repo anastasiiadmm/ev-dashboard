@@ -44,7 +44,6 @@ const Create = observer(() => {
     districtsLoading,
   } = toJS(commonStore);
   const { createMerchantSuccess } = toJS(merchantStore);
-  console.log('createMerchantSuccess', createMerchantSuccess);
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const currentLocale = useCurrentLocale();
@@ -83,6 +82,7 @@ const Create = observer(() => {
 
   useEffect(() => {
     if (createMerchantSuccess) {
+      setError(false);
       showSuccessModal();
     }
     return () => {
@@ -342,7 +342,9 @@ const Create = observer(() => {
                   loading={countriesLoading}
                   error={error}
                   options={countries}
-                  handleChange={(value) => handleFormChange('country', value)}
+                  handleChange={(value: string | number | boolean) =>
+                    handleFormChange('country', value)
+                  }
                 />
 
                 <FormField
@@ -363,7 +365,9 @@ const Create = observer(() => {
                   error={error}
                   disabled={!isCitySelected}
                   options={districts}
-                  handleChange={(value) => handleFormChange('district', value)}
+                  handleChange={(value: string | number | boolean) =>
+                    handleFormChange('district', value)
+                  }
                 />
               </div>
               <div>
@@ -385,7 +389,9 @@ const Create = observer(() => {
                   error={error}
                   disabled={!isCountrySelected}
                   options={settlements}
-                  handleChange={(value) => handleFormChange('city', value)}
+                  handleChange={(value: string | number | boolean) =>
+                    handleFormChange('city', value)
+                  }
                 />
 
                 <FormField
@@ -428,7 +434,8 @@ const Create = observer(() => {
           </Text>
           <Radio.Group style={{ width: 260 }} value={selectedLanguage}>
             {sortedLanguageItems.map((item) => {
-              const isChecked = radioButtonStates[item.value] || false;
+              const isChecked =
+                radioButtonStates[item.value as keyof typeof radioButtonStates] || false;
 
               return (
                 <CardComponent

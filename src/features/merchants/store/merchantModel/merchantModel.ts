@@ -3,6 +3,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import axiosApi from '~/shared/utils/mobx-api';
 import { ICreateMerchant, IMerchant } from '~/features/merchants/interfaces';
 import { IError } from '~/shared/interfaces';
+import { isErrorResponse } from '~/shared/utils/helper';
 
 interface MerchantState {
   merchants: IMerchant[] | null;
@@ -63,7 +64,6 @@ class MerchantStore implements MerchantState {
   }
 
   async postCreateMerchant(merchantData: ICreateMerchant) {
-    console.log('merchantData', merchantData);
     try {
       runInAction(() => {
         this.createMerchantLoading = true;
@@ -79,13 +79,15 @@ class MerchantStore implements MerchantState {
         this.createMerchantError = null;
       });
     } catch (e) {
-      runInAction(() => {
-        this.createMerchantLoading = false;
-        this.createMerchantSuccess = false;
-        this.createMerchantError = e.response.data;
-      });
-
-      throw e.response.data;
+      if (isErrorResponse(e)) {
+        const errorData = e.response.data;
+        runInAction(() => {
+          this.createMerchantLoading = false;
+          this.createMerchantSuccess = false;
+          this.createMerchantError = errorData;
+        });
+        throw errorData;
+      }
     }
   }
 }
