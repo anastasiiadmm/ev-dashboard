@@ -1,9 +1,9 @@
+import { AxiosError } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
 import { ICreateMerchant, IMerchant } from '~/features/merchants/interfaces';
 import { IError } from '~/shared/interfaces';
-import { isErrorResponse } from '~/shared/utils/helper';
 
 interface MerchantState {
   merchants: IMerchant[] | null;
@@ -12,13 +12,8 @@ interface MerchantState {
   merchantsError: string | null;
   commonError: IError | null;
   createMerchantLoading: boolean;
-  createMerchantError: string | null;
+  createMerchantError: AxiosError | null;
   createMerchantSuccess: boolean;
-}
-
-interface MessageError {
-  message: string;
-  details?: string;
 }
 
 class MerchantStore implements MerchantState {
@@ -28,7 +23,7 @@ class MerchantStore implements MerchantState {
   merchantsError: string | null = null;
   commonError: IError | null = null;
   createMerchantLoading: boolean = false;
-  createMerchantError: string | null = null;
+  createMerchantError: AxiosError | null = null;
   createMerchantSuccess: boolean = false;
 
   constructor() {
@@ -54,7 +49,7 @@ class MerchantStore implements MerchantState {
         this.commonError = null;
       });
     } catch (e) {
-      const error = e as MessageError;
+      const error = e as AxiosError;
       runInAction(() => {
         this.merchantsLoading = false;
         this.success = false;
@@ -79,15 +74,14 @@ class MerchantStore implements MerchantState {
         this.createMerchantError = null;
       });
     } catch (e) {
-      if (isErrorResponse(e)) {
-        const errorData = e.response.data;
-        runInAction(() => {
-          this.createMerchantLoading = false;
-          this.createMerchantSuccess = false;
-          this.createMerchantError = errorData;
-        });
-        throw errorData;
-      }
+      const error = e as AxiosError;
+      runInAction(() => {
+        this.createMerchantLoading = false;
+        this.createMerchantSuccess = false;
+        this.createMerchantError = error;
+      });
+
+      throw error;
     }
   }
 }
