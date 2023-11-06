@@ -43,5 +43,31 @@
     "list_of_referrals": "List of referrals",
     "settings": "Settings",
     "log_out": "Logout"
+  },
+  "merchants": {
+    "name": "Name",
+    "contract_no": "Contract No.",
+    "location": "Location",
+    "entity": "Entity",
+    "status": "Status",
+    "number_of_stations": "Num. of stations",
+    "action": "Action",
+    "add_station": "Add station",
+    "search_among_merchants": "Search among merchants",
+    "add_merchant": "Add merchant",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "the_merchants_you_select_will_not_be_active": "The merchants you select will not be active.",
+    "the_merchants_you_select_will_be_active": "The merchants you select will be active."
+  },
+  "modals": {
+    "cancel": "Cancel",
+    "okay": "Okay",
+    "yes": "Yes"
+  },
+  "table": {
+    "show": "Show by",
+    "page": "Page",
+    "from": "from"
   }
 }

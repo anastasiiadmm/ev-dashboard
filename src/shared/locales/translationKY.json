@@ -43,5 +43,32 @@
     "list_of_referrals": "Рефералдардын тизмеси",
     "settings": "Орнотуулар",
     "log_out": "Чыгуу"
+  },
+  "merchants": {
+    "name": "Аталышы",
+    "contract_no": "Келишимдин саны",
+    "contacts": "Байланыштар",
+    "location": "Локация",
+    "entity": "Юридикалык тарап",
+    "status": "Статусу",
+    "number_of_stations": "Станциялардын саны",
+    "action": "Кыймыл-аракет",
+    "add_station": "Станцияга кошуу",
+    "search_among_merchants": "Мерчанттардын арасынан издөө",
+    "add_merchant": "Мерчантты кошуу",
+    "deactivate": "Активдүүлүктөн чыгаруу",
+    "activate": "Активдештирүү",
+    "the_merchants_you_select_will_not_be_active": "Сиздер тандаган мерчанттар активдүү эмес.",
+    "the_merchants_you_select_will_be_active": "Сиздер тандаган мерчанттар активдүү эмес."
+  },
+  "modals": {
+    "cancel": "Жокко чыгаруу",
+    "okay": "Жакшы",
+    "yes": "Ооба"
+  },
+  "table": {
+    "show": "Көрсөтүү",
+    "page": "Баракча",
+    "from": "тартып"
   }
 }

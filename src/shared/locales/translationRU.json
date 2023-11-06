@@ -43,5 +43,32 @@
     "list_of_referrals": "Список рефералов",
     "settings": "Настройки",
     "log_out": "Выйти"
+  },
+  "merchants": {
+    "name": "Наименование",
+    "contract_no": "№ договора",
+    "contacts": "Контакты",
+    "location": "Локация",
+    "entity": "Юр лицо",
+    "status": "Статус",
+    "number_of_stations": "Кол-во станций",
+    "action": "Действие",
+    "add_station": "Добавить станцию",
+    "search_among_merchants": "Искать среди мерчантов",
+    "add_merchant": "Добавить мерчанта",
+    "deactivate": "Деактивировать",
+    "activate": "Активировать",
+    "the_merchants_you_select_will_not_be_active": "Выбранные Вами мерчанты будут не активны.",
+    "the_merchants_you_select_will_be_active": "Выбранные Вами мерчанты будут активны."
+  },
+  "modals": {
+    "cancel": "Отменить",
+    "okay": "Хорошо",
+    "yes": "Да"
+  },
+  "table": {
+    "show": "Показывать по",
+    "page": "Стр.",
+    "from": "из"
   }
 }

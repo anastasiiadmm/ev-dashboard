@@ -2,6 +2,7 @@ import { Button, Form, Row, Tooltip } from 'antd';
 import React, { useState } from 'react';
 import bem from 'easy-bem';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { add, plus, active, status, x, search, infoCircle, inactive } from '~/assets/images';
 import { FormField, ModalComponent, TableComponent } from '~/shared/ui';
@@ -11,6 +12,7 @@ import './Merchants.scss';
 
 const Merchants = () => {
   const b = bem('Merchants');
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isDeactivateButton, setIsDeactivateButton] = useState(true);
@@ -19,10 +21,11 @@ const Merchants = () => {
   const columns: IColumn[] = [
     {
       title: 'ID',
+      width: 10,
       dataIndex: 'id',
     },
     {
-      title: 'Наименование',
+      title: t('merchants.name'),
       render: (record: IMerchant) => {
         return (
           <Link to={`/merchants/merchant/${record?.id}`} className={b('title crop-text')}>
@@ -32,7 +35,7 @@ const Merchants = () => {
       },
     },
     {
-      title: '№ договора',
+      title: t('merchants.contract_no'),
       dataIndex: 'legal_name_ru',
     },
     {
@@ -40,32 +43,31 @@ const Merchants = () => {
       dataIndex: 'rate',
     },
     {
-      title: 'Контакты',
+      title: t('merchants.contacts'),
       dataIndex: 'phone',
     },
     {
-      title: 'Локация',
+      title: t('merchants.location'),
       render: (record: IMerchant) => {
         return <p className={b('text crop-text')}>{record?.address_ru}</p>;
       },
     },
     {
-      title: 'Юр лицо',
+      title: t('merchants.entity'),
       render: (record: IMerchant) => {
         return <p className={b('text crop-text')}>{record?.entity}</p>;
       },
     },
     {
-      title: 'Статус',
+      title: t('merchants.status'),
       dataIndex: 'active',
       render: (text: boolean) => {
         return <img className={b('center-block')} src={text ? status : inactive} alt='status' />;
       },
     },
     {
-      title: 'Кол-во станций',
+      title: t('merchants.number_of_stations'),
       dataIndex: 'number_stations',
-      width: 30,
     },
     {
       title: <img src={active} alt='active' />,
@@ -76,7 +78,7 @@ const Merchants = () => {
       dataIndex: 'inactive_stations',
     },
     {
-      title: 'Действие',
+      title: t('merchants.action'),
       render: () => {
         return (
           <Tooltip
@@ -85,7 +87,7 @@ const Merchants = () => {
             title={
               <div className={b('info')}>
                 <img src={infoCircle} alt='infoCircle' />
-                <p>Добавить станцию</p>
+                <p>{t('merchants.add_station')}</p>
               </div>
             }
           >
@@ -187,7 +189,7 @@ const Merchants = () => {
             <FormField
               style={{ width: 300 }}
               id='autocomplete_id'
-              placeholder='Искать среди мерчантов'
+              placeholder={t('merchants.search_among_merchants')}
               size='large'
               prefix={<img src={search} alt='search' />}
             />
@@ -197,7 +199,7 @@ const Merchants = () => {
       <Row className={b('table-block')}>
         <Link to='/merchants/create-merchant' className={b('add-block')}>
           <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
-            Добавить мерчанта
+            {t('merchants.add_merchant')}
           </Button>
         </Link>
 
@@ -219,7 +221,8 @@ const Merchants = () => {
               onClick={showModal}
               disabled={isDisabledButton}
             >
-              {isDeactivateButton ? 'Деактивировать' : 'Активировать'} ({selectedRowKeys.length})
+              {isDeactivateButton ? t('merchants.deactivate') : t('merchants.activate')} (
+              {selectedRowKeys.length})
             </Button>
           </div>
         )}
@@ -232,11 +235,15 @@ const Merchants = () => {
         handleCancel={handleOkCancel}
       >
         <ActiveInactiveModal
-          textTitle={isDeactivateButton ? 'Деактивировать' : 'Активировать'}
+          textTitle={
+            isDeactivateButton
+              ? (t('merchants.deactivate') as string)
+              : (t('merchants.activate') as string)
+          }
           infoText={
             isDeactivateButton
-              ? 'Выбранные Вами мерчанты будут не активны.'
-              : 'Выбранные Вами мерчанты будут активны.'
+              ? (t('merchants.the_merchants_you_select_will_not_be_active') as string)
+              : (t('merchants.the_merchants_you_select_will_be_active') as string)
           }
           handleOkCancel={handleOkCancel}
         />
