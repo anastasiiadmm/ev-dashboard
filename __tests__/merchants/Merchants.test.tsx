@@ -2,6 +2,12 @@ import React from 'react';
 import { screen, render, fireEvent, waitFor, cleanup } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import { BrowserRouter } from 'react-router-dom';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+
+import translationEN from '~/shared/locales/translationEN.json';
+import translationRU from '~/shared/locales/translationRU.json';
+import translationKY from '~/shared/locales/translationKY.json';
 
 import Create from "../../src/features/merchants/Create/Create";
 
@@ -49,25 +55,43 @@ jest.mock('~/shared/utils/config', () => ({
   apiURL: 'http://localhost/8000',
 }));
 
+const resources = {
+  en: {
+    translation: translationEN,
+  },
+  ru: { translation: translationRU },
+  ky: { translation: translationKY },
+};
+
+i18n
+  .use(initReactI18next)
+  .init({
+    resources,
+    lng: 'ru',
+    fallbackLng: 'ru',
+    interpolation: {
+      escapeValue: false,
+    },
+    react: { useSuspense: false },
+  });
+
 beforeAll(() => {
   process.env.NODE_ENV = 'test';
 });
 
 jest.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: key => key,
-    i18n: {
-      changeLanguage: jest.fn(),
-      language: 'en',
-    },
-  }),
-
-  withTranslation: () => Component => {
-    Component.defaultProps = { ...Component.defaultProps, t: key => key };
-    return Component;
+  useTranslation: () => {
+    return {
+      t: (str) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {}),
+      },
+    };
   },
-
-  Trans: ({ children }) => children,
+  initReactI18next: {
+    type: '3rdParty',
+    init: () => {},
+  }
 }));
 
 describe('Create Merchant UI Component', () => {
