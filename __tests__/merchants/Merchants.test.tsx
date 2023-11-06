@@ -10,6 +10,7 @@ import translationRU from '~/shared/locales/translationRU.json';
 import translationKY from '~/shared/locales/translationKY.json';
 
 import Create from "../../src/features/merchants/Create/Create";
+import { merchantStore } from "../../src/shared/api/store";
 
 const mockCountries = [
   { id: '1', name: 'Country1' },
@@ -94,6 +95,20 @@ jest.mock('react-i18next', () => ({
   }
 }));
 
+beforeEach(() => {
+  jest.spyOn(merchantStore, 'postCreateMerchant').mockImplementation(() => Promise.resolve({ merchantStore: {
+      postCreateMerchant: jest.fn().mockImplementation(() => Promise.resolve({
+        name: 'Test Name',
+        agreementNumber: '1234',
+      }))
+    } }));
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
+
 describe('Create Merchant UI Component', () => {
   it('renders and interacts correctly', async () => {
 
@@ -110,11 +125,11 @@ describe('Create Merchant UI Component', () => {
     const rate = screen.getByLabelText('% по агентскому договору');
     const phone = screen.getByLabelText('Телефон');
     const email = screen.getByLabelText('Ваш email');
-    const button = await screen.findByRole('button', { name: 'Далее' });
     const countrySelect = screen.getByLabelText('Страна');
     const districtSelect = screen.getByLabelText('Район');
     const settlementSelect = screen.getByLabelText('Город');
     const address = screen.getByLabelText('Улица');
+    const button = await screen.findByRole('button', { name: 'Далее' });
 
     await waitFor(async () => {
       fireEvent.change(name, { target: { value: 'Test' } });
@@ -128,6 +143,26 @@ describe('Create Merchant UI Component', () => {
       expect(settlementSelect).toBeInTheDocument();
       fireEvent.change(address, { target: { value: 'Test address' } });
       fireEvent.click(button);
+    });
+  });
+
+  test('displays error message on form submission failure', async () => {
+    render(
+      <BrowserRouter>
+        <Create />
+      </BrowserRouter>
+    );
+
+    await waitFor( async () => {
+      fireEvent.change(screen.getByLabelText('Наименование'), { target: { value: 'Test Name' } });
+      fireEvent.change(screen.getByLabelText('№ договора'), { target: { value: '1234' } });
+      fireEvent.change(screen.getByLabelText('Юридическое лицо'), { target: { value: 'Test Name' } });
+      fireEvent.change(screen.getByLabelText('% по агентскому договору'), { target: { value: 'Test Name' } });
+      fireEvent.change(screen.getByLabelText('Телефон'), { target: { value: '+996555555555' } });
+      fireEvent.change(screen.getByLabelText('Ваш email'), { target: { value: 'test@gmail.com' } });
+      fireEvent.change(screen.getByLabelText('Улица'), { target: { value: 'Test address' } });
+      fireEvent.click(screen.getByRole('button', { name: 'Далее' }));
+      expect(await screen.getByText('Одно или несколько из обязательных полей не заполнено или содержит неверные данные, проверьте введенные данные.')).toBeInTheDocument();
     });
   });
 });
