@@ -1,7 +1,10 @@
 {
   "errors": {
     "enter_your_email_address": "Enter your email address",
-    "the_input_is_not_valid_email": "Your email address is not valid"
+    "the_input_is_not_valid_email": "Your email address is not valid",
+    "password_length": "Password must contain at least 8 characters",
+    "wrong_password": "Wrong password",
+    "two_passwords_do_not_match": "Password mismatch"
   },
   "login": {
     "sign_in": "Sign in",
@@ -9,6 +12,36 @@
     "email": "Email",
     "your_password": "Your password",
     "remember_me": "Remember me",
-    "sign_in_button": "Sign in"
+    "sign_in_button": "Sign in",
+    "repeat_password": "Repeat password",
+    "continue": "Continue",
+    "back": "Back"
+  },
+  "change_password": {
+    "create_password": "Create password",
+    "password_recovery": "Password recovery",
+    "information_about_resetting_your_password": "An email has been sent to your email with information about resetting your password.",
+    "go_to_your_email_to_continue_the_password_reset_procedure": "Go to your email to continue the password reset procedure."
+  },
+  "menu": {
+    "menu": "Main",
+    "merchants": "Merchants",
+    "merchant_report": "Merchant Report",
+    "users": "Users",
+    "list_of_user_charges": "List of user charges",
+    "extract_from_user_balance": "Extract from user balance",
+    "software_rental_partners": "Software Rental Partners",
+    "rates": "Rates",
+    "heat_map": "Heat Map",
+    "promotions": "Promotions",
+    "list_of_promotions": "List of Promotions",
+    "report_of_promotions": "Report of Promotions",
+    "advertising_banners": "Advertising banners",
+    "infrastructure_around_stations": "Infrastructure around stations",
+    "list_of_tags": "List of Tags",
+    "list_of_promotional_codes": "List of promotional codes",
+    "list_of_referrals": "List of referrals",
+    "settings": "Settings",
+    "log_out": "Logout"
   }
 }

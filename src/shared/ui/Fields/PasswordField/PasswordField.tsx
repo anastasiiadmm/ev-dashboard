@@ -27,7 +27,8 @@ const PasswordField: React.FC<Props> = ({
   required = true,
 }) => {
   const b = bem('PasswordField');
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const error = t('errors.two_passwords_do_not_match');
 
   return name === 'confirm_password' ? (
     <Form.Item
@@ -39,7 +40,7 @@ const PasswordField: React.FC<Props> = ({
       rules={[
         {
           required: true,
-          message: 'Неправильный пароль',
+          message: t('errors.wrong_password'),
         },
         ({ getFieldValue }) => ({
           validator(_, value) {
@@ -47,7 +48,7 @@ const PasswordField: React.FC<Props> = ({
             if (!value || password === value) {
               return Promise.resolve();
             }
-            return Promise.reject(new Error('Пароли не совпадают'));
+            return Promise.reject(new Error(error as string));
           },
         }),
       ]}
@@ -80,11 +81,11 @@ const PasswordField: React.FC<Props> = ({
       rules={[
         {
           required: true,
-          message: 'Неправильный пароль',
+          message: t('errors.wrong_password'),
         },
         {
           min: 8,
-          message: 'Пароль должен содержать минимум 8 символов',
+          message: t('errors.password_length'),
         },
       ]}
     >

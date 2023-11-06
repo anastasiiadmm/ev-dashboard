@@ -1,1 +1,47 @@
-{}
+{
+  "errors": {
+    "enter_your_email_address": "Электрондук почта туура эмес",
+    "the_input_is_not_valid_email": "Электрондук почта туура эмес",
+    "password_length": "Сырсөз кеминде 8 белгиден турушу керек",
+    "wrong_password": "Пароль туура эмес",
+    "two_passwords_do_not_match": "Сырсөз дал келбейт"
+  },
+  "login": {
+    "sign_in": "Авторизация",
+    "forgot_password": "Купуя тамганы, санды унутуп калдынызбы? ",
+    "email": "Электрондук почта",
+    "your_password": "Сиздин пароль",
+    "remember_me": "Мени эске тутуу",
+    "sign_in_button": "Кирүү үчүн",
+    "repeat_password": "Сырсөздү кайталаңыз",
+    "continue": "Улантуу",
+    "back": "Артка"
+  },
+  "change_password": {
+    "create_password": "Жаңы сырсөз түзүңүз",
+    "password_recovery": "Сыр сөздү калыбына келтирүү",
+    "information_about_resetting_your_password": "Сиздин электрондук почтаңызга сырсөзүңүздү калыбына келтирүү жөнүндө маалымат жөнөтүлдү.",
+    "go_to_your_email_to_continue_the_password_reset_procedure": "Сырсөздү калыбына келтирүү процедурасын улантуу үчүн электрондук почтаңызга өтүңүз."
+  },
+  "menu": {
+    "menu": "Башаты",
+    "merchants": "Мерчанттар",
+    "merchant_report": "Мерчанттар боюнча отчет",
+    "users": "Колдонуучулар",
+    "list_of_user_charges": "Колдонуучулардын заряддарынын тизмеси",
+    "extract_from_user_balance": "Колдонуучулардын балансынан көчүрмө",
+    "software_rental_partners": "Программалык камсыздоону (ПК) ижаралоо боюнча өнөктөштөр",
+    "rates": "Тарифтер",
+    "heat_map": "Жылуулук картасы",
+    "promotions": "Акциялар",
+    "list_of_promotions": "Акциялардын тизмеси",
+    "report_of_promotions": "Акциялар боюнча отчет",
+    "advertising_banners": "Жарнамалык баннерлер",
+    "infrastructure_around_stations": "Станциялардын айланасындагы инфраструктура",
+    "list_of_tags": "Тегилердин тизмеси",
+    "list_of_promotional_codes": "Промокоддордун тизмеси",
+    "list_of_referrals": "Рефералдардын тизмеси",
+    "settings": "Орнотуулар",
+    "log_out": "Чыгуу"
+  }
+}

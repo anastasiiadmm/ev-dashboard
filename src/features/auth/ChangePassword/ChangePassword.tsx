@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Col, Form, Row, Typography } from 'antd';
 import bem from 'easy-bem';
+import { useTranslation } from 'react-i18next';
 
 import { logo } from '~/assets/images';
 import { FormField } from '~/shared/ui';
@@ -10,6 +11,7 @@ const { Text } = Typography;
 const ChangePassword = () => {
   const b = bem('ResetPassword');
   const [form] = Form.useForm();
+  const { t } = useTranslation();
 
   const onFinish = () => {};
 
@@ -22,7 +24,7 @@ const ChangePassword = () => {
             <div>
               <Row className={b('buttons-row')}>
                 <Text strong className={b('title')}>
-                  Создайте новый пароль
+                  {t('change_password.create_password')}
                 </Text>
               </Row>
 
@@ -39,7 +41,7 @@ const ChangePassword = () => {
                   data-testid='password_id'
                   type='password'
                   name='password'
-                  placeholder='Ваш пароль'
+                  placeholder={t('login.your_password')}
                 />
 
                 <FormField
@@ -48,11 +50,11 @@ const ChangePassword = () => {
                   type='password'
                   name='confirm_password'
                   dependencies={['password']}
-                  placeholder='Повторите пароль'
+                  placeholder={t('login.repeat_password')}
                 />
 
                 <Button type='primary' htmlType='submit' className={b('login-button')}>
-                  Продолжить
+                  {t('login.continue')}
                 </Button>
               </Form>
             </div>
