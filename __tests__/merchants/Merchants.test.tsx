@@ -2,13 +2,10 @@ import React from 'react';
 import { screen, render, fireEvent, waitFor, cleanup } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import { BrowserRouter } from 'react-router-dom';
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
 
-import translationEN from '~/shared/locales/translationEN.json';
-import translationRU from '~/shared/locales/translationRU.json';
-import translationKY from '~/shared/locales/translationKY.json';
-
+import '../../__mocks__/react-i18next.mock';
+import '../../__mocks__/matchMedia.mock';
+import '../../__mocks__/i18next';
 import Create from "../../src/features/merchants/Create/Create";
 import { merchantStore } from "../../src/shared/api/store";
 
@@ -27,6 +24,14 @@ const mockSettlements = [
   { id: '2', name: 'Country2' },
 ];
 
+beforeAll(() => {
+  process.env.NODE_ENV = 'http://localhost/:8000/';
+});
+
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({ t: key => key })
+}));
+
 beforeEach(() => {
   cleanup();
   jest.mock('../../src/features/merchants/Create/Create', () => ({
@@ -37,65 +42,6 @@ beforeEach(() => {
     districtsLoading: false,
     settlementsLoading: false,
   }));
-});
-
-window.matchMedia = window.matchMedia || function(query) {
-  return {
-    matches: false,
-    addListener: function() {},
-    removeListener: function() {},
-    media: query,
-    onchange: null,
-    dispatchEvent: jest.fn(),
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-  } as unknown as MediaQueryList;
-};
-
-jest.mock('~/shared/utils/config', () => ({
-  apiURL: 'http://localhost/8000',
-}));
-
-const resources = {
-  en: {
-    translation: translationEN,
-  },
-  ru: { translation: translationRU },
-  ky: { translation: translationKY },
-};
-
-i18n
-  .use(initReactI18next)
-  .init({
-    resources,
-    lng: 'ru',
-    fallbackLng: 'ru',
-    interpolation: {
-      escapeValue: false,
-    },
-    react: { useSuspense: false },
-  });
-
-beforeAll(() => {
-  process.env.NODE_ENV = 'test';
-});
-
-jest.mock('react-i18next', () => ({
-  useTranslation: () => {
-    return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {}),
-      },
-    };
-  },
-  initReactI18next: {
-    type: '3rdParty',
-    init: () => {},
-  }
-}));
-
-beforeEach(() => {
   jest.spyOn(merchantStore, 'postCreateMerchant').mockImplementation(() => Promise.resolve({ merchantStore: {
       postCreateMerchant: jest.fn().mockImplementation(() => Promise.resolve({
         name: 'Test Name',
@@ -104,10 +50,13 @@ beforeEach(() => {
     } }));
 });
 
+jest.mock('~/shared/utils/config', () => ({
+  apiURL: 'http://localhost/:8000/',
+}));
+
 afterEach(() => {
   jest.restoreAllMocks();
 });
-
 
 describe('Create Merchant UI Component', () => {
   it('renders and interacts correctly', async () => {
