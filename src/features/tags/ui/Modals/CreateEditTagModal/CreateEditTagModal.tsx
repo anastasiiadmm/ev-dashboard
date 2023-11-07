@@ -10,9 +10,10 @@ const { Title } = Typography;
 
 interface Props {
   textTitle: string;
+  creating: boolean;
 }
 
-const CreateEditTagModal: React.FC<Props> = ({ textTitle }) => {
+const CreateEditTagModal: React.FC<Props> = ({ textTitle, creating = false }) => {
   const b = bem('CreateEditTagModal');
   const { t } = useTranslation();
   const [form] = Form.useForm();
@@ -64,7 +65,7 @@ const CreateEditTagModal: React.FC<Props> = ({ textTitle }) => {
         />
 
         <Button type='primary' style={{ width: '100%' }}>
-          {t('merchants.create')}
+          {creating ? t('merchants.create') : t('tags.save')}
         </Button>
       </Form>
     </div>

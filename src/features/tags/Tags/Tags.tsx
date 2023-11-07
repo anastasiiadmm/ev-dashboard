@@ -102,7 +102,11 @@ const Tags = () => {
                 </div>
               }
             >
-              <Button className={b('add-button')} icon={<img src={editColor} alt='plus' />} />
+              <Button
+                onClick={showTagModal}
+                className={b('add-button')}
+                icon={<img src={editColor} alt='plus' />}
+              />
             </Tooltip>
             <Tooltip
               color='#707A94'
@@ -224,7 +228,17 @@ const Tags = () => {
         handleOk={handleTagOkCancel}
         handleCancel={handleTagOkCancel}
       >
-        <CreateEditTagModal textTitle={t('modals.creating_a_tag') as string} />
+        <CreateEditTagModal creating textTitle={t('modals.creating_a_tag') as string} />
+      </ModalComponent>
+
+      <ModalComponent
+        closeIcon
+        width={360}
+        isModalOpen={isTagModalOpen}
+        handleOk={handleTagOkCancel}
+        handleCancel={handleTagOkCancel}
+      >
+        <CreateEditTagModal textTitle={t('modals.editing_a_tag') as string} />
       </ModalComponent>
     </Row>
   );

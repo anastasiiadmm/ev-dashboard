@@ -97,7 +97,8 @@
     "after_cancellation_all_data_will_be_lost": "После отмены все данные будут утеряны.",
     "merchant_has_been_created": "Мерчант был создан",
     "a_new_merchant_account_has_been_successfully_created": "Новая учётная запись мерчанта была успешно создана.",
-    "creating_a_tag": "Создание тега"
+    "creating_a_tag": "Создание тега",
+    "editing_a_tag": "Редактирование тега"
   },
   "table": {
     "show": "Показывать по",
@@ -114,6 +115,7 @@
     "the_tags_you_select_will_be_active": "Выбранные Вами теги будут активны.",
     "name_in_kyrgyz": "Название на Кыргызском",
     "name_in_russian": "Название на Русском",
-    "name_in_eng": "Название на Английском"
+    "name_in_eng": "Название на Английском",
+    "save": "Сохранить"
   }
 }

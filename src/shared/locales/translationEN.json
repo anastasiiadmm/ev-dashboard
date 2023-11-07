@@ -96,7 +96,8 @@
     "after_cancellation_all_data_will_be_lost": "After cancellation, all data will be lost",
     "merchant_has_been_created": "Merchant has been created",
     "a_new_merchant_account_has_been_successfully_created": "A new merchant account has been successfully created",
-    "creating_a_tag": "Creating a tag"
+    "creating_a_tag": "Creating a tag",
+    "editing_a_tag": "Editing a tag"
   },
   "table": {
     "show": "Show by",
@@ -113,6 +114,7 @@
     "the_tags_you_select_will_be_active": "The tags you select will be active.",
     "name_in_kyrgyz": "Name in Kyrgyz",
     "name_in_russian": "Name in Russian",
-    "name_in_eng": "Title in English"
+    "name_in_eng": "Title in English",
+    "save": "Save"
   }
 }
