@@ -6,6 +6,10 @@
     "wrong_password": "Неправильный пароль",
     "two_passwords_do_not_match": "Пароли не совпадают"
   },
+  "alerts": {
+    "incorrectly_filled_field": "Неправильно заполненное поле",
+    "one_or_more_of_the_required_fields_are_not_filled": "Одно или несколько из обязательных полей не заполнено или содержит неверные данные, проверьте введенные данные."
+  },
   "login": {
     "sign_in": "Авторизация",
     "forgot_password": "Забыли пароль?",
@@ -45,18 +49,35 @@
     "log_out": "Выйти"
   },
   "merchants": {
+    "merchants": "Мерчанты",
+    "create_merchant": "Создание мерчанта",
     "name": "Наименование",
     "contract_no": "№ договора",
     "contacts": "Контакты",
     "location": "Локация",
+    "country": "Страна",
+    "district": "Район",
+    "city": "Город",
+    "street": "Улица",
+    "active": "Активный",
     "entity": "Юр лицо",
+    "entity_full": "Юридическое лицо",
+    "phone": "Телефон",
+    "your_email": "Ваш E-mail",
+    "merchant_information": "Информация о мерчанте",
+    "under_agency_agreement": "% по агентскому договору",
     "status": "Статус",
+    "create": "Создать",
+    "further": "Далее",
+    "data_must_be_provided_in_several_languages": "Данные нужно указать на нескольких языках",
+    "for_correct_display_in_user_applications": "Для корректного отображения в пользовательских приложениях",
     "number_of_stations": "Кол-во станций",
     "action": "Действие",
     "add_station": "Добавить станцию",
     "search_among_merchants": "Искать среди мерчантов",
     "add_merchant": "Добавить мерчанта",
     "deactivate": "Деактивировать",
+    "cancel": "Отменить",
     "activate": "Активировать",
     "the_merchants_you_select_will_not_be_active": "Выбранные Вами мерчанты будут не активны.",
     "the_merchants_you_select_will_be_active": "Выбранные Вами мерчанты будут активны."
@@ -64,7 +85,11 @@
   "modals": {
     "cancel": "Отменить",
     "okay": "Хорошо",
-    "yes": "Да"
+    "yes": "Да",
+    "are_you_sure_you_want_to_cancel_your_changes": "Вы действительно хотите отменить изменения?",
+    "after_cancellation_all_data_will_be_lost": "После отмены все данные будут утеряны.",
+    "merchant_has_been_created": "Мерчант был создан",
+    "": "Новая учётная запись мерчанта была успешно создана."
   },
   "table": {
     "show": "Показывать по",
