@@ -13,7 +13,7 @@ import './TableComponent.scss';
 interface Props {
   data: (IMerchant | IStation | ITag)[];
   columns: IColumn[];
-  rowKey: (record: IMerchant | IStation) => Key;
+  rowKey: (record: IMerchant | IStation | ITag) => Key;
   rowSelection: {
     selectedRowKeys: React.Key[];
     onChange: (selectedRowKeys: React.Key[]) => void;
@@ -40,7 +40,7 @@ const TableComponent: React.FC<Props> = ({
   rowSelection,
 }) => {
   const b = bem('TableComponent');
-  const rowClassName = (_: IMerchant | IStation, index: number) => {
+  const rowClassName = (_: IMerchant | IStation | ITag, index: number) => {
     if (index % 2 === 0) {
       return '';
     }
