@@ -1,0 +1,48 @@
+@use '../../../app/styles/variables' as variables;
+
+.Tags {
+  &__search-pagination-block {
+    box-sizing: border-box !important;
+    z-index: 999;
+    width: calc(100% + 40px);
+    margin: 0;
+    background: #ffffff;
+    padding: 16px 16px 0 16px;
+    border-top: 1px solid variables.$gray-bg-color;
+    border-left: 1px solid variables.$gray-bg-color;
+  }
+
+  &__table-block {
+    width: 100%;
+    position: relative;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__add-block {
+    display: flex;
+    align-self: self-end;
+  }
+
+  &__button-style {
+    display: flex;
+    align-items: center;
+    width: 180px;
+    margin-bottom: 18px;
+  }
+
+  .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child {
+    inset-inline-start: 1px;
+  }
+
+  .ant-input-affix-wrapper {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+
+  .ant-input {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+}

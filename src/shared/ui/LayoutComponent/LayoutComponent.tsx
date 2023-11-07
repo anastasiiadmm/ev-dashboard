@@ -207,7 +207,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     ),
     getItem(
       'Список тегов',
-      '13',
+      '/tags',
       <img src={tag} alt='tag' />,
       <img src={tagActive} alt='tagActive' />,
     ),
