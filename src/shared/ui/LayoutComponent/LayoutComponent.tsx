@@ -3,6 +3,7 @@ import { Button, Layout, Menu, theme, Typography } from 'antd';
 import bem from 'easy-bem';
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 
 import {
   arrowLeft,
@@ -63,6 +64,7 @@ type Props = {
 
 const LayoutComponent: React.FC<Props> = ({ children }) => {
   const b = bem('LayoutComponent');
+  const { t } = useTranslation();
   const push = useNavigate();
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
@@ -104,25 +106,25 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
 
   const items: MenuItem[] = [
     getItem(
-      'Главная',
+      t('menu.menu'),
       '/',
       <img src={main} alt='main' />,
       <img src={mainActive} alt='mainActive' />,
     ),
     getItem(
-      'Мерчанты',
+      t('menu.merchants'),
       'sub1',
       <img src={identification} alt='identification' />,
       <img src={identificationActive} alt='identificationActive' />,
       [
         getItem(
-          'Мерчанты',
+          t('menu.merchants'),
           '/merchants',
           <img src={circle} alt='circle' />,
           <img src={circleActive} alt='circleActive' />,
         ),
         getItem(
-          'Отчет по Мерчантам',
+          t('menu.merchant_report'),
           '4',
           <img src={circle} alt='circle' />,
           <img src={circleActive} alt='circleActive' />,
@@ -130,25 +132,25 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
       ],
     ),
     getItem(
-      'Пользователи',
+      t('menu.users'),
       'sub2',
       <img src={users} alt='users' />,
       <img src={usersActive} alt='usersActive' />,
       [
         getItem(
-          'Пользователи',
+          t('menu.users'),
           '5',
           <img src={circle} alt='circle' />,
           <img src={circleActive} alt='circleActive' />,
         ),
         getItem(
-          'Список зарядов пользователей',
+          t('menu.list_of_user_charges'),
           '6',
           <img src={circle} alt='circle' />,
           <img src={circleActive} alt='circleActive' />,
         ),
         getItem(
-          'Выписка с баланса пользователей',
+          t('menu.extract_from_user_balance'),
           '16',
           <img src={circle} alt='circle' />,
           <img src={circleActive} alt='circleActive' />,
@@ -156,37 +158,37 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
       ],
     ),
     getItem(
-      'Партнеры по Аренде ПО',
+      t('menu.software_rental_partners'),
       '2',
       <img src={laptop} alt='laptop' />,
       <img src={laptopActive} alt='laptopActive' />,
     ),
     getItem(
-      'Тарифы',
+      t('menu.rates'),
       '7',
       <img src={rates} alt='rates' />,
       <img src={ratesActive} alt='ratesActive' />,
     ),
     getItem(
-      'Тепловая Карта',
+      t('menu.heat_map'),
       '8',
       <img src={heatMap} alt='heatMap' />,
       <img src={heatMapActive} alt='heatMapActive' />,
     ),
     getItem(
-      'Акции',
+      t('menu.promotions'),
       'sub3',
       <img src={speakerPhone} alt='speakerPhone' />,
       <img src={speakerPhoneActive} alt='speakerPhoneActive' />,
       [
         getItem(
-          'Список Акций',
+          t('menu.list_of_promotions'),
           '9',
           <img src={circle} alt='circle' />,
           <img src={circleActive} alt='circleActive' />,
         ),
         getItem(
-          'Отчет по акциям',
+          t('menu.report_of_promotions'),
           '10',
           <img src={circle} alt='circle' />,
           <img src={circleActive} alt='circleActive' />,
@@ -194,31 +196,31 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
       ],
     ),
     getItem(
-      'Рекламные баннера',
+      t('menu.advertising_banners'),
       '11',
       <img src={template} alt='template' />,
       <img src={templateActive} alt='templateActive' />,
     ),
     getItem(
-      'Инфраструктура вокруг станций',
+      t('menu.infrastructure_around_stations'),
       '12',
       <img src={officeBuilding} alt='officeBuilding' />,
       <img src={officeBuildingActive} alt='officeBuildingActive' />,
     ),
     getItem(
-      'Список тегов',
+      t('menu.list_of_tags'),
       '/tags',
       <img src={tag} alt='tag' />,
       <img src={tagActive} alt='tagActive' />,
     ),
     getItem(
-      'Список промокодов',
+      t('menu.list_of_promotional_codes'),
       '14',
       <img src={promoCode} alt='promoCode' />,
       <img src={promoCodeActive} alt='promoCodeActive' />,
     ),
     getItem(
-      'Список рефералов',
+      t('menu.list_of_referrals'),
       '15',
       <img src={referrals} alt='referrals' />,
       <img src={referralsActive} alt='referralsActive' />,
@@ -238,13 +240,13 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
 
   const logoutItems: MenuItem[] = [
     getItem(
-      'Настройки',
+      t('menu.settings'),
       '1',
       <img src={settings} alt='settings' />,
       <img src={settingsActive} alt='settingsActive' />,
     ),
     getItem(
-      'Выйти',
+      t('menu.log_out'),
       '/logout',
       <img src={logout} alt='logout' />,
       <img src={logoutActive} alt='logoutActive' />,

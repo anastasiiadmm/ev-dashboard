@@ -4,6 +4,7 @@ import bem from 'easy-bem';
 import { Button, Form, Radio, Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
+import { useTranslation } from 'react-i18next';
 
 import { eng, kg, rus } from '~/assets/images';
 import {
@@ -28,13 +29,9 @@ const languageItems = [
   { name: 'Английский', value: 'en', lang: 'Англисча', icon: eng },
 ];
 
-const items = [
-  { title: 'Мерчанты', href: '/merchants' },
-  { title: 'Создание мерчанта', href: '/merchants/create-merchant' },
-];
-
 const Create = observer(() => {
   const b = bem('Create');
+  const { t } = useTranslation();
   const {
     countries,
     countriesLoading,
@@ -79,6 +76,11 @@ const Create = observer(() => {
   const isAllSelected = Object.values(radioButtonStates).every((value) => value);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
+
+  const items = [
+    { title: t('merchants.merchants'), href: '/merchants' },
+    { title: t('merchants.create_merchant'), href: '/merchants/create-merchant' },
+  ];
 
   useEffect(() => {
     if (createMerchantSuccess) {
@@ -149,7 +151,7 @@ const Create = observer(() => {
       if (b.value === currentLocale) return 1;
       return 0;
     });
-  }, [currentLocale]);
+  }, []);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -187,14 +189,14 @@ const Create = observer(() => {
       <div className={b('cards-block')}>
         <CardComponent>
           <Title level={3} style={{ margin: 0 }}>
-            Создание мерчанта
+            {t('merchants.create_merchant')}
           </Title>
 
           {error && (
             <AlertComponent
               className={b('alert-styles')}
-              message='Неправильно заполненное поле'
-              description='Одно или несколько из обязательных полей не заполнено или содержит неверные данные, проверьте введенные данные.'
+              message={t('alerts.incorrectly_filled_field') as string}
+              description={t('alerts.one_or_more_of_the_required_fields_are_not_filled') as string}
               type='error'
               showIcon
               closable
@@ -209,15 +211,15 @@ const Create = observer(() => {
             layout='vertical'
             size='middle'
           >
-            <p className={b('info')}>Информация о мерчанте</p>
+            <p className={b('info')}>{t('merchants.merchant_information')}</p>
             <div className={b('display-block')}>
               <div>
                 <FormField
                   data-testid='name_id'
                   id='name_id'
                   name={`name_${selectedLanguage}`}
-                  placeholder='Наименование'
-                  label='Наименование'
+                  placeholder={t('merchants.name')}
+                  label={t('merchants.name')}
                   rules={[
                     {
                       required: true,
@@ -234,8 +236,8 @@ const Create = observer(() => {
                   data-testid='document_id'
                   id='document_id'
                   name='agreement_number'
-                  placeholder='№ договора'
-                  label='№ договора'
+                  placeholder={t('merchants.contract_no')}
+                  label={t('merchants.contract_no')}
                   rules={[
                     {
                       required: true,
@@ -253,8 +255,8 @@ const Create = observer(() => {
                   data-testid='legal_name'
                   id='legal_name'
                   name={`legal_name_${selectedLanguage}`}
-                  placeholder='Юридическое лицо'
-                  label='Юридическое лицо'
+                  placeholder={t('merchants.entity_full')}
+                  label={t('merchants.entity_full')}
                   rules={[
                     {
                       required: true,
@@ -272,8 +274,8 @@ const Create = observer(() => {
                   id='percent_id'
                   name='rate'
                   inputType='number'
-                  placeholder='% по агентскому договору'
-                  label='% по агентскому договору'
+                  placeholder={t('merchants.under_agency_agreement')}
+                  label={t('merchants.under_agency_agreement')}
                   rules={[
                     {
                       required: true,
@@ -288,15 +290,15 @@ const Create = observer(() => {
               </div>
             </div>
 
-            <p className={b('info')}>Контакты</p>
+            <p className={b('info')}>{t('merchants.contacts')}</p>
             <div className={b('display-block')}>
               <FormField
                 type='phone'
                 data-testid='phone_id'
                 id='phone_id'
                 name='phone'
-                placeholder='Телефон'
-                label='Телефон'
+                placeholder={t('merchants.phone')}
+                label={t('merchants.phone')}
                 rules={[
                   {
                     required: true,
@@ -314,15 +316,15 @@ const Create = observer(() => {
                 type='email'
                 id='email_id'
                 name='email'
-                label='Ваш email'
-                placeholder='Введите email'
+                label={t('merchants.your_email')}
+                placeholder={t('merchants.your_email')}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handleFormChange('email', e.target.value)
                 }
               />
             </div>
 
-            <p className={b('info')}>Локация</p>
+            <p className={b('info')}>{t('merchants.location')}</p>
             <div className={b('display-block')}>
               <div>
                 <FormField
@@ -331,8 +333,8 @@ const Create = observer(() => {
                   data-testid='country_id'
                   id='country_id'
                   name='country'
-                  placeholder='Страна'
-                  label='Страна'
+                  placeholder={t('merchants.country')}
+                  label={t('merchants.country')}
                   rules={[
                     {
                       required: true,
@@ -353,8 +355,8 @@ const Create = observer(() => {
                   data-testid='district_id'
                   id='district_id'
                   name='district'
-                  placeholder='Район'
-                  label='Район'
+                  placeholder={t('merchants.district')}
+                  label={t('merchants.district')}
                   loading={districtsLoading}
                   rules={[
                     {
@@ -378,8 +380,8 @@ const Create = observer(() => {
                   id='settlements_id'
                   name='settlements'
                   loading={settlementsLoading}
-                  placeholder='Город'
-                  label='Город'
+                  placeholder={t('merchants.city')}
+                  label={t('merchants.city')}
                   rules={[
                     {
                       required: true,
@@ -398,8 +400,8 @@ const Create = observer(() => {
                   data-testid='address_id'
                   id='address_id'
                   name={`address_${selectedLanguage}`}
-                  placeholder='Улица'
-                  label='Улица'
+                  placeholder={t('merchants.street')}
+                  label={t('merchants.street')}
                   rules={[
                     {
                       required: true,
@@ -419,18 +421,18 @@ const Create = observer(() => {
               data-testid='active_id'
               id='active_id'
               name='active'
-              text='Активный'
-              label='Статус'
+              text={t('merchants.active')}
+              label={t('merchants.status')}
               onChange={(checked: boolean) => handleFormChange('active', checked)}
             />
           </Form>
         </CardComponent>
         <CardComponent className={b('lang-block')}>
           <Title level={4} style={{ margin: 0 }}>
-            Данные нужно указать на нескольких языках
+            {t('merchants.data_must_be_provided_in_several_languages')}
           </Title>
           <Text style={{ marginBottom: 20 }}>
-            Для корректного отображения в пользовательских приложениях
+            {t('merchants.for_correct_display_in_user_applications')}
           </Text>
           <Radio.Group style={{ width: 260 }} value={selectedLanguage}>
             {sortedLanguageItems.map((item) => {
@@ -464,15 +466,15 @@ const Create = observer(() => {
           <div className={b('button-block')}>
             {isAllSelected ? (
               <Button type='primary' onClick={onFinish}>
-                Создать
+                {t('merchants.create')}
               </Button>
             ) : (
               <Button type='primary' onClick={handleNextLanguage}>
-                Далее
+                {t('merchants.further')}
               </Button>
             )}
             <Button type='default' className={b('cancel-button')} onClick={showModal}>
-              Отменить
+              {t('merchants.cancel')}
             </Button>
           </div>
         </CardComponent>
@@ -485,8 +487,8 @@ const Create = observer(() => {
         handleCancel={handleOkCancel}
       >
         <ActiveInactiveModal
-          textTitle='Вы действительно хотите отменить изменения?'
-          infoText='После отмены все данные будут утеряны.'
+          textTitle={t('merchants.are_you_sure_you_want_to_cancel_your_changes') as string}
+          infoText={t('merchants.after_cancellation_all_data_will_be_lost') as string}
           handleOkCancel={handleOkCancel}
           handleAgreeHandler={handleAgreeHandler}
         />
@@ -501,7 +503,7 @@ const Create = observer(() => {
         <ActiveInactiveModal
           hasCancelButton={false}
           successModal
-          textTitle='Мерчант был создан'
+          textTitle={t('merchant_has_been_created') as string}
           infoText='Новая учётная запись мерчанта была успешно создана.'
           handleOkCancel={handleOkSuccessCancel}
           handleAgreeHandler={handleAgreeHandler}

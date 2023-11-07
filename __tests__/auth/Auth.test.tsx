@@ -3,6 +3,9 @@ import { render } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import { BrowserRouter } from 'react-router-dom';
 
+import '../../__mocks__/react-i18next.mock';
+import '../../__mocks__/matchMedia.mock';
+import '../../__mocks__/i18nextMock';
 import Auth from "../../src/features/auth/Auth/Auth";
 
 jest.mock('~/shared/utils/config', () => ({
@@ -10,7 +13,7 @@ jest.mock('~/shared/utils/config', () => ({
 }));
 
 beforeAll(() => {
-  process.env.NODE_ENV = 'test';
+  process.env.NODE_ENV = 'http://localhost/:8000/';
 });
 
 jest.mock('antd/lib/form/Form', () => {
