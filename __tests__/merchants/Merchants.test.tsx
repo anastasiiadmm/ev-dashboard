@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import '../../__mocks__/react-i18next.mock';
 import '../../__mocks__/matchMedia.mock';
-import '../../__mocks__/i18next';
+import '../../__mocks__/i18nextMock';
 import Create from "../../src/features/merchants/Create/Create";
 import { merchantStore } from "../../src/shared/api/store";
 
