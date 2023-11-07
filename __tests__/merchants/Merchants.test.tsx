@@ -119,17 +119,17 @@ describe('Create Merchant UI Component', () => {
     );
 
     expect(getByTestId('create-component')).toBeInTheDocument();
-    const name = screen.getByLabelText('Наименование');
-    const document = screen.getByLabelText('№ договора');
-    const legal_name = screen.getByLabelText('Юридическое лицо');
-    const rate = screen.getByLabelText('% по агентскому договору');
-    const phone = screen.getByLabelText('Телефон');
-    const email = screen.getByLabelText('Ваш email');
-    const countrySelect = screen.getByLabelText('Страна');
-    const districtSelect = screen.getByLabelText('Район');
-    const settlementSelect = screen.getByLabelText('Город');
-    const address = screen.getByLabelText('Улица');
-    const button = await screen.findByRole('button', { name: 'Далее' });
+    const name = screen.getByLabelText('merchants.name');
+    const document = screen.getByLabelText('merchants.contract_no');
+    const legal_name = screen.getByLabelText('merchants.entity_full');
+    const rate = screen.getByLabelText('merchants.under_agency_agreement');
+    const phone = screen.getByLabelText('merchants.phone');
+    const email = screen.getByLabelText('merchants.your_email');
+    const countrySelect = screen.getByLabelText('merchants.country');
+    const districtSelect = screen.getByLabelText('merchants.district');
+    const settlementSelect = screen.getByLabelText('merchants.city');
+    const address = screen.getByLabelText('merchants.street');
+    const button = await screen.findByRole('button', { name: 'merchants.further' });
 
     await waitFor(async () => {
       fireEvent.change(name, { target: { value: 'Test' } });
@@ -154,15 +154,15 @@ describe('Create Merchant UI Component', () => {
     );
 
     await waitFor( async () => {
-      fireEvent.change(screen.getByLabelText('Наименование'), { target: { value: 'Test Name' } });
-      fireEvent.change(screen.getByLabelText('№ договора'), { target: { value: '1234' } });
-      fireEvent.change(screen.getByLabelText('Юридическое лицо'), { target: { value: 'Test Name' } });
-      fireEvent.change(screen.getByLabelText('% по агентскому договору'), { target: { value: 'Test Name' } });
-      fireEvent.change(screen.getByLabelText('Телефон'), { target: { value: '+996555555555' } });
-      fireEvent.change(screen.getByLabelText('Ваш email'), { target: { value: 'test@gmail.com' } });
-      fireEvent.change(screen.getByLabelText('Улица'), { target: { value: 'Test address' } });
-      fireEvent.click(screen.getByRole('button', { name: 'Далее' }));
-      expect(await screen.getByText('Одно или несколько из обязательных полей не заполнено или содержит неверные данные, проверьте введенные данные.')).toBeInTheDocument();
+      fireEvent.change(screen.getByLabelText('merchants.name'), { target: { value: 'Test Name' } });
+      fireEvent.change(screen.getByLabelText('merchants.contract_no'), { target: { value: '1234' } });
+      fireEvent.change(screen.getByLabelText('merchants.entity_full'), { target: { value: 'Test Name' } });
+      fireEvent.change(screen.getByLabelText('merchants.under_agency_agreement'), { target: { value: 'Test Name' } });
+      fireEvent.change(screen.getByLabelText('merchants.phone'), { target: { value: '+996555555555' } });
+      fireEvent.change(screen.getByLabelText('merchants.your_email'), { target: { value: 'test@gmail.com' } });
+      fireEvent.change(screen.getByLabelText('merchants.country'), { target: { value: 'Test address' } });
+      fireEvent.click(screen.getByRole('button', { name: 'merchants.further' }));
+      expect(await screen.getByText('alerts.one_or_more_of_the_required_fields_are_not_filled')).toBeInTheDocument();
     });
   });
 });
