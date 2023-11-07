@@ -10,7 +10,7 @@ const { Title } = Typography;
 
 interface Props {
   textTitle: string;
-  creating: boolean;
+  creating?: boolean;
 }
 
 const CreateEditTagModal: React.FC<Props> = ({ textTitle, creating = false }) => {
