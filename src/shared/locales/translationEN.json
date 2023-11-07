@@ -56,7 +56,14 @@
     "location": "Location",
     "entity": "Entity",
     "entity_full": "Entity",
+    "connectors": "Connectors",
+    "tags": "Tags",
+    "infrastructure": "Инфраструктура",
+    "the_stations_you_selected_will_not_be_active": "The stations you selected will not be active.",
+    "the_stations_you_selected_will_be_active": "The stations you selected will be active.",
     "status": "Status",
+    "schedule": "Schedule",
+    "not_a_standard_work_schedule": "Not a standard work schedule",
     "phone": "Phone",
     "your_email": "Your E-mail",
     "country": "Country",
@@ -87,7 +94,9 @@
     "yes": "Yes",
     "are_you_sure_you_want_to_cancel_your_changes": "Are you sure you want to cancel your changes?",
     "after_cancellation_all_data_will_be_lost": "After cancellation, all data will be lost",
-    "merchant_has_been_created": "Merchant has been created"
+    "merchant_has_been_created": "Merchant has been created",
+    "a_new_merchant_account_has_been_successfully_created": "A new merchant account has been successfully created",
+    "creating_a_tag": "Creating a tag"
   },
   "table": {
     "show": "Show by",
@@ -101,6 +110,9 @@
     "edit_tag": "Edit tag",
     "delete_tag": "Delete tag",
     "the_tags_you_select_will_not_be_active": "The tags you select will not be active.",
-    "the_tags_you_select_will_be_active": "The tags you select will be active."
+    "the_tags_you_select_will_be_active": "The tags you select will be active.",
+    "name_in_kyrgyz": "Name in Kyrgyz",
+    "name_in_russian": "Name in Russian",
+    "name_in_eng": "Title in English"
   }
 }

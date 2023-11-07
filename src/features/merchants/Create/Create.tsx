@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 import { eng, kg, rus } from '~/assets/images';
 import {
+  ActiveInactiveModal,
   AlertComponent,
   BreadcrumbComponent,
   CardComponent,
@@ -18,7 +19,6 @@ import { useCurrentLocale } from '~/shared/hooks';
 import { ICreateMerchant } from '~/features/merchants/interfaces';
 import { commonStore, merchantStore } from '~/shared/api/store';
 import { getParams } from '~/shared/utils/helper';
-import { ActiveInactiveModal } from '~/features/merchants';
 import './Create.scss';
 
 const { Title, Text } = Typography;
@@ -487,8 +487,8 @@ const Create = observer(() => {
         handleCancel={handleOkCancel}
       >
         <ActiveInactiveModal
-          textTitle={t('merchants.are_you_sure_you_want_to_cancel_your_changes') as string}
-          infoText={t('merchants.after_cancellation_all_data_will_be_lost') as string}
+          textTitle={t('modals.are_you_sure_you_want_to_cancel_your_changes') as string}
+          infoText={t('modals.after_cancellation_all_data_will_be_lost') as string}
           handleOkCancel={handleOkCancel}
           handleAgreeHandler={handleAgreeHandler}
         />
@@ -503,8 +503,8 @@ const Create = observer(() => {
         <ActiveInactiveModal
           hasCancelButton={false}
           successModal
-          textTitle={t('merchant_has_been_created') as string}
-          infoText='Новая учётная запись мерчанта была успешно создана.'
+          textTitle={t('modals.merchant_has_been_created') as string}
+          infoText={t('modals.a_new_merchant_account_has_been_successfully_created') as string}
           handleOkCancel={handleOkSuccessCancel}
           handleAgreeHandler={handleAgreeHandler}
         />

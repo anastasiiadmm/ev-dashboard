@@ -55,6 +55,11 @@
     "contract_no": "№ договора",
     "contacts": "Контакты",
     "location": "Локация",
+    "schedule": "График работы",
+    "infrastructure": "Инфраструктура",
+    "not_a_standard_work_schedule": "Не стандартный режим работы",
+    "connectors": "Коннекторы",
+    "tags": "Теги",
     "country": "Страна",
     "district": "Район",
     "city": "Город",
@@ -75,6 +80,8 @@
     "action": "Действие",
     "add_station": "Добавить станцию",
     "search_among_merchants": "Искать среди мерчантов",
+    "the_stations_you_selected_will_not_be_active": "Выбранные Вами станции будут не активны.",
+    "the_stations_you_selected_will_be_active": "Выбранные Вами станции будут активны.",
     "add_merchant": "Добавить мерчанта",
     "deactivate": "Деактивировать",
     "cancel": "Отменить",
@@ -88,7 +95,9 @@
     "yes": "Да",
     "are_you_sure_you_want_to_cancel_your_changes": "Вы действительно хотите отменить изменения?",
     "after_cancellation_all_data_will_be_lost": "После отмены все данные будут утеряны.",
-    "merchant_has_been_created": "Мерчант был создан"
+    "merchant_has_been_created": "Мерчант был создан",
+    "a_new_merchant_account_has_been_successfully_created": "Новая учётная запись мерчанта была успешно создана.",
+    "creating_a_tag": "Создание тега"
   },
   "table": {
     "show": "Показывать по",
@@ -102,6 +111,9 @@
     "edit_tag": "Редактировать тег",
     "delete_tag": "Удалить тег",
     "the_tags_you_select_will_not_be_active": "Выбранные Вами теги будут не активны.",
-    "the_tags_you_select_will_be_active": "Выбранные Вами теги будут активны."
+    "the_tags_you_select_will_be_active": "Выбранные Вами теги будут активны.",
+    "name_in_kyrgyz": "Название на Кыргызском",
+    "name_in_russian": "Название на Русском",
+    "name_in_eng": "Название на Английском"
   }
 }

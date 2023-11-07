@@ -20,13 +20,9 @@
     flex-direction: column;
   }
 
-  &__add-block {
-    display: flex;
-    align-self: self-end;
-  }
-
   &__button-style {
     display: flex;
+    align-self: flex-end;
     align-items: center;
     width: 180px;
     margin-bottom: 18px;

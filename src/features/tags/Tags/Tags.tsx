@@ -1,23 +1,60 @@
 import bem from 'easy-bem';
 import { Button, Form, Row, Tooltip } from 'antd';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { FormField, ModalComponent, TableComponent } from '~/shared/ui';
+import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '~/shared/ui';
 import { add, deleteIcon, editColor, inactive, infoCircle, search, status } from '~/assets/images';
 import { IColumn } from '~/features/merchants/interfaces';
 import { ITag } from '~/features/tags/interfaces';
-import { ActiveInactiveModal } from '~/features/merchants';
+import { CreateEditTagModal } from '~/features/tags';
 import './Tags.scss';
 
 const Tags = () => {
   const b = bem('Tags');
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isTagModalOpen, setIsTagModalOpen] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isDeactivateButton, setIsDeactivateButton] = useState(true);
   const [isDisabledButton, setIsDisabledButton] = useState(true);
+
+  const pagePrevHandler = () => {};
+  const pageNextHandler = () => {};
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOkCancel = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const showTagModal = () => {
+    setIsTagModalOpen(true);
+  };
+
+  const handleTagOkCancel = () => {
+    setIsTagModalOpen(!isTagModalOpen);
+  };
+
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    setSelectedRowKeys(newSelectedRowKeys);
+    const selectedStatuses = newSelectedRowKeys.map((key) => {
+      const selectedMerchant = data.find((item) => item.id === parseInt(key.toString()));
+      return selectedMerchant ? selectedMerchant.active : false;
+    });
+    const hasActiveTrue = selectedStatuses.includes(true);
+    const hasActiveFalse = selectedStatuses.includes(false);
+    const hasMixedStatus = hasActiveTrue && hasActiveFalse;
+    setIsDeactivateButton(hasActiveTrue && !hasActiveFalse);
+    setIsDisabledButton(hasMixedStatus);
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
 
   const columns: IColumn[] = [
     {
@@ -109,35 +146,6 @@ const Tags = () => {
     },
   ];
 
-  const pagePrevHandler = () => {};
-  const pageNextHandler = () => {};
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOkCancel = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
-  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-    const selectedStatuses = newSelectedRowKeys.map((key) => {
-      const selectedMerchant = data.find((item) => item.id === parseInt(key.toString()));
-      return selectedMerchant ? selectedMerchant.active : false;
-    });
-    const hasActiveTrue = selectedStatuses.includes(true);
-    const hasActiveFalse = selectedStatuses.includes(false);
-    const hasMixedStatus = hasActiveTrue && hasActiveFalse;
-    setIsDeactivateButton(hasActiveTrue && !hasActiveFalse);
-    setIsDisabledButton(hasMixedStatus);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
-
   return (
     <Row justify='space-between' data-testid='auth-component' className={b()}>
       <Row className={b('search-pagination-block')}>
@@ -154,11 +162,14 @@ const Tags = () => {
         </div>
       </Row>
       <Row className={b('table-block')}>
-        <Link to='/tags/create-tag' className={b('add-block')}>
-          <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
-            {t('tags.add_tag')}
-          </Button>
-        </Link>
+        <Button
+          className={b('button-style')}
+          type='primary'
+          icon={<img src={add} alt='add' />}
+          onClick={showTagModal}
+        >
+          {t('tags.add_tag')}
+        </Button>
 
         <TableComponent
           rowKey={(record) => record.id.toString()}
@@ -204,6 +215,16 @@ const Tags = () => {
           }
           handleOkCancel={handleOkCancel}
         />
+      </ModalComponent>
+
+      <ModalComponent
+        closeIcon
+        width={360}
+        isModalOpen={isTagModalOpen}
+        handleOk={handleTagOkCancel}
+        handleCancel={handleTagOkCancel}
+      >
+        <CreateEditTagModal textTitle={t('modals.creating_a_tag') as string} />
       </ModalComponent>
     </Row>
   );

@@ -211,3 +211,8 @@ button:focus-visible {
   border: 1px solid variables.$border-color;
   border-radius: 8px;
 }
+
+.ant-modal .ant-modal-close {
+  top: 23px;
+  color: variables.$text-color;
+}
