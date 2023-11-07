@@ -11,6 +11,7 @@ import { Create, Merchant, Merchants } from '~/features/merchants';
 import { authStore } from '~/shared/api/store';
 import { LayoutComponent } from '~/shared/ui';
 import { LanguageSelect } from '~/shared/ui/Fields';
+import { Tags } from '~/features/tags';
 import { tokensLocalStorage } from '~/shared/utils/config';
 import {
   defaultLocalStorage,
@@ -62,6 +63,9 @@ const App: React.FC = observer(() => {
             <Route index element={<Merchants />} />
             <Route path='/merchants/merchant/:id' element={<Merchant />} />
             <Route path='/merchants/create-merchant' element={<Create />} />
+          </Route>
+          <Route path='/tags'>
+            <Route index element={<Tags />} />
           </Route>
         </Routes>
       </LayoutComponent>

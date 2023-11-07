@@ -1,7 +1,6 @@
 @use '../../../app/styles/variables' as variables;
 
 .TableComponent {
-
   .ant-table-wrapper .ant-table-cell,
   .ant-table-wrapper .ant-table-thead > tr > th,
   .ant-table-wrapper .ant-table-tbody > tr > th,
@@ -20,8 +19,8 @@
     position: relative;
   }
 
-  .ant-table-wrapper .ant-table-tbody > tr > th:not(:last-child)::before,
-  .ant-table-wrapper .ant-table-tbody > tr > td:not(:last-child)::before {
+  .ant-table-wrapper .ant-table-tbody > tr > th:not(:first-child):not(:last-child)::before,
+  .ant-table-wrapper .ant-table-tbody > tr > td:not(:first-child):not(:last-child)::before {
     content: '';
     position: absolute;
     right: 0;

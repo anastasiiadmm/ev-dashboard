@@ -88,12 +88,20 @@
     "yes": "Да",
     "are_you_sure_you_want_to_cancel_your_changes": "Вы действительно хотите отменить изменения?",
     "after_cancellation_all_data_will_be_lost": "После отмены все данные будут утеряны.",
-    "merchant_has_been_created": "Мерчант был создан",
-    "": "Новая учётная запись мерчанта была успешно создана."
+    "merchant_has_been_created": "Мерчант был создан"
   },
   "table": {
     "show": "Показывать по",
     "page": "Стр.",
     "from": "из"
+  },
+  "tags": {
+    "search_by": "Искать среди тегов",
+    "add_tag": "Добавить тег",
+    "name": "Наименование",
+    "edit_tag": "Редактировать тег",
+    "delete_tag": "Удалить тег",
+    "the_tags_you_select_will_not_be_active": "Выбранные Вами теги будут не активны.",
+    "the_tags_you_select_will_be_active": "Выбранные Вами теги будут активны."
   }
 }

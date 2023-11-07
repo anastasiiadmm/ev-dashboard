@@ -93,5 +93,14 @@
     "show": "Show by",
     "page": "Page",
     "from": "from"
+  },
+  "tags": {
+    "search_by": "Search among tags",
+    "add_tag": "Add tag",
+    "name": "Name",
+    "edit_tag": "Edit tag",
+    "delete_tag": "Delete tag",
+    "the_tags_you_select_will_not_be_active": "The tags you select will not be active.",
+    "the_tags_you_select_will_be_active": "The tags you select will be active."
   }
 }

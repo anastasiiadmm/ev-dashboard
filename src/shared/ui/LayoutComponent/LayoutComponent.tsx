@@ -209,7 +209,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     ),
     getItem(
       t('menu.list_of_tags'),
-      '13',
+      '/tags',
       <img src={tag} alt='tag' />,
       <img src={tagActive} alt='tagActive' />,
     ),

@@ -1,0 +1,122 @@
+@use '../../../app/styles/variables' as variables;
+
+.Tags {
+  &__search-pagination-block {
+    box-sizing: border-box !important;
+    z-index: 999;
+    width: calc(100% + 40px);
+    margin: 0;
+    background: #ffffff;
+    padding: 16px 16px 0 16px;
+    border-top: 1px solid variables.$gray-bg-color;
+    border-left: 1px solid variables.$gray-bg-color;
+  }
+
+  &__table-block {
+    width: 100%;
+    position: relative;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__add-block {
+    display: flex;
+    align-self: self-end;
+  }
+
+  &__button-style {
+    display: flex;
+    align-items: center;
+    width: 180px;
+    margin-bottom: 18px;
+  }
+
+  &__pagination-block {
+    margin-top: 16px;
+    position: absolute;
+    bottom: 0;
+  }
+
+  &__deactivate-button {
+    background-color: variables.$white-color !important;
+    border-color: variables.$white-color !important;
+    color: variables.$red-bg;
+  }
+
+  &__activate-button {
+    background-color: variables.$white-color !important;
+    border-color: variables.$white-color !important;
+    color: variables.$link-turquoise-color;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__text {
+    margin: 0;
+  }
+
+  &__center-block {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  &__pagination-block {
+    margin-top: 16px;
+    position: absolute;
+    bottom: 0;
+  }
+
+  &__tags-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__add-button {
+    display: block;
+    text-align: center;
+    background: variables.$active-link-menu-bg !important;
+    border-color: variables.$active-link-menu-bg !important;
+  }
+
+  &__delete-button {
+    display: block;
+    text-align: center;
+    background: variables.$light-red-bg !important;
+    border-color: variables.$light-red-bg !important;
+  }
+
+  &__tag {
+    background-color: variables.$gray-light-bg-color;
+    border-radius: 8px;
+    display: inline-block;
+    padding: 5px 7px;
+  }
+
+  &__tooltip-style {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child {
+    inset-inline-start: 1px;
+  }
+
+  .ant-input-affix-wrapper {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+
+  .ant-input {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+}
