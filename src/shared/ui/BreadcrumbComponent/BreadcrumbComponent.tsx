@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Breadcrumb } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 import bem from 'easy-bem';
+import { useTranslation } from 'react-i18next';
 
 import './BreadcrumbComponent.scss';
 
@@ -20,10 +21,11 @@ interface Props {
 const BreadcrumbComponent: React.FC<Props> = ({ items }) => {
   const b = bem('BreadcrumbComponent');
   const location = useLocation();
+  const { t } = useTranslation();
 
   const allItems = useMemo(() => {
-    return [{ title: 'Главная', href: '/' }, ...items];
-  }, [items]);
+    return [{ title: t('menu.menu'), href: '/' }, ...items];
+  }, [items, t]);
 
   const breadcrumbItems = useMemo(() => {
     return allItems.map((item) => {

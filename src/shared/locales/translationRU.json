@@ -1,7 +1,14 @@
 {
   "errors": {
     "enter_your_email_address": "Введите адрес электронной почты",
-    "the_input_is_not_valid_email": "Неверный адрес электронной почты"
+    "the_input_is_not_valid_email": "Неверный адрес электронной почты",
+    "password_length": "Пароль должен содержать минимум 8 символов",
+    "wrong_password": "Неправильный пароль",
+    "two_passwords_do_not_match": "Пароли не совпадают"
+  },
+  "alerts": {
+    "incorrectly_filled_field": "Неправильно заполненное поле",
+    "one_or_more_of_the_required_fields_are_not_filled": "Одно или несколько из обязательных полей не заполнено или содержит неверные данные, проверьте введенные данные."
   },
   "login": {
     "sign_in": "Авторизация",
@@ -9,6 +16,84 @@
     "email": "Электронная почта",
     "your_password": "Ваш пароль",
     "remember_me": "Запомнить меня",
-    "sign_in_button": "Войти"
+    "sign_in_button": "Войти",
+    "repeat_password": "Повторите пароль",
+    "continue": "Продолжить",
+    "back": "Назад"
+  },
+  "change_password": {
+    "create_password": "Создайте новый пароль",
+    "password_recovery": "Восстановление пароля",
+    "information_about_resetting_your_password": "На вашу почту было отправлено письмо с информацией о сбросе пароля.",
+    "go_to_your_email_to_continue_the_password_reset_procedure": "Перейдите в свою почту, чтобы продолжить процедуру сброса пароля."
+  },
+  "menu": {
+    "menu": "Главная",
+    "merchants": "Мерчанты",
+    "merchant_report": "Отчет по Мерчантам",
+    "users": "Пользователи",
+    "list_of_user_charges": "Список зарядов пользователей",
+    "extract_from_user_balance": "Выписка с баланса пользователей",
+    "software_rental_partners": "Партнеры по Аренде ПО",
+    "rates": "Тарифы",
+    "heat_map": "Тепловая Карта",
+    "promotions": "Акции",
+    "list_of_promotions": "Список Акций",
+    "report_of_promotions": "Отчет по акциям",
+    "advertising_banners": "Рекламные баннера",
+    "infrastructure_around_stations": "Инфраструктура вокруг станций",
+    "list_of_tags": "Список тегов",
+    "list_of_promotional_codes": "Список промокодов",
+    "list_of_referrals": "Список рефералов",
+    "settings": "Настройки",
+    "log_out": "Выйти"
+  },
+  "merchants": {
+    "merchants": "Мерчанты",
+    "create_merchant": "Создание мерчанта",
+    "name": "Наименование",
+    "contract_no": "№ договора",
+    "contacts": "Контакты",
+    "location": "Локация",
+    "country": "Страна",
+    "district": "Район",
+    "city": "Город",
+    "street": "Улица",
+    "active": "Активный",
+    "entity": "Юр лицо",
+    "entity_full": "Юридическое лицо",
+    "phone": "Телефон",
+    "your_email": "Ваш E-mail",
+    "merchant_information": "Информация о мерчанте",
+    "under_agency_agreement": "% по агентскому договору",
+    "status": "Статус",
+    "create": "Создать",
+    "further": "Далее",
+    "data_must_be_provided_in_several_languages": "Данные нужно указать на нескольких языках",
+    "for_correct_display_in_user_applications": "Для корректного отображения в пользовательских приложениях",
+    "number_of_stations": "Кол-во станций",
+    "action": "Действие",
+    "add_station": "Добавить станцию",
+    "search_among_merchants": "Искать среди мерчантов",
+    "add_merchant": "Добавить мерчанта",
+    "deactivate": "Деактивировать",
+    "cancel": "Отменить",
+    "activate": "Активировать",
+    "the_merchants_you_select_will_not_be_active": "Выбранные Вами мерчанты будут не активны.",
+    "the_merchants_you_select_will_be_active": "Выбранные Вами мерчанты будут активны."
+  },
+  "modals": {
+    "cancel": "Отменить",
+    "okay": "Хорошо",
+    "yes": "Да",
+    "are_you_sure_you_want_to_cancel_your_changes": "Вы действительно хотите отменить изменения?",
+    "after_cancellation_all_data_will_be_lost": "После отмены все данные будут утеряны.",
+    "merchant_has_been_created": "Мерчант был создан",
+    "": "Новая учётная запись мерчанта была успешно создана."
+  },
+  "table": {
+    "show": "Показывать по",
+    "page": "Стр.",
+    "from": "из"
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import bem from 'easy-bem';
 import { Button, Typography } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 import { greenCheck, warning } from '~/assets/images';
 import './ActiveInactiveModal.scss';
@@ -25,6 +26,7 @@ const ActiveInactiveModal: React.FC<Props> = ({
   infoText,
 }) => {
   const b = bem('ActiveInactiveModal');
+  const { t } = useTranslation();
 
   return (
     <div className={b('')}>
@@ -43,11 +45,11 @@ const ActiveInactiveModal: React.FC<Props> = ({
         <div className={b('buttons-block') + successModal ? 'float-style' : ''}>
           {hasCancelButton && (
             <Button className={b('cancel-button')} onClick={handleOkCancel}>
-              Отменить
+              {t('modals.cancel')}
             </Button>
           )}
           <Button type='primary' onClick={handleAgreeHandler}>
-            {successModal ? 'Хорошо' : 'Да'}
+            {successModal ? t('modals.okay') : t('modals.yes')}
           </Button>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import bem from 'easy-bem';
 import { Button, Col, Form, Row, Typography } from 'antd';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { logo } from '~/assets/images';
 import { FormField } from '~/shared/ui';
@@ -11,6 +12,7 @@ const { Text } = Typography;
 
 const ResetPassword = () => {
   const b = bem('ResetPassword');
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const [showSuccessComponent, setShowSuccessComponent] = useState(false);
 
@@ -35,11 +37,10 @@ const ResetPassword = () => {
               <img src={logo} alt='logo' className={b('logo-image')} />
               <div className={b('success-block')}>
                 <Text className={b('title')}>
-                  На вашу почту <b>joe@mail.com</b> было отправлено письмо с информацией о сбросе
-                  пароля.
+                  {t('change_password.information_about_resetting_your_password')}
                 </Text>
                 <Text className={b('title')}>
-                  Перейдите в свою почту, чтобы продолжить процедуру сброса пароля.
+                  {t('change_password.go_to_your_email_to_continue_the_password_reset_procedure')}
                 </Text>
               </div>
             </div>
@@ -58,7 +59,7 @@ const ResetPassword = () => {
             <div>
               <Row className={b('buttons-row')}>
                 <Text strong className={b('title')}>
-                  Восстановление пароля
+                  {t('change_password.password_recovery')}
                 </Text>
               </Row>
 
@@ -80,22 +81,22 @@ const ResetPassword = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'Неверный адрес электронной почты',
+                      message: t('errors.the_input_is_not_valid_email'),
                     },
                     {
                       pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: 'Неверный адрес электронной почты',
+                      message: t('errors.the_input_is_not_valid_email'),
                     },
                   ]}
-                  placeholder='Электронная почта'
+                  placeholder={t('login.email')}
                 />
 
                 <Button type='primary' htmlType='submit' className={b('login-button')}>
-                  Продолжить
+                  {t('login.continue')}
                 </Button>
                 <Link to='/'>
                   <Button type='link' className={b('back-button')}>
-                    Назад
+                    {t('login.back')}
                   </Button>
                 </Link>
               </Form>
