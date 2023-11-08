@@ -13,6 +13,7 @@ import './Tags.scss';
 const Tags = () => {
   const b = bem('Tags');
   const { t } = useTranslation();
+  const [creating, setCreating] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTagModalOpen, setIsTagModalOpen] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -30,12 +31,17 @@ const Tags = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const showTagModal = () => {
+  const handleTagOkCancel = () => {
+    setIsTagModalOpen(!isTagModalOpen);
+  };
+
+  const showTagModal = (isCreating) => {
+    setCreating(isCreating);
     setIsTagModalOpen(true);
   };
 
-  const handleTagOkCancel = () => {
-    setIsTagModalOpen(!isTagModalOpen);
+  const showEditModal = () => {
+    showTagModal(false);
   };
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
@@ -103,7 +109,7 @@ const Tags = () => {
               }
             >
               <Button
-                onClick={showTagModal}
+                onClick={showEditModal}
                 className={b('add-button')}
                 icon={<img src={editColor} alt='plus' />}
               />
@@ -170,7 +176,7 @@ const Tags = () => {
           className={b('button-style')}
           type='primary'
           icon={<img src={add} alt='add' />}
-          onClick={showTagModal}
+          onClick={() => showTagModal(true)}
         >
           {t('tags.add_tag')}
         </Button>
@@ -228,17 +234,14 @@ const Tags = () => {
         handleOk={handleTagOkCancel}
         handleCancel={handleTagOkCancel}
       >
-        <CreateEditTagModal creating textTitle={t('modals.creating_a_tag') as string} />
-      </ModalComponent>
-
-      <ModalComponent
-        closeIcon
-        width={360}
-        isModalOpen={isTagModalOpen}
-        handleOk={handleTagOkCancel}
-        handleCancel={handleTagOkCancel}
-      >
-        <CreateEditTagModal textTitle={t('modals.editing_a_tag') as string} />
+        <CreateEditTagModal
+          textTitle={
+            creating
+              ? (t('modals.creating_a_tag') as string)
+              : (t('modals.editing_a_tag') as string)
+          }
+          creating={creating}
+        />
       </ModalComponent>
     </Row>
   );
