@@ -1,0 +1,17 @@
+@use '../../../../../app/styles/variables' as variables;
+
+.CreateEditTagModal {
+  &__title {
+    margin-bottom: 16px;
+  }
+
+  .switch-text {
+    display: inline-block;
+    margin-left: 8px;
+    font-weight: variables.$font-400 !important;
+  }
+
+  .ant-form-item {
+    margin-bottom: 12px;
+  }
+}

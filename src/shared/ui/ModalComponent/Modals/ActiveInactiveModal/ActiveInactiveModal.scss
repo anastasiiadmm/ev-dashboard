@@ -22,10 +22,11 @@
     background-color: variables.$active-link-menu-bg;
     color: variables.$link-turquoise-color;
     border: none;
+    margin-right: 8px;
   }
 
   .float-style {
     float: right;
-    margin-top: 43px;
+    margin-top: 30px;
   }
 }

@@ -4,6 +4,7 @@ import { Modal } from 'antd';
 interface Props {
   title?: string;
   width?: number;
+  closeIcon?: boolean;
   isModalOpen: boolean;
   handleOk: () => void;
   handleCancel?: () => void;
@@ -14,6 +15,7 @@ const ModalComponent: React.FC<Props> = ({
   isModalOpen,
   handleOk,
   handleCancel,
+  closeIcon = false,
   children,
   title,
   width,
@@ -21,7 +23,7 @@ const ModalComponent: React.FC<Props> = ({
   return (
     <Modal
       width={width}
-      closeIcon={false}
+      closeIcon={closeIcon}
       title={title}
       open={isModalOpen}
       onOk={handleOk}

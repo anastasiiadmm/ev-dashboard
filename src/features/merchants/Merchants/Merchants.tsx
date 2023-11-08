@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { add, plus, active, status, x, search, infoCircle, inactive } from '~/assets/images';
-import { FormField, ModalComponent, TableComponent } from '~/shared/ui';
+import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '~/shared/ui';
 import { IColumn, IMerchant } from '~/features/merchants/interfaces';
-import { ActiveInactiveModal } from '~/features/merchants';
 import './Merchants.scss';
 
 const Merchants = () => {

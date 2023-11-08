@@ -4,17 +4,17 @@ import 'dayjs/locale/ru';
 import bem from 'easy-bem';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { add, inactive, infoCircle, plus, status } from '~/assets/images';
-import { ActiveInactiveModal } from '~/features/merchants';
 import { IColumn, IStation } from '~/features/merchants/interfaces';
 import { TableCell } from '~/features/merchants/Merchant/ui';
-import { ModalComponent, TableComponent } from '~/shared/ui';
-
+import { ActiveInactiveModal, ModalComponent, TableComponent } from '~/shared/ui';
 import './TableStations.scss';
 
 const TableStations = () => {
   const b = bem('TableStations');
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isDeactivateButton, setIsDeactivateButton] = useState(true);
@@ -26,7 +26,7 @@ const TableStations = () => {
       dataIndex: 'id',
     },
     {
-      title: 'Наименование',
+      title: t('merchants.name'),
       render: (record: IStation) => {
         return (
           <Link to={`/merchants/merchant/${record?.id}`} className={b('title crop-text')}>
@@ -36,16 +36,16 @@ const TableStations = () => {
       },
     },
     {
-      title: 'Локация',
+      title: t('merchants.location'),
       render: (record: IStation) => {
         return <p className={b('text crop-text')}>{record?.location}</p>;
       },
     },
     {
-      title: 'Режим работы',
+      title: t('merchants.schedule'),
       width: 120,
       render: (record: IStation) => {
-        let schedule: string = 'Не стандартный режим работы';
+        let schedule: string = t('merchants.not_a_standard_work_schedule') as string;
         const days = record.schedule;
         const areNumbersNotInOrder = (arr: number[]) => {
           return arr.every((value, index, array) => index === 0 || value === array[index - 1] + 1);
@@ -66,31 +66,31 @@ const TableStations = () => {
       },
     },
     {
-      title: 'Статус',
+      title: t('merchants.status'),
       dataIndex: 'status',
       render: (text: number) => {
         return <img className={b('center-block')} src={!text ? status : inactive} alt='status' />;
       },
     },
     {
-      title: 'Конекторы',
+      title: t('merchants.connectors'),
       render: (record: IStation) => {
         const connectors = record.connectors.join(', ');
         return <p className={b('text crop-text')}>{connectors}</p>;
       },
     },
     {
-      title: 'Теги',
+      title: t('merchants.tags'),
       width: 170,
       render: (record: IStation) => <TableCell data={record.tags} />,
     },
     {
-      title: 'Инфраструктура',
+      title: t('merchants.infrastructure'),
       width: 180,
       render: (record: IStation) => <TableCell data={record.surroundings} />,
     },
     {
-      title: 'Действие',
+      title: t('merchants.action'),
       render: () => {
         return (
           <Tooltip
@@ -99,7 +99,7 @@ const TableStations = () => {
             title={
               <div className={b('info')}>
                 <img src={infoCircle} alt='infoCircle' />
-                <p>Добавить станцию</p>
+                <p>{t('merchants.add_station')}</p>
               </div>
             }
           >
@@ -270,7 +270,7 @@ const TableStations = () => {
       <Row className={b('table-block')}>
         <Link to='/merchants' className={b('add-block')}>
           <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
-            Добавить станцию
+            {t('merchants.add_station')}
           </Button>
         </Link>
 
@@ -292,7 +292,10 @@ const TableStations = () => {
               onClick={showModal}
               disabled={isDisabledButton}
             >
-              {isDeactivateButton ? 'Деактивировать' : 'Активировать'} ({selectedRowKeys.length})
+              {isDeactivateButton
+                ? (t('merchants.deactivate') as string)
+                : (t('merchants.activate') as string)}{' '}
+              ({selectedRowKeys.length})
             </Button>
           </div>
         )}
@@ -304,11 +307,15 @@ const TableStations = () => {
           handleCancel={handleOkCancel}
         >
           <ActiveInactiveModal
-            textTitle={isDeactivateButton ? 'Деактивировать' : 'Активировать'}
+            textTitle={
+              isDeactivateButton
+                ? (t('merchants.deactivate') as string)
+                : (t('merchants.activate') as string)
+            }
             infoText={
               isDeactivateButton
-                ? 'Выбранные Вами станции будут не активны.'
-                : 'Выбранные Вами станции будут активны.'
+                ? (t('merchants.the_stations_you_selected_will_not_be_active') as string)
+                : (t('merchants.the_stations_you_selected_will_not_active') as string)
             }
             handleOkCancel={handleOkCancel}
           />

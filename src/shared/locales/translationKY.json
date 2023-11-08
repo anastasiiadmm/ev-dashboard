@@ -56,11 +56,18 @@
     "contacts": "Байланыштар",
     "location": "Локация",
     "entity": "Юридикалык тарап",
+    "schedule": "Иш графиги",
+    "not_a_standard_work_schedule": "Стандарттык иштөө режими эмес",
     "phone": "Телефон",
     "your_email": "Сиздин электрондук почтаңыз",
+    "connectors": "Коннекторлор",
+    "tags": "Теги",
+    "infrastructure": "Инфраструктура",
     "country": "Өлкө",
     "district": "Району",
     "city": "Шаары",
+    "the_stations_you_selected_will_not_be_active": "Сиз тандаган станциялар активдүү болбойт.",
+    "the_stations_you_selected_will_be_active": "Сиз тандаган станциялар активдүү болот.",
     "street": "Көчөсү",
     "active": "Активдүү",
     "data_must_be_provided_in_several_languages": "Маалыматтар бир нече тилдерде көрсөтүлүүсү керек",
@@ -88,7 +95,10 @@
     "yes": "Ооба",
     "are_you_sure_you_want_to_cancel_your_changes": "Вы действительно хотите отменить изменения?",
     "after_cancellation_all_data_will_be_lost": "Жокко чыгаргандан кийин, бардык маалыматтар жоголот.",
-    "merchant_has_been_created": "Мерчант түзүлдү"
+    "merchant_has_been_created": "Мерчант түзүлдү",
+    "a_new_merchant_account_has_been_successfully_created": "Жаңы соодагер аккаунту ийгиликтүү түзүлдү.",
+    "creating_a_tag": "Тег түзүү",
+    "editing_a_tag": "Тегди түзөтүү"
   },
   "table": {
     "show": "Көрсөтүү",
@@ -102,6 +112,10 @@
     "edit_tag": "Тегди түзөтүү",
     "delete_tag": "Өчүрүү тегди",
     "the_tags_you_select_will_not_be_active": "Сиз тандаган тэгдер активдүү болбойт.",
-    "the_tags_you_select_will_be_active": "Сиз тандаган тэгдер активдүү болот."
+    "the_tags_you_select_will_be_active": "Сиз тандаган тэгдер активдүү болот.",
+    "name_in_kyrgyz": "Кыргызча аты",
+    "name_in_russian": "Орусча аталышы",
+    "name_in_eng": "Англис тилиндеги аталыш",
+    "save": "Сактоо"
   }
 }

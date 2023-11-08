@@ -5,3 +5,7 @@ export interface ITag {
   tag_en: string;
   active: boolean;
 }
+
+export interface ITagCreate {
+  active: boolean;
+}
