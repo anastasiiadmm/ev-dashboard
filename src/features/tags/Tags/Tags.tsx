@@ -35,7 +35,7 @@ const Tags = () => {
     setIsTagModalOpen(!isTagModalOpen);
   };
 
-  const showTagModal = (isCreating) => {
+  const showTagModal = (isCreating: boolean) => {
     setCreating(isCreating);
     setIsTagModalOpen(true);
   };
