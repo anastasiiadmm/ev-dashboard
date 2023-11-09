@@ -15,6 +15,7 @@ const Tags = () => {
   const { t } = useTranslation();
   const [creating, setCreating] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const [isTagModalOpen, setIsTagModalOpen] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isDeactivateButton, setIsDeactivateButton] = useState(true);
@@ -22,6 +23,14 @@ const Tags = () => {
 
   const pagePrevHandler = () => {};
   const pageNextHandler = () => {};
+
+  const showDeleteModal = () => {
+    setIsModalDeleteOpen(true);
+  };
+
+  const handleDeleteOkCancel = () => {
+    setIsModalDeleteOpen(!isModalDeleteOpen);
+  };
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -124,7 +133,11 @@ const Tags = () => {
                 </div>
               }
             >
-              <Button className={b('delete-button')} icon={<img src={deleteIcon} alt='plus' />} />
+              <Button
+                onClick={showDeleteModal}
+                className={b('delete-button')}
+                icon={<img src={deleteIcon} alt='plus' />}
+              />
             </Tooltip>
           </div>
         );
@@ -241,6 +254,19 @@ const Tags = () => {
               : (t('modals.editing_a_tag') as string)
           }
           creating={creating}
+        />
+      </ModalComponent>
+
+      <ModalComponent
+        width={311}
+        isModalOpen={isModalDeleteOpen}
+        handleOk={handleDeleteOkCancel}
+        handleCancel={handleDeleteOkCancel}
+      >
+        <ActiveInactiveModal
+          textTitle={t('tags.deleting_tag') as string}
+          infoText={t('tags.if_you_delete_it_you_wont_be_able_to_restore') as string}
+          handleOkCancel={handleDeleteOkCancel}
         />
       </ModalComponent>
     </Row>

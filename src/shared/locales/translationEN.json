@@ -115,6 +115,8 @@
     "name_in_kyrgyz": "Name in Kyrgyz",
     "name_in_russian": "Name in Russian",
     "name_in_eng": "Title in English",
-    "save": "Save"
+    "save": "Save",
+    "deleting_tag": "Are you sure you want to remove the tag?",
+    "if_you_delete_it_you_wont_be_able_to_restore": "If you delete it, you won't be able to restore"
   }
 }
