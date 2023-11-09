@@ -10,8 +10,12 @@ import './PaginationComponent.scss';
 
 interface Props {
   params: IPagination | null | undefined;
+  changeShowByHandler: ((value: string) => void | undefined) | undefined;
+  onChangePageCheckHandler: ((value: string) => void | undefined) | undefined;
   pagePrevHandler?: (() => void | undefined) | undefined;
   pageNextHandler?: (() => void | undefined) | undefined;
+  defaultSizeValue: number | undefined;
+  pages: number | undefined;
 }
 
 const options = [
@@ -20,7 +24,14 @@ const options = [
   { value: '50', label: '50' },
 ];
 
-const PaginationComponent: React.FC<Props> = ({ params, pagePrevHandler, pageNextHandler }) => {
+const PaginationComponent: React.FC<Props> = ({
+  pages,
+  pagePrevHandler,
+  pageNextHandler,
+  changeShowByHandler,
+  defaultSizeValue,
+  onChangePageCheckHandler,
+}) => {
   const b = bem('PaginationComponent');
   const { t } = useTranslation();
 
@@ -34,16 +45,22 @@ const PaginationComponent: React.FC<Props> = ({ params, pagePrevHandler, pageNex
           type='select'
           defaultValue={10}
           options={options}
+          handleChange={changeShowByHandler}
         />
       </div>
       <div className={b('num-block')}>
         <p className={b('title')}>{t('table.page')}</p>
-        <Form initialValues={{ input: 1 }}>
-          <FormField inputClassName={b('input-style')} data-testid='input_id' name='input' />
+        <Form initialValues={{ size: defaultSizeValue }}>
+          <FormField
+            onChange={onChangePageCheckHandler}
+            inputClassName={b('input-style')}
+            data-testid='size_id'
+            name='size'
+          />
         </Form>
 
         <p className={b('title')}>
-          {t('table.from')} {params?.count ? params?.count : 0}
+          {t('table.from')} {pages ? pages : 0}
         </p>
       </div>
       <div>

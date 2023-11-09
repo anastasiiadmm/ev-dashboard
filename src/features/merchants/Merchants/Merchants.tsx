@@ -11,6 +11,8 @@ import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '
 import { IColumn, IMerchant } from '~/features/merchants/interfaces';
 import merchantStore from '~/features/merchants/store/merchantModel/merchantModel';
 import { useLanguage } from '~/shared/context/LanguageContext/LanguageContext';
+import { getParams } from '~/shared/utils/helper';
+import { useDebounce } from '~/shared/hooks';
 import './Merchants.scss';
 
 const Merchants = observer(() => {
@@ -18,14 +20,27 @@ const Merchants = observer(() => {
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
   const { merchants, merchantsLoading } = toJS(merchantStore);
+  const [filters, setFilters] = useState({
+    page: merchants?.page || 1,
+    search: '',
+    size: merchants?.size || 10,
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isDeactivateButton, setIsDeactivateButton] = useState(true);
   const [isDisabledButton, setIsDisabledButton] = useState(true);
+  const debouncedSearchTerm = useDebounce(filters?.search, 500);
+  const debouncedPageTerm = useDebounce(filters?.page, 500);
 
   useEffect(() => {
-    merchantStore.fetchMerchants(currentLanguage);
-  }, [currentLanguage]);
+    const queryString = getParams({
+      page: filters?.page,
+      search: filters?.search,
+      size: filters?.size,
+    });
+
+    merchantStore.fetchMerchants(queryString, currentLanguage);
+  }, [currentLanguage, debouncedSearchTerm, debouncedPageTerm, filters?.size]);
 
   const columns: IColumn[] = [
     {
@@ -107,8 +122,13 @@ const Merchants = observer(() => {
     },
   ] as IColumn[];
 
-  const pagePrevHandler = () => {};
-  const pageNextHandler = () => {};
+  const pagePrevHandler = () => {
+    setFilters((prevFilters) => ({ ...prevFilters, size: filters?.size + 1 }));
+  };
+
+  const pageNextHandler = () => {
+    setFilters((prevFilters) => ({ ...prevFilters, size: filters?.size - 1 }));
+  };
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -133,6 +153,20 @@ const Merchants = observer(() => {
     setIsDisabledButton(hasMixedStatus);
   };
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFilters((prevFilters) => ({ ...prevFilters, search: value }));
+  };
+
+  const onChangePageCheckHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFilters((prevFilters) => ({ ...prevFilters, page: value }));
+  };
+
+  const changeShowByHandler = (value: string) => {
+    setFilters((prevFilters) => ({ ...prevFilters, size: value }));
+  };
+
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
@@ -149,6 +183,7 @@ const Merchants = observer(() => {
               placeholder={t('merchants.search_among_merchants')}
               size='large'
               prefix={<img src={search} alt='search' />}
+              onChange={handleSearchChange}
             />
           </Form>
         </div>
@@ -168,6 +203,10 @@ const Merchants = observer(() => {
           columns={columns}
           pagePrevHandler={pagePrevHandler}
           pageNextHandler={pageNextHandler}
+          changeShowByHandler={changeShowByHandler}
+          onChangePageCheckHandler={onChangePageCheckHandler}
+          defaultSizeValue={filters?.page}
+          pages={merchants?.pages}
         />
 
         {!!selectedRowKeys.length && (

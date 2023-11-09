@@ -22,7 +22,11 @@ interface Props {
   params?: IPagination | null;
   pagePrevHandler?: (() => void | undefined) | undefined;
   pageNextHandler?: (() => void | undefined) | undefined;
+  onChangePageCheckHandler?: (() => void | undefined) | undefined;
+  changeShowByHandler?: ((value: string) => void | undefined) | undefined;
   disabledButton?: boolean;
+  defaultSizeValue?: number | undefined;
+  pages?: number | undefined;
   scroll?: { x?: string | number; y?: string | number } & {
     scrollToFirstRowOnChange?: boolean;
   };
@@ -38,6 +42,10 @@ const TableComponent: React.FC<Props> = ({
   pagePrevHandler,
   pageNextHandler,
   rowSelection,
+  changeShowByHandler,
+  defaultSizeValue,
+  pages,
+  onChangePageCheckHandler,
 }) => {
   const b = bem('TableComponent');
   const rowClassName = (_: IMerchant | IStation | ITag, index: number) => {
@@ -65,9 +73,13 @@ const TableComponent: React.FC<Props> = ({
         rowClassName={rowClassName}
       />
       <PaginationComponent
+        changeShowByHandler={changeShowByHandler}
         params={params}
         pagePrevHandler={pagePrevHandler}
         pageNextHandler={pageNextHandler}
+        defaultSizeValue={defaultSizeValue}
+        onChangePageCheckHandler={onChangePageCheckHandler}
+        pages={pages}
       />
     </div>
   );

@@ -29,7 +29,7 @@ class MerchantStore implements MerchantState {
     makeAutoObservable(this);
   }
 
-  async fetchMerchants(currentLanguage: string) {
+  async fetchMerchants(queryString, currentLanguage: string) {
     try {
       runInAction(() => {
         this.merchantsLoading = true;
@@ -38,7 +38,7 @@ class MerchantStore implements MerchantState {
 
       const config = getAxiosConfig(currentLanguage);
 
-      const resp = await axiosApi.get(`/merchants/`, config);
+      const resp = await axiosApi.get(`/merchants/${queryString}`, config);
       const data = resp.data;
 
       runInAction(() => {
