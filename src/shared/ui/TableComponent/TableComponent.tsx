@@ -5,7 +5,12 @@ import bem from 'easy-bem';
 
 import NotFoundImages from '~/shared/ui/NotFoundImages/NotFoundImages';
 import { PaginationComponent } from '~/shared/ui';
-import { IColumn, IMerchant, IStation } from '~/features/merchants/interfaces/IMerchant';
+import {
+  IColumn,
+  IMerchant,
+  IMerchantPagination,
+  IStation,
+} from '~/features/merchants/interfaces/IMerchant';
 import { IPagination } from '~/shared/interfaces/IPagination';
 import { ITag } from '~/features/tags/interfaces';
 import './TableComponent.scss';
@@ -22,11 +27,11 @@ interface Props {
   params?: IPagination | null;
   pagePrevHandler?: (() => void | undefined) | undefined;
   pageNextHandler?: (() => void | undefined) | undefined;
-  onChangePageCheckHandler?: (() => void | undefined) | undefined;
+  onChangePageCheckHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   changeShowByHandler?: ((value: string) => void | undefined) | undefined;
   disabledButton?: boolean;
   defaultSizeValue?: number | undefined;
-  pages?: number | undefined;
+  pages?: IMerchantPagination | undefined;
   scroll?: { x?: string | number; y?: string | number } & {
     scrollToFirstRowOnChange?: boolean;
   };

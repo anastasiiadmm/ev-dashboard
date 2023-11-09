@@ -19,7 +19,7 @@ const Merchants = observer(() => {
   const b = bem('Merchants');
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
-  const { merchants, merchantsLoading } = toJS(merchantStore);
+  const { merchants, merchantPagination, merchantsLoading } = toJS(merchantStore);
   const [filters, setFilters] = useState({
     page: merchants?.page || 1,
     search: '',
@@ -123,11 +123,11 @@ const Merchants = observer(() => {
   ] as IColumn[];
 
   const pagePrevHandler = () => {
-    setFilters((prevFilters) => ({ ...prevFilters, size: filters?.size + 1 }));
+    setFilters((prevFilters) => ({ ...prevFilters, page: filters?.page - 1 }));
   };
 
   const pageNextHandler = () => {
-    setFilters((prevFilters) => ({ ...prevFilters, size: filters?.size - 1 }));
+    setFilters((prevFilters) => ({ ...prevFilters, page: filters?.page + 1 }));
   };
 
   const showModal = () => {
@@ -199,14 +199,14 @@ const Merchants = observer(() => {
           rowKey={(record) => record.id.toString()}
           rowSelection={rowSelection}
           loading={merchantsLoading}
-          data={merchants?.items}
+          data={merchants}
           columns={columns}
           pagePrevHandler={pagePrevHandler}
           pageNextHandler={pageNextHandler}
           changeShowByHandler={changeShowByHandler}
           onChangePageCheckHandler={onChangePageCheckHandler}
           defaultSizeValue={filters?.page}
-          pages={merchants?.pages}
+          pages={merchantPagination}
         />
 
         {!!selectedRowKeys.length && (

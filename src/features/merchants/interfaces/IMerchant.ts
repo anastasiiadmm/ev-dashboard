@@ -16,6 +16,13 @@ export interface IMerchant {
   city: number;
 }
 
+export interface IMerchantPagination {
+  page: number | null;
+  pages: number | null;
+  size: number | null;
+  total: number | null;
+}
+
 export interface ICreateMerchant {
   active: boolean;
   name_ru: string;

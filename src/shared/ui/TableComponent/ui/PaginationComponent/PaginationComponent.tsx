@@ -6,16 +6,17 @@ import { useTranslation } from 'react-i18next';
 import { chevronRight, chevronLeft } from '~/assets/images';
 import { FormField } from '~/shared/ui';
 import { IPagination } from '~/shared/interfaces';
+import { IMerchantPagination } from '~/features/merchants/interfaces';
 import './PaginationComponent.scss';
 
 interface Props {
   params: IPagination | null | undefined;
   changeShowByHandler: ((value: string) => void | undefined) | undefined;
-  onChangePageCheckHandler: ((value: string) => void | undefined) | undefined;
+  onChangePageCheckHandler: ((e: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
   pagePrevHandler?: (() => void | undefined) | undefined;
   pageNextHandler?: (() => void | undefined) | undefined;
   defaultSizeValue: number | undefined;
-  pages: number | undefined;
+  pages: IMerchantPagination | undefined;
 }
 
 const options = [
@@ -60,17 +61,19 @@ const PaginationComponent: React.FC<Props> = ({
         </Form>
 
         <p className={b('title')}>
-          {t('table.from')} {pages ? pages : 0}
+          {t('table.from')} {pages?.pages ? pages?.pages : 0}
         </p>
       </div>
       <div>
         <Button
+          disabled={pages?.page <= 1}
           onClick={pagePrevHandler}
           type='primary'
           icon={<img src={chevronLeft} alt='chevronLeft' />}
           style={{ marginRight: 8 }}
         />
         <Button
+          disabled={pages?.page >= pages?.pages}
           onClick={pageNextHandler}
           type='primary'
           icon={<img src={chevronRight} alt='chevronRight' />}

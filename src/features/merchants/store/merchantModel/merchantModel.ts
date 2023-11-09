@@ -2,12 +2,13 @@ import { AxiosError } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
-import { ICreateMerchant, IMerchant } from '~/features/merchants/interfaces';
+import { ICreateMerchant, IMerchant, IMerchantPagination } from '~/features/merchants/interfaces';
 import { IError } from '~/shared/interfaces';
 import { getAxiosConfig } from '~/shared/utils/getAxiosConfig/getAxiosConfig';
 
 interface MerchantState {
   merchants: IMerchant[] | null;
+  merchantPagination: IMerchantPagination | null;
   merchantsLoading: boolean;
   merchantsError: string | null;
   commonError: IError | null;
@@ -18,6 +19,12 @@ interface MerchantState {
 
 class MerchantStore implements MerchantState {
   merchants: IMerchant[] | null = null;
+  merchantPagination: IMerchantPagination | null = {
+    page: null,
+    pages: null,
+    size: null,
+    total: null,
+  };
   merchantsLoading: boolean = false;
   merchantsError: string | null = null;
   commonError: IError | null = null;
@@ -42,7 +49,13 @@ class MerchantStore implements MerchantState {
       const data = resp.data;
 
       runInAction(() => {
-        this.merchants = data;
+        this.merchants = data?.items;
+        if (this.merchantPagination) {
+          this.merchantPagination.page = data?.page;
+          this.merchantPagination.pages = data?.pages;
+          this.merchantPagination.size = data?.size;
+          this.merchantPagination.total = data?.total;
+        }
         this.merchantsLoading = false;
         this.merchantsError = null;
         this.commonError = null;
