@@ -57,6 +57,7 @@
     "entity": "Entity",
     "entity_full": "Entity",
     "connectors": "Connectors",
+    "contacts": "Phone",
     "tags": "Tags",
     "infrastructure": "Инфраструктура",
     "the_stations_you_selected_will_not_be_active": "The stations you selected will not be active.",

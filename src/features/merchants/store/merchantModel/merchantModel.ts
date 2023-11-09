@@ -4,11 +4,11 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import axiosApi from '~/shared/utils/mobx-api';
 import { ICreateMerchant, IMerchant } from '~/features/merchants/interfaces';
 import { IError } from '~/shared/interfaces';
+import { getAxiosConfig } from '~/shared/utils/getAxiosConfig/getAxiosConfig';
 
 interface MerchantState {
   merchants: IMerchant[] | null;
   merchantsLoading: boolean;
-  success: boolean;
   merchantsError: string | null;
   commonError: IError | null;
   createMerchantLoading: boolean;
@@ -19,7 +19,6 @@ interface MerchantState {
 class MerchantStore implements MerchantState {
   merchants: IMerchant[] | null = null;
   merchantsLoading: boolean = false;
-  success: boolean = false;
   merchantsError: string | null = null;
   commonError: IError | null = null;
   createMerchantLoading: boolean = false;
@@ -30,21 +29,21 @@ class MerchantStore implements MerchantState {
     makeAutoObservable(this);
   }
 
-  async fetchMerchants() {
+  async fetchMerchants(currentLanguage: string) {
     try {
       runInAction(() => {
         this.merchantsLoading = true;
-        this.success = false;
         this.commonError = null;
       });
 
-      const resp = await axiosApi.get(`/merchants/`);
+      const config = getAxiosConfig(currentLanguage);
+
+      const resp = await axiosApi.get(`/merchants/`, config);
       const data = resp.data;
 
       runInAction(() => {
         this.merchants = data;
         this.merchantsLoading = false;
-        this.success = true;
         this.merchantsError = null;
         this.commonError = null;
       });
@@ -52,7 +51,6 @@ class MerchantStore implements MerchantState {
       const error = e as AxiosError;
       runInAction(() => {
         this.merchantsLoading = false;
-        this.success = false;
         this.merchantsError = error?.message || null;
       });
     }

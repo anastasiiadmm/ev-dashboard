@@ -3,19 +3,22 @@ import i18n from 'i18next';
 
 import { eng, kg, rus } from '~/assets/images';
 import { FormField } from '~/shared/ui';
+import { saveLangToLocalStorage } from '~/shared/utils/storage';
+import { useLanguage } from '~/shared/context/LanguageContext/LanguageContext';
 
-function LanguageSelect() {
-  const savedLanguage = localStorage.getItem('language') || 'ru';
-  const [lang, setLang] = useState(savedLanguage);
+const LanguageSelect = () => {
+  const { setCurrentLanguage, currentLanguage } = useLanguage();
+  const [lang, setLang] = useState(currentLanguage);
 
   useEffect(() => {
-    i18n.changeLanguage(savedLanguage);
-  }, [savedLanguage]);
+    saveLangToLocalStorage(lang);
+    i18n.changeLanguage(currentLanguage);
+  }, [currentLanguage]);
 
   const handleChange = (value: string) => {
     i18n.changeLanguage(value);
     setLang(value);
-    localStorage.setItem('language', value);
+    setCurrentLanguage(value);
   };
 
   return (
@@ -31,6 +34,6 @@ function LanguageSelect() {
       ]}
     />
   );
-}
+};
 
 export default LanguageSelect;

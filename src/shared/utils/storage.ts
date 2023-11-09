@@ -1,4 +1,4 @@
-import { tokensLocalStorage } from '~/shared/utils/config';
+import { languageLocalStorage, tokensLocalStorage } from '~/shared/utils/config';
 import { IJWTokens } from '~/features/auth/interfaces/IJWTokens';
 
 export const defaultLocalStorage = { user: null, token: null };
@@ -27,4 +27,8 @@ export const logoutLocalStorage = () => {
 
 export const addLocalStorage = (payload: IJWTokens) => {
   localStorage.setItem(tokensLocalStorage, JSON.stringify(payload));
+};
+
+export const saveLangToLocalStorage = (value: string) => {
+  localStorage.setItem(languageLocalStorage, value);
 };

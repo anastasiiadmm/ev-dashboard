@@ -1,21 +1,31 @@
 import { Button, Form, Row, Tooltip } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import bem from 'easy-bem';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { toJS } from 'mobx';
+import { observer } from 'mobx-react-lite';
 
 import { add, plus, active, status, x, search, infoCircle, inactive } from '~/assets/images';
 import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '~/shared/ui';
 import { IColumn, IMerchant } from '~/features/merchants/interfaces';
+import merchantStore from '~/features/merchants/store/merchantModel/merchantModel';
+import { useLanguage } from '~/shared/context/LanguageContext/LanguageContext';
 import './Merchants.scss';
 
-const Merchants = () => {
+const Merchants = observer(() => {
   const b = bem('Merchants');
   const { t } = useTranslation();
+  const { currentLanguage } = useLanguage();
+  const { merchants, merchantsLoading } = toJS(merchantStore);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isDeactivateButton, setIsDeactivateButton] = useState(true);
   const [isDisabledButton, setIsDisabledButton] = useState(true);
+
+  useEffect(() => {
+    merchantStore.fetchMerchants(currentLanguage);
+  }, [currentLanguage]);
 
   const columns: IColumn[] = [
     {
@@ -28,14 +38,14 @@ const Merchants = () => {
       render: (record: IMerchant) => {
         return (
           <Link to={`/merchants/merchant/${record?.id}`} className={b('title crop-text')}>
-            {record?.name_ru}
+            {record?.name}
           </Link>
         );
       },
     },
     {
       title: t('merchants.contract_no'),
-      dataIndex: 'legal_name_ru',
+      dataIndex: 'agreement_number',
     },
     {
       title: '%',
@@ -48,13 +58,13 @@ const Merchants = () => {
     {
       title: t('merchants.location'),
       render: (record: IMerchant) => {
-        return <p className={b('text crop-text')}>{record?.address_ru}</p>;
+        return <p className={b('text crop-text')}>{record?.location}</p>;
       },
     },
     {
       title: t('merchants.entity'),
       render: (record: IMerchant) => {
-        return <p className={b('text crop-text')}>{record?.entity}</p>;
+        return <p className={b('text crop-text')}>{record?.legal_name}</p>;
       },
     },
     {
@@ -97,60 +107,6 @@ const Merchants = () => {
     },
   ] as IColumn[];
 
-  const data: IMerchant[] = [
-    {
-      id: 1,
-      name_ru: 'Длинное наименование станции',
-      legal_name_ru: 'W16/06/2023',
-      rate: '15',
-      phone: '+996 999 444 444',
-      address_ru: 'Кыргызстан, Бишкек, название длинное',
-      number_stations: 42,
-      active_stations: 32,
-      inactive_stations: 0,
-      agreement_number: '15',
-      entity: 'Длинное название юридического лица',
-      active: false,
-      country: 0,
-      district: 0,
-      city: 0,
-    },
-    {
-      id: 2,
-      name_ru: 'Длинное наименование станции',
-      legal_name_ru: 'W16/06/2023',
-      rate: '15',
-      phone: '+996 999 444 444',
-      address_ru: 'Кыргызстан, Бишкек, название длинное',
-      number_stations: 42,
-      active_stations: 32,
-      inactive_stations: 0,
-      agreement_number: '15',
-      entity: 'Длинное название юридического лица',
-      active: true,
-      country: 0,
-      district: 0,
-      city: 0,
-    },
-    {
-      id: 3,
-      name_ru: 'Длинное наименование станции',
-      legal_name_ru: 'W16/06/2023',
-      rate: '15',
-      phone: '+996 999 444 444',
-      address_ru: 'Кыргызстан, Бишкек, название длинное',
-      number_stations: 42,
-      active_stations: 32,
-      inactive_stations: 0,
-      agreement_number: '15',
-      entity: 'Длинное название юридического лица',
-      active: true,
-      country: 0,
-      district: 0,
-      city: 0,
-    },
-  ];
-
   const pagePrevHandler = () => {};
   const pageNextHandler = () => {};
 
@@ -165,7 +121,9 @@ const Merchants = () => {
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
     const selectedStatuses = newSelectedRowKeys.map((key) => {
-      const selectedMerchant = data.find((item) => item.id === parseInt(key.toString()));
+      const selectedMerchant = merchants?.items.find(
+        (item) => item.id === parseInt(key.toString()),
+      );
       return selectedMerchant ? selectedMerchant.active : false;
     });
     const hasActiveTrue = selectedStatuses.includes(true);
@@ -205,8 +163,8 @@ const Merchants = () => {
         <TableComponent
           rowKey={(record) => record.id.toString()}
           rowSelection={rowSelection}
-          loading={false}
-          data={data}
+          loading={merchantsLoading}
+          data={merchants?.items}
           columns={columns}
           pagePrevHandler={pagePrevHandler}
           pageNextHandler={pageNextHandler}
@@ -249,6 +207,6 @@ const Merchants = () => {
       </ModalComponent>
     </Row>
   );
-};
+});
 
 export default Merchants;
