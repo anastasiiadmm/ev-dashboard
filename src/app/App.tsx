@@ -18,7 +18,7 @@ import {
   getUserLocalStorage,
   logoutLocalStorage,
 } from '~/shared/utils/storage';
-import { LanguageProvider } from '~/shared/context/LanguageContext/LanguageContext';
+import { LanguageProvider } from '~/shared/context';
 
 const App: React.FC = observer(() => {
   const b = bem('Auth');
