@@ -46,7 +46,7 @@ class MerchantStore implements MerchantState {
     try {
       runInAction(() => {
         this.merchantsLoading = true;
-        this.patchMerchantSuccess = false;
+        this.createMerchantSuccess = false;
         this.commonError = null;
       });
 
@@ -64,7 +64,7 @@ class MerchantStore implements MerchantState {
           this.merchantPagination.total = data?.total;
         }
         this.merchantsLoading = false;
-        this.patchMerchantSuccess = true;
+        this.createMerchantSuccess = true;
         this.merchantsError = null;
         this.commonError = null;
       });
@@ -72,7 +72,7 @@ class MerchantStore implements MerchantState {
       const error = e as AxiosError;
       runInAction(() => {
         this.merchantsLoading = false;
-        this.patchMerchantSuccess = false;
+        this.createMerchantSuccess = false;
         this.merchantsError = error?.message || null;
       });
     }
