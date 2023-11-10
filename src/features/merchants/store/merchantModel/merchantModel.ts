@@ -75,7 +75,7 @@ class MerchantStore implements MerchantState {
     }
   }
 
-  async postCreateMerchant(merchantID: string, merchantData: ICreateMerchant) {
+  async postCreateMerchant(merchantData: ICreateMerchant) {
     try {
       runInAction(() => {
         this.patchMerchantLoading = true;
@@ -83,7 +83,7 @@ class MerchantStore implements MerchantState {
         this.patchMerchantError = null;
       });
 
-      await axiosApi.patch(`/merchants/${merchantID}`, merchantData);
+      await axiosApi.patch(`/merchants/`, merchantData);
 
       runInAction(() => {
         this.patchMerchantLoading = false;
@@ -102,7 +102,7 @@ class MerchantStore implements MerchantState {
     }
   }
 
-  async patchMerchant(merchantData: ICreateMerchant) {
+  async patchMerchant(merchantID: string, merchantData: ICreateMerchant) {
     try {
       runInAction(() => {
         this.createMerchantLoading = true;
@@ -110,7 +110,7 @@ class MerchantStore implements MerchantState {
         this.createMerchantError = null;
       });
 
-      await axiosApi.post(`/merchants/`, merchantData);
+      await axiosApi.post(`/merchants/${merchantID}`, merchantData);
 
       runInAction(() => {
         this.createMerchantLoading = false;
