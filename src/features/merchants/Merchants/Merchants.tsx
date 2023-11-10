@@ -13,8 +13,8 @@ import merchantStore from '~/features/merchants/store/merchantModel/merchantMode
 import { useLanguage } from '~/shared/context/LanguageContext/LanguageContext';
 import { getParams } from '~/shared/utils/helper';
 import { useDebounce } from '~/shared/hooks';
-import './Merchants.scss';
 import { IQueryMerchant } from '~/features/merchants/interfaces/IMerchant';
+import './Merchants.scss';
 
 const Merchants = observer(() => {
   const b = bem('Merchants');
