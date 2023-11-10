@@ -236,8 +236,8 @@ const Create = observer(() => {
                   data-testid='document_id'
                   id='document_id'
                   name='agreement_number'
-                  placeholder={t('merchants.contract_no')}
-                  label={t('merchants.contract_no')}
+                  placeholder={t('merchants.agreement_number')}
+                  label={t('merchants.agreement_number')}
                   rules={[
                     {
                       required: true,
