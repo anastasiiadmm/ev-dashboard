@@ -46,7 +46,6 @@ class MerchantStore implements MerchantState {
     try {
       runInAction(() => {
         this.merchantsLoading = true;
-        this.createMerchantSuccess = false;
         this.commonError = null;
       });
 
@@ -64,7 +63,6 @@ class MerchantStore implements MerchantState {
           this.merchantPagination.total = data?.total;
         }
         this.merchantsLoading = false;
-        this.createMerchantSuccess = true;
         this.merchantsError = null;
         this.commonError = null;
       });
@@ -72,7 +70,6 @@ class MerchantStore implements MerchantState {
       const error = e as AxiosError;
       runInAction(() => {
         this.merchantsLoading = false;
-        this.createMerchantSuccess = false;
         this.merchantsError = error?.message || null;
       });
     }
@@ -81,39 +78,12 @@ class MerchantStore implements MerchantState {
   async postCreateMerchant(merchantData: ICreateMerchant) {
     try {
       runInAction(() => {
-        this.patchMerchantLoading = true;
-        this.patchMerchantSuccess = false;
-        this.patchMerchantError = null;
-      });
-
-      await axiosApi.post(`/merchants/`, merchantData);
-
-      runInAction(() => {
-        this.patchMerchantLoading = false;
-        this.patchMerchantSuccess = true;
-        this.patchMerchantError = null;
-      });
-    } catch (e) {
-      const error = e as AxiosError;
-      runInAction(() => {
-        this.patchMerchantSuccess = false;
-        this.patchMerchantLoading = false;
-        this.patchMerchantError = error;
-      });
-
-      throw error;
-    }
-  }
-
-  async patchMerchant(merchantID: string, merchantData: ICreateMerchant) {
-    try {
-      runInAction(() => {
         this.createMerchantLoading = true;
         this.createMerchantSuccess = false;
         this.createMerchantError = null;
       });
 
-      await axiosApi.patch(`/merchants/${merchantID}`, merchantData);
+      await axiosApi.post(`/merchants/`, merchantData);
 
       runInAction(() => {
         this.createMerchantLoading = false;
