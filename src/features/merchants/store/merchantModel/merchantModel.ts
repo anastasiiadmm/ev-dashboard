@@ -2,49 +2,67 @@ import { AxiosError } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
-import { ICreateMerchant, IMerchant } from '~/features/merchants/interfaces';
+import { ICreateMerchant, IMerchant, IMerchantPagination } from '~/features/merchants/interfaces';
 import { IError } from '~/shared/interfaces';
+import { getAxiosConfig } from '~/shared/utils';
 
 interface MerchantState {
   merchants: IMerchant[] | null;
+  merchantPagination: IMerchantPagination | null;
   merchantsLoading: boolean;
-  success: boolean;
   merchantsError: string | null;
   commonError: IError | null;
   createMerchantLoading: boolean;
   createMerchantError: AxiosError | null;
   createMerchantSuccess: boolean;
+  patchMerchantSuccess: boolean;
+  patchMerchantLoading: boolean;
+  patchMerchantError: AxiosError | null;
 }
 
 class MerchantStore implements MerchantState {
   merchants: IMerchant[] | null = null;
+  merchantPagination: IMerchantPagination | null = {
+    page: null,
+    pages: null,
+    size: null,
+    total: null,
+  };
   merchantsLoading: boolean = false;
-  success: boolean = false;
   merchantsError: string | null = null;
   commonError: IError | null = null;
   createMerchantLoading: boolean = false;
   createMerchantError: AxiosError | null = null;
   createMerchantSuccess: boolean = false;
+  patchMerchantSuccess: boolean = false;
+  patchMerchantLoading: boolean = false;
+  patchMerchantError: AxiosError | null = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  async fetchMerchants() {
+  async fetchMerchants(queryString: string, currentLanguage: string) {
     try {
       runInAction(() => {
         this.merchantsLoading = true;
-        this.success = false;
         this.commonError = null;
       });
 
-      const resp = await axiosApi.get(`/merchants/`);
+      const config = getAxiosConfig(currentLanguage);
+
+      const resp = await axiosApi.get(`/merchants/${queryString}`, config);
       const data = resp.data;
 
       runInAction(() => {
-        this.merchants = data;
+        this.merchants = data?.items;
+        if (this.merchantPagination) {
+          this.merchantPagination.page = data?.page;
+          this.merchantPagination.pages = data?.pages;
+          this.merchantPagination.size = data?.size;
+          this.merchantPagination.total = data?.total;
+        }
         this.merchantsLoading = false;
-        this.success = true;
         this.merchantsError = null;
         this.commonError = null;
       });
@@ -52,7 +70,6 @@ class MerchantStore implements MerchantState {
       const error = e as AxiosError;
       runInAction(() => {
         this.merchantsLoading = false;
-        this.success = false;
         this.merchantsError = error?.message || null;
       });
     }
@@ -80,7 +97,6 @@ class MerchantStore implements MerchantState {
         this.createMerchantSuccess = false;
         this.createMerchantError = error;
       });
-
       throw error;
     }
   }

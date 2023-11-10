@@ -8,6 +8,7 @@ import '../../__mocks__/matchMedia.mock';
 import '../../__mocks__/i18nextMock';
 import Create from "../../src/features/merchants/Create/Create";
 import { merchantStore } from "../../src/shared/api/store";
+import Merchants from "../../src/features/merchants/Merchants/Merchants";
 
 const mockCountries = [
   { id: '1', name: 'Country1' },
@@ -69,7 +70,7 @@ describe('Create Merchant UI Component', () => {
 
     expect(getByTestId('create-component')).toBeInTheDocument();
     const name = screen.getByLabelText('merchants.name');
-    const document = screen.getByLabelText('merchants.contract_no');
+    const document = screen.getByLabelText('merchants.agreement_number');
     const legal_name = screen.getByLabelText('merchants.entity_full');
     const rate = screen.getByLabelText('merchants.under_agency_agreement');
     const phone = screen.getByLabelText('merchants.phone');
@@ -104,7 +105,7 @@ describe('Create Merchant UI Component', () => {
 
     await waitFor( async () => {
       fireEvent.change(screen.getByLabelText('merchants.name'), { target: { value: 'Test Name' } });
-      fireEvent.change(screen.getByLabelText('merchants.contract_no'), { target: { value: '1234' } });
+      fireEvent.change(screen.getByLabelText('merchants.agreement_number'), { target: { value: '1234' } });
       fireEvent.change(screen.getByLabelText('merchants.entity_full'), { target: { value: 'Test Name' } });
       fireEvent.change(screen.getByLabelText('merchants.under_agency_agreement'), { target: { value: 'Test Name' } });
       fireEvent.change(screen.getByLabelText('merchants.phone'), { target: { value: '+996555555555' } });
@@ -113,5 +114,14 @@ describe('Create Merchant UI Component', () => {
       fireEvent.click(screen.getByRole('button', { name: 'merchants.further' }));
       expect(await screen.getByText('alerts.one_or_more_of_the_required_fields_are_not_filled')).toBeInTheDocument();
     });
+  });
+
+  test('Render component toMatchSnapshot()', () => {
+    const { asFragment } = render(
+      <BrowserRouter>
+        <Merchants />
+      </BrowserRouter>
+    );
+    expect(asFragment()).toMatchSnapshot();
   });
 });

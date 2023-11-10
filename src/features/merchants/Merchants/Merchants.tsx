@@ -1,21 +1,46 @@
 import { Button, Form, Row, Tooltip } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import bem from 'easy-bem';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { toJS } from 'mobx';
+import { observer } from 'mobx-react-lite';
 
 import { add, plus, active, status, x, search, infoCircle, inactive } from '~/assets/images';
 import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '~/shared/ui';
-import { IColumn, IMerchant } from '~/features/merchants/interfaces';
+import { IColumn, IMerchant, IQueryMerchant } from '~/features/merchants/interfaces';
+import { getParams } from '~/shared/utils/helper';
+import { useDebounce } from '~/shared/hooks';
+import { merchantStore } from '~/shared/api/store';
+import { useLanguage } from '~/shared/context';
 import './Merchants.scss';
 
-const Merchants = () => {
+const Merchants = observer(() => {
   const b = bem('Merchants');
   const { t } = useTranslation();
+  const { currentLanguage } = useLanguage();
+  const { merchants, merchantPagination, merchantsLoading } = toJS(merchantStore);
+  const [filters, setFilters] = useState<IQueryMerchant>({
+    page: merchantPagination?.page || 1,
+    search: '',
+    size: merchantPagination?.size || 10,
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isDeactivateButton, setIsDeactivateButton] = useState(true);
   const [isDisabledButton, setIsDisabledButton] = useState(true);
+  const debouncedSearchTerm = useDebounce(filters?.search, 500);
+  const debouncedPageTerm = useDebounce(filters?.page, 500);
+
+  useEffect(() => {
+    const queryString = getParams({
+      page: filters?.page,
+      search: filters?.search,
+      size: filters?.size,
+    });
+
+    merchantStore.fetchMerchants(queryString, currentLanguage);
+  }, [currentLanguage, debouncedSearchTerm, debouncedPageTerm, filters?.size]);
 
   const columns: IColumn[] = [
     {
@@ -28,14 +53,14 @@ const Merchants = () => {
       render: (record: IMerchant) => {
         return (
           <Link to={`/merchants/merchant/${record?.id}`} className={b('title crop-text')}>
-            {record?.name_ru}
+            {record?.name}
           </Link>
         );
       },
     },
     {
-      title: t('merchants.contract_no'),
-      dataIndex: 'legal_name_ru',
+      title: t('merchants.agreement_number'),
+      dataIndex: 'agreement_number',
     },
     {
       title: '%',
@@ -48,13 +73,13 @@ const Merchants = () => {
     {
       title: t('merchants.location'),
       render: (record: IMerchant) => {
-        return <p className={b('text crop-text')}>{record?.address_ru}</p>;
+        return <p className={b('text crop-text')}>{record?.location}</p>;
       },
     },
     {
-      title: t('merchants.entity'),
+      title: t('merchants.legal_name'),
       render: (record: IMerchant) => {
-        return <p className={b('text crop-text')}>{record?.entity}</p>;
+        return <p className={b('text crop-text')}>{record?.legal_name}</p>;
       },
     },
     {
@@ -97,62 +122,13 @@ const Merchants = () => {
     },
   ] as IColumn[];
 
-  const data: IMerchant[] = [
-    {
-      id: 1,
-      name_ru: 'Длинное наименование станции',
-      legal_name_ru: 'W16/06/2023',
-      rate: '15',
-      phone: '+996 999 444 444',
-      address_ru: 'Кыргызстан, Бишкек, название длинное',
-      number_stations: 42,
-      active_stations: 32,
-      inactive_stations: 0,
-      agreement_number: '15',
-      entity: 'Длинное название юридического лица',
-      active: false,
-      country: 0,
-      district: 0,
-      city: 0,
-    },
-    {
-      id: 2,
-      name_ru: 'Длинное наименование станции',
-      legal_name_ru: 'W16/06/2023',
-      rate: '15',
-      phone: '+996 999 444 444',
-      address_ru: 'Кыргызстан, Бишкек, название длинное',
-      number_stations: 42,
-      active_stations: 32,
-      inactive_stations: 0,
-      agreement_number: '15',
-      entity: 'Длинное название юридического лица',
-      active: true,
-      country: 0,
-      district: 0,
-      city: 0,
-    },
-    {
-      id: 3,
-      name_ru: 'Длинное наименование станции',
-      legal_name_ru: 'W16/06/2023',
-      rate: '15',
-      phone: '+996 999 444 444',
-      address_ru: 'Кыргызстан, Бишкек, название длинное',
-      number_stations: 42,
-      active_stations: 32,
-      inactive_stations: 0,
-      agreement_number: '15',
-      entity: 'Длинное название юридического лица',
-      active: true,
-      country: 0,
-      district: 0,
-      city: 0,
-    },
-  ];
+  const pagePrevHandler = () => {
+    setFilters((prevFilters) => ({ ...prevFilters, page: filters?.page - 1 }));
+  };
 
-  const pagePrevHandler = () => {};
-  const pageNextHandler = () => {};
+  const pageNextHandler = () => {
+    setFilters((prevFilters) => ({ ...prevFilters, page: filters?.page + 1 }));
+  };
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -165,7 +141,7 @@ const Merchants = () => {
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
     const selectedStatuses = newSelectedRowKeys.map((key) => {
-      const selectedMerchant = data.find((item) => item.id === parseInt(key.toString()));
+      const selectedMerchant = merchants?.find((item) => item.id === parseInt(key.toString()));
       return selectedMerchant ? selectedMerchant.active : false;
     });
     const hasActiveTrue = selectedStatuses.includes(true);
@@ -173,6 +149,21 @@ const Merchants = () => {
     const hasMixedStatus = hasActiveTrue && hasActiveFalse;
     setIsDeactivateButton(hasActiveTrue && !hasActiveFalse);
     setIsDisabledButton(hasMixedStatus);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFilters((prevFilters) => ({ ...prevFilters, search: value }));
+  };
+
+  const onChangePageCheckHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value, 10);
+    setFilters((prevFilters) => ({ ...prevFilters, page: value }));
+  };
+
+  const changeShowByHandler = (value: string) => {
+    const size = parseInt(value, 10);
+    setFilters((prevFilters) => ({ ...prevFilters, size }));
   };
 
   const rowSelection = {
@@ -191,6 +182,7 @@ const Merchants = () => {
               placeholder={t('merchants.search_among_merchants')}
               size='large'
               prefix={<img src={search} alt='search' />}
+              onChange={handleSearchChange}
             />
           </Form>
         </div>
@@ -205,11 +197,15 @@ const Merchants = () => {
         <TableComponent
           rowKey={(record) => record.id.toString()}
           rowSelection={rowSelection}
-          loading={false}
-          data={data}
+          loading={merchantsLoading}
+          data={merchants || []}
           columns={columns}
           pagePrevHandler={pagePrevHandler}
           pageNextHandler={pageNextHandler}
+          changeShowByHandler={changeShowByHandler}
+          onChangePageCheckHandler={onChangePageCheckHandler}
+          defaultSizeValue={filters?.page}
+          pages={merchantPagination}
         />
 
         {!!selectedRowKeys.length && (
@@ -249,6 +245,6 @@ const Merchants = () => {
       </ModalComponent>
     </Row>
   );
-};
+});
 
 export default Merchants;

@@ -1,10 +1,10 @@
 export interface IMerchant {
   id: number;
-  name_ru: string;
-  legal_name_ru: string;
+  name: string;
+  legal_name: string;
   rate: string;
   phone: string;
-  address_ru: string;
+  location: string;
   number_stations: number;
   active_stations: number;
   inactive_stations: number;
@@ -14,6 +14,19 @@ export interface IMerchant {
   country: number;
   district: number;
   city: number;
+}
+
+export interface IMerchantPagination {
+  page: number | null;
+  pages: number | null;
+  size: number | null;
+  total: number | null;
+}
+
+export interface IQueryMerchant {
+  page: number;
+  search: string;
+  size: number;
 }
 
 export interface ICreateMerchant {

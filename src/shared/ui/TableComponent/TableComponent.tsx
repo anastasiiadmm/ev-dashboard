@@ -5,13 +5,13 @@ import bem from 'easy-bem';
 
 import NotFoundImages from '~/shared/ui/NotFoundImages/NotFoundImages';
 import { PaginationComponent } from '~/shared/ui';
-import { IColumn, IMerchant, IStation } from '~/features/merchants/interfaces/IMerchant';
-import { IPagination } from '~/shared/interfaces/IPagination';
+import { IColumn, IMerchant, IMerchantPagination, IStation } from '~/features/merchants/interfaces';
+import { IPagination } from '~/shared/interfaces';
 import { ITag } from '~/features/tags/interfaces';
 import './TableComponent.scss';
 
 interface Props {
-  data: (IMerchant | IStation | ITag)[];
+  data: readonly (IMerchant | IStation | ITag)[] | undefined;
   columns: IColumn[];
   rowKey: (record: IMerchant | IStation | ITag) => Key;
   rowSelection: {
@@ -22,7 +22,11 @@ interface Props {
   params?: IPagination | null;
   pagePrevHandler?: (() => void | undefined) | undefined;
   pageNextHandler?: (() => void | undefined) | undefined;
+  onChangePageCheckHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  changeShowByHandler?: ((value: string) => void | undefined) | undefined;
   disabledButton?: boolean;
+  defaultSizeValue?: number | undefined;
+  pages?: IMerchantPagination | null;
   scroll?: { x?: string | number; y?: string | number } & {
     scrollToFirstRowOnChange?: boolean;
   };
@@ -38,6 +42,10 @@ const TableComponent: React.FC<Props> = ({
   pagePrevHandler,
   pageNextHandler,
   rowSelection,
+  changeShowByHandler,
+  defaultSizeValue,
+  pages,
+  onChangePageCheckHandler,
 }) => {
   const b = bem('TableComponent');
   const rowClassName = (_: IMerchant | IStation | ITag, index: number) => {
@@ -65,9 +73,13 @@ const TableComponent: React.FC<Props> = ({
         rowClassName={rowClassName}
       />
       <PaginationComponent
+        changeShowByHandler={changeShowByHandler}
         params={params}
         pagePrevHandler={pagePrevHandler}
         pageNextHandler={pageNextHandler}
+        defaultSizeValue={defaultSizeValue}
+        onChangePageCheckHandler={onChangePageCheckHandler}
+        pages={pages}
       />
     </div>
   );

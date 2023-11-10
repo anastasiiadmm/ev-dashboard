@@ -18,6 +18,7 @@ import {
   getUserLocalStorage,
   logoutLocalStorage,
 } from '~/shared/utils/storage';
+import { LanguageProvider } from '~/shared/context';
 
 const App: React.FC = observer(() => {
   const b = bem('Auth');
@@ -56,19 +57,21 @@ const App: React.FC = observer(() => {
 
   if (authStore.tokens.access && authStore.tokens.refresh) {
     return (
-      <LayoutComponent>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/merchants'>
-            <Route index element={<Merchants />} />
-            <Route path='/merchants/merchant/:id' element={<Merchant />} />
-            <Route path='/merchants/create-merchant' element={<Create />} />
-          </Route>
-          <Route path='/tags'>
-            <Route index element={<Tags />} />
-          </Route>
-        </Routes>
-      </LayoutComponent>
+      <LanguageProvider>
+        <LayoutComponent>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/merchants'>
+              <Route index element={<Merchants />} />
+              <Route path='/merchants/merchant/:id' element={<Merchant />} />
+              <Route path='/merchants/create-merchant' element={<Create />} />
+            </Route>
+            <Route path='/tags'>
+              <Route index element={<Tags />} />
+            </Route>
+          </Routes>
+        </LayoutComponent>
+      </LanguageProvider>
     );
   } else {
     return (
