@@ -77,7 +77,7 @@ const Merchants = observer(() => {
       },
     },
     {
-      title: t('merchants.entity'),
+      title: t('merchants.legal_name'),
       render: (record: IMerchant) => {
         return <p className={b('text crop-text')}>{record?.legal_name}</p>;
       },

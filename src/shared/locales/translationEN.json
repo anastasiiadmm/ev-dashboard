@@ -54,7 +54,7 @@
     "name": "Name",
     "agreement_number": "Contract No.",
     "location": "Location",
-    "entity": "Entity",
+    "legal_name": "Entity",
     "entity_full": "Entity",
     "connectors": "Connectors",
     "contacts": "Phone",

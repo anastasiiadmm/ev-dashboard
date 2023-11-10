@@ -5,13 +5,8 @@ import bem from 'easy-bem';
 
 import NotFoundImages from '~/shared/ui/NotFoundImages/NotFoundImages';
 import { PaginationComponent } from '~/shared/ui';
-import {
-  IColumn,
-  IMerchant,
-  IMerchantPagination,
-  IStation,
-} from '~/features/merchants/interfaces/IMerchant';
-import { IPagination } from '~/shared/interfaces/IPagination';
+import { IColumn, IMerchant, IMerchantPagination, IStation } from '~/features/merchants/interfaces';
+import { IPagination } from '~/shared/interfaces';
 import { ITag } from '~/features/tags/interfaces';
 import './TableComponent.scss';
 

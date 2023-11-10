@@ -65,7 +65,7 @@
     "city": "Город",
     "street": "Улица",
     "active": "Активный",
-    "entity": "Юр лицо",
+    "legal_name": "Юр лицо",
     "entity_full": "Юридическое лицо",
     "phone": "Телефон",
     "your_email": "Ваш E-mail",
