@@ -16,7 +16,7 @@ interface Props {
   pagePrevHandler?: (() => void | undefined) | undefined;
   pageNextHandler?: (() => void | undefined) | undefined;
   defaultSizeValue: number | undefined;
-  pages: IMerchantPagination | undefined;
+  pages: IMerchantPagination | undefined | null;
 }
 
 const options = [
@@ -66,14 +66,14 @@ const PaginationComponent: React.FC<Props> = ({
       </div>
       <div>
         <Button
-          disabled={pages?.page <= 1}
+          disabled={(pages?.page ?? 1) <= 1}
           onClick={pagePrevHandler}
           type='primary'
           icon={<img src={chevronLeft} alt='chevronLeft' />}
           style={{ marginRight: 8 }}
         />
         <Button
-          disabled={pages?.page >= pages?.pages}
+          disabled={(pages?.page ?? 1) >= (pages?.pages ?? 1)}
           onClick={pageNextHandler}
           type='primary'
           icon={<img src={chevronRight} alt='chevronRight' />}

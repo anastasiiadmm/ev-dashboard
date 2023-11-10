@@ -16,7 +16,7 @@ import { ITag } from '~/features/tags/interfaces';
 import './TableComponent.scss';
 
 interface Props {
-  data: (IMerchant | IStation | ITag)[];
+  data: readonly (IMerchant | IStation | ITag)[] | undefined;
   columns: IColumn[];
   rowKey: (record: IMerchant | IStation | ITag) => Key;
   rowSelection: {
@@ -31,7 +31,7 @@ interface Props {
   changeShowByHandler?: ((value: string) => void | undefined) | undefined;
   disabledButton?: boolean;
   defaultSizeValue?: number | undefined;
-  pages?: IMerchantPagination | undefined;
+  pages?: IMerchantPagination | null;
   scroll?: { x?: string | number; y?: string | number } & {
     scrollToFirstRowOnChange?: boolean;
   };

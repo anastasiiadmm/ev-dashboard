@@ -1,16 +1,20 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 type LanguageContextType = {
   currentLanguage: string;
   setCurrentLanguage: React.Dispatch<React.SetStateAction<string>>;
 };
 
+interface LanguageProviderProps {
+  children: ReactNode;
+}
+
 const LanguageContext = createContext<LanguageContextType>({
   currentLanguage: 'ru',
   setCurrentLanguage: () => {},
 });
 
-export const LanguageProvider = ({ children }) => {
+export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem('language') || 'ru');
 
   return (

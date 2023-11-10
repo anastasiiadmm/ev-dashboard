@@ -6,5 +6,6 @@ export type {
   IColumn,
   ITabs,
   IMerchantPagination,
+  IQueryMerchant,
 } from './IMerchant';
 export type { ICommon } from './ICommon';

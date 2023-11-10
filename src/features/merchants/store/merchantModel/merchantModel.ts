@@ -36,7 +36,7 @@ class MerchantStore implements MerchantState {
     makeAutoObservable(this);
   }
 
-  async fetchMerchants(queryString, currentLanguage: string) {
+  async fetchMerchants(queryString: string, currentLanguage: string) {
     try {
       runInAction(() => {
         this.merchantsLoading = true;

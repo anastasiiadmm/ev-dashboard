@@ -14,16 +14,17 @@ import { useLanguage } from '~/shared/context/LanguageContext/LanguageContext';
 import { getParams } from '~/shared/utils/helper';
 import { useDebounce } from '~/shared/hooks';
 import './Merchants.scss';
+import { IQueryMerchant } from '~/features/merchants/interfaces/IMerchant';
 
 const Merchants = observer(() => {
   const b = bem('Merchants');
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
   const { merchants, merchantPagination, merchantsLoading } = toJS(merchantStore);
-  const [filters, setFilters] = useState({
-    page: merchants?.page || 1,
+  const [filters, setFilters] = useState<IQueryMerchant>({
+    page: merchantPagination?.page || 1,
     search: '',
-    size: merchants?.size || 10,
+    size: merchantPagination?.size || 10,
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -141,9 +142,7 @@ const Merchants = observer(() => {
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
     const selectedStatuses = newSelectedRowKeys.map((key) => {
-      const selectedMerchant = merchants?.items.find(
-        (item) => item.id === parseInt(key.toString()),
-      );
+      const selectedMerchant = merchants?.find((item) => item.id === parseInt(key.toString()));
       return selectedMerchant ? selectedMerchant.active : false;
     });
     const hasActiveTrue = selectedStatuses.includes(true);
@@ -159,12 +158,13 @@ const Merchants = observer(() => {
   };
 
   const onChangePageCheckHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const value = parseInt(e.target.value, 10);
     setFilters((prevFilters) => ({ ...prevFilters, page: value }));
   };
 
   const changeShowByHandler = (value: string) => {
-    setFilters((prevFilters) => ({ ...prevFilters, size: value }));
+    const size = parseInt(value, 10);
+    setFilters((prevFilters) => ({ ...prevFilters, size }));
   };
 
   const rowSelection = {
@@ -199,7 +199,7 @@ const Merchants = observer(() => {
           rowKey={(record) => record.id.toString()}
           rowSelection={rowSelection}
           loading={merchantsLoading}
-          data={merchants}
+          data={merchants || []}
           columns={columns}
           pagePrevHandler={pagePrevHandler}
           pageNextHandler={pageNextHandler}
