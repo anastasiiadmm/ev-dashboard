@@ -83,7 +83,7 @@ class MerchantStore implements MerchantState {
         this.patchMerchantError = null;
       });
 
-      await axiosApi.patch(`/merchants/`, merchantData);
+      await axiosApi.post(`/merchants/`, merchantData);
 
       runInAction(() => {
         this.patchMerchantLoading = false;
@@ -110,7 +110,7 @@ class MerchantStore implements MerchantState {
         this.createMerchantError = null;
       });
 
-      await axiosApi.post(`/merchants/${merchantID}`, merchantData);
+      await axiosApi.patch(`/merchants/${merchantID}`, merchantData);
 
       runInAction(() => {
         this.createMerchantLoading = false;
