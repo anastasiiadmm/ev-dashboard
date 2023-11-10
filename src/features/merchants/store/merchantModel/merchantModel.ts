@@ -4,7 +4,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import axiosApi from '~/shared/utils/mobx-api';
 import { ICreateMerchant, IMerchant, IMerchantPagination } from '~/features/merchants/interfaces';
 import { IError } from '~/shared/interfaces';
-import { getAxiosConfig } from '~/shared/utils/getAxiosConfig/getAxiosConfig';
+import { getAxiosConfig } from '~/shared/utils';
 
 interface MerchantState {
   merchants: IMerchant[] | null;
@@ -15,6 +15,9 @@ interface MerchantState {
   createMerchantLoading: boolean;
   createMerchantError: AxiosError | null;
   createMerchantSuccess: boolean;
+  patchMerchantSuccess: boolean;
+  patchMerchantLoading: boolean;
+  patchMerchantError: AxiosError | null;
 }
 
 class MerchantStore implements MerchantState {
@@ -31,6 +34,9 @@ class MerchantStore implements MerchantState {
   createMerchantLoading: boolean = false;
   createMerchantError: AxiosError | null = null;
   createMerchantSuccess: boolean = false;
+  patchMerchantSuccess: boolean = false;
+  patchMerchantLoading: boolean = false;
+  patchMerchantError: AxiosError | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -69,7 +75,34 @@ class MerchantStore implements MerchantState {
     }
   }
 
-  async postCreateMerchant(merchantData: ICreateMerchant) {
+  async postCreateMerchant(merchantID: string, merchantData: ICreateMerchant) {
+    try {
+      runInAction(() => {
+        this.patchMerchantLoading = true;
+        this.patchMerchantSuccess = false;
+        this.patchMerchantError = null;
+      });
+
+      await axiosApi.patch(`/merchants/${merchantID}`, merchantData);
+
+      runInAction(() => {
+        this.patchMerchantLoading = false;
+        this.patchMerchantSuccess = true;
+        this.patchMerchantError = null;
+      });
+    } catch (e) {
+      const error = e as AxiosError;
+      runInAction(() => {
+        this.patchMerchantSuccess = false;
+        this.patchMerchantLoading = false;
+        this.patchMerchantError = error;
+      });
+
+      throw error;
+    }
+  }
+
+  async patchMerchant(merchantData) {
     try {
       runInAction(() => {
         this.createMerchantLoading = true;
@@ -91,7 +124,6 @@ class MerchantStore implements MerchantState {
         this.createMerchantSuccess = false;
         this.createMerchantError = error;
       });
-
       throw error;
     }
   }

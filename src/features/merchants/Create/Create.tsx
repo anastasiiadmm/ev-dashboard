@@ -18,7 +18,7 @@ import {
 import { useCurrentLocale } from '~/shared/hooks';
 import { ICreateMerchant } from '~/features/merchants/interfaces';
 import { commonStore, merchantStore } from '~/shared/api/store';
-import { getParams } from '~/shared/utils/helper';
+import { getParams } from '~/shared/utils';
 import './Create.scss';
 
 const { Title, Text } = Typography;
