@@ -102,7 +102,7 @@ class MerchantStore implements MerchantState {
     }
   }
 
-  async patchMerchant(merchantData) {
+  async patchMerchant(merchantData: ICreateMerchant) {
     try {
       runInAction(() => {
         this.createMerchantLoading = true;
