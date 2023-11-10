@@ -52,7 +52,7 @@
     "merchants": "Merchants",
     "create_merchant": "Creating merchant",
     "name": "Name",
-    "contract_no": "Contract No.",
+    "agreement_number": "Contract No.",
     "location": "Location",
     "entity": "Entity",
     "entity_full": "Entity",

@@ -8,12 +8,11 @@ import { observer } from 'mobx-react-lite';
 
 import { add, plus, active, status, x, search, infoCircle, inactive } from '~/assets/images';
 import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '~/shared/ui';
-import { IColumn, IMerchant } from '~/features/merchants/interfaces';
-import { useLanguage } from '~/shared/context/LanguageContext/LanguageContext';
+import { IColumn, IMerchant, IQueryMerchant } from '~/features/merchants/interfaces';
 import { getParams } from '~/shared/utils/helper';
 import { useDebounce } from '~/shared/hooks';
 import { merchantStore } from '~/shared/api/store';
-import { IQueryMerchant } from '~/features/merchants/interfaces/IMerchant';
+import { useLanguage } from '~/shared/context';
 import './Merchants.scss';
 
 const Merchants = observer(() => {
@@ -60,7 +59,7 @@ const Merchants = observer(() => {
       },
     },
     {
-      title: t('merchants.contract_no'),
+      title: t('merchants.agreement_number'),
       dataIndex: 'agreement_number',
     },
     {

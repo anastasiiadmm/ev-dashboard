@@ -4,7 +4,7 @@ import i18n from 'i18next';
 import { eng, kg, rus } from '~/assets/images';
 import { FormField } from '~/shared/ui';
 import { saveLangToLocalStorage } from '~/shared/utils/storage';
-import { useLanguage } from '~/shared/context/LanguageContext/LanguageContext';
+import { useLanguage } from '~/shared/context';
 
 const LanguageSelect = () => {
   const { setCurrentLanguage, currentLanguage } = useLanguage();

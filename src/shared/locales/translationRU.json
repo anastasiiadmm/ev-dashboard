@@ -52,7 +52,7 @@
     "merchants": "Мерчанты",
     "create_merchant": "Создание мерчанта",
     "name": "Наименование",
-    "contract_no": "№ договора",
+    "agreement_number": "№ договора",
     "contacts": "Контакты",
     "location": "Локация",
     "schedule": "График работы",
