@@ -2,7 +2,6 @@ import axios from 'axios';
 
 import { apiURL } from '~/shared/utils/config';
 import { authStore } from '~/shared/api/store';
-import { addLocalStorage } from '~/shared/utils/storage';
 
 const axiosApi = axios.create({
   baseURL: apiURL,
@@ -39,11 +38,10 @@ axiosApi.interceptors.response.use(
         if (resp.status === 200) {
           const newTokens = resp.data;
           axiosApi.defaults.headers.Authorization = `Bearer ${newTokens.access}`;
-          addLocalStorage({
+          authStore.setTokens({
             access: newTokens.access,
-            refresh,
+            refresh: newTokens.refresh,
           });
-          window.dispatchEvent(new Event('storage'));
           return axiosApi(originalRequest);
         }
       } catch {
