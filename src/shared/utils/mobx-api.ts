@@ -23,32 +23,27 @@ axiosApi.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     const statusCode = error?.response?.status;
-    const { access, refresh } = authStore.tokens;
 
-    if (
-      access &&
-      statusCode === 401 &&
-      error.config &&
-      !error.config._isReady &&
-      error.response.data.messages
-    ) {
+    if (statusCode === 401 && !originalRequest._isRetry) {
       originalRequest._isRetry = true;
       try {
-        const resp = await axiosApi.post('/accounts/refresh/', { refresh });
+        const resp = await axiosApi.post('/accounts/refresh/', {
+          refresh: authStore.tokens.refresh,
+        });
         if (resp.status === 200) {
           const newTokens = resp.data;
-          axiosApi.defaults.headers.Authorization = `Bearer ${newTokens.access}`;
           authStore.setTokens({
             access: newTokens.access,
             refresh: newTokens.refresh,
           });
+          axiosApi.defaults.headers.Authorization = `Bearer ${newTokens.access}`;
           return axiosApi(originalRequest);
         }
       } catch {
-        authStore.clearTokens();
+        authStore.logoutUser();
+        return Promise.reject(error);
       }
     }
-
     return Promise.reject(error);
   },
 );
