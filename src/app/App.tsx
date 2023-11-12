@@ -35,11 +35,18 @@ const App: React.FC = observer(() => {
   }, []);
 
   const handleStorageEvent = useCallback(({ key, newValue }: StorageEvent) => {
-    if (key === tokensLocalStorage && newValue === JSON.stringify(defaultLocalStorage)) {
-      authStore.logoutUser();
-      logoutLocalStorage();
-    } else {
-      authStore.checkForTokens(JSON.parse(newValue || ''));
+    if (key === tokensLocalStorage) {
+      if (newValue && newValue !== JSON.stringify(defaultLocalStorage)) {
+        try {
+          const parsedValue = JSON.parse(newValue);
+          authStore.checkForTokens(parsedValue);
+        } catch (e) {
+          console.error('Error parsing storage event data:', e);
+        }
+      } else if (newValue === JSON.stringify(defaultLocalStorage)) {
+        authStore.logoutUser();
+        logoutLocalStorage();
+      }
     }
   }, []);
 
