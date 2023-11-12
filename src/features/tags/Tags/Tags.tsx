@@ -10,8 +10,8 @@ import { add, deleteIcon, editColor, inactive, infoCircle, search, status } from
 import { IColumn } from '~/features/merchants/interfaces';
 import { ITag } from '~/features/tags/interfaces';
 import { CreateEditTagModal } from '~/features/tags';
-import tagsStore from '~/features/tags/store/tagsModel/tagsModel';
 import { useTableFilter } from '~/shared/hooks';
+import { tagsStore } from '~/shared/api/store';
 import './Tags.scss';
 
 const Tags = observer(() => {
