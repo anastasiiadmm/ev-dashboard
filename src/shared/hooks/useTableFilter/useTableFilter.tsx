@@ -1,10 +1,14 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useDebounce } from '~/shared/hooks';
 import { getParams } from '~/shared/utils';
 import { useLanguage } from '~/shared/context';
 
-const useTableFilter = (fetchFunction) => {
+interface FetchFunctionType {
+  (queryString: string, currentLanguage: string): Promise<never>;
+}
+
+const useTableFilter = (fetchFunction: FetchFunctionType) => {
   const { currentLanguage } = useLanguage();
   const [filters, setFilters] = useState({ page: 1, search: '', size: 10 });
 
@@ -21,11 +25,11 @@ const useTableFilter = (fetchFunction) => {
     fetchFunction(queryString, currentLanguage);
   }, [currentLanguage, debouncedSearchTerm, debouncedPageTerm, filters?.size]);
 
-  const handlePageChange = (page, size) => {
+  const handlePageChange = (page: number, size: number) => {
     setFilters((prevFilters) => ({ ...prevFilters, page, size }));
   };
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setFilters((prevFilters) => ({ ...prevFilters, search: value }));
   };
@@ -38,12 +42,12 @@ const useTableFilter = (fetchFunction) => {
     setFilters((prevFilters) => ({ ...prevFilters, page: prevFilters.page + 1 }));
   };
 
-  const onChangePageCheckHandler = (e) => {
+  const onChangePageCheckHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value, 10);
     setFilters((prevFilters) => ({ ...prevFilters, page: value }));
   };
 
-  const changeShowByHandler = (value) => {
+  const changeShowByHandler = (value: string) => {
     const size = parseInt(value, 10);
     setFilters((prevFilters) => ({ ...prevFilters, size }));
   };

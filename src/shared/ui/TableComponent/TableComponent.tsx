@@ -11,7 +11,7 @@ import { ITag } from '~/features/tags/interfaces';
 import './TableComponent.scss';
 
 interface Props {
-  data: readonly (IMerchant | IStation | ITag)[] | undefined;
+  data: readonly (IMerchant | IStation | ITag)[] | null | undefined;
   columns: IColumn[];
   rowKey: (record: IMerchant | IStation | ITag) => Key;
   rowSelection: {
@@ -68,7 +68,7 @@ const TableComponent: React.FC<Props> = ({
         loading={loading}
         rowSelection={rowSelection}
         columns={columns}
-        dataSource={data}
+        dataSource={data || []}
         pagination={false}
         rowClassName={rowClassName}
       />
