@@ -90,7 +90,6 @@ class AuthStore implements AuthState {
         ...this.tokens,
         ...newTokens,
       };
-      addLocalStorage(this.tokens);
     });
   }
 
