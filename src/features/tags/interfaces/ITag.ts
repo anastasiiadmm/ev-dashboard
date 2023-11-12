@@ -1,8 +1,8 @@
 export interface ITag {
   id: number;
-  tag_ky: string;
-  tag_ru: string;
-  tag_en: string;
+  title_ky: string;
+  title_ru: string;
+  title_en: string;
   active: boolean;
 }
 

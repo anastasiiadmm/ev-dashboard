@@ -182,7 +182,7 @@ exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
                             class="ant-table-cell"
                             scope="col"
                           >
-                            merchants.entity
+                            merchants.legal_name
                           </th>
                           <th
                             class="ant-table-cell"

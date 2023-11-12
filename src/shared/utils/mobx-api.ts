@@ -37,7 +37,7 @@ axiosApi.interceptors.response.use(
     ) {
       originalRequest._isRetry = true;
       try {
-        const resp = await axiosApi.post('/refresh/', { refresh });
+        const resp = await axiosApi.post('/accounts/refresh/', { refresh });
         // is OK status
         if (resp.status < 300) {
           const newTokens = resp.data;

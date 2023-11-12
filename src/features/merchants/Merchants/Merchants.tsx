@@ -1,5 +1,5 @@
 import { Button, Form, Row, Tooltip } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import bem from 'easy-bem';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -8,39 +8,27 @@ import { observer } from 'mobx-react-lite';
 
 import { add, plus, active, status, x, search, infoCircle, inactive } from '~/assets/images';
 import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '~/shared/ui';
-import { IColumn, IMerchant, IQueryMerchant } from '~/features/merchants/interfaces';
-import { getParams } from '~/shared/utils/helper';
-import { useDebounce } from '~/shared/hooks';
+import { IColumn, IMerchant } from '~/features/merchants/interfaces';
 import { merchantStore } from '~/shared/api/store';
-import { useLanguage } from '~/shared/context';
+import { useTableFilter } from '~/shared/hooks';
 import './Merchants.scss';
 
 const Merchants = observer(() => {
   const b = bem('Merchants');
   const { t } = useTranslation();
-  const { currentLanguage } = useLanguage();
   const { merchants, merchantPagination, merchantsLoading } = toJS(merchantStore);
-  const [filters, setFilters] = useState<IQueryMerchant>({
-    page: merchantPagination?.page || 1,
-    search: '',
-    size: merchantPagination?.size || 10,
-  });
+  const {
+    filters,
+    handleSearchChange,
+    pagePrevHandler,
+    pageNextHandler,
+    changeShowByHandler,
+    onChangePageCheckHandler,
+  } = useTableFilter(merchantStore.fetchMerchants.bind(merchantStore));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isDeactivateButton, setIsDeactivateButton] = useState(true);
   const [isDisabledButton, setIsDisabledButton] = useState(true);
-  const debouncedSearchTerm = useDebounce(filters?.search, 500);
-  const debouncedPageTerm = useDebounce(filters?.page, 500);
-
-  useEffect(() => {
-    const queryString = getParams({
-      page: filters?.page,
-      search: filters?.search,
-      size: filters?.size,
-    });
-
-    merchantStore.fetchMerchants(queryString, currentLanguage);
-  }, [currentLanguage, debouncedSearchTerm, debouncedPageTerm, filters?.size]);
 
   const columns: IColumn[] = [
     {
@@ -122,14 +110,6 @@ const Merchants = observer(() => {
     },
   ] as IColumn[];
 
-  const pagePrevHandler = () => {
-    setFilters((prevFilters) => ({ ...prevFilters, page: filters?.page - 1 }));
-  };
-
-  const pageNextHandler = () => {
-    setFilters((prevFilters) => ({ ...prevFilters, page: filters?.page + 1 }));
-  };
-
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -149,21 +129,6 @@ const Merchants = observer(() => {
     const hasMixedStatus = hasActiveTrue && hasActiveFalse;
     setIsDeactivateButton(hasActiveTrue && !hasActiveFalse);
     setIsDisabledButton(hasMixedStatus);
-  };
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setFilters((prevFilters) => ({ ...prevFilters, search: value }));
-  };
-
-  const onChangePageCheckHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value, 10);
-    setFilters((prevFilters) => ({ ...prevFilters, page: value }));
-  };
-
-  const changeShowByHandler = (value: string) => {
-    const size = parseInt(value, 10);
-    setFilters((prevFilters) => ({ ...prevFilters, size }));
   };
 
   const rowSelection = {

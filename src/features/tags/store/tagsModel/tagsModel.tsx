@@ -36,7 +36,7 @@ class TagsStore implements TagsState {
 
       const config = getAxiosConfig(currentLanguage);
 
-      const resp = await axiosApi.get(`/tags/${queryString}`, config);
+      const resp = await axiosApi.get(`/common/tags/${queryString}`, config);
       const data = resp.data;
 
       runInAction(() => {
