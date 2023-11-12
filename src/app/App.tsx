@@ -27,7 +27,7 @@ const App: React.FC = observer(() => {
   const initializeApp = useCallback(() => {
     const tokensLocal = getUserLocalStorage();
     if (tokensLocal?.access && tokensLocal?.refresh) {
-      authStore.setTokens(tokensLocal);
+      authStore.checkForTokens(tokensLocal);
     } else {
       logoutLocalStorage();
       authStore.clearTokens();
@@ -39,7 +39,7 @@ const App: React.FC = observer(() => {
       authStore.logoutUser();
       logoutLocalStorage();
     } else {
-      authStore.setTokens(JSON.parse(newValue || ''));
+      authStore.checkForTokens(JSON.parse(newValue || ''));
     }
   }, []);
 

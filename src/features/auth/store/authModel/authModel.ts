@@ -84,10 +84,14 @@ class AuthStore implements AuthState {
     }
   }
 
-  setTokens(data: IJWTokens) {
-    this.tokens = data;
-    addLocalStorage(data);
-    window.dispatchEvent(new Event('storage'));
+  checkForTokens(newTokens: Partial<IJWTokens>) {
+    runInAction(() => {
+      this.tokens = {
+        ...this.tokens,
+        ...newTokens,
+      };
+      addLocalStorage(this.tokens);
+    });
   }
 
   clearTokens() {

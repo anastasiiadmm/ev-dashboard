@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { apiURL } from '~/shared/utils/config';
 import { authStore } from '~/shared/api/store';
+import { addLocalStorage } from '~/shared/utils/storage';
 
 const axiosApi = axios.create({
   baseURL: apiURL,
@@ -25,18 +26,24 @@ axiosApi.interceptors.response.use(
     const statusCode = error?.response?.status;
     const { access, refresh } = authStore.tokens;
 
-    if (access && refresh && statusCode === 401 && !originalRequest._isRetry) {
+    if (
+      access &&
+      statusCode === 401 &&
+      error.config &&
+      !error.config._isReady &&
+      error.response.data.messages
+    ) {
       originalRequest._isRetry = true;
       try {
         const resp = await axiosApi.post('/accounts/refresh/', { refresh });
-        // is OK status
-        if (resp.status < 300) {
+        if (resp.status === 200) {
           const newTokens = resp.data;
           axiosApi.defaults.headers.Authorization = `Bearer ${newTokens.access}`;
-          authStore.setTokens({
+          addLocalStorage({
             access: newTokens.access,
-            refresh: newTokens.refresh,
+            refresh,
           });
+          window.dispatchEvent(new Event('storage'));
           return axiosApi(originalRequest);
         }
       } catch {
