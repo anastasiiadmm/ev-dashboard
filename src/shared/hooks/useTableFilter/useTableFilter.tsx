@@ -5,7 +5,7 @@ import { getParams } from '~/shared/utils';
 import { useLanguage } from '~/shared/context';
 
 interface FetchFunctionType {
-  (queryString: string, currentLanguage: string): Promise<never>;
+  (queryString: string, currentLanguage: string): Promise<void>;
 }
 
 const useTableFilter = (fetchFunction: FetchFunctionType) => {
