@@ -98,7 +98,11 @@ const Tags = observer(() => {
     try {
       await tagsStore.changeTagsStatuses(changeStatus);
     } catch (e) {
-      openNotification('error', '', e);
+      if (e instanceof Error) {
+        openNotification('error', '', e.message);
+      } else {
+        console.error('Unexpected error type:', e);
+      }
     }
   };
 

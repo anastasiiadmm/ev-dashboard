@@ -77,20 +77,18 @@ class TagsStore implements TagsState {
       const updatedTags = resp.data;
 
       runInAction(() => {
-        if (this.tags) {
-          updatedTags.forEach((updatedTag) => {
-            const index = this.tags?.findIndex((tag) => tag.id === updatedTag.id);
-            if (index !== -1) {
-              if (this.tags) {
-                this.tags[index] = updatedTag;
-              }
-            } else {
-              this.tags?.push(updatedTag);
-            }
-          });
-        } else {
-          this.tags = updatedTags;
+        if (!this.tags) {
+          this.tags = [];
         }
+
+        updatedTags.forEach((updatedTag: ITag) => {
+          const index = this.tags!.findIndex((tag) => tag.id === updatedTag.id);
+          if (index !== -1) {
+            this.tags![index] = updatedTag;
+          } else {
+            this.tags!.push(updatedTag);
+          }
+        });
 
         this.changeStatusesSuccess = true;
         this.changeStatusesLoading = false;
@@ -106,7 +104,7 @@ class TagsStore implements TagsState {
     }
   }
 
-  setChangeStatusesSuccess(value) {
+  setChangeStatusesSuccess(value: boolean) {
     this.changeStatusesSuccess = value;
   }
 }
