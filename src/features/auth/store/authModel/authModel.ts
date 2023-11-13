@@ -65,33 +65,11 @@ class AuthStore implements AuthState {
     }
   }
 
-  async refreshToken() {
-    const tokens = getUserLocalStorage();
-
-    if (tokens?.refresh) {
-      try {
-        const resp = await axiosApi.post('/accounts/refresh/', { refresh: tokens.refresh });
-        if (resp.status === 200 && resp.data.access && resp.data.refresh) {
-          runInAction(() => {
-            this.tokens.access = resp.data.access;
-            this.tokens.refresh = resp.data.refresh;
-            addLocalStorage(this.tokens);
-          });
-        }
-      } catch (error) {
-        this.clearTokens();
-      }
-    }
-  }
-
-  setTokens(data: IJWTokens) {
-    if (data && typeof data === 'object') {
-      this.tokens = data;
-      addLocalStorage(data);
-      window.dispatchEvent(new Event('storage'));
-    } else {
-      console.error('Invalid token data', data);
-    }
+  setTokens(payload: IJWTokens) {
+    this.tokens = {
+      ...this.tokens,
+      ...payload,
+    };
   }
 
   clearTokens() {

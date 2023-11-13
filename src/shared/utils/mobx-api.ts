@@ -27,7 +27,7 @@ axiosApi.interceptors.response.use(
     if (statusCode === 401 && !originalRequest._isRetry) {
       originalRequest._isRetry = true;
       try {
-        const resp = await axiosApi.post('/accounts/refresh/', {
+        const resp = await axios.post(`${apiURL}/accounts/refresh/`, {
           refresh: authStore.tokens.refresh,
         });
         if (resp.status === 200) {
