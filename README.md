@@ -19,7 +19,7 @@ Programming language used React JS / TypeScript
 
 The service uses the following technologies:
 
-        node -v version 18.13.0 and yarn 1.22.19
+        node -v version node:18-slim and yarn 1.22.19
         nvm current version 0.39.1
 
 ## BASE DEPENDENCIES

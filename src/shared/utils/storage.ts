@@ -9,16 +9,18 @@ export const defaultTokens: IJWTokens = {
 };
 
 export const getUserLocalStorage = (): IJWTokens | null => {
-  try {
-    const tokenLocal = JSON.parse(localStorage.getItem(tokensLocalStorage) || '');
-    if (tokenLocal && 'access' in tokenLocal && 'refresh' in tokenLocal) {
-      return tokenLocal;
+  const tokenString = localStorage.getItem(tokensLocalStorage);
+  if (tokenString) {
+    try {
+      const tokenLocal = JSON.parse(tokenString);
+      if (tokenLocal && 'access' in tokenLocal && 'refresh' in tokenLocal) {
+        return tokenLocal;
+      }
+    } catch {
+      logoutLocalStorage();
     }
-    return null;
-  } catch {
-    logoutLocalStorage();
-    return null;
   }
+  return null;
 };
 
 export const logoutLocalStorage = () => {

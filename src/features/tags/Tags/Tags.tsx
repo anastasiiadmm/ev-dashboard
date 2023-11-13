@@ -2,17 +2,30 @@ import bem from 'easy-bem';
 import { Button, Form, Row, Tooltip } from 'antd';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toJS } from 'mobx';
+import { observer } from 'mobx-react-lite';
 
 import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '~/shared/ui';
 import { add, deleteIcon, editColor, inactive, infoCircle, search, status } from '~/assets/images';
 import { IColumn } from '~/features/merchants/interfaces';
 import { ITag } from '~/features/tags/interfaces';
 import { CreateEditTagModal } from '~/features/tags';
+import { useTableFilter } from '~/shared/hooks';
+import { tagsStore } from '~/shared/api/store';
 import './Tags.scss';
 
-const Tags = () => {
+const Tags = observer(() => {
   const b = bem('Tags');
   const { t } = useTranslation();
+  const { tags, tagsPagination, tagsLoading } = toJS(tagsStore);
+  const {
+    filters,
+    handleSearchChange,
+    pagePrevHandler,
+    pageNextHandler,
+    changeShowByHandler,
+    onChangePageCheckHandler,
+  } = useTableFilter(tagsStore.fetchTags.bind(tagsStore));
   const [creating, setCreating] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
@@ -20,9 +33,6 @@ const Tags = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isDeactivateButton, setIsDeactivateButton] = useState(true);
   const [isDisabledButton, setIsDisabledButton] = useState(true);
-
-  const pagePrevHandler = () => {};
-  const pageNextHandler = () => {};
 
   const showDeleteModal = () => {
     setIsModalDeleteOpen(true);
@@ -56,7 +66,7 @@ const Tags = () => {
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
     const selectedStatuses = newSelectedRowKeys.map((key) => {
-      const selectedMerchant = data.find((item) => item.id === parseInt(key.toString()));
+      const selectedMerchant = tags?.find((item) => item.id === parseInt(key.toString()));
       return selectedMerchant ? selectedMerchant.active : false;
     });
     const hasActiveTrue = selectedStatuses.includes(true);
@@ -80,19 +90,19 @@ const Tags = () => {
     {
       title: t('tags.name') + ' KG',
       render: (record: ITag) => {
-        return <div className={b('tag')}>{record?.tag_ky}</div>;
+        return <div className={b('tag')}>{record?.title_ky}</div>;
       },
     },
     {
       title: t('tags.name') + ' RU',
       render: (record: ITag) => {
-        return <div className={b('tag')}>{record?.tag_ru}</div>;
+        return <div className={b('tag')}>{record?.title_ru}</div>;
       },
     },
     {
       title: t('tags.name') + ' ENG',
       render: (record: ITag) => {
-        return <div className={b('tag')}>{record?.tag_en}</div>;
+        return <div className={b('tag')}>{record?.title_en}</div>;
       },
     },
     {
@@ -145,30 +155,6 @@ const Tags = () => {
     },
   ] as IColumn[];
 
-  const data: ITag[] = [
-    {
-      id: 1,
-      tag_ky: '#Тег аты',
-      tag_ru: '#Название тега',
-      tag_en: '#Naimenovanie',
-      active: false,
-    },
-    {
-      id: 2,
-      tag_ky: '#Тег аты',
-      tag_ru: '#Название тега',
-      tag_en: '#Naimenovanie',
-      active: true,
-    },
-    {
-      id: 3,
-      tag_ky: '#Тег аты',
-      tag_ru: '#Название тега',
-      tag_en: '#Naimenovanie',
-      active: false,
-    },
-  ];
-
   return (
     <Row justify='space-between' data-testid='auth-component' className={b()}>
       <Row className={b('search-pagination-block')}>
@@ -180,6 +166,7 @@ const Tags = () => {
               placeholder={t('tags.search_by')}
               size='large'
               prefix={<img src={search} alt='search' />}
+              onChange={handleSearchChange}
             />
           </Form>
         </div>
@@ -197,11 +184,15 @@ const Tags = () => {
         <TableComponent
           rowKey={(record) => record.id.toString()}
           rowSelection={rowSelection}
-          loading={false}
-          data={data}
+          loading={tagsLoading}
+          data={tags}
           columns={columns}
           pagePrevHandler={pagePrevHandler}
           pageNextHandler={pageNextHandler}
+          changeShowByHandler={changeShowByHandler}
+          onChangePageCheckHandler={onChangePageCheckHandler}
+          defaultSizeValue={filters?.page}
+          pages={tagsPagination}
         />
 
         {!!selectedRowKeys.length && (
@@ -271,6 +262,6 @@ const Tags = () => {
       </ModalComponent>
     </Row>
   );
-};
+});
 
 export default Tags;
