@@ -23,6 +23,7 @@ axiosApi.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     const statusCode = error?.response?.status;
+    const tokens = authStore.tokens;
 
     if (statusCode === 401 && !originalRequest._isRetry) {
       originalRequest._isRetry = true;
@@ -32,9 +33,12 @@ axiosApi.interceptors.response.use(
         });
         if (resp.status === 200) {
           const newTokens = resp.data;
-          authStore.setTokens({
+          const usersLocal = {
             access: newTokens.access,
-            refresh: newTokens.refresh,
+            refresh: tokens.refresh,
+          };
+          authStore.setTokens({
+            access: usersLocal.access,
           });
           axiosApi.defaults.headers.Authorization = `Bearer ${newTokens.access}`;
           return axiosApi(originalRequest);
