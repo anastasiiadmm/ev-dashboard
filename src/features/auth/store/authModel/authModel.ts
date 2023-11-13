@@ -65,7 +65,7 @@ class AuthStore implements AuthState {
     }
   }
 
-  setTokens(payload) {
+  setTokens(payload: IJWTokens) {
     this.tokens = {
       ...this.tokens,
       ...payload,
