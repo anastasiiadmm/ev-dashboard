@@ -2,9 +2,8 @@ import { AxiosError } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
-import { ITagPagination, ITag } from '~/features/tags/interfaces';
+import { ITagPagination, ITag, IChangeTagsStatuses } from '~/features/tags/interfaces';
 import { getAxiosConfig } from '~/shared/utils';
-import { IChangeTagsStatuses } from '~/features/tags/interfaces/ITag';
 
 interface TagsState {
   tags: ITag[] | null;
