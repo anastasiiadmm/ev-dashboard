@@ -87,7 +87,7 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
               class="ant-spin-container"
             >
               <div
-                class="ant-table ant-table-empty ant-table-scroll-horizontal"
+                class="ant-table ant-table-scroll-horizontal"
               >
                 <div
                   class="ant-table-container"
@@ -119,15 +119,14 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                               class="ant-table-selection"
                             >
                               <label
-                                class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled css-dev-only-do-not-override-xu9wm8"
+                                class="ant-checkbox-wrapper css-dev-only-do-not-override-xu9wm8"
                               >
                                 <span
-                                  class="ant-checkbox ant-wave-target css-dev-only-do-not-override-xu9wm8 ant-checkbox-disabled"
+                                  class="ant-checkbox ant-wave-target css-dev-only-do-not-override-xu9wm8"
                                 >
                                   <input
                                     aria-label="Select all"
                                     class="ant-checkbox-input"
-                                    disabled=""
                                     type="checkbox"
                                   />
                                   <span
@@ -248,31 +247,200 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                           </td>
                         </tr>
                         <tr
-                          class="ant-table-placeholder"
+                          class="ant-table-row ant-table-row-level-0"
+                          data-row-key="1"
                         >
                           <td
+                            class="ant-table-cell ant-table-selection-column"
+                          >
+                            <label
+                              class="ant-checkbox-wrapper css-dev-only-do-not-override-xu9wm8"
+                            >
+                              <span
+                                class="ant-checkbox ant-wave-target css-dev-only-do-not-override-xu9wm8"
+                              >
+                                <input
+                                  class="ant-checkbox-input"
+                                  type="checkbox"
+                                />
+                                <span
+                                  class="ant-checkbox-inner"
+                                />
+                              </span>
+                            </label>
+                          </td>
+                          <td
                             class="ant-table-cell"
-                            colspan="7"
+                          >
+                            1
+                          </td>
+                          <td
+                            class="ant-table-cell"
                           >
                             <div
-                              class="css-dev-only-do-not-override-xu9wm8 ant-empty"
+                              class="Tags__tag"
                             >
-                              <div
-                                class="ant-empty-image"
-                                style="height: 300px;"
+                              Tag 1
+                            </div>
+                          </td>
+                          <td
+                            class="ant-table-cell"
+                          >
+                            <div
+                              class="Tags__tag"
+                            >
+                              Тег 1
+                            </div>
+                          </td>
+                          <td
+                            class="ant-table-cell"
+                          >
+                            <div
+                              class="Tags__tag"
+                            >
+                              Tag 1
+                            </div>
+                          </td>
+                          <td
+                            class="ant-table-cell"
+                          >
+                            <img
+                              alt="status"
+                              class="Tags__center-block"
+                              src="[object Object]"
+                            />
+                          </td>
+                          <td
+                            class="ant-table-cell"
+                          >
+                            <div
+                              class="Tags__tags-block"
+                            >
+                              <button
+                                class="ant-btn css-dev-only-do-not-override-xu9wm8 ant-btn-default ant-btn-icon-only Tags__add-button"
+                                type="button"
                               >
-                                <img
-                                  alt="notFoundImages"
-                                  src="[object Object]"
+                                <span
+                                  class="ant-btn-icon"
+                                >
+                                  <img
+                                    alt="plus"
+                                    src="[object Object]"
+                                  />
+                                </span>
+                              </button>
+                              <button
+                                class="ant-btn css-dev-only-do-not-override-xu9wm8 ant-btn-default ant-btn-icon-only Tags__delete-button"
+                                type="button"
+                              >
+                                <span
+                                  class="ant-btn-icon"
+                                >
+                                  <img
+                                    alt="plus"
+                                    src="[object Object]"
+                                  />
+                                </span>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr
+                          class="ant-table-row ant-table-row-level-0 gray-row"
+                          data-row-key="2"
+                        >
+                          <td
+                            class="ant-table-cell ant-table-selection-column"
+                          >
+                            <label
+                              class="ant-checkbox-wrapper css-dev-only-do-not-override-xu9wm8"
+                            >
+                              <span
+                                class="ant-checkbox ant-wave-target css-dev-only-do-not-override-xu9wm8"
+                              >
+                                <input
+                                  class="ant-checkbox-input"
+                                  type="checkbox"
                                 />
-                              </div>
-                              <div
-                                class="ant-empty-description"
+                                <span
+                                  class="ant-checkbox-inner"
+                                />
+                              </span>
+                            </label>
+                          </td>
+                          <td
+                            class="ant-table-cell"
+                          >
+                            2
+                          </td>
+                          <td
+                            class="ant-table-cell"
+                          >
+                            <div
+                              class="Tags__tag"
+                            >
+                              Tag 2
+                            </div>
+                          </td>
+                          <td
+                            class="ant-table-cell"
+                          >
+                            <div
+                              class="Tags__tag"
+                            >
+                              Тег 2
+                            </div>
+                          </td>
+                          <td
+                            class="ant-table-cell"
+                          >
+                            <div
+                              class="Tags__tag"
+                            >
+                              Tag 2
+                            </div>
+                          </td>
+                          <td
+                            class="ant-table-cell"
+                          >
+                            <img
+                              alt="status"
+                              class="Tags__center-block"
+                              src="[object Object]"
+                            />
+                          </td>
+                          <td
+                            class="ant-table-cell"
+                          >
+                            <div
+                              class="Tags__tags-block"
+                            >
+                              <button
+                                class="ant-btn css-dev-only-do-not-override-xu9wm8 ant-btn-default ant-btn-icon-only Tags__add-button"
+                                type="button"
                               >
-                                <h2>
-                                  Данные отсутствуют
-                                </h2>
-                              </div>
+                                <span
+                                  class="ant-btn-icon"
+                                >
+                                  <img
+                                    alt="plus"
+                                    src="[object Object]"
+                                  />
+                                </span>
+                              </button>
+                              <button
+                                class="ant-btn css-dev-only-do-not-override-xu9wm8 ant-btn-default ant-btn-icon-only Tags__delete-button"
+                                type="button"
+                              >
+                                <span
+                                  class="ant-btn-icon"
+                                >
+                                  <img
+                                    alt="plus"
+                                    src="[object Object]"
+                                  />
+                                </span>
+                              </button>
                             </div>
                           </td>
                         </tr>

@@ -1,6 +1,6 @@
 import bem from 'easy-bem';
 import { Button, Form, Row, Tooltip } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
@@ -8,16 +8,18 @@ import { observer } from 'mobx-react-lite';
 import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '~/shared/ui';
 import { add, deleteIcon, editColor, inactive, infoCircle, search, status } from '~/assets/images';
 import { IColumn } from '~/features/merchants/interfaces';
-import { ITag } from '~/features/tags/interfaces';
+import { IChangeTagsStatuses, ITag } from '~/features/tags/interfaces';
 import { CreateEditTagModal } from '~/features/tags';
-import { useTableFilter } from '~/shared/hooks';
+import { useNotification, useTableFilter } from '~/shared/hooks';
 import { tagsStore } from '~/shared/api/store';
 import './Tags.scss';
 
 const Tags = observer(() => {
   const b = bem('Tags');
   const { t } = useTranslation();
-  const { tags, tagsPagination, tagsLoading } = toJS(tagsStore);
+  const openNotification = useNotification();
+  const { tags, tagsPagination, tagsLoading, changeStatusesSuccess, changeStatusesLoading } =
+    toJS(tagsStore);
   const {
     filters,
     handleSearchChange,
@@ -31,8 +33,19 @@ const Tags = observer(() => {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const [isTagModalOpen, setIsTagModalOpen] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [changeStatus, setChangeStatus] = useState<IChangeTagsStatuses>({ active: false, ids: [] });
   const [isDeactivateButton, setIsDeactivateButton] = useState(true);
   const [isDisabledButton, setIsDisabledButton] = useState(true);
+
+  useEffect(() => {
+    if (changeStatusesSuccess) {
+      handleOkCancel();
+      setSelectedRowKeys([]);
+    }
+    return () => {
+      tagsStore.setChangeStatusesSuccess(false);
+    };
+  }, [changeStatusesSuccess, openNotification, t]);
 
   const showDeleteModal = () => {
     setIsModalDeleteOpen(true);
@@ -66,14 +79,31 @@ const Tags = observer(() => {
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
     const selectedStatuses = newSelectedRowKeys.map((key) => {
-      const selectedMerchant = tags?.find((item) => item.id === parseInt(key.toString()));
-      return selectedMerchant ? selectedMerchant.active : false;
+      const selectedTag = tags?.find((item) => item.id === parseInt(key.toString()));
+      return selectedTag ? selectedTag.active : false;
     });
     const hasActiveTrue = selectedStatuses.includes(true);
     const hasActiveFalse = selectedStatuses.includes(false);
     const hasMixedStatus = hasActiveTrue && hasActiveFalse;
     setIsDeactivateButton(hasActiveTrue && !hasActiveFalse);
     setIsDisabledButton(hasMixedStatus);
+    setChangeStatus((prevStatuses) => ({
+      ...prevStatuses,
+      active: !selectedStatuses[0],
+      ids: newSelectedRowKeys?.map(Number),
+    }));
+  };
+
+  const handleAgreeHandler = async () => {
+    try {
+      await tagsStore.changeTagsStatuses(changeStatus);
+    } catch (e) {
+      if (e instanceof Error) {
+        openNotification('error', '', e.message);
+      } else {
+        console.error('Unexpected error type:', e);
+      }
+    }
   };
 
   const rowSelection = {
@@ -228,6 +258,8 @@ const Tags = observer(() => {
               : (t('tags.the_tags_you_select_will_be_active') as string)
           }
           handleOkCancel={handleOkCancel}
+          handleAgreeHandler={handleAgreeHandler}
+          loadingStatus={changeStatusesLoading}
         />
       </ModalComponent>
 

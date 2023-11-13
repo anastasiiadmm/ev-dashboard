@@ -118,6 +118,7 @@
     "name_in_eng": "Название на Английском",
     "save": "Сохранить",
     "deleting_tag": "Вы действительно хотите удалить тег?",
-    "if_you_delete_it_you_wont_be_able_to_restore": "Если вы удалите, то не сможете восстановить"
+    "if_you_delete_it_you_wont_be_able_to_restore": "Если вы удалите, то не сможете восстановить",
+    "tags_updated": "Статус обновлен"
   }
 }
