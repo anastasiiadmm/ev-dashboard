@@ -28,6 +28,17 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
+jest.mock('~/shared/api/store', () => ({
+  tagsStore: {
+    tags: [
+      { id: 1, title_ky: 'Tag 1', title_ru: 'Тег 1', title_en: 'Tag 1', active: true },
+      { id: 2, title_ky: 'Tag 2', title_ru: 'Тег 2', title_en: 'Tag 2', active: false },
+    ],
+    fetchTags: jest.fn(),
+    setChangeStatusesSuccess: jest.fn(),
+  },
+}));
+
 describe('Tags UI Component', () => {
   test('Render component toMatchSnapshot()', () => {
     const { asFragment } = render(
@@ -36,5 +47,18 @@ describe('Tags UI Component', () => {
       </BrowserRouter>
     );
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  test('it should render mock tags data', () => {
+    const { getAllByText } = render(
+      <BrowserRouter>
+        <Tags />
+      </BrowserRouter>
+    );
+
+    const tagElement1 = getAllByText('Tag 1');
+    const tagElement2 = getAllByText('Tag 2');
+    expect(tagElement1.length).toBe(2);
+    expect(tagElement2.length).toBe(2);
   });
 });
