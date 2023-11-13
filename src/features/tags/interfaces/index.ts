@@ -1,1 +1,1 @@
-export type { ITag, ITags, ITagCreate, ITagPagination } from './ITag';
+export type { ITag, ITagCreate, ITagPagination } from './ITag';
