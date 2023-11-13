@@ -4,12 +4,16 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import axiosApi from '~/shared/utils/mobx-api';
 import { ITagPagination, ITag } from '~/features/tags/interfaces';
 import { getAxiosConfig } from '~/shared/utils';
+import { IChangeTagsStatuses } from '~/features/tags/interfaces/ITag';
 
 interface TagsState {
   tags: ITag[] | null;
   tagsPagination: ITagPagination | null;
   tagsLoading: boolean;
   tagsError: string | null;
+  changeStatusesSuccess: boolean;
+  changeStatusesLoading: boolean;
+  changeStatusesError: string | null;
 }
 
 class TagsStore implements TagsState {
@@ -22,6 +26,9 @@ class TagsStore implements TagsState {
   };
   tagsLoading: boolean = false;
   tagsError: string | null = null;
+  changeStatusesSuccess: boolean = false;
+  changeStatusesLoading: boolean = false;
+  changeStatusesError: string | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -57,6 +64,51 @@ class TagsStore implements TagsState {
         this.tagsError = error?.message || null;
       });
     }
+  }
+
+  async changeTagsStatuses(data: IChangeTagsStatuses) {
+    try {
+      runInAction(() => {
+        this.changeStatusesSuccess = false;
+        this.changeStatusesLoading = true;
+        this.changeStatusesError = null;
+      });
+
+      const resp = await axiosApi.patch(`/common/tags/statuses/`, data);
+      const updatedTags = resp.data;
+
+      runInAction(() => {
+        if (this.tags) {
+          updatedTags.forEach((updatedTag) => {
+            const index = this.tags?.findIndex((tag) => tag.id === updatedTag.id);
+            if (index !== -1) {
+              if (this.tags) {
+                this.tags[index] = updatedTag;
+              }
+            } else {
+              this.tags?.push(updatedTag);
+            }
+          });
+        } else {
+          this.tags = updatedTags;
+        }
+
+        this.changeStatusesSuccess = true;
+        this.changeStatusesLoading = false;
+        this.changeStatusesError = null;
+      });
+    } catch (e) {
+      const error = e as AxiosError;
+      runInAction(() => {
+        this.tagsLoading = false;
+        this.changeStatusesSuccess = false;
+        this.tagsError = error?.message || null;
+      });
+    }
+  }
+
+  setChangeStatusesSuccess(value) {
+    this.changeStatusesSuccess = value;
   }
 }
 

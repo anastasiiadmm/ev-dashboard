@@ -13,6 +13,7 @@ interface Props {
   handleAgreeHandler?: () => void;
   hasCancelButton?: boolean;
   successModal?: boolean;
+  loadingStatus?: boolean;
   textTitle: string;
   infoText: string;
 }
@@ -21,6 +22,7 @@ const ActiveInactiveModal: React.FC<Props> = ({
   hasCancelButton = true,
   successModal = false,
   handleAgreeHandler,
+  loadingStatus,
   handleOkCancel,
   textTitle,
   infoText,
@@ -48,7 +50,7 @@ const ActiveInactiveModal: React.FC<Props> = ({
               {t('modals.cancel')}
             </Button>
           )}
-          <Button type='primary' onClick={handleAgreeHandler}>
+          <Button type='primary' onClick={handleAgreeHandler} loading={loadingStatus}>
             {successModal ? t('modals.okay') : t('modals.yes')}
           </Button>
         </div>
