@@ -1,5 +1,5 @@
 import { Button, Form, Row, Tooltip } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import bem from 'easy-bem';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -10,13 +10,20 @@ import { add, plus, active, status, x, search, infoCircle, inactive } from '~/as
 import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '~/shared/ui';
 import { IColumn, IMerchant } from '~/features/merchants/interfaces';
 import { merchantStore } from '~/shared/api/store';
-import { useTableFilter } from '~/shared/hooks';
+import { useNotification, useRowSelection, useTableFilter } from '~/shared/hooks';
 import './Merchants.scss';
 
 const Merchants = observer(() => {
   const b = bem('Merchants');
   const { t } = useTranslation();
-  const { merchants, merchantPagination, merchantsLoading } = toJS(merchantStore);
+  const openNotification = useNotification();
+  const {
+    merchants,
+    merchantPagination,
+    merchantsLoading,
+    changeMerchantStatusesSuccess,
+    changeMerchantStatusesLoading,
+  } = toJS(merchantStore);
   const {
     filters,
     handleSearchChange,
@@ -25,10 +32,23 @@ const Merchants = observer(() => {
     changeShowByHandler,
     onChangePageCheckHandler,
   } = useTableFilter(merchantStore.fetchMerchants.bind(merchantStore));
+  const {
+    selectedRowKeys,
+    onSelectChange,
+    isDeactivateButton,
+    isDisabledButton,
+    applyChangeStatus,
+  } = useRowSelection(merchants || [], merchantStore.changeMerchantsStatuses.bind(merchantStore));
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const [isDeactivateButton, setIsDeactivateButton] = useState(true);
-  const [isDisabledButton, setIsDisabledButton] = useState(true);
+
+  useEffect(() => {
+    if (changeMerchantStatusesSuccess) {
+      handleOkCancel();
+    }
+    return () => {
+      merchantStore.setChangeStatusesSuccess(false);
+    };
+  }, [changeMerchantStatusesSuccess]);
 
   const columns: IColumn[] = [
     {
@@ -118,17 +138,16 @@ const Merchants = observer(() => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-    const selectedStatuses = newSelectedRowKeys.map((key) => {
-      const selectedMerchant = merchants?.find((item) => item.id === parseInt(key.toString()));
-      return selectedMerchant ? selectedMerchant.active : false;
-    });
-    const hasActiveTrue = selectedStatuses.includes(true);
-    const hasActiveFalse = selectedStatuses.includes(false);
-    const hasMixedStatus = hasActiveTrue && hasActiveFalse;
-    setIsDeactivateButton(hasActiveTrue && !hasActiveFalse);
-    setIsDisabledButton(hasMixedStatus);
+  const handleAgreeHandler = async () => {
+    try {
+      await applyChangeStatus();
+    } catch (e) {
+      if (e instanceof Error) {
+        openNotification('error', '', e.message);
+      } else {
+        console.error('Unexpected error type:', e);
+      }
+    }
   };
 
   const rowSelection = {
@@ -137,7 +156,7 @@ const Merchants = observer(() => {
   };
 
   return (
-    <Row justify='space-between' data-testid='auth-component' className={b()}>
+    <Row justify='space-between' data-testid='merchants-component' className={b()}>
       <Row className={b('search-pagination-block')}>
         <div>
           <Form>
@@ -206,6 +225,8 @@ const Merchants = observer(() => {
               : (t('merchants.the_merchants_you_select_will_be_active') as string)
           }
           handleOkCancel={handleOkCancel}
+          loadingStatus={changeMerchantStatusesLoading}
+          handleAgreeHandler={handleAgreeHandler}
         />
       </ModalComponent>
     </Row>

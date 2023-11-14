@@ -2,8 +2,9 @@ import { AxiosError } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
-import { ITagPagination, ITag, IChangeTagsStatuses } from '~/features/tags/interfaces';
+import { ITagPagination, ITag } from '~/features/tags/interfaces';
 import { getAxiosConfig } from '~/shared/utils';
+import { IChangeStatuses } from '~/shared/interfaces';
 
 interface TagsState {
   tags: ITag[] | null;
@@ -65,7 +66,7 @@ class TagsStore implements TagsState {
     }
   }
 
-  async changeTagsStatuses(data: IChangeTagsStatuses) {
+  async changeTagsStatuses(data: IChangeStatuses) {
     try {
       runInAction(() => {
         this.changeStatusesSuccess = false;
@@ -97,9 +98,9 @@ class TagsStore implements TagsState {
     } catch (e) {
       const error = e as AxiosError;
       runInAction(() => {
-        this.tagsLoading = false;
+        this.changeStatusesLoading = false;
         this.changeStatusesSuccess = false;
-        this.tagsError = error?.message || null;
+        this.changeStatusesError = error?.message || null;
       });
     }
   }
