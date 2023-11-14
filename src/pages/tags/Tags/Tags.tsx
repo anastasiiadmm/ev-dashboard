@@ -8,9 +8,9 @@ import { observer } from 'mobx-react-lite';
 import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '~/shared/ui';
 import { add, deleteIcon, editColor, inactive, infoCircle, search, status } from '~/assets/images';
 import { IColumn } from '~/pages/merchants/interfaces';
-import { IChangeTagsStatuses, ITag } from '~/pages/tags/interfaces';
+import { ITag } from '~/pages/tags/interfaces';
 import { CreateEditTagModal } from '~/pages/tags';
-import { useNotification, useTableFilter } from '~/shared/hooks';
+import { useNotification, useRowSelection, useTableFilter } from '~/shared/hooks';
 import { tagsStore } from '~/shared/api/store';
 import './Tags.scss';
 
@@ -28,24 +28,26 @@ const Tags = observer(() => {
     changeShowByHandler,
     onChangePageCheckHandler,
   } = useTableFilter(tagsStore.fetchTags.bind(tagsStore));
+  const {
+    selectedRowKeys,
+    onSelectChange,
+    isDeactivateButton,
+    isDisabledButton,
+    applyChangeStatus,
+  } = useRowSelection(tags || [], tagsStore.changeTagsStatuses.bind(tagsStore));
   const [creating, setCreating] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const [isTagModalOpen, setIsTagModalOpen] = useState(false);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const [changeStatus, setChangeStatus] = useState<IChangeTagsStatuses>({ active: false, ids: [] });
-  const [isDeactivateButton, setIsDeactivateButton] = useState(true);
-  const [isDisabledButton, setIsDisabledButton] = useState(true);
 
   useEffect(() => {
     if (changeStatusesSuccess) {
       handleOkCancel();
-      setSelectedRowKeys([]);
     }
     return () => {
       tagsStore.setChangeStatusesSuccess(false);
     };
-  }, [changeStatusesSuccess, openNotification, t]);
+  }, [changeStatusesSuccess]);
 
   const showDeleteModal = () => {
     setIsModalDeleteOpen(true);
@@ -76,27 +78,9 @@ const Tags = observer(() => {
     showTagModal(false);
   };
 
-  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-    const selectedStatuses = newSelectedRowKeys.map((key) => {
-      const selectedTag = tags?.find((item) => item.id === parseInt(key.toString()));
-      return selectedTag ? selectedTag.active : false;
-    });
-    const hasActiveTrue = selectedStatuses.includes(true);
-    const hasActiveFalse = selectedStatuses.includes(false);
-    const hasMixedStatus = hasActiveTrue && hasActiveFalse;
-    setIsDeactivateButton(hasActiveTrue && !hasActiveFalse);
-    setIsDisabledButton(hasMixedStatus);
-    setChangeStatus((prevStatuses) => ({
-      ...prevStatuses,
-      active: !selectedStatuses[0],
-      ids: newSelectedRowKeys?.map(Number),
-    }));
-  };
-
   const handleAgreeHandler = async () => {
     try {
-      await tagsStore.changeTagsStatuses(changeStatus);
+      await applyChangeStatus();
     } catch (e) {
       if (e instanceof Error) {
         openNotification('error', '', e.message);

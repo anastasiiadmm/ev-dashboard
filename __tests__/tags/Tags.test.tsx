@@ -36,6 +36,12 @@ jest.mock('~/shared/api/store', () => ({
     ],
     fetchTags: jest.fn(),
     setChangeStatusesSuccess: jest.fn(),
+    changeTagsStatuses: jest.fn().mockImplementation(() => ({
+      bind: jest.fn().mockImplementation(() => {
+        return function() {
+        };
+      })
+    })),
   },
 }));
 
