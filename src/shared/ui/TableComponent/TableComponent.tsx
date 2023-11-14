@@ -4,9 +4,9 @@ import { Key } from 'antd/lib/table/interface';
 import bem from 'easy-bem';
 
 import { PaginationComponent, NotFoundImages } from '~/shared/ui';
-import { IColumn, IMerchant, IMerchantPagination, IStation } from '~/features/merchants/interfaces';
+import { IColumn, IMerchant, IMerchantPagination, IStation } from '~/pages/merchants/interfaces';
 import { IPagination } from '~/shared/interfaces';
-import { ITag } from '~/features/tags/interfaces';
+import { ITag } from '~/pages/tags/interfaces';
 import './TableComponent.scss';
 
 interface Props {

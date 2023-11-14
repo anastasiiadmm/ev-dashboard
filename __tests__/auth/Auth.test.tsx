@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import '../../__mocks__/react-i18next.mock';
 import '../../__mocks__/matchMedia.mock';
 import '../../__mocks__/i18nextMock';
-import Auth from "../../src/features/auth/Auth/Auth";
+import Auth from "../../src/pages/auth/Auth/Auth";
 
 jest.mock('~/shared/utils/config', () => ({
   apiURL: 'http://localhost/8000',
@@ -24,7 +24,7 @@ jest.mock('antd/lib/form/Form', () => {
   };
 });
 
-jest.mock('../../src/features/auth/Auth/Auth', () => () => <div>Mocked Auth</div>);
+jest.mock('../../src/pages/auth/Auth/Auth', () => () => <div>Mocked Auth</div>);
 
 describe('tests for Auth ui',  () => {
   test('Render component toMatchSnapshot()', () => {

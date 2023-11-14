@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { defaultTokens } from '~/shared/utils/storage';
 
-import AuthStore from "../../src/features/auth/store/authModel/authModel";
+import AuthStore from "../../src/pages/auth/store/authModel/authModel";
 
 jest.mock('~/shared/utils/config', () => ({
     apiURL: 'http://localhost/8000',

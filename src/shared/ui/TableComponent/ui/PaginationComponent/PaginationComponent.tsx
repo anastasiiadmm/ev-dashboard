@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { chevronRight, chevronLeft } from '~/assets/images';
 import { FormField } from '~/shared/ui';
 import { IPagination } from '~/shared/interfaces';
-import { IMerchantPagination } from '~/features/merchants/interfaces';
+import { IMerchantPagination } from '~/pages/merchants/interfaces';
 import './PaginationComponent.scss';
 
 interface Props {
