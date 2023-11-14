@@ -115,7 +115,7 @@ class TagsStore implements TagsState {
     this.changeStatusesSuccess = value;
   }
 
-  async deleteTag(id: number) {
+  async deleteTag(id: number | null) {
     try {
       runInAction(() => {
         this.deleteTagSuccess = false;

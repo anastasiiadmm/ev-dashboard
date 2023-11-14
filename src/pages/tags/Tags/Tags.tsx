@@ -41,7 +41,7 @@ const Tags = observer(() => {
     isDisabledButton,
     applyChangeStatus,
   } = useRowSelection(tags || [], tagsStore.changeTagsStatuses.bind(tagsStore));
-  const [selectedRowKey, setSelectedRowKey] = useState<number>(null);
+  const [selectedRowKey, setSelectedRowKey] = useState<number | null>(null);
   const [creating, setCreating] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
