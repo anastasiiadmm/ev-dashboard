@@ -1,18 +1,28 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { useNotification } from '~/shared/hooks';
+import { ITag } from '~/features/tags/interfaces';
+import { IMerchant } from '~/features/merchants/interfaces';
+import { IChangeStatuses } from '~/shared/interfaces';
 
-const useRowSelection = (arrayOfItems, updateStatusFunction) => {
+interface FetchFunctionType {
+  (data: IChangeStatuses): Promise<void>;
+}
+
+const useRowSelection = (
+  arrayOfItems: ITag[] | IMerchant[] | null,
+  updateStatusFunction: FetchFunctionType,
+) => {
   const openNotification = useNotification();
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isDeactivateButton, setIsDeactivateButton] = useState(true);
   const [isDisabledButton, setIsDisabledButton] = useState(true);
-  const [changeStatus, setChangeStatus] = useState({ active: false, ids: [] });
+  const [changeStatus, setChangeStatus] = useState<IChangeStatuses>({ active: false, ids: [] });
 
-  const onSelectChange = (newSelectedRowKeys) => {
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
     const selectedStatuses = newSelectedRowKeys.map((key) => {
-      const selectedTag = arrayOfItems.find((item) => item.id === parseInt(key.toString(), 10));
+      const selectedTag = arrayOfItems?.find((item) => item.id === parseInt(key.toString(), 10));
       return selectedTag ? selectedTag.active : false;
     });
 
@@ -34,7 +44,11 @@ const useRowSelection = (arrayOfItems, updateStatusFunction) => {
       await updateStatusFunction(changeStatus);
       setSelectedRowKeys([]);
     } catch (e) {
-      openNotification('error', '', e.message);
+      if (e instanceof Error) {
+        openNotification('error', '', e.message);
+      } else {
+        console.error('An unknown error occurred:', e);
+      }
     }
   };
 

@@ -38,7 +38,7 @@ const Merchants = observer(() => {
     isDeactivateButton,
     isDisabledButton,
     applyChangeStatus,
-  } = useRowSelection(merchants, merchantStore.changeMerchantsStatuses.bind(merchantStore));
+  } = useRowSelection(merchants || [], merchantStore.changeMerchantsStatuses.bind(merchantStore));
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
