@@ -34,7 +34,7 @@ jest.mock('react-i18next', () => ({
 
 beforeEach(() => {
   cleanup();
-  jest.mock('../../src/features/merchants/Create/Create', () => ({
+  jest.mock('../../src/pages/merchants/Create/Create', () => ({
     countries: mockCountries,
     districts: mockDistricts,
     settlements: mockSettlements,
