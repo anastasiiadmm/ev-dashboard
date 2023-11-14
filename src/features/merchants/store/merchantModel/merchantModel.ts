@@ -3,7 +3,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
 import { ICreateMerchant, IMerchant, IMerchantPagination } from '~/features/merchants/interfaces';
-import { IError } from '~/shared/interfaces';
+import { IChangeStatuses, IError } from '~/shared/interfaces';
 import { getAxiosConfig } from '~/shared/utils';
 
 interface MerchantState {
@@ -18,6 +18,9 @@ interface MerchantState {
   patchMerchantSuccess: boolean;
   patchMerchantLoading: boolean;
   patchMerchantError: AxiosError | null;
+  changeMerchantStatusesSuccess: boolean;
+  changeMerchantStatusesLoading: boolean;
+  changeMerchantStatusesError: string | null;
 }
 
 class MerchantStore implements MerchantState {
@@ -37,6 +40,9 @@ class MerchantStore implements MerchantState {
   patchMerchantSuccess: boolean = false;
   patchMerchantLoading: boolean = false;
   patchMerchantError: AxiosError | null = null;
+  changeMerchantStatusesSuccess: boolean = false;
+  changeMerchantStatusesLoading: boolean = false;
+  changeMerchantStatusesError: string | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -99,6 +105,49 @@ class MerchantStore implements MerchantState {
       });
       throw error;
     }
+  }
+
+  async changeMerchantsStatuses(data: IChangeStatuses) {
+    try {
+      runInAction(() => {
+        this.changeMerchantStatusesSuccess = false;
+        this.changeMerchantStatusesLoading = true;
+        this.changeMerchantStatusesError = null;
+      });
+
+      const resp = await axiosApi.patch(`/merchants/statuses/`, data);
+      const updatedTags = resp.data;
+
+      runInAction(() => {
+        if (!this.merchants) {
+          this.merchants = [];
+        }
+
+        updatedTags.forEach((updatedMerchant: IMerchant) => {
+          const index = this.merchants!.findIndex((tag) => tag.id === updatedMerchant.id);
+          if (index !== -1) {
+            this.merchants![index] = updatedMerchant;
+          } else {
+            this.merchants!.push(updatedMerchant);
+          }
+        });
+
+        this.changeMerchantStatusesSuccess = true;
+        this.changeMerchantStatusesLoading = false;
+        this.changeMerchantStatusesError = null;
+      });
+    } catch (e) {
+      const error = e as AxiosError;
+      runInAction(() => {
+        this.changeMerchantStatusesLoading = false;
+        this.changeMerchantStatusesSuccess = false;
+        this.changeMerchantStatusesError = error?.message || null;
+      });
+    }
+  }
+
+  setChangeStatusesSuccess(value: boolean) {
+    this.changeMerchantStatusesSuccess = value;
   }
 }
 

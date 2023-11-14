@@ -16,8 +16,3 @@ export interface ITagPagination {
   size: number | null;
   total: number | null;
 }
-
-export interface IChangeTagsStatuses {
-  active: boolean;
-  ids: number[];
-}
