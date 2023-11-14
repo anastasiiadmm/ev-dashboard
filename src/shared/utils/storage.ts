@@ -1,5 +1,5 @@
 import { languageLocalStorage, tokensLocalStorage } from '~/shared/utils/config';
-import { IJWTokens } from '~/features/auth/interfaces';
+import { IJWTokens } from '~/pages/auth/interfaces';
 
 export const defaultLocalStorage = { user: null, token: null };
 

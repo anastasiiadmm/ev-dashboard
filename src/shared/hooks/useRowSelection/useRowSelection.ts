@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import { useNotification } from '~/shared/hooks';
-import { ITag } from '~/features/tags/interfaces';
-import { IMerchant } from '~/features/merchants/interfaces';
+import { ITag } from '~/pages/tags/interfaces';
+import { IMerchant } from '~/pages/merchants/interfaces';
 import { IChangeStatuses } from '~/shared/interfaces';
 
 interface FetchFunctionType {

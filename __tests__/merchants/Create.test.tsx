@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import '../../__mocks__/react-i18next.mock';
 import '../../__mocks__/matchMedia.mock';
 import '../../__mocks__/i18nextMock';
-import Create from "../../src/features/merchants/Create/Create";
+import Create from "../../src/pages/merchants/Create/Create";
 import { merchantStore } from "../../src/shared/api/store";
 
 const mockCountries = [
@@ -34,7 +34,7 @@ jest.mock('react-i18next', () => ({
 
 beforeEach(() => {
   cleanup();
-  jest.mock('../../src/features/merchants/Create/Create', () => ({
+  jest.mock('../../src/pages/merchants/Create/Create', () => ({
     countries: mockCountries,
     districts: mockDistricts,
     settlements: mockSettlements,

@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import '../../__mocks__/react-i18next.mock';
 import '../../__mocks__/matchMedia.mock';
 import '../../__mocks__/i18nextMock';
-import { Tags } from "../../src/features/tags";
+import Tags from "../../src/pages/tags/Tags/Tags";
 
 beforeAll(() => {
   process.env.NODE_ENV = 'http://localhost/:8000/';
