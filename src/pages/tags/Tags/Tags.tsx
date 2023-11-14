@@ -18,8 +18,14 @@ const Tags = observer(() => {
   const b = bem('Tags');
   const { t } = useTranslation();
   const openNotification = useNotification();
-  const { tags, tagsPagination, tagsLoading, changeStatusesSuccess, changeStatusesLoading } =
-    toJS(tagsStore);
+  const {
+    tags,
+    tagsPagination,
+    tagsLoading,
+    changeStatusesSuccess,
+    changeStatusesLoading,
+    deleteTagLoading,
+  } = toJS(tagsStore);
   const {
     filters,
     handleSearchChange,
@@ -35,6 +41,7 @@ const Tags = observer(() => {
     isDisabledButton,
     applyChangeStatus,
   } = useRowSelection(tags || [], tagsStore.changeTagsStatuses.bind(tagsStore));
+  const [selectedRowKey, setSelectedRowKey] = useState<number>(null);
   const [creating, setCreating] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
@@ -90,6 +97,19 @@ const Tags = observer(() => {
     }
   };
 
+  const handleAgreeDeleteTagHandler = async () => {
+    try {
+      await tagsStore.deleteTag(selectedRowKey);
+      handleDeleteOkCancel();
+    } catch (e) {
+      if (e instanceof Error) {
+        openNotification('error', '', e.message);
+      } else {
+        console.error('Unexpected error type:', e);
+      }
+    }
+  };
+
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
@@ -128,7 +148,7 @@ const Tags = observer(() => {
     },
     {
       title: t('merchants.action'),
-      render: () => {
+      render: (record: ITag) => {
         return (
           <div className={b('tags-block')}>
             <Tooltip
@@ -158,7 +178,10 @@ const Tags = observer(() => {
               }
             >
               <Button
-                onClick={showDeleteModal}
+                onClick={() => {
+                  showDeleteModal();
+                  setSelectedRowKey(record.id);
+                }}
                 className={b('delete-button')}
                 icon={<img src={deleteIcon} alt='plus' />}
               />
@@ -274,6 +297,8 @@ const Tags = observer(() => {
           textTitle={t('tags.deleting_tag') as string}
           infoText={t('tags.if_you_delete_it_you_wont_be_able_to_restore') as string}
           handleOkCancel={handleDeleteOkCancel}
+          loadingStatus={deleteTagLoading}
+          handleAgreeHandler={handleAgreeDeleteTagHandler}
         />
       </ModalComponent>
     </Row>

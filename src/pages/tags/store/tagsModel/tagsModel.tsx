@@ -14,6 +14,9 @@ interface TagsState {
   changeStatusesSuccess: boolean;
   changeStatusesLoading: boolean;
   changeStatusesError: string | null;
+  deleteTagSuccess: boolean;
+  deleteTagLoading: boolean;
+  deleteTagError: string | null;
 }
 
 class TagsStore implements TagsState {
@@ -29,6 +32,9 @@ class TagsStore implements TagsState {
   changeStatusesSuccess: boolean = false;
   changeStatusesLoading: boolean = false;
   changeStatusesError: string | null = null;
+  deleteTagSuccess: boolean = false;
+  deleteTagLoading: boolean = false;
+  deleteTagError: string | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -107,6 +113,36 @@ class TagsStore implements TagsState {
 
   setChangeStatusesSuccess(value: boolean) {
     this.changeStatusesSuccess = value;
+  }
+
+  async deleteTag(id: number) {
+    try {
+      runInAction(() => {
+        this.deleteTagSuccess = false;
+        this.deleteTagLoading = true;
+        this.deleteTagError = null;
+      });
+
+      await axiosApi.delete(`/common/tags/${id}/`);
+
+      runInAction(() => {
+        if (!this.tags) {
+          this.tags = [];
+        } else {
+          this.tags = this.tags.filter((item) => item.id !== Number(id));
+        }
+        this.deleteTagSuccess = true;
+        this.deleteTagLoading = false;
+        this.deleteTagError = null;
+      });
+    } catch (e) {
+      const error = e as AxiosError;
+      runInAction(() => {
+        this.deleteTagLoading = false;
+        this.deleteTagSuccess = false;
+        this.deleteTagError = error?.message || null;
+      });
+    }
   }
 }
 
