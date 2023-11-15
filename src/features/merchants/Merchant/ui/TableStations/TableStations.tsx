@@ -3,18 +3,20 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import bem from 'easy-bem';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Link, useParams } from 'react-router-dom';
 
 import { add, inactive, infoCircle, plus, status } from '~/assets/images';
 import { IColumn, IStation } from '~/features/merchants/interfaces';
 import { TableCell } from '~/features/merchants/Merchant/ui';
 import { ActiveInactiveModal, ModalComponent, TableComponent } from '~/shared/ui';
+
 import './TableStations.scss';
 
 const TableStations = () => {
   const b = bem('TableStations');
   const { t } = useTranslation();
+  const { id: merchantId } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isDeactivateButton, setIsDeactivateButton] = useState(true);
@@ -268,7 +270,7 @@ const TableStations = () => {
   return (
     <Row justify='space-between' data-testid='auth-component' className={b()}>
       <Row className={b('table-block')}>
-        <Link to='/merchants' className={b('add-block')}>
+        <Link to={`/merchants/merchant/${merchantId}/create-station`} className={b('add-block')}>
           <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
             {t('merchants.add_station')}
           </Button>

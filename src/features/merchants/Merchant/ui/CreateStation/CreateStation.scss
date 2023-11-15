@@ -1,0 +1,190 @@
+@use '../../../../../app/styles/variables' as variables;
+
+.CreateStation {
+  margin: 20px;
+
+  &__cards-block {
+    display: flex;
+    gap: 24px;
+    margin: 20px 0 0 0;
+    align-items: start;
+
+    > div {
+      width: 532px;
+    }
+  }
+
+  &__info {
+    margin: 20px 0 12px 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: variables.$font-600;
+  }
+
+  &__display-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    > div {
+      width: 100%;
+    }
+  }
+
+  &__switch-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    > div {
+      width: 100%;
+      margin-bottom: 0 !important;
+    }
+  }
+
+  &__phone-input-styles {
+    width: 48%;
+  }
+
+  .switch-text {
+    display: inline-block;
+    margin-left: 8px;
+    font-weight: variables.$font-400 !important;
+  }
+
+  &__button-block {
+    display: flex;
+    flex-direction: column;
+    margin-top: 28px;
+    > button {
+      margin-top: 8px;
+    }
+  }
+
+  &__language-item {
+    background-color: variables.$gray-light-bg-color;
+    border: none;
+    margin-top: 8px;
+    > div {
+      border: none !important;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      padding: 10px !important;
+    }
+  }
+
+  &__lang-block {
+    width: 310px !important;
+  }
+
+  &__button-info {
+    width: 240px;
+    height: 40px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__cancel-button {
+    background-color: variables.$gray-light-bg-color;
+    color: variables.$black-color;
+    border: none;
+  }
+
+  .active-border {
+    border: 1px solid variables.$title-color;
+  }
+
+  &__alert-styles {
+    margin: 20px 0;
+    padding: 12px;
+
+    .ant-alert-message {
+      color: variables.$red-color;
+      font-size: 12px;
+      font-weight: variables.$font-600;
+      text-transform: uppercase;
+    }
+
+    .ant-alert-description {
+      color: variables.$red-color;
+      font-size: 12px;
+    }
+  }
+
+  .custom-radio .ant-radio-input {
+    display: none;
+  }
+
+  &__radio-styles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__upload-block {
+    margin: 20px 0;
+  }
+
+  &__warning-text {
+    position: relative;
+    font-size: 12px;
+    line-height: 16.8px;
+    color: variables.$second-color;
+    padding-top: 12px;
+    padding-left: 28px;
+    background: url('../../../../../assets/images/svg/icons/default/warning-gray.svg') no-repeat 6px 15px;
+  }
+
+  .radio-group-button > span > span {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('../../../../../assets/images/svg/icons/default/check.svg') no-repeat center center;
+    background-size: contain;
+    margin-right: -3px;
+    border-color: transparent;
+    background-color: transparent;
+  }
+
+  .ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+    background-color: variables.$white-color;
+    border-color: variables.$gray-color;
+  }
+
+  .ant-radio-wrapper .ant-radio-checked .ant-radio-inner::after {
+    opacity: 0;
+  }
+
+  .ant-radio-wrapper .ant-radio-checked::after {
+    outline: none;
+    border: none;
+  }
+
+  .ant-form-item {
+    margin-bottom: 14px;
+  }
+
+  &__point-btn {
+    width: auto;
+    padding-left: 30px;
+    background-color: #ECFFFD;
+    color: #3EB0A6C4;
+    border: 1px solid #E8F2FF;
+    background-image: url('../../../../../assets/images/svg/icons/active/point.svg');
+    background-repeat: no-repeat;
+    background-position: 9px center;
+  }
+
+  &__add-evse {
+    padding: 0;
+  }
+
+  &__infra-label > div > div > label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+}

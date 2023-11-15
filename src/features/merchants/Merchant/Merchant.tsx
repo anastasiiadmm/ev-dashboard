@@ -1,10 +1,14 @@
-import React from 'react';
 import { Row, Tabs } from 'antd';
-import bem from 'easy-bem';
 import dayjs from 'dayjs';
+import bem from 'easy-bem';
+import React from 'react';
 
-import { CardMerchantHeader, CardMerchantInfo, TableStations } from 'features/merchants/Merchant/ui';
 import { IMerchantInfo, ITabs } from '~/features/merchants/interfaces';
+import {
+  CardMerchantHeader,
+  CardMerchantInfo,
+  TableStations,
+} from '~/features/merchants/Merchant/ui';
 
 import './Merchant.scss';
 
@@ -46,9 +50,7 @@ const Merchant = () => {
     {
       key: '2',
       label: 'Станции',
-      children: (
-        <TableStations />
-      ),
+      children: <TableStations />,
     },
   ];
 

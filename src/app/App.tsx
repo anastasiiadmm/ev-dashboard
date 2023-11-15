@@ -8,17 +8,18 @@ import { Route, Routes } from 'react-router';
 import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
 import { Home } from '~/features/main';
 import { Create, Merchant, Merchants } from '~/features/merchants';
+import { CreateStation } from '~/features/merchants/Merchant/ui';
+import { Tags } from '~/features/tags';
 import { authStore } from '~/shared/api/store';
+import { LanguageProvider } from '~/shared/context';
 import { LayoutComponent } from '~/shared/ui';
 import { LanguageSelect } from '~/shared/ui/Fields';
-import { Tags } from '~/features/tags';
 import { tokensLocalStorage } from '~/shared/utils/config';
 import {
   defaultLocalStorage,
   getUserLocalStorage,
   logoutLocalStorage,
 } from '~/shared/utils/storage';
-import { LanguageProvider } from '~/shared/context';
 
 const App: React.FC = observer(() => {
   const b = bem('Auth');
@@ -71,6 +72,7 @@ const App: React.FC = observer(() => {
             <Route path='/merchants'>
               <Route index element={<Merchants />} />
               <Route path='/merchants/merchant/:id' element={<Merchant />} />
+              <Route path='/merchants/merchant/:id/create-station' element={<CreateStation />} />
               <Route path='/merchants/create-merchant' element={<Create />} />
             </Route>
             <Route path='/tags'>
