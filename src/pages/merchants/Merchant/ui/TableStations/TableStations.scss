@@ -1,0 +1,79 @@
+@use '../../../../../app/styles/variables' as variables;
+
+.TableStations {
+  &__table-block {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .crop-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    white-space: normal;
+  }
+
+  &__text {
+    margin: 0;
+  }
+
+  &__add-block {
+    position: absolute;
+    top: -51px;
+    right: 0;
+    display: flex;
+    align-self: self-end;
+  }
+
+  &__button-style {
+    display: flex;
+    align-items: center;
+    height: 34px;
+    padding: 8px 12px 8px 8px;
+  }
+
+  &__add-button {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    background: variables.$active-link-menu-bg !important;
+    border-color: variables.$active-link-menu-bg !important;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__pagination-block {
+    position: absolute;
+    bottom: 16px;
+  }
+
+  &__deactivate-button {
+    background-color: variables.$white-color !important;
+    border-color: variables.$white-color !important;
+    color: variables.$red-bg;
+  }
+
+  &__activate-button {
+    background-color: variables.$white-color !important;
+    border-color: variables.$white-color !important;
+    color: variables.$link-turquoise-color;
+  }
+
+  &__center-block {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .ant-btn-default {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+}

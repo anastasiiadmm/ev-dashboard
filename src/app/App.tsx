@@ -2,14 +2,15 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import bem from 'easy-bem';
 import { observer } from 'mobx-react-lite';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, Suspense } from 'react';
 import { Route, Routes } from 'react-router';
+import { Spin } from 'antd';
 
-import { Auth, ChangePassword, ResetPassword } from '~/features/auth';
-import { Home } from '~/features/main';
-import { Create, Merchant, Merchants } from '~/features/merchants';
-import { CreateStation } from '~/features/merchants/Merchant/ui';
-import { Tags } from '~/features/tags';
+import { HomePageAsync } from '~/pages/main';
+import { AuthAsync, ChangePasswordAsync, ResetPasswordAsync } from '~/pages/auth';
+import { CreateMerchantAsync, MerchantAsync, MerchantsAsync } from '~/pages/merchants';
+import { CreateStation } from '~/pages/merchants/Merchant/ui';
+import { TagsAsync } from '~/pages/tags';
 import { authStore } from '~/shared/api/store';
 import { LanguageProvider } from '~/shared/context';
 import { LayoutComponent } from '~/shared/ui';
@@ -67,32 +68,36 @@ const App: React.FC = observer(() => {
     return (
       <LanguageProvider>
         <LayoutComponent>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/merchants'>
-              <Route index element={<Merchants />} />
-              <Route path='/merchants/merchant/:id' element={<Merchant />} />
-              <Route path='/merchants/merchant/:id/create-station' element={<CreateStation />} />
-              <Route path='/merchants/create-merchant' element={<Create />} />
-            </Route>
-            <Route path='/tags'>
-              <Route index element={<Tags />} />
-            </Route>
-          </Routes>
+          <Suspense fallback={<Spin />}>
+            <Routes>
+              <Route path='/' element={<HomePageAsync />} />
+              <Route path='/merchants'>
+                <Route index element={<MerchantsAsync />} />
+                <Route path='/merchants/merchant/:id' element={<MerchantAsync />} />
+                <Route path='/merchants/merchant/:id/create-station' element={<CreateStation />} />
+                <Route path='/merchants/create-merchant' element={<CreateMerchantAsync />} />
+              </Route>
+              <Route path='/tags'>
+                <Route index element={<TagsAsync />} />
+              </Route>
+            </Routes>
+          </Suspense>
         </LayoutComponent>
       </LanguageProvider>
     );
   } else {
     return (
       <>
-        <div className={b('localization-block')}>
-          <LanguageSelect />
-        </div>
-        <Routes>
-          <Route path='*' element={<Auth />} />
-          <Route path='/reset-password' element={<ResetPassword />} />
-          <Route path='/change-password' element={<ChangePassword />} />
-        </Routes>
+        <Suspense fallback={<Spin />}>
+          <div className={b('localization-block')}>
+            <LanguageSelect />
+          </div>
+          <Routes>
+            <Route path='*' element={<AuthAsync />} />
+            <Route path='/reset-password' element={<ResetPasswordAsync />} />
+            <Route path='/change-password' element={<ChangePasswordAsync />} />
+          </Routes>
+        </Suspense>
       </>
     );
   }
