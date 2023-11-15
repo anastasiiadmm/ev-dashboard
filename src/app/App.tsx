@@ -9,8 +9,10 @@ import { Spin } from 'antd';
 import { HomePageAsync } from '~/pages/main';
 import { AuthAsync, ChangePasswordAsync, ResetPasswordAsync } from '~/pages/auth';
 import { CreateMerchantAsync, MerchantAsync, MerchantsAsync } from '~/pages/merchants';
+import { CreateStation } from '~/pages/merchants/Merchant/ui';
 import { TagsAsync } from '~/pages/tags';
 import { authStore } from '~/shared/api/store';
+import { LanguageProvider } from '~/shared/context';
 import { LayoutComponent } from '~/shared/ui';
 import { LanguageSelect } from '~/shared/ui/Fields';
 import { tokensLocalStorage } from '~/shared/utils/config';
@@ -19,7 +21,6 @@ import {
   getUserLocalStorage,
   logoutLocalStorage,
 } from '~/shared/utils/storage';
-import { LanguageProvider } from '~/shared/context';
 
 const App: React.FC = observer(() => {
   const b = bem('Auth');
@@ -73,6 +74,7 @@ const App: React.FC = observer(() => {
               <Route path='/merchants'>
                 <Route index element={<MerchantsAsync />} />
                 <Route path='/merchants/merchant/:id' element={<MerchantAsync />} />
+                <Route path='/merchants/merchant/:id/create-station' element={<CreateStation />} />
                 <Route path='/merchants/create-merchant' element={<CreateMerchantAsync />} />
               </Route>
               <Route path='/tags'>

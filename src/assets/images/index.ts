@@ -56,6 +56,7 @@ export { default as referralsActive } from './svg/icons/active/rreferrals-active
 export { default as settingsActive } from './svg/icons/active/settings-active.svg';
 export { default as logoutActive } from './svg/icons/active/logout-active.svg';
 export { default as usersActive } from './svg/icons/active/user-group-active.svg';
+export { default as point } from './svg/icons/active/point.svg';
 
 // images
 export { default as notFoundImage } from './png/images/Add tasks-pana 1.png';

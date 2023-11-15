@@ -1,7 +1,7 @@
-import React from 'react';
 import { Row, Tabs } from 'antd';
-import bem from 'easy-bem';
 import dayjs from 'dayjs';
+import bem from 'easy-bem';
+import React from 'react';
 
 import { CardMerchantHeader, CardMerchantInfo, TableStations } from '~/pages/merchants/Merchant/ui';
 import { IMerchantInfo, ITabs } from '~/pages/merchants/interfaces';
