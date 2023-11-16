@@ -13,7 +13,7 @@ import './CardMerchantHeader.scss';
 const { Title, Text } = Typography;
 
 type Props = {
-  merchant: IMerchantDetail;
+  merchant: IMerchantDetail | null;
   className?: string;
 };
 

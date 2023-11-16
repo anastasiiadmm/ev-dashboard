@@ -100,7 +100,7 @@
     "stations": "Станции",
     "merchant_id": "ID Мерчанта",
     "created_by": "Кем был создан",
-    "date_of_creation": "Дата создания"
+    "date_of_creation": "Дата создания",
     "create_station": "Создание станции",
     "station_information": "Информация о станции",
     "download": "Загрузить",

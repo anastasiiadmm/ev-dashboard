@@ -153,7 +153,7 @@ const TableStations = observer(() => {
   return (
     <Row justify='space-between' data-testid='auth-component' className={b()}>
       <Row className={b('table-block')}>
-        <Link to={`/merchants/merchant/${merchantId}/create-station`} className={b('add-block')}>
+        <Link to={`/merchants/merchant/${id}/create-station`} className={b('add-block')}>
           <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
             {t('merchants.add_station')}
           </Button>

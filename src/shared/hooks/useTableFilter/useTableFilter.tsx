@@ -3,15 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { useDebounce } from '~/shared/hooks';
 import { getParams } from '~/shared/utils';
 import { useLanguage } from '~/shared/context';
+import { IQueryType } from '~/shared/interfaces';
 
 interface FetchFunctionType {
   (queryString: string, currentLanguage: string): Promise<void>;
-}
-
-interface FiltersType {
-  page: number;
-  search: string;
-  size: number;
 }
 
 const useTableFilter = (
@@ -19,13 +14,17 @@ const useTableFilter = (
   { includeSearch = true, additionalParams = {} } = {},
 ) => {
   const { currentLanguage } = useLanguage();
-  const [filters, setFilters] = useState<FiltersType>({ page: 1, search: '', size: 10 });
+  const [filters, setFilters] = useState<IQueryType>({ page: 1, search: '', size: 10 });
 
   const debouncedSearchTerm = useDebounce(filters?.search, 500);
   const debouncedPageTerm = useDebounce(filters?.page, 500);
 
   useEffect(() => {
-    const params = { ...additionalParams, page: filters.page, size: filters.size };
+    const params: IQueryType = {
+      ...additionalParams,
+      page: filters.page,
+      size: filters.size,
+    };
     if (includeSearch) {
       params.search = filters.search;
     }

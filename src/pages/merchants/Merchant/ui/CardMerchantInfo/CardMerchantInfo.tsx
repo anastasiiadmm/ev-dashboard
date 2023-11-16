@@ -10,7 +10,7 @@ import { IMerchantDetail } from '~/pages/merchants/interfaces';
 const { Title } = Typography;
 
 type Props = {
-  merchant: IMerchantDetail;
+  merchant: IMerchantDetail | null;
   classNameTitle?: string;
   classNameButton?: string;
   style?: React.CSSProperties;

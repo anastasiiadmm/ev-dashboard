@@ -1,6 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 
-export const getParams = <T extends Record<string, unknown>>(params: T) =>
+import { IQueryType } from '~/shared/interfaces';
+
+export const getParams = <T extends Record<string, unknown> | IQueryType>(params: T) =>
   params
     ? `?${Object.entries(params)
         .map(([key, value]) => `${key}=${value}`)

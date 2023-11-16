@@ -175,7 +175,7 @@ class MerchantStore implements MerchantState {
     this.changeMerchantStatusesSuccess = value;
   }
 
-  async getMerchantDetail(currentLanguage, id: number) {
+  async getMerchantDetail(currentLanguage: string, id: number | undefined) {
     try {
       runInAction(() => {
         this.merchantDetailLoading = true;
@@ -202,7 +202,7 @@ class MerchantStore implements MerchantState {
     }
   }
 
-  async getMerchantStationsDetail(queryString: string, currentLanguage) {
+  async getMerchantStationsDetail(queryString: string, currentLanguage: string) {
     try {
       runInAction(() => {
         this.merchantDetailStationLoading = true;

@@ -20,7 +20,7 @@ const Merchant = observer(() => {
   const { merchantDetail, merchantDetailLoading } = toJS(merchantStore);
 
   useEffect(() => {
-    merchantStore.getMerchantDetail(currentLanguage, id);
+    merchantStore.getMerchantDetail(currentLanguage, Number(id));
   }, [currentLanguage, id]);
 
   const items: ITabs[] = [

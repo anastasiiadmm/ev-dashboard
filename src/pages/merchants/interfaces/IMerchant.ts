@@ -35,6 +35,7 @@ export interface IMerchantStation {
   connectors: string[];
   tags: string[];
   surroundings: string[];
+  active?: boolean;
 }
 
 export interface IScheduleStation {
