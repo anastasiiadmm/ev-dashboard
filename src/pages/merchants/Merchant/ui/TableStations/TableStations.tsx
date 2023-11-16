@@ -73,6 +73,7 @@ const TableStations = observer(() => {
     },
     {
       title: t('merchants.location'),
+      width: 130,
       render: (record: IStation) => {
         return <p className={b('text crop-text')}>{record?.location}</p>;
       },
