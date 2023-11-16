@@ -1,0 +1,9 @@
+.UploadFile {
+  .ant-btn > span {
+    text-decoration: underline;
+  }
+
+  &.ant-upload-wrapper .ant-upload-drag {
+    border: none;
+  }
+}
