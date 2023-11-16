@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Flex, Row, Typography } from 'antd';
+import { Button, Flex, Row, Skeleton, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { CardComponent } from '~/shared/ui';
@@ -12,12 +12,22 @@ const { Title } = Typography;
 type Props = {
   merchant: IMerchantDetail | null;
   classNameTitle?: string;
+  merchantDetailLoading?: string;
   classNameButton?: string;
   style?: React.CSSProperties;
 };
 
-const CardMerchantInfo: React.FC<Props> = ({ merchant, classNameTitle, classNameButton }) => {
+const CardMerchantInfo: React.FC<Props> = ({
+  merchant,
+  merchantDetailLoading,
+  classNameTitle,
+  classNameButton,
+}) => {
   const { t } = useTranslation();
+
+  if (merchantDetailLoading) {
+    return <Skeleton />;
+  }
 
   return (
     <CardComponent>

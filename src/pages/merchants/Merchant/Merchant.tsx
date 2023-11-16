@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Row, Spin, Tabs } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Row, Skeleton, Tabs } from 'antd';
 import bem from 'easy-bem';
 import { toJS } from 'mobx';
 import { useParams } from 'react-router';
@@ -18,10 +18,15 @@ const Merchant = observer(() => {
   const { id } = useParams();
   const { currentLanguage } = useLanguage();
   const { merchantDetail, merchantDetailLoading } = toJS(merchantStore);
+  const [activeKey, setActiveKey] = useState<string>('1');
 
   useEffect(() => {
     merchantStore.getMerchantDetail(currentLanguage, Number(id));
   }, [currentLanguage, id]);
+
+  const onTabChange = (key: string) => {
+    setActiveKey(key);
+  };
 
   const items: ITabs[] = [
     {
@@ -30,6 +35,7 @@ const Merchant = observer(() => {
       children: (
         <CardMerchantInfo
           merchant={merchantDetail}
+          merchantDetailLoading={merchantDetailLoading}
           classNameButton={b('button-style')}
           classNameTitle={b('title-info')}
         />
@@ -42,14 +48,20 @@ const Merchant = observer(() => {
     },
   ];
 
-  if (merchantDetailLoading) {
-    return <Spin className='spin' />;
-  }
-
   return (
     <Row justify='space-between' data-testid='merchant-component' className={b()}>
-      <CardMerchantHeader className={b('card-text-block')} merchant={merchantDetail} />
-      <Tabs defaultActiveKey='1' items={items} />
+      {merchantDetailLoading ? (
+        <Skeleton />
+      ) : (
+        <CardMerchantHeader className={b('card-text-block')} merchant={merchantDetail} />
+      )}
+
+      <Tabs
+        defaultActiveKey={activeKey}
+        activeKey={activeKey}
+        onChange={onTabChange}
+        items={items}
+      />
     </Row>
   );
 });

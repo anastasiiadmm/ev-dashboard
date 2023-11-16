@@ -87,7 +87,7 @@ const TableStations = observer(() => {
           <p className={b('text crop-text')}>
             {days?.[0]?.open}
             <br />
-            выходной: {}
+            {t('merchants.day_off')}
           </p>
         );
       },
