@@ -1,19 +1,46 @@
 export interface IMerchant {
   id: number;
-  name: string;
-  legal_name: string;
-  rate: string;
-  phone: string;
-  location: string;
   number_stations: number;
   active_stations: number;
   inactive_stations: number;
+  name: string;
+  legal_name: string;
+  rate: string;
   agreement_number: string;
+  phone: string;
+  location: string;
   entity: string;
   active: boolean;
   country: number;
   district: number;
   city: number;
+}
+
+export interface IMerchantDetail extends Omit<IMerchant, 'country' | 'district' | 'city'> {
+  created_by: string;
+  city_name: string;
+  country_name: string;
+  district_name: string;
+  created_at: string;
+  address: string;
+  email: string;
+}
+
+export interface IMerchantStation {
+  id: number;
+  name: string;
+  location: string;
+  schedule: IScheduleStation[];
+  status: number;
+  connectors: string[];
+  tags: string[];
+  surroundings: string[];
+}
+
+export interface IScheduleStation {
+  days: number[];
+  open: string;
+  breaks: string[];
 }
 
 export interface IMerchantPagination {
@@ -47,26 +74,6 @@ export interface ICreateMerchant {
   country: number;
   district: number;
   city: number;
-}
-
-export interface IMerchantInfo {
-  id: number;
-  number_stations: number;
-  active_stations: number;
-  inactive_stations: number;
-  name: string;
-  legal_name: string;
-  email: string;
-  rate: string;
-  agreement_number: string;
-  address: string;
-  phone: string;
-  active: boolean;
-  country: string;
-  district: string;
-  city: string;
-  created_by: string;
-  created_at: string;
 }
 
 export interface ISchedule {

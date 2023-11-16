@@ -8,20 +8,28 @@ interface FetchFunctionType {
   (queryString: string, currentLanguage: string): Promise<void>;
 }
 
-const useTableFilter = (fetchFunction: FetchFunctionType) => {
+interface FiltersType {
+  page: number;
+  search: string;
+  size: number;
+}
+
+const useTableFilter = (
+  fetchFunction: FetchFunctionType,
+  { includeSearch = true, additionalParams = {} } = {},
+) => {
   const { currentLanguage } = useLanguage();
-  const [filters, setFilters] = useState({ page: 1, search: '', size: 10 });
+  const [filters, setFilters] = useState<FiltersType>({ page: 1, search: '', size: 10 });
 
   const debouncedSearchTerm = useDebounce(filters?.search, 500);
   const debouncedPageTerm = useDebounce(filters?.page, 500);
 
   useEffect(() => {
-    const queryString = getParams({
-      page: filters?.page,
-      search: filters?.search,
-      size: filters?.size,
-    });
-
+    const params = { ...additionalParams, page: filters.page, size: filters.size };
+    if (includeSearch) {
+      params.search = filters.search;
+    }
+    const queryString = getParams(params);
     fetchFunction(queryString, currentLanguage);
   }, [currentLanguage, debouncedSearchTerm, debouncedPageTerm, filters?.size]);
 

@@ -1,11 +1,12 @@
 export type {
   IMerchant,
-  IMerchantInfo,
   ICreateMerchant,
   IStation,
   IColumn,
   ITabs,
   IMerchantPagination,
   IQueryMerchant,
+  IMerchantDetail,
+  IMerchantStation,
 } from './IMerchant';
 export type { ICommon } from './ICommon';

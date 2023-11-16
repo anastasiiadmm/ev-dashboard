@@ -14,6 +14,7 @@ interface Props {
   rules?: Rule[];
   placeholder?: string;
   inputClassName?: string;
+  disabled?: boolean;
   onChange?: () => void;
   error?: boolean;
   prefix?: React.ReactNode;
@@ -32,6 +33,7 @@ const DefaultField: React.FC<Props> = ({
   inputType,
   onChange,
   prefix,
+  disabled,
 }) => {
   return (
     <Form.Item
@@ -44,6 +46,7 @@ const DefaultField: React.FC<Props> = ({
       help={error ? '' : undefined}
     >
       <Input
+        disabled={disabled}
         type={inputType}
         name={name}
         defaultValue={defaultValue}
