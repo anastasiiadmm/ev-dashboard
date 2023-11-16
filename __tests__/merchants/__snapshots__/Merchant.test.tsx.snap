@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
+<DocumentFragment>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-spinning spin css-dev-only-do-not-override-xu9wm8"
+  >
+    <span
+      class="ant-spin-dot ant-spin-dot-spin"
+    >
+      <i
+        class="ant-spin-dot-item"
+      />
+      <i
+        class="ant-spin-dot-item"
+      />
+      <i
+        class="ant-spin-dot-item"
+      />
+      <i
+        class="ant-spin-dot-item"
+      />
+    </span>
+  </div>
+</DocumentFragment>
+`;

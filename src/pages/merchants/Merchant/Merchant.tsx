@@ -47,7 +47,7 @@ const Merchant = observer(() => {
   }
 
   return (
-    <Row justify='space-between' data-testid='auth-component' className={b()}>
+    <Row justify='space-between' data-testid='merchant-component' className={b()}>
       <CardMerchantHeader className={b('card-text-block')} merchant={merchantDetail} />
       <Tabs defaultActiveKey='1' items={items} />
     </Row>
