@@ -58,10 +58,16 @@
     "legal_name": "Entity",
     "entity_full": "Entity",
     "connectors": "Connectors",
+    "day_off": "day off:",
     "contacts": "Phone",
     "tags": "Tags",
     "tag": "Tag",
-    "infrastructure": "Инфраструктура",
+    "infrastructure": "Infrastructure",
+    "merchant_name": "Merchant name",
+    "email": "Email",
+    "active_stations": "Active stations",
+    "inactive_stations": "Inactive stations",
+    "edit": "Edit",
     "the_stations_you_selected_will_not_be_active": "The stations you selected will not be active.",
     "the_stations_you_selected_will_be_active": "The stations you selected will be active.",
     "status": "Status",
@@ -74,6 +80,7 @@
     "city": "City",
     "street": "Street",
     "active": "Active",
+    "inactive": "Inactive",
     "create": "Create",
     "further": "Further",
     "cancel": "Cancel",
@@ -89,7 +96,6 @@
     "deactivate": "Deactivate",
     "activate": "Activate",
     "the_merchants_you_select_will_not_be_active": "The merchants you select will not be active.",
-    "the_merchants_you_select_will_be_active": "The merchants you select will be active.",
     "create_station": "Create station",
     "station_information": "Station information",
     "download": "Download",
@@ -110,7 +116,13 @@
     "select_on_map": "Select on map",
     "add_evse_module": "+ Add EVSE module",
     "column_information": "Column information",
-    "information_about_evse_modules": "Information about EVSE modules"
+    "information_about_evse_modules": "Information about EVSE modules",
+    "the_merchants_you_select_will_be_active": "The merchants you select will be active.",
+    "about_merchant": "About merchant",
+    "stations": "Stations",
+    "merchant_id": "Merchant ID",
+    "created_by": "Created by",
+    "date_of_creation": "Date of creation"
   },
   "modals": {
     "cancel": "Cancel",
@@ -143,5 +155,14 @@
     "deleting_tag": "Are you sure you want to remove the tag?",
     "if_you_delete_it_you_wont_be_able_to_restore": "If you delete it, you won't be able to restore",
     "tags_updated": "Status updated"
+  },
+  "week_days": {
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday",
+    "Sunday": "Sunday"
   }
 }

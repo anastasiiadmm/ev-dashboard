@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useNotification } from '~/shared/hooks';
 import { ITag } from '~/pages/tags/interfaces';
-import { IMerchant } from '~/pages/merchants/interfaces';
+import { IMerchant, IMerchantStation } from '~/pages/merchants/interfaces';
 import { IChangeStatuses } from '~/shared/interfaces';
 
 interface FetchFunctionType {
@@ -10,7 +10,7 @@ interface FetchFunctionType {
 }
 
 const useRowSelection = (
-  arrayOfItems: ITag[] | IMerchant[] | null,
+  arrayOfItems: ITag[] | IMerchant[] | IMerchantStation[] | null,
   updateStatusFunction: FetchFunctionType,
 ) => {
   const openNotification = useNotification();
@@ -23,7 +23,7 @@ const useRowSelection = (
     setSelectedRowKeys(newSelectedRowKeys);
     const selectedStatuses = newSelectedRowKeys.map((key) => {
       const selectedTag = arrayOfItems?.find((item) => item.id === parseInt(key.toString(), 10));
-      return selectedTag ? selectedTag.active : false;
+      return selectedTag ? selectedTag?.active : false;
     });
 
     const hasActiveTrue = selectedStatuses.includes(true);

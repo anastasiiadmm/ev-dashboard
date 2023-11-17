@@ -132,7 +132,8 @@
     color: variables.$second-color;
     padding-top: 12px;
     padding-left: 28px;
-    background: url('../../../../../assets/images/svg/icons/default/warning-gray.svg') no-repeat 6px 15px;
+    background: url('../../../../../assets/images/svg/icons/default/warning-gray.svg') no-repeat 6px
+      15px;
   }
 
   .radio-group-button > span > span {
@@ -140,7 +141,8 @@
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: url('../../../../../assets/images/svg/icons/default/check.svg') no-repeat center center;
+    background: url('../../../../../assets/images/svg/icons/default/check.svg') no-repeat center
+      center;
     background-size: contain;
     margin-right: -3px;
     border-color: transparent;
@@ -168,9 +170,9 @@
   &__point-btn {
     width: auto;
     padding-left: 30px;
-    background-color: #ECFFFD;
-    color: #3EB0A6C4;
-    border: 1px solid #E8F2FF;
+    background-color: #ecfffd;
+    color: #3eb0a6c4;
+    border: 1px solid #e8f2ff;
     background-image: url('../../../../../assets/images/svg/icons/active/point.svg');
     background-repeat: no-repeat;
     background-position: 9px center;

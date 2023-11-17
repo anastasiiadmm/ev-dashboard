@@ -4,3 +4,4 @@ export type { IError } from './IError';
 export type { OptionType } from './IField';
 export type { ErrorResponse } from './IError';
 export type { IChangeStatuses } from './IStatus';
+export type { IQueryType } from './IQueryType';

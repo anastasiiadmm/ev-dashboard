@@ -1,88 +1,125 @@
 import React from 'react';
-import { Button, Flex, Row, Typography } from 'antd';
+import { Button, Flex, Row, Skeleton, Typography } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 import { CardComponent } from '~/shared/ui';
 import { TextBlock } from '~/pages/merchants/Merchant/ui';
 import { edit } from '~/assets/images';
-import { IMerchantInfo } from '~/pages/merchants/interfaces';
+import { IMerchantDetail } from '~/pages/merchants/interfaces';
 
 const { Title } = Typography;
 
 type Props = {
-  merchant: IMerchantInfo;
+  merchant: IMerchantDetail | null;
   classNameTitle?: string;
+  merchantDetailLoading?: boolean;
   classNameButton?: string;
   style?: React.CSSProperties;
 };
 
-const CardMerchantInfo: React.FC<Props> = ({ merchant, classNameTitle, classNameButton }) => {
+const CardMerchantInfo: React.FC<Props> = ({
+  merchant,
+  merchantDetailLoading,
+  classNameTitle,
+  classNameButton,
+}) => {
+  const { t } = useTranslation();
+
+  if (merchantDetailLoading) {
+    return <Skeleton />;
+  }
+
   return (
     <CardComponent>
       <Row>
         <Flex vertical style={{ marginRight: '44px' }}>
           <Title level={5} className={classNameTitle}>
-            Информация о мерчанте
+            {t('merchants.merchant_information')}
           </Title>
           <TextBlock
             styleText={{ marginBottom: '24px' }}
-            title='Наименование мерчанта'
+            title={t('merchants.merchant_name') as string}
             text={merchant?.name}
           />
           <TextBlock
             styleText={{ marginBottom: '24px' }}
-            title='Юридическое лицо'
+            title={t('merchants.entity_full') as string}
             text={merchant?.legal_name}
           />
           <TextBlock
             styleText={{ marginBottom: '24px' }}
-            title='№ договора'
+            title={t('merchants.agreement_number') as string}
             text={merchant?.agreement_number}
           />
           <TextBlock
             styleText={{ marginBottom: '24px' }}
-            title='% по агентскому договору'
+            title={t('merchants.under_agency_agreement') as string}
             text={merchant?.rate}
           />
         </Flex>
         <Flex vertical style={{ marginRight: '44px' }}>
           <Title level={5} className={classNameTitle}>
-            Контакты
-          </Title>
-          <TextBlock styleText={{ marginBottom: '24px' }} title='Телефон' text={merchant?.phone} />
-          <TextBlock styleText={{ marginBottom: '24px' }} title='Email' text={merchant?.email} />
-        </Flex>
-        <Flex vertical style={{ marginRight: '44px' }}>
-          <Title level={5} className={classNameTitle}>
-            Локация
-          </Title>
-          <TextBlock styleText={{ marginBottom: '24px' }} title='Страна' text={merchant?.country} />
-          <TextBlock styleText={{ marginBottom: '24px' }} title='Город' text={merchant?.city} />
-          <TextBlock styleText={{ marginBottom: '24px' }} title='Район' text={merchant?.district} />
-          <TextBlock styleText={{ marginBottom: '24px' }} title='Улица' text={merchant?.address} />
-        </Flex>
-        <Flex vertical style={{ marginRight: '44px' }}>
-          <Title level={5} className={classNameTitle}>
-            Станции
+            {t('merchants.contacts')}
           </Title>
           <TextBlock
             styleText={{ marginBottom: '24px' }}
-            title='Кол-во станций'
+            title={t('merchants.phone') as string}
+            text={merchant?.phone}
+          />
+          <TextBlock
+            styleText={{ marginBottom: '24px' }}
+            title={t('merchants.email') as string}
+            text={merchant?.email}
+          />
+        </Flex>
+        <Flex vertical style={{ marginRight: '44px' }}>
+          <Title level={5} className={classNameTitle}>
+            {t('merchants.location')}
+          </Title>
+          <TextBlock
+            styleText={{ marginBottom: '24px' }}
+            title={t('merchants.country') as string}
+            text={merchant?.country_name}
+          />
+          <TextBlock
+            styleText={{ marginBottom: '24px' }}
+            title={t('merchants.city') as string}
+            text={merchant?.city_name}
+          />
+          <TextBlock
+            styleText={{ marginBottom: '24px' }}
+            title={t('merchants.district') as string}
+            text={merchant?.district_name}
+          />
+          <TextBlock
+            styleText={{ marginBottom: '24px' }}
+            title={t('merchants.street') as string}
+            text={merchant?.address}
+          />
+        </Flex>
+        <Flex vertical style={{ marginRight: '44px' }}>
+          <Title level={5} className={classNameTitle}>
+            {t('merchants.stations')}
+          </Title>
+          <TextBlock
+            styleText={{ marginBottom: '24px' }}
+            title={t('merchants.number_of_stations') as string}
             text={merchant?.number_stations}
           />
           <TextBlock
             styleText={{ marginBottom: '24px' }}
-            title='Активных станций'
+            title={t('merchants.active_stations') as string}
             text={merchant?.active_stations}
           />
           <TextBlock
             styleText={{ marginBottom: '24px' }}
-            title='Неактивных станций'
+            title={t('merchants.inactive_stations') as string}
             text={merchant?.inactive_stations}
           />
         </Flex>
       </Row>
       <Button className={classNameButton} type='primary' icon={<img src={edit} alt='edit' />}>
-        Редактировать
+        {t('merchants.edit')}
       </Button>
     </CardComponent>
   );
