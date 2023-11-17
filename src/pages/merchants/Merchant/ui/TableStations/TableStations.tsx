@@ -88,7 +88,7 @@ const TableStations = observer(() => {
         return (
           <p>
             {days?.[0]?.open}
-            {days?.length ? (
+            {days?.[0]?.open && (
               <>
                 <br />
                 <span style={{ display: 'flex', gap: 5 }}>
@@ -98,7 +98,7 @@ const TableStations = observer(() => {
                   ))}
                 </span>
               </>
-            ) : null}
+            )}
           </p>
         );
       },
