@@ -12,7 +12,7 @@ const { Title } = Typography;
 type Props = {
   merchant: IMerchantDetail | null;
   classNameTitle?: string;
-  merchantDetailLoading?: string;
+  merchantDetailLoading?: boolean;
   classNameButton?: string;
   style?: React.CSSProperties;
 };

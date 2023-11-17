@@ -155,5 +155,14 @@
     "deleting_tag": "Сиз чындап эле тегин жок кылууну каалайсызбы?",
     "if_you_delete_it_you_wont_be_able_to_restore": "Эгерде сиз өчүрсөңүз, анда кайра калыбына келтирүү мүмкүн эмес",
     "tags_updated": "Статус жаңырды"
+  },
+  "week_days": {
+    "Monday": "Дүйшөмбү",
+    "Tuesday": "Шейшемби",
+    "Wednesday": "Шаршемби",
+    "Thursday": "Бейшемби",
+    "Friday": "Жума",
+    "Saturday": "Ишемби",
+    "Sunday": "Жекшемби"
   }
 }

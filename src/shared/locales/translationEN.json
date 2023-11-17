@@ -155,5 +155,14 @@
     "deleting_tag": "Are you sure you want to remove the tag?",
     "if_you_delete_it_you_wont_be_able_to_restore": "If you delete it, you won't be able to restore",
     "tags_updated": "Status updated"
+  },
+  "week_days": {
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday",
+    "Sunday": "Sunday"
   }
 }

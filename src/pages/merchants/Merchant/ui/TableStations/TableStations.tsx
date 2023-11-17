@@ -13,6 +13,7 @@ import { TableCell } from '~/pages/merchants/Merchant/ui';
 import { ActiveInactiveModal, ModalComponent, TableComponent } from '~/shared/ui';
 import { merchantStore } from '~/shared/api/store';
 import { useNotification, useRowSelection, useTableFilter } from '~/shared/hooks';
+import { getDaysFromSchedule } from '~/shared/utils/helper';
 import './TableStations.scss';
 
 const TableStations = observer(() => {
@@ -80,14 +81,20 @@ const TableStations = observer(() => {
     },
     {
       title: t('merchants.schedule'),
-      width: 120,
+      width: 190,
       render: (record: IStation) => {
         const days = record.schedule;
+        const daysName = getDaysFromSchedule(record.schedule);
         return (
-          <p className={b('text crop-text')}>
+          <p>
             {days?.[0]?.open}
             <br />
-            {t('merchants.day_off')}
+            <span style={{ display: 'flex', gap: 5 }}>
+              {t('merchants.day_off')}
+              {daysName.map((day: string) => (
+                <span key={day}>{t(`week_days.${day}`)}</span>
+              ))}
+            </span>
           </p>
         );
       },

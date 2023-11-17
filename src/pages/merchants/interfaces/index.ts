@@ -2,6 +2,7 @@ export type {
   IMerchant,
   ICreateMerchant,
   IStation,
+  ISchedule,
   IColumn,
   ITabs,
   IMerchantPagination,

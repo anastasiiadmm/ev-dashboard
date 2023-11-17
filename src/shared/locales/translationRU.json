@@ -155,5 +155,14 @@
     "deleting_tag": "Вы действительно хотите удалить тег?",
     "if_you_delete_it_you_wont_be_able_to_restore": "Если вы удалите, то не сможете восстановить",
     "tags_updated": "Статус обновлен"
+  },
+  "week_days": {
+    "Monday": "Понедельник",
+    "Tuesday": "Вторник",
+    "Wednesday": "Среда",
+    "Thursday": "Четверг",
+    "Friday": "Пятницы",
+    "Saturday": "Суббота",
+    "Sunday": "Воскресенье"
   }
 }
