@@ -88,13 +88,17 @@ const TableStations = observer(() => {
         return (
           <p>
             {days?.[0]?.open}
-            <br />
-            <span style={{ display: 'flex', gap: 5 }}>
-              {t('merchants.day_off')}
-              {daysName.map((day: string) => (
-                <span key={day}>{t(`week_days.${day}`)}</span>
-              ))}
-            </span>
+            {days?.length ? (
+              <>
+                <br />
+                <span style={{ display: 'flex', gap: 5 }}>
+                  {t('merchants.day_off')}
+                  {daysName.map((day: string) => (
+                    <span key={day}>{t(`week_days.${day}`)}</span>
+                  ))}
+                </span>
+              </>
+            ) : null}
           </p>
         );
       },
