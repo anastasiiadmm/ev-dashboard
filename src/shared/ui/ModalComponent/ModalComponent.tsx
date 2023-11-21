@@ -9,6 +9,7 @@ interface Props {
   handleOk: () => void;
   handleCancel?: () => void;
   children: ReactNode;
+  className?: string;
 }
 
 const ModalComponent: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const ModalComponent: React.FC<Props> = ({
   children,
   title,
   width,
+  className,
 }) => {
   return (
     <Modal
@@ -29,6 +31,7 @@ const ModalComponent: React.FC<Props> = ({
       onOk={handleOk}
       onCancel={handleCancel}
       footer={null}
+      className={className}
     >
       {children}
     </Modal>

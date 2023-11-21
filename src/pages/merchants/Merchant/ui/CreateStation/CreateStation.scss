@@ -187,4 +187,10 @@
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
   }
+
+  &__info-module {
+    font-weight: variables.$font-400;
+    color: variables.$second-color;
+    font-size: 10px;
+  }
 }
