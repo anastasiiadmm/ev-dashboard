@@ -15,7 +15,7 @@ type Props = {
   classNameTitle?: string;
   merchantDetailLoading?: boolean;
   classNameButton?: string;
-  merchantId?: number;
+  merchantId?: string | undefined;
   style?: React.CSSProperties;
 };
 
