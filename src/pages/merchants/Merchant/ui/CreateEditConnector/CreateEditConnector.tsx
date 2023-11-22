@@ -1,6 +1,7 @@
 import { Button, Form } from 'antd';
 import bem from 'easy-bem';
 import React, { ChangeEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { ICreateConnector } from '~/pages/merchants/interfaces';
 import { TextBlock } from '~/pages/merchants/Merchant/ui';
@@ -12,12 +13,13 @@ interface Props {
   onAddConnector: (evse_id: number, connector: ICreateConnector) => void;
   onFinish: () => void;
   handleFormChange: (key: string, value: string | number | boolean) => void;
-  stationId: number;
+  stationId?: number | string;
   error: boolean;
 }
 
 const CreateEditConnector: React.FC<Props> = ({ stationId, error, onFinish, handleFormChange }) => {
   const b = bem('CreateEditConnector');
+  const { t } = useTranslation();
   const [form] = Form.useForm();
 
   const typo = [
@@ -59,7 +61,11 @@ const CreateEditConnector: React.FC<Props> = ({ stationId, error, onFinish, hand
     <>
       <div className={b()}>
         {stationId && (
-          <TextBlock styleText={{ marginBottom: '24px' }} title='ID станции' text={stationId} />
+          <TextBlock
+            styleText={{ marginBottom: '24px' }}
+            title={t('merchants.id_station')}
+            text={stationId}
+          />
         )}
         <Form
           form={form}
@@ -75,8 +81,8 @@ const CreateEditConnector: React.FC<Props> = ({ stationId, error, onFinish, hand
             data-testid='typo_id'
             id='typo_id'
             name='typo'
-            placeholder={'Тип разъема'}
-            label={'Тип разъема'}
+            placeholder={t('merchants.connector_type')}
+            label={t('merchants.connector_type')}
             rules={[
               {
                 required: true,
@@ -91,8 +97,8 @@ const CreateEditConnector: React.FC<Props> = ({ stationId, error, onFinish, hand
             data-testid='power_kWh_id'
             id='power_kWh_id'
             name='power_kWh'
-            placeholder={'Мощность коннектора'}
-            label={'Мощность коннектора'}
+            placeholder={t('merchants.connector_power')}
+            label={t('merchants.connector_power')}
             rules={[
               {
                 required: true,
@@ -109,34 +115,31 @@ const CreateEditConnector: React.FC<Props> = ({ stationId, error, onFinish, hand
               data-testid='fee_id'
               id='fee_id'
               name='fee'
-              placeholder={'Персональный тариф'}
-              label={'Персональный тариф'}
-              addonAfter='сом за 1 кВтч за 1 мин'
+              placeholder={t('merchants.personal_tariff')}
+              label={t('merchants.personal_tariff')}
+              addonAfter={t('merchants.tariff_kwh')}
               inputType='number'
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleFormChange('fee', e.target.value)
               }
             />
-            <p>
-              *Вы можете добавить персональный тариф, или пропустить, тогда тариф будет установлен
-              по умолчанию
-            </p>
+            <p>{t('merchants.warning_personal_tariff')}</p>
           </div>
           <FormField
             data-testid='fee_id'
             id='fee_id'
-            placeholder={'Тариф по умолчанию'}
-            label={'Тариф по умолчанию'}
+            placeholder={t('merchants.default_tariff')}
+            label={t('merchants.default_tariff')}
             disabled
             defaultValue='50'
-            addonAfter='сом за 1 кВтч за 1 мин'
+            addonAfter={t('merchants.tariff_kwh')}
           />
           <FormField
             data-testid='cable_length_id'
             id='cable_length_id'
             name='cable_length'
-            placeholder={'Длина кабеля'}
-            label={'Длина кабеля'}
+            placeholder={t('merchants.length_of_cable')}
+            label={t('merchants.length_of_cable')}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleFormChange('cable_length', e.target.value)
             }
@@ -144,7 +147,7 @@ const CreateEditConnector: React.FC<Props> = ({ stationId, error, onFinish, hand
         </Form>
       </div>
       <Button className={b('add-connector-btn')} type='primary' onClick={onFinish}>
-        Сохранить
+        {t('merchants.save')}
       </Button>
     </>
   );
