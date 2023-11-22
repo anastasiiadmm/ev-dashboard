@@ -452,7 +452,7 @@ const CreateStation = observer(() => {
               modules.map((module, index) => (
                 <CardEVSEModule
                   key={index}
-                  stationId={Number(stationId)}
+                  stationId={stationId}
                   module={module}
                   onRemoveModule={() => removeModule(module.evse_id)}
                   onRemoveConnector={removeConnector}
@@ -460,10 +460,7 @@ const CreateStation = observer(() => {
                   onEditConnector={onEditConnector}
                 />
               ))}
-            <p className={b('info-module')}>
-              *Если ваша станция может заряжать всеми коннекторами одновременно, то на один модуль
-              EVSE приходится по одному коннектору.
-            </p>
+            <p className={b('info-module')}>{t('merchants.warning_evse_modules')}</p>
 
             <p className={b('info')}>{t('merchants.location')}</p>
             <div className={b('display-block')}>

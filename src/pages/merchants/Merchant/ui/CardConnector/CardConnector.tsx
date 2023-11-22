@@ -1,6 +1,7 @@
 import { Button, Divider } from 'antd';
 import bem from 'easy-bem';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { ICreateConnector } from '~/pages/merchants/interfaces';
 import { FormField } from '~/shared/ui';
@@ -21,6 +22,7 @@ const CardConnector: React.FC<Props> = ({
   setConnector,
 }) => {
   const b = bem('CardConnector');
+  const { t } = useTranslation();
 
   const optionsPosition = [
     {
@@ -77,7 +79,9 @@ const CardConnector: React.FC<Props> = ({
           name='position'
         />
         <Divider className={b('connector-divider')} type='vertical' />
-        <p>{connector.fee} сом за 1кВтч за 1 мин</p>
+        <p>
+          {connector.fee} {t('merchants.tariff_kwh')}
+        </p>
       </div>
 
       <div className={b('btn-block')}>

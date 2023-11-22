@@ -1,6 +1,7 @@
 import { Button } from 'antd';
 import bem from 'easy-bem';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { ICreateConnector, IModule } from '~/pages/merchants/interfaces';
 import { CardConnector, CreateEditConnector } from '~/pages/merchants/Merchant/ui';
@@ -10,7 +11,7 @@ import './CardEVSEModule.scss';
 
 interface Props {
   module: IModule;
-  stationId: number;
+  stationId?: number | string;
   onAddConnector: (evse_id: number, connector: ICreateConnector) => void;
   onEditConnector: (evse_id: number, connectorId: number, connector: ICreateConnector) => void;
   onRemoveModule: () => void;
@@ -26,6 +27,7 @@ const CardEVSEModule: React.FC<Props> = ({
   onEditConnector,
 }) => {
   const b = bem('CardModule');
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState<ICreateConnector>({
     evse_id: module.evse_id,
@@ -82,10 +84,13 @@ const CardEVSEModule: React.FC<Props> = ({
   return (
     <>
       <CardComponent className={b()}>
-        <h4 className={b('title-module')}>Модуль EVSE#{module.evse_id}</h4>
+        <h4 className={b('title-module')}>
+          {t('merchants.module_evse')}
+          {module.evse_id}
+        </h4>
         {module.connectors.length ? (
           <Button className={b('add-connector-btn')} type='link' onClick={showModalConnector}>
-            + Добавить коннектор
+            {t('merchants.add_connector')}
           </Button>
         ) : (
           <Button className={b('remove-module-btn')} onClick={onRemoveModule} />
@@ -103,14 +108,14 @@ const CardEVSEModule: React.FC<Props> = ({
           ))}
         {!module.connectors.length && (
           <Button style={{ padding: 0 }} type='link' onClick={showModalConnector}>
-            + Добавить коннектор
+            {t('merchants.add_connector')}
           </Button>
         )}
       </CardComponent>
 
       <ModalComponent
         width={352}
-        title={'Коннектор'}
+        title={t('merchants.title_connector')}
         closeIcon
         isModalOpen={isModalOpen}
         handleOk={handleCreateEditConnector}
