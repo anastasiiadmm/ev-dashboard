@@ -8,13 +8,15 @@ import { FormField } from '~/shared/ui';
 
 import './CreateEditConnector.scss';
 
-const CreateEditConnector: React.FC<{
+interface Props {
   onAddConnector: (evse_id: number, connector: ICreateConnector) => void;
   onFinish: () => void;
   handleFormChange: (key: string, value: string | number | boolean) => void;
   stationId: number;
   error: boolean;
-}> = ({ stationId, error, onFinish, handleFormChange }) => {
+}
+
+const CreateEditConnector: React.FC<Props> = ({ stationId, error, onFinish, handleFormChange }) => {
   const b = bem('CreateEditConnector');
   const [form] = Form.useForm();
 

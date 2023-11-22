@@ -7,12 +7,19 @@ import { FormField } from '~/shared/ui';
 
 import './CardConnector.scss';
 
-const CardConnector: React.FC<{
+interface Props {
   connector: ICreateConnector;
   onRemoveConnector: (evseId: number, connectorId: number) => void;
   onEditConnector: () => void;
   setConnector: (connector: ICreateConnector) => void;
-}> = ({ connector, onRemoveConnector, onEditConnector, setConnector }) => {
+}
+
+const CardConnector: React.FC<Props> = ({
+  connector,
+  onRemoveConnector,
+  onEditConnector,
+  setConnector,
+}) => {
   const b = bem('CardConnector');
 
   const optionsPosition = [

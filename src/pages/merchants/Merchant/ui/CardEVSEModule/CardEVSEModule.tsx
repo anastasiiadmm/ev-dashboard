@@ -8,14 +8,16 @@ import { CardComponent, ModalComponent } from '~/shared/ui';
 
 import './CardEVSEModule.scss';
 
-const CardEVSEModule: React.FC<{
+interface Props {
   module: IModule;
   stationId: number;
   onAddConnector: (evse_id: number, connector: ICreateConnector) => void;
   onEditConnector: (evse_id: number, connectorId: number, connector: ICreateConnector) => void;
   onRemoveModule: () => void;
   onRemoveConnector: (evse_id: number, connector_id: number) => void;
-}> = ({
+}
+
+const CardEVSEModule: React.FC<Props> = ({
   module,
   stationId,
   onRemoveModule,
