@@ -29,8 +29,8 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                   <div
                     class="ant-form-item-control-input-content"
                   >
-                    <span                      class="ant-input-affix-wrapper css-dev-only-do-not-override-qgg3xn"
-052
+                    <span
+                      class="ant-input-affix-wrapper css-dev-only-do-not-override-nllxry"
                     >
                       <span
                         class="ant-input-prefix"
@@ -40,8 +40,8 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                           src="[object Object]"
                         />
                       </span>
-                      <in                        class="ant-input css-dev-only-do-not-override-qgg3xn"
-052
+                      <input
+                        class="ant-input css-dev-only-do-not-override-nllxry"
                         placeholder="tags.search_by"
                         type="text"
                         value=""
@@ -55,11 +55,11 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
         </form>
       </div>
     </div>
-    <      class="ant-row Tags__table-block css-dev-only-do-not-override-qgg3xn"
+    <div
+      class="ant-row Tags__table-block css-dev-only-do-not-override-nllxry"
     >
       <button
-        class="ant-btn css-dev-only-do-not-override-qgg3xn ant-btn-primary Tags__button-style"
-052
+        class="ant-btn css-dev-only-do-not-override-nllxry ant-btn-primary Tags__button-style"
         type="button"
       >
         <span
@@ -609,3 +609,22 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
             </button>
             <button
               class="ant-btn css-dev-only-do-not-override-nllxry ant-btn-primary ant-btn-icon-only"
+              disabled=""
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <img
+                  alt="chevronRight"
+                  src="[object Object]"
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
