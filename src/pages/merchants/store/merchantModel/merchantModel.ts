@@ -2,7 +2,13 @@ import { AxiosError } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
-import { ICreateMerchant, IMerchant, IMerchantPagination } from '~/pages/merchants/interfaces';
+import {
+  ICreateMerchant,
+  IMerchant,
+  IMerchantDetail,
+  IMerchantPagination,
+  IMerchantStation,
+} from '~/pages/merchants/interfaces';
 import { IChangeStatuses, IError } from '~/shared/interfaces';
 import { getAxiosConfig } from '~/shared/utils';
 
@@ -21,6 +27,13 @@ interface MerchantState {
   changeMerchantStatusesSuccess: boolean;
   changeMerchantStatusesLoading: boolean;
   changeMerchantStatusesError: string | null;
+  merchantDetail: IMerchantDetail | null;
+  merchantDetailLoading: boolean;
+  merchantDetailError: AxiosError | null;
+  merchantDetailStation: IMerchantStation[] | null;
+  merchantDetailStationPagination: IMerchantPagination | null;
+  merchantDetailStationLoading: boolean;
+  merchantDetailStationError: AxiosError | null;
 }
 
 class MerchantStore implements MerchantState {
@@ -43,6 +56,18 @@ class MerchantStore implements MerchantState {
   changeMerchantStatusesSuccess: boolean = false;
   changeMerchantStatusesLoading: boolean = false;
   changeMerchantStatusesError: string | null = null;
+  merchantDetail: IMerchantDetail | null = null;
+  merchantDetailLoading: boolean = false;
+  merchantDetailError: AxiosError | null = null;
+  merchantDetailStation: IMerchantStation[] | null = null;
+  merchantDetailStationPagination: IMerchantPagination | null = {
+    page: null,
+    pages: null,
+    size: null,
+    total: null,
+  };
+  merchantDetailStationLoading: boolean = false;
+  merchantDetailStationError: AxiosError | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -148,6 +173,66 @@ class MerchantStore implements MerchantState {
 
   setChangeStatusesSuccess(value: boolean) {
     this.changeMerchantStatusesSuccess = value;
+  }
+
+  async getMerchantDetail(currentLanguage: string, id: number | undefined) {
+    try {
+      runInAction(() => {
+        this.merchantDetailLoading = true;
+        this.merchantDetailError = null;
+      });
+
+      const config = getAxiosConfig(currentLanguage);
+
+      const resp = await axiosApi.get(`/merchants/${id}/`, config);
+      const data = resp.data;
+
+      runInAction(() => {
+        this.merchantDetail = data;
+        this.merchantDetailLoading = false;
+        this.merchantDetailError = null;
+      });
+    } catch (e) {
+      const error = e as AxiosError;
+      runInAction(() => {
+        this.merchantDetailLoading = false;
+        this.merchantDetailError = error;
+      });
+      throw error;
+    }
+  }
+
+  async getMerchantStationsDetail(queryString: string, currentLanguage: string) {
+    try {
+      runInAction(() => {
+        this.merchantDetailStationLoading = true;
+        this.merchantDetailStationError = null;
+      });
+
+      const config = getAxiosConfig(currentLanguage);
+
+      const resp = await axiosApi.get(`/stations/${queryString}`, config);
+      const data = resp.data;
+
+      runInAction(() => {
+        this.merchantDetailStation = data?.items;
+        if (this.merchantDetailStationPagination) {
+          this.merchantDetailStationPagination.page = data?.page;
+          this.merchantDetailStationPagination.pages = data?.pages;
+          this.merchantDetailStationPagination.size = data?.size;
+          this.merchantDetailStationPagination.total = data?.total;
+        }
+        this.merchantDetailStationLoading = false;
+        this.merchantDetailStationError = null;
+      });
+    } catch (e) {
+      const error = e as AxiosError;
+      runInAction(() => {
+        this.merchantDetailStationLoading = false;
+        this.merchantDetailStationError = error;
+      });
+      throw error;
+    }
   }
 }
 

@@ -68,10 +68,17 @@
     "country": "Өлкө",
     "district": "Району",
     "city": "Шаары",
+    "day_off": "дем алыш күнү:",
     "the_stations_you_selected_will_not_be_active": "Сиз тандаган станциялар активдүү болбойт.",
     "the_stations_you_selected_will_be_active": "Сиз тандаган станциялар активдүү болот.",
     "street": "Көчөсү",
     "active": "Активдүү",
+    "inactive": "Жигерсиз",
+    "merchant_name": "Соодагердин аты",
+    "email": "Почта",
+    "active_stations": "Активдүү станциялар",
+    "inactive_stations": "Активсиз станциялар",
+    "edit": "Редакциялоо",
     "data_must_be_provided_in_several_languages": "Маалыматтар бир нече тилдерде көрсөтүлүүсү керек",
     "for_correct_display_in_user_applications": "Колдонуучу колдонмолорунда туура көрсөтүү үчүн",
     "merchant_information": "Мерчант жөнүндө маалымат",
@@ -110,7 +117,12 @@
     "select_on_map": "Картадан тандоо",
     "add_evse_module": "+ EVSE модулун кошуу",
     "stanchion_information": "Колонка жөнүндө маалымат",
-    "information_about_evse_modules": "EVSE модулдары жөнүндө маалымат"
+    "information_about_evse_modules": "EVSE модулдары жөнүндө маалымат",
+    "about_merchant": "Соодагер жөнүндө",
+    "stations": "Станциялар",
+    "merchant_id": "Мерчанттын ID си",
+    "created_by": "Ким тарабынан түзүлгөн",
+    "date_of_creation": "Түзүлгөн датасы"
   },
   "modals": {
     "cancel": "Жокко чыгаруу",
@@ -143,5 +155,14 @@
     "deleting_tag": "Сиз чындап эле тегин жок кылууну каалайсызбы?",
     "if_you_delete_it_you_wont_be_able_to_restore": "Эгерде сиз өчүрсөңүз, анда кайра калыбына келтирүү мүмкүн эмес",
     "tags_updated": "Статус жаңырды"
+  },
+  "week_days": {
+    "Monday": "Дүйшөмбү",
+    "Tuesday": "Шейшемби",
+    "Wednesday": "Шаршемби",
+    "Thursday": "Бейшемби",
+    "Friday": "Жума",
+    "Saturday": "Ишемби",
+    "Sunday": "Жекшемби"
   }
 }

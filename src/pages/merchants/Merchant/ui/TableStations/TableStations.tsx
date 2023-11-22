@@ -1,26 +1,61 @@
 import { Button, Row, Tooltip } from 'antd';
-import dayjs from 'dayjs';
-import 'dayjs/locale/ru';
 import bem from 'easy-bem';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Link, useParams } from 'react-router-dom';
+import { toJS } from 'mobx';
+import { useParams } from 'react-router';
+import { observer } from 'mobx-react-lite';
 
 import { add, inactive, infoCircle, plus, status } from '~/assets/images';
 import { IColumn, IStation } from '~/pages/merchants/interfaces';
 import { TableCell } from '~/pages/merchants/Merchant/ui';
 import { ActiveInactiveModal, ModalComponent, TableComponent } from '~/shared/ui';
-
+import { merchantStore } from '~/shared/api/store';
+import { useNotification, useRowSelection, useTableFilter } from '~/shared/hooks';
+import { getDaysFromSchedule } from '~/shared/utils/helper';
 import './TableStations.scss';
 
-const TableStations = () => {
+const TableStations = observer(() => {
   const b = bem('TableStations');
   const { t } = useTranslation();
-  const { id: merchantId } = useParams();
+  const { id } = useParams();
+  const openNotification = useNotification();
+  const { merchantDetailStation, merchantDetailStationPagination, merchantDetailStationLoading } =
+    toJS(merchantStore);
+  const {
+    filters,
+    pagePrevHandler,
+    pageNextHandler,
+    changeShowByHandler,
+    onChangePageCheckHandler,
+  } = useTableFilter(merchantStore.getMerchantStationsDetail.bind(merchantStore), {
+    includeSearch: false,
+    additionalParams: { merchant: id },
+  });
+  const {
+    selectedRowKeys,
+    onSelectChange,
+    isDeactivateButton,
+    isDisabledButton,
+    applyChangeStatus,
+  } = useRowSelection(
+    merchantDetailStation || [],
+    merchantStore.changeMerchantsStatuses.bind(merchantStore),
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const [isDeactivateButton, setIsDeactivateButton] = useState(true);
-  const [isDisabledButton, setIsDisabledButton] = useState(true);
+
+  const handleAgreeHandler = async () => {
+    try {
+      await applyChangeStatus();
+    } catch (e) {
+      if (e instanceof Error) {
+        openNotification('error', '', e.message);
+      } else {
+        console.error('Unexpected error type:', e);
+      }
+    }
+  };
 
   const columns: IColumn[] = [
     {
@@ -39,32 +74,33 @@ const TableStations = () => {
     },
     {
       title: t('merchants.location'),
+      width: 130,
       render: (record: IStation) => {
         return <p className={b('text crop-text')}>{record?.location}</p>;
       },
     },
     {
       title: t('merchants.schedule'),
-      width: 120,
+      width: 190,
       render: (record: IStation) => {
-        let schedule: string = t('merchants.not_a_standard_work_schedule') as string;
         const days = record.schedule;
-        const areNumbersNotInOrder = (arr: number[]) => {
-          return arr.every((value, index, array) => index === 0 || value === array[index - 1] + 1);
-        };
-        if (days.length && days.length === 1 && areNumbersNotInOrder(days[0].days)) {
-          const week: number[] = [0, 1, 2, 3, 4, 5, 6];
-          const date = week.slice(1);
-          date.splice(week.length, 0, 0);
-          const weekend: number[] = date.filter(
-            (element: number) => !days[0].days.includes(element),
-          );
-          const formattedDays: string[] = weekend.map((day: number) =>
-            dayjs().day(day).format('dd'),
-          );
-          schedule = `${days[0].open} выходной: ${formattedDays.join(' - ')}`;
-        }
-        return <p className={b('text crop-text')}>{schedule}</p>;
+        const daysName = getDaysFromSchedule(record.schedule);
+        return (
+          <p>
+            {days?.[0]?.open}
+            {days?.[0]?.open && (
+              <>
+                <br />
+                <span style={{ display: 'flex', gap: 5 }}>
+                  {t('merchants.day_off')}
+                  {daysName.map((day: string) => (
+                    <span key={day}>{t(`week_days.${day}`)}</span>
+                  ))}
+                </span>
+              </>
+            )}
+          </p>
+        );
       },
     },
     {
@@ -112,154 +148,12 @@ const TableStations = () => {
     },
   ] as IColumn[];
 
-  const data: IStation[] = [
-    {
-      id: 1,
-      name: 'Наименование длинное станции Ким',
-      location: 'Кыргызстан, Бишкек, название длинное',
-      schedule: [
-        {
-          days: [1, 2, 3, 4, 5],
-          open: '09:00 - 23:00',
-          breaks: ['12:00 - 13:00'],
-        },
-      ],
-      status: 0,
-      connectors: ['Tesla', 'CCS'],
-      tags: [
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-      ],
-      surroundings: [
-        'Кафе',
-        'школа',
-        'Кафе',
-        'школа',
-        'Кафе',
-        'школа',
-        'Кафе',
-        'школа',
-        'Кафе',
-        'школа',
-      ],
-    },
-    {
-      id: 2,
-      name: 'Наименование длинное станции Ким',
-      location: 'Кыргызстан, Бишкек, название длинное',
-      schedule: [
-        {
-          days: [1, 2, 3],
-          open: '09:00 - 23:00',
-          breaks: ['12:00 - 13:00'],
-        },
-        {
-          days: [4, 5, 6],
-          open: '11:00 - 23:00',
-          breaks: ['12:00 - 13:00'],
-        },
-        {
-          days: [0],
-          open: '13:00 - 20:00',
-          breaks: ['15:00 - 16:00'],
-        },
-      ],
-      status: 1,
-      connectors: ['Tesla', 'CCS'],
-      tags: [
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-      ],
-      surroundings: [
-        'Кафе',
-        'школа',
-        'Кафе',
-        'школа',
-        'Кафе',
-        'школа',
-        'Кафе',
-        'школа',
-        'Кафе',
-        'школа',
-      ],
-    },
-    {
-      id: 3,
-      name: 'Наименование длинное станции Ким',
-      location: 'Кыргызстан, Бишкек, название длинное',
-      schedule: [
-        {
-          days: [1, 2, 3, 4, 5, 6],
-          open: '06:00 - 23:00',
-          breaks: ['12:00 - 13:00'],
-        },
-      ],
-      status: 0,
-      connectors: ['Tesla', 'CCS'],
-      tags: [
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-        '#Быстрая',
-      ],
-      surroundings: [
-        'Кафе',
-        'школа',
-        'Кафе',
-        'школа',
-        'Кафе',
-        'школа',
-        'Кафе',
-        'школа',
-        'Кафе',
-        'школа',
-      ],
-    },
-  ];
-
-  const pagePrevHandler = () => {};
-  const pageNextHandler = () => {};
-
   const showModal = () => {
     setIsModalOpen(true);
   };
 
   const handleOkCancel = () => {
     setIsModalOpen(!isModalOpen);
-  };
-  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-    const selectedStatuses = newSelectedRowKeys.map((key) => {
-      const selectedMerchant = data.find((item) => item.id === parseInt(key.toString()));
-      return selectedMerchant ? selectedMerchant?.status : 1;
-    });
-    const hasActiveTrue = selectedStatuses.includes(0);
-    const hasActiveFalse = selectedStatuses.includes(1);
-    const hasMixedStatus = hasActiveTrue && hasActiveFalse;
-    setIsDeactivateButton(hasActiveTrue && !hasActiveFalse);
-    setIsDisabledButton(hasMixedStatus);
   };
 
   const rowSelection = {
@@ -270,7 +164,7 @@ const TableStations = () => {
   return (
     <Row justify='space-between' data-testid='auth-component' className={b()}>
       <Row className={b('table-block')}>
-        <Link to={`/merchants/merchant/${merchantId}/create-station`} className={b('add-block')}>
+        <Link to={`/merchants/merchant/${id}/create-station`} className={b('add-block')}>
           <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
             {t('merchants.add_station')}
           </Button>
@@ -279,11 +173,15 @@ const TableStations = () => {
         <TableComponent
           rowKey={(record) => record.id.toString()}
           rowSelection={rowSelection}
-          loading={false}
-          data={data}
+          loading={merchantDetailStationLoading}
+          data={merchantDetailStation || []}
           columns={columns}
           pagePrevHandler={pagePrevHandler}
           pageNextHandler={pageNextHandler}
+          changeShowByHandler={changeShowByHandler}
+          onChangePageCheckHandler={onChangePageCheckHandler}
+          defaultSizeValue={filters?.page}
+          pages={merchantDetailStationPagination}
         />
 
         {!!selectedRowKeys.length && (
@@ -320,11 +218,13 @@ const TableStations = () => {
                 : (t('merchants.the_stations_you_selected_will_not_active') as string)
             }
             handleOkCancel={handleOkCancel}
+            loadingStatus={false}
+            handleAgreeHandler={handleAgreeHandler}
           />
         </ModalComponent>
       </Row>
     </Row>
   );
-};
+});
 
 export default TableStations;
