@@ -164,5 +164,31 @@
     "Friday": "Friday",
     "Saturday": "Saturday",
     "Sunday": "Sunday"
+  },
+  "empty": {
+    "banner": {
+      "title": "You don't have any advertising banners yet",
+      "image_title": "advertising banners",
+      "description": "Add an advertising banner for the application",
+      "button": "Add banner"
+    },
+    "fullscreen": {
+      "title": "You don't have fullscreens yet",
+      "image_title": "Fullscreens",
+      "description": "Add a full screen for the application",
+      "button": "Add fullscreen"
+    },
+    "stock": {
+      "title": "You don't have a promotion yet",
+      "image_title": "Stock",
+      "description": "Promotions help motivate users to take actions or other text",
+      "button": "Add promotion"
+    },
+    "rates": {
+      "title": "You don't have any tariffs yet",
+      "image_title": "Rates",
+      "description": "Add rates for the application",
+      "button": "Add tariff"
+    }
   }
 }
