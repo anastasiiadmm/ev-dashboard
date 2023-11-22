@@ -4,7 +4,8 @@
     "the_input_is_not_valid_email": "Неверный адрес электронной почты",
     "password_length": "Пароль должен содержать минимум 8 символов",
     "wrong_password": "Неправильный пароль",
-    "two_passwords_do_not_match": "Пароли не совпадают"
+    "two_passwords_do_not_match": "Пароли не совпадают",
+    "no_data_available": "Данные отсутствуют"
   },
   "alerts": {
     "incorrectly_filled_field": "Неправильно заполненное поле",
