@@ -6,8 +6,8 @@ import { BrowserRouter } from 'react-router-dom';
 import '../../__mocks__/react-i18next.mock';
 import '../../__mocks__/matchMedia.mock';
 import '../../__mocks__/i18nextMock';
-import Create from "../../src/pages/merchants/Create/Create";
 import { merchantStore } from "../../src/shared/api/store";
+import CreateEdit from "../../src/pages/merchants/CreateEdit/CreateEdit";
 
 const mockCountries = [
   { id: '1', name: 'Country1' },
@@ -34,7 +34,7 @@ jest.mock('react-i18next', () => ({
 
 beforeEach(() => {
   cleanup();
-  jest.mock('../../src/pages/merchants/Create/Create', () => ({
+  jest.mock('../../src/pages/merchants/CreateEdit/CreateEdit', () => ({
     countries: mockCountries,
     districts: mockDistricts,
     settlements: mockSettlements,
@@ -63,7 +63,7 @@ describe('Create Merchant UI Component', () => {
 
     const { getByTestId } = render(
       <BrowserRouter>
-        <Create />
+        <CreateEdit />
       </BrowserRouter>
     );
 
@@ -98,7 +98,7 @@ describe('Create Merchant UI Component', () => {
   test('displays error message on form submission failure', async () => {
     render(
       <BrowserRouter>
-        <Create />
+        <CreateEdit />
       </BrowserRouter>
     );
 

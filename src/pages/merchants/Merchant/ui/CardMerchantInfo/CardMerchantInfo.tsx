@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Flex, Row, Skeleton, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 import { CardComponent } from '~/shared/ui';
 import { TextBlock } from '~/pages/merchants/Merchant/ui';
@@ -14,10 +15,12 @@ type Props = {
   classNameTitle?: string;
   merchantDetailLoading?: boolean;
   classNameButton?: string;
+  merchantId?: number;
   style?: React.CSSProperties;
 };
 
 const CardMerchantInfo: React.FC<Props> = ({
+  merchantId,
   merchant,
   merchantDetailLoading,
   classNameTitle,
@@ -118,9 +121,11 @@ const CardMerchantInfo: React.FC<Props> = ({
           />
         </Flex>
       </Row>
-      <Button className={classNameButton} type='primary' icon={<img src={edit} alt='edit' />}>
-        {t('merchants.edit')}
-      </Button>
+      <Link to={`/merchants/create-edit-merchant/${merchantId}`}>
+        <Button className={classNameButton} type='primary' icon={<img src={edit} alt='edit' />}>
+          {t('merchants.edit')}
+        </Button>
+      </Link>
     </CardComponent>
   );
 };

@@ -135,7 +135,10 @@
     "tariff_kwh": "som for 1 kWh for 1 min",
     "warning_personal_tariff": "*You can add a personal tariff, or skip it, then the tariff will be set by default",
     "length_of_cable": "Length of cable",
-    "save": "Save"
+    "edit_merchant": "Editing merchant",
+    "save": "Save",
+    "changes_saved": "Changes saved",
+    "the_merchant_account_has_been_successfully_updated": "The merchant account has been successfully updated."
   },
   "modals": {
     "cancel": "Cancel",

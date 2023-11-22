@@ -34,6 +34,9 @@ interface MerchantState {
   merchantDetailStationPagination: IMerchantPagination | null;
   merchantDetailStationLoading: boolean;
   merchantDetailStationError: AxiosError | null;
+  merchantDetailForUpdate: ICreateMerchant | null | undefined;
+  merchantDetailForUpdateLoading: boolean;
+  merchantDetailForUpdateError: AxiosError | null;
 }
 
 class MerchantStore implements MerchantState {
@@ -68,6 +71,9 @@ class MerchantStore implements MerchantState {
   };
   merchantDetailStationLoading: boolean = false;
   merchantDetailStationError: AxiosError | null = null;
+  merchantDetailForUpdate: ICreateMerchant | null | undefined = null;
+  merchantDetailForUpdateLoading: boolean = false;
+  merchantDetailForUpdateError: AxiosError | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -130,6 +136,10 @@ class MerchantStore implements MerchantState {
       });
       throw error;
     }
+  }
+
+  setCreateMerchantStatusesSuccess(value: boolean) {
+    this.createMerchantSuccess = value;
   }
 
   async changeMerchantsStatuses(data: IChangeStatuses) {
@@ -233,6 +243,61 @@ class MerchantStore implements MerchantState {
       });
       throw error;
     }
+  }
+
+  async getMerchantDetailForUpdate(id: number | undefined) {
+    try {
+      runInAction(() => {
+        this.merchantDetailForUpdateLoading = true;
+        this.merchantDetailForUpdateError = null;
+      });
+
+      const resp = await axiosApi.get(`/merchants/for-update/${id}/`);
+      const data = resp.data;
+
+      runInAction(() => {
+        this.merchantDetailForUpdate = data;
+        this.merchantDetailForUpdateLoading = false;
+        this.merchantDetailForUpdateError = null;
+      });
+    } catch (e) {
+      const error = e as AxiosError;
+      runInAction(() => {
+        this.merchantDetailForUpdateLoading = false;
+        this.merchantDetailForUpdateError = error;
+      });
+      throw error;
+    }
+  }
+
+  async patchMerchant(id: string, merchantData: ICreateMerchant | null | undefined) {
+    try {
+      runInAction(() => {
+        this.patchMerchantLoading = true;
+        this.patchMerchantSuccess = false;
+        this.patchMerchantError = null;
+      });
+
+      await axiosApi.patch(`/merchants/${id}/`, merchantData);
+
+      runInAction(() => {
+        this.patchMerchantLoading = false;
+        this.patchMerchantSuccess = true;
+        this.patchMerchantError = null;
+      });
+    } catch (e) {
+      const error = e as AxiosError;
+      runInAction(() => {
+        this.patchMerchantLoading = false;
+        this.patchMerchantSuccess = false;
+        this.patchMerchantError = error;
+      });
+      throw error;
+    }
+  }
+
+  setPatchMerchantStatusesSuccess(value: boolean) {
+    this.patchMerchantSuccess = value;
   }
 }
 
