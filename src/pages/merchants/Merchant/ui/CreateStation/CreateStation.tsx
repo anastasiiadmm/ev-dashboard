@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { eng, kg, rus } from '~/assets/images';
 import { ICreateConnector, ICreateMerchant, IModule } from '~/pages/merchants/interfaces';
-import { CardEVSEModule } from '~/pages/merchants/Merchant/ui';
+import { CardEVSEModule, ScheduleModal } from '~/pages/merchants/Merchant/ui';
 import { commonStore, merchantStore } from '~/shared/api/store';
 import { useCurrentLocale } from '~/shared/hooks';
 import {
@@ -81,6 +81,7 @@ const CreateStation = observer(() => {
   const isAllSelected = Object.values(radioButtonStates).every((value) => value);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
+  const [isModalScheduleOpen, setIsModalScheduleOpen] = useState(false);
   const [modules, setModules] = useState<IModule[]>([]);
 
   const items = [
@@ -195,6 +196,10 @@ const CreateStation = observer(() => {
 
   const handleOkSuccessCancel = () => {
     setIsModalSuccessOpen(!isModalOpen);
+  };
+
+  const handleOpenScheduleModal = () => {
+    setIsModalScheduleOpen(!isModalScheduleOpen);
   };
 
   const onFinish = async () => {
@@ -382,10 +387,9 @@ const CreateStation = observer(() => {
                   },
                 ]}
                 error={error}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handleFormChange('schedule', e.target.value)
-                }
+                onChange={handleOpenScheduleModal}
               />
+              <Button onClick={handleOpenScheduleModal} />
               <FormField
                 data-testid='environment_id'
                 id='environment_id'
@@ -729,6 +733,17 @@ const CreateStation = observer(() => {
           handleOkCancel={handleOkSuccessCancel}
           handleAgreeHandler={handleAgreeHandler}
         />
+      </ModalComponent>
+
+      <ModalComponent
+        closeIcon
+        title='Режим работы'
+        width={622}
+        isModalOpen={isModalScheduleOpen}
+        handleOk={handleOpenScheduleModal}
+        handleCancel={handleOpenScheduleModal}
+      >
+        <ScheduleModal handleOkCancel={handleOpenScheduleModal} />
       </ModalComponent>
     </div>
   );
