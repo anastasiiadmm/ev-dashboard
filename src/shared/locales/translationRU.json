@@ -122,7 +122,20 @@
     "select_on_map": "Выбрать на карте",
     "add_evse_module": "+ Добавить модуль EVSE",
     "column_information": "Информация о колонке",
-    "information_about_evse_modules": "Информация о модулях EVSE"
+    "information_about_evse_modules": "Информация о модулях EVSE",
+    "warning_evse_modules": "*Если ваша станция может заряжать всеми коннекторами одновременно, то на один модуль EVSE приходится по одному коннектору.",
+    "add_connector": "+ Добавить коннектор",
+    "module_evse": "Модуль EVSE#",
+    "title_connector": "Коннектор",
+    "id_station": "ID станции",
+    "connector_type": "Тип разъема",
+    "connector_power": "Мощность коннектора",
+    "personal_tariff": "Персональный тариф",
+    "default_tariff": "Тариф по умолчанию",
+    "tariff_kwh": "сом за 1 кВтч за 1 мин",
+    "warning_personal_tariff": "*Вы можете добавить персональный тариф, или пропустить, тогда тариф будет установлен по умолчанию",
+    "length_of_cable": "Длина кабеля",
+    "save": "Сохранить"
   },
   "modals": {
     "cancel": "Отменить",

@@ -1,0 +1,51 @@
+@use '../../../../../app/styles/variables' as variables;
+
+.CardModule {
+  margin-bottom: 20px;
+
+  &__title-module {
+    font-weight: variables.$font-600;
+  }
+
+  &__remove-module-btn {
+    border: none;
+    border-radius: unset;
+    max-width: 20px;
+    width: 20px !important;
+    height: 20px;
+    background-color: transparent;
+    background-image: url('../../../../../assets/images/svg/icons/default/delete-cross.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 14px;
+    right: 13px;
+  }
+
+  &__add-connector-btn {
+    padding: 0;
+    position: absolute;
+    top: 7px;
+    right: 11px;
+  }
+
+  &__modal-connector {
+    &.ant-modal .ant-modal-content {
+      padding: 16px;
+    }
+
+    &.ant-modal .ant-modal-close {
+      top: 16px;
+    }
+  }
+
+  &.ant-card-bordered {
+    border: none;
+    background-color: variables.$gray-light-bg-color;
+  }
+
+  &.ant-card .ant-card-body {
+    padding: 12px;
+    border: none;
+  }
+}

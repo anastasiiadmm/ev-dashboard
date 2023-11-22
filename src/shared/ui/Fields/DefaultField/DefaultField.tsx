@@ -14,10 +14,11 @@ interface Props {
   rules?: Rule[];
   placeholder?: string;
   inputClassName?: string;
-  disabled?: boolean;
   onChange?: () => void;
   error?: boolean;
   prefix?: React.ReactNode;
+  disabled?: boolean;
+  addonAfter?: string;
 }
 
 const DefaultField: React.FC<Props> = ({
@@ -34,6 +35,7 @@ const DefaultField: React.FC<Props> = ({
   onChange,
   prefix,
   disabled,
+  addonAfter,
 }) => {
   return (
     <Form.Item
@@ -46,14 +48,15 @@ const DefaultField: React.FC<Props> = ({
       help={error ? '' : undefined}
     >
       <Input
-        disabled={disabled}
         type={inputType}
         name={name}
+        disabled={disabled}
         defaultValue={defaultValue}
         placeholder={placeholder}
         className={inputClassName}
         onChange={onChange}
         prefix={prefix}
+        addonAfter={addonAfter}
       />
     </Form.Item>
   );

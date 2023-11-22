@@ -77,23 +77,6 @@ export interface ICreateMerchant {
   city: number;
 }
 
-export interface ISchedule {
-  days: number[];
-  open: string;
-  breaks: string[];
-}
-
-export interface IStation {
-  id: number;
-  name: string;
-  location: string;
-  schedule: ISchedule[];
-  status: number;
-  connectors: string[];
-  tags: string[];
-  surroundings: string[];
-}
-
 export interface IColumn {
   title: string | JSX.Element;
   dataIndex: string;

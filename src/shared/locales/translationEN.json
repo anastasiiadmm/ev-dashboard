@@ -122,7 +122,20 @@
     "stations": "Stations",
     "merchant_id": "Merchant ID",
     "created_by": "Created by",
-    "date_of_creation": "Date of creation"
+    "date_of_creation": "Date of creation",
+    "warning_evse_modules": "*If your station can charge with all connectors at the same time, then there is one connector per EVSE module.",
+    "add_connector": "+ Add connector",
+    "module_evse": "EVSE module#",
+    "title_connector": "Connector",
+    "id_station": "Station ID",
+    "connector_type": "Connector type",
+    "connector_power": "Connector power",
+    "personal_tariff": "Personal tariff",
+    "default_tariff": "Default tariff",
+    "tariff_kwh": "som for 1 kWh for 1 min",
+    "warning_personal_tariff": "*You can add a personal tariff, or skip it, then the tariff will be set by default",
+    "length_of_cable": "Length of cable",
+    "save": "Save"
   },
   "modals": {
     "cancel": "Cancel",

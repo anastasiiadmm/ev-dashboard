@@ -7,7 +7,8 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { eng, kg, rus } from '~/assets/images';
-import { ICreateMerchant } from '~/pages/merchants/interfaces';
+import { ICreateConnector, ICreateMerchant, IModule } from '~/pages/merchants/interfaces';
+import { CardEVSEModule } from '~/pages/merchants/Merchant/ui';
 import { commonStore, merchantStore } from '~/shared/api/store';
 import { useCurrentLocale } from '~/shared/hooks';
 import {
@@ -35,6 +36,7 @@ const CreateStation = observer(() => {
   const b = bem('CreateStation');
   const { t } = useTranslation();
   const { id: merchantId } = useParams();
+  const { stationId } = useParams();
   const {
     countries,
     countriesLoading,
@@ -79,6 +81,7 @@ const CreateStation = observer(() => {
   const isAllSelected = Object.values(radioButtonStates).every((value) => value);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
+  const [modules, setModules] = useState<IModule[]>([]);
 
   const items = [
     { title: t('merchants.merchant'), href: `/merchants/merchant/${merchantId}` },
@@ -118,6 +121,21 @@ const CreateStation = observer(() => {
     const queryString = getParams({ location_type: locationType });
     commonStore.fetchLocations(queryString);
   }, [isCountrySelected, isCitySelected]);
+
+  const executionTypes = [
+    {
+      id: 0,
+      name: 'wall',
+    },
+    {
+      id: 1,
+      name: 'floor',
+    },
+    {
+      id: 2,
+      name: 'mobile',
+    },
+  ];
 
   const handleFormChange = (key: string, value: string | number | boolean) => {
     setFormData((prevData) => ({
@@ -186,6 +204,64 @@ const CreateStation = observer(() => {
       if (error) {
         setError(true);
       }
+    }
+  };
+
+  const addModule = () => {
+    setModules((prevModules) => [
+      ...prevModules,
+      {
+        evse_id: prevModules.length + 1,
+        connectors: [],
+      },
+    ]);
+  };
+
+  const removeModule = (evseId: number) => {
+    const updatedModules = modules
+      .filter((module) => module.evse_id !== evseId)
+      .map((module, index) => {
+        module.evse_id = index + 1;
+        module.connectors.map((connector) => (connector.evse_id = index + 1));
+        return module;
+      });
+    setModules(updatedModules);
+  };
+
+  const removeConnector = (evseId: number, connectorId: number) => {
+    const moduleIndex = modules.findIndex((module) => module.evse_id === evseId);
+    const updatedConnectors = modules[moduleIndex].connectors
+      .filter((connector) => connector.connector_id !== connectorId)
+      .map((connector, index) => {
+        connector.connector_id = index + 1;
+        return connector;
+      });
+    const updatedModules = [...modules];
+    updatedModules[moduleIndex].connectors = updatedConnectors;
+    setModules(updatedModules);
+  };
+
+  const addConnector = (evseId: number, connector: ICreateConnector) => {
+    const moduleIndex = modules.findIndex((module) => module.evse_id === evseId);
+    if (moduleIndex !== -1) {
+      const newConnector: ICreateConnector = connector;
+      newConnector.evse_id = evseId;
+      newConnector.connector_id = modules[moduleIndex].connectors.length + 1;
+      const updatedModules = [...modules];
+      updatedModules[moduleIndex].connectors.push(newConnector);
+      setModules(updatedModules);
+    }
+  };
+
+  const onEditConnector = (evseId: number, connectorId: number, connector: ICreateConnector) => {
+    const moduleIndex = modules.findIndex((module) => module.evse_id === evseId);
+    if (moduleIndex !== -1) {
+      const connectorIndex = modules[moduleIndex].connectors.findIndex(
+        ({ id }) => id === connectorId,
+      );
+      const updatedModules = [...modules];
+      updatedModules[moduleIndex].connectors[connectorIndex] = connector;
+      setModules(updatedModules);
     }
   };
 
@@ -350,6 +426,8 @@ const CreateStation = observer(() => {
             <FormField
               data-testid='execution_type_id'
               id='execution_type_id'
+              type='select'
+              options={executionTypes}
               name='execution_type'
               label={t('merchants.execution_type')}
               placeholder={t('merchants.execution_type')}
@@ -360,16 +438,29 @@ const CreateStation = observer(() => {
                 },
               ]}
               error={error}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleFormChange('execution_type', e.target.value)
+              handleChange={(value: string | number | boolean) =>
+                handleFormChange('execution_type', value)
               }
             />
 
             <p className={b('info')}>{t('merchants.information_about_evse_modules')}</p>
-            <Button className={b('add-evse')} type='link' onClick={() => console.log('[ADD_EVSE]')}>
+            <Button className={b('add-evse')} type='link' onClick={addModule}>
               {t('merchants.add_evse_module')}
               <span style={{ color: '#FF4B55' }}>*</span>
             </Button>
+            {!!modules.length &&
+              modules.map((module, index) => (
+                <CardEVSEModule
+                  key={index}
+                  stationId={stationId}
+                  module={module}
+                  onRemoveModule={() => removeModule(module.evse_id)}
+                  onRemoveConnector={removeConnector}
+                  onAddConnector={addConnector}
+                  onEditConnector={onEditConnector}
+                />
+              ))}
+            <p className={b('info-module')}>{t('merchants.warning_evse_modules')}</p>
 
             <p className={b('info')}>{t('merchants.location')}</p>
             <div className={b('display-block')}>
@@ -601,6 +692,22 @@ const CreateStation = observer(() => {
           textTitle={t('modals.are_you_sure_you_want_to_cancel_your_changes') as string}
           infoText={t('modals.after_cancellation_all_data_will_be_lost') as string}
           handleOkCancel={handleOkCancel}
+          handleAgreeHandler={handleAgreeHandler}
+        />
+      </ModalComponent>
+
+      <ModalComponent
+        width={400}
+        isModalOpen={isModalSuccessOpen}
+        handleOk={handleOkSuccessCancel}
+        handleCancel={handleOkSuccessCancel}
+      >
+        <ActiveInactiveModal
+          hasCancelButton={false}
+          successModal
+          textTitle={t('modals.merchant_has_been_created') as string}
+          infoText={t('modals.a_new_merchant_account_has_been_successfully_created') as string}
+          handleOkCancel={handleOkSuccessCancel}
           handleAgreeHandler={handleAgreeHandler}
         />
       </ModalComponent>
