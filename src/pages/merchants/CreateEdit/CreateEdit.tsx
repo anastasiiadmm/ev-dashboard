@@ -20,8 +20,8 @@ import { useCurrentLocale } from '~/shared/hooks';
 import { ICreateMerchant } from '~/pages/merchants/interfaces';
 import { commonStore, merchantStore } from '~/shared/api/store';
 import { getParams } from '~/shared/utils';
-import './CreateEdit.scss';
 import { TextBlock } from '~/pages/merchants/Merchant/ui';
+import './CreateEdit.scss';
 
 const { Title, Text } = Typography;
 
@@ -590,7 +590,7 @@ const CreateEdit = observer(() => {
                   {id ? t('merchants.save') : t('merchants.create')}
                 </Button>
               ) : (
-                <Button type='primary' onClick={handleNextLanguage}>
+                <Button type='primary' data-testid='further-button' onClick={handleNextLanguage}>
                   {t('merchants.further')}
                 </Button>
               )}

@@ -115,4 +115,32 @@ describe('Create Merchant UI Component', () => {
     });
   });
 
+  it('renders with correct language options', () => {
+    const { getByText } = render(
+      <BrowserRouter>
+        <CreateEdit />
+      </BrowserRouter>
+    );
+
+    const languageOptions = ['Кыргызский', 'Русский', 'Английский'];
+    languageOptions.forEach((language) => {
+      expect(getByText(language)).toBeInTheDocument();
+    });
+  });
+
+  it('handles form submission failure and displays error message', async () => {
+    jest.spyOn(merchantStore, 'postCreateMerchant').mockImplementation(() => Promise.reject());
+
+    const { getByTestId, findByText } = render(
+      <BrowserRouter>
+        <CreateEdit />
+      </BrowserRouter>
+    );
+
+    fireEvent.click(getByTestId('further-button'));
+
+    const errorMessage = await findByText('alerts.one_or_more_of_the_required_fields_are_not_filled');
+    expect(errorMessage).toBeInTheDocument();
+  });
+
 });
