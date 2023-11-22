@@ -9,6 +9,7 @@ interface Props {
   defaultValue?: string;
   name?: string;
   label?: string;
+  placeholder?: string;
   disabled?: boolean;
   optionStyles?: CSSProperties | undefined;
   className?: string;
@@ -25,6 +26,7 @@ interface Props {
 const SelectField: React.FC<Props> = ({
   name,
   label,
+  placeholder,
   rules,
   bordered = true,
   loading,
@@ -56,6 +58,7 @@ const SelectField: React.FC<Props> = ({
         onChange={handleChange}
         suffixIcon={suffixIconData}
         dropdownStyle={dropdownStyle}
+        placeholder={placeholder}
       >
         {options?.map((option) => {
           const key = 'value' in option ? option.value : option.id;

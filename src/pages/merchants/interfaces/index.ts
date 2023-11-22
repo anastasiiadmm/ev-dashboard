@@ -1,8 +1,6 @@
 export type {
   IMerchant,
   ICreateMerchant,
-  IStation,
-  ISchedule,
   IColumn,
   ITabs,
   IMerchantPagination,
@@ -11,3 +9,11 @@ export type {
   IMerchantStation,
 } from './IMerchant';
 export type { ICommon } from './ICommon';
+export type {
+  IStation,
+  ISchedule,
+  ICreateStation,
+  ICreateSchedule,
+  ICreateConnector,
+  IModule,
+} from './IStation';
