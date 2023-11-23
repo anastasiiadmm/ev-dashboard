@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
-import { ITagPagination, ITag } from '~/pages/tags/interfaces';
+import { ITagPagination, ITag, ITagCreate } from '~/pages/tags/interfaces';
 import { getAxiosConfig } from '~/shared/utils';
 import { IChangeStatuses } from '~/shared/interfaces';
 
@@ -17,6 +17,12 @@ interface TagsState {
   deleteTagSuccess: boolean;
   deleteTagLoading: boolean;
   deleteTagError: string | null;
+  createTagLoading: boolean;
+  createTagSuccess: boolean;
+  createTagError: string | null;
+  updateTagLoading: boolean;
+  updateTagSuccess: boolean;
+  updateTagError: string | null;
 }
 
 class TagsStore implements TagsState {
@@ -35,6 +41,12 @@ class TagsStore implements TagsState {
   deleteTagSuccess: boolean = false;
   deleteTagLoading: boolean = false;
   deleteTagError: string | null = null;
+  createTagLoading: boolean = false;
+  createTagSuccess: boolean = false;
+  createTagError: string | null = null;
+  updateTagLoading: boolean = false;
+  updateTagSuccess: boolean = false;
+  updateTagError: string | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -143,6 +155,92 @@ class TagsStore implements TagsState {
         this.deleteTagError = error?.message || null;
       });
     }
+  }
+
+  async createTag(data: ITagCreate) {
+    try {
+      runInAction(() => {
+        this.createTagSuccess = false;
+        this.createTagLoading = true;
+        this.createTagError = null;
+      });
+
+      const resp = await axiosApi.post(`/common/tags/`, data);
+      const updatedTags = resp.data;
+
+      runInAction(() => {
+        if (!this.tags) {
+          this.tags = [];
+        }
+
+        updatedTags.forEach((updatedTag: ITag) => {
+          const index = this.tags!.findIndex((tag) => tag.id === updatedTag.id);
+          if (index !== -1) {
+            this.tags![index] = updatedTag;
+          } else {
+            this.tags!.push(updatedTag);
+          }
+        });
+
+        this.createTagSuccess = true;
+        this.createTagLoading = false;
+        this.createTagError = null;
+      });
+    } catch (e) {
+      const error = e as AxiosError;
+      runInAction(() => {
+        this.createTagLoading = false;
+        this.createTagSuccess = false;
+        this.createTagError = error?.message || null;
+      });
+    }
+  }
+
+  setCreateTagSuccess(value: boolean) {
+    this.createTagSuccess = value;
+  }
+
+  async updateTag(id: number | null, data: ITagCreate) {
+    try {
+      runInAction(() => {
+        this.updateTagSuccess = false;
+        this.updateTagLoading = true;
+        this.updateTagError = null;
+      });
+
+      const resp = await axiosApi.patch(`/common/tags/${id}/`, data);
+      const updatedTags = resp.data;
+
+      runInAction(() => {
+        if (!this.tags) {
+          this.tags = [];
+        }
+
+        updatedTags.forEach((updatedTag: ITag) => {
+          const index = this.tags!.findIndex((tag) => tag.id === updatedTag.id);
+          if (index !== -1) {
+            this.tags![index] = updatedTag;
+          } else {
+            this.tags!.push(updatedTag);
+          }
+        });
+
+        this.updateTagSuccess = true;
+        this.updateTagLoading = false;
+        this.updateTagError = null;
+      });
+    } catch (e) {
+      const error = e as AxiosError;
+      runInAction(() => {
+        this.updateTagLoading = false;
+        this.updateTagSuccess = false;
+        this.updateTagError = error?.message || null;
+      });
+    }
+  }
+
+  setUpdateSuccess(value: boolean) {
+    this.updateTagSuccess = value;
   }
 }
 
