@@ -4,7 +4,8 @@
     "the_input_is_not_valid_email": "Your email address is not valid",
     "password_length": "Password must contain at least 8 characters",
     "wrong_password": "Wrong password",
-    "two_passwords_do_not_match": "Password mismatch"
+    "two_passwords_do_not_match": "Password mismatch",
+    "no_data_available": "No data available"
   },
   "alerts": {
     "incorrectly_filled_field": "Incorrectly filled field",
@@ -135,7 +136,10 @@
     "tariff_kwh": "som for 1 kWh for 1 min",
     "warning_personal_tariff": "*You can add a personal tariff, or skip it, then the tariff will be set by default",
     "length_of_cable": "Length of cable",
-    "save": "Save"
+    "edit_merchant": "Editing merchant",
+    "save": "Save",
+    "changes_saved": "Changes saved",
+    "the_merchant_account_has_been_successfully_updated": "The merchant account has been successfully updated."
   },
   "modals": {
     "cancel": "Cancel",
