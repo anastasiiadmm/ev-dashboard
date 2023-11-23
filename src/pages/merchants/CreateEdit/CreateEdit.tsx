@@ -35,6 +35,7 @@ const CreateEdit = observer(() => {
   const b = bem('CreateEdit');
   const { t } = useTranslation();
   const { id } = useParams();
+  const [form] = Form.useForm();
   const {
     countries,
     countriesLoading,
@@ -50,11 +51,9 @@ const CreateEdit = observer(() => {
     patchMerchantSuccess,
     patchMerchantLoading,
   } = toJS(merchantStore);
-  const [form] = Form.useForm();
   const navigate = useNavigate();
   const currentLocale = useCurrentLocale();
   const [selectedLanguage, setSelectedLanguage] = useState(currentLocale);
-  const [check, setCheck] = useState(false);
   const [previousSelectedLanguage, setPreviousSelectedLanguage] = useState(selectedLanguage);
   const [formData, setFormData] = useState<ICreateMerchant>({
     active: false,
@@ -101,36 +100,6 @@ const CreateEdit = observer(() => {
       merchantStore.getMerchantDetailForUpdate(Number(id));
     }
   }, [id]);
-
-  useEffect(() => {
-    if (!check && id && merchantDetailForUpdate) {
-      const updatedValues = {
-        agreement_number: merchantDetailForUpdate?.agreement_number,
-        rate: merchantDetailForUpdate?.rate,
-        phone: merchantDetailForUpdate?.phone,
-        email: merchantDetailForUpdate?.email,
-        country: merchantDetailForUpdate?.country,
-        city: merchantDetailForUpdate?.city,
-        district: merchantDetailForUpdate?.district,
-        active: merchantDetailForUpdate?.active,
-        [`name_${selectedLanguage}` as `name_ru` | `name_en` | `name_ky`]:
-          merchantDetailForUpdate?.[
-            `name_${selectedLanguage}` as keyof typeof merchantDetailForUpdate
-          ],
-        [`legal_name_${selectedLanguage}` as `legal_name_ru` | `legal_name_en` | `legal_name_ky`]:
-          merchantDetailForUpdate?.[
-            `legal_name_${selectedLanguage}` as keyof typeof merchantDetailForUpdate
-          ],
-        [`address_${selectedLanguage}` as `address_ru` | `address_en` | `address_ky`]:
-          merchantDetailForUpdate?.[
-            `address_${selectedLanguage}` as keyof typeof merchantDetailForUpdate
-          ],
-      };
-
-      form.setFieldsValue(updatedValues);
-      setCheck(true);
-    }
-  }, [form, id, merchantDetailForUpdate, check, selectedLanguage]);
 
   useEffect(() => {
     if (createMerchantSuccess) {
@@ -261,6 +230,13 @@ const CreateEdit = observer(() => {
     setIsModalSuccessOpen(!isModalOpen);
   };
 
+  const getLanguageItemClassName = (itemValue: string) => {
+    const isActiveBorder =
+      (itemValue === selectedLanguage && !isAllSelected) || (id && itemValue === selectedLanguage);
+
+    return b('language-item') + (isActiveBorder ? ' active-border' : '');
+  };
+
   const onFinish = async () => {
     try {
       await form.validateFields();
@@ -304,7 +280,7 @@ const CreateEdit = observer(() => {
 
             <Form
               form={form}
-              initialValues={id ? merchantDetailForUpdate || {} : undefined}
+              initialValues={merchantDetailForUpdate || {}}
               onFinish={onFinish}
               autoComplete='off'
               layout='vertical'
@@ -553,17 +529,7 @@ const CreateEdit = observer(() => {
                   radioButtonStates[item.value as keyof typeof radioButtonStates] || false;
 
                 return (
-                  <CardComponent
-                    className={
-                      b('language-item') +
-                      (item.value === selectedLanguage && !isAllSelected
-                        ? ' active-border'
-                        : id && item.value === selectedLanguage
-                        ? ' active-border'
-                        : '')
-                    }
-                    key={item.name}
-                  >
+                  <CardComponent className={getLanguageItemClassName(item.value)} key={item.name}>
                     <img src={item.icon} alt={item.name} />
                     <div className={b('button-info')}>
                       <Text style={{ margin: 0 }}>{item.name}</Text>
@@ -582,11 +548,7 @@ const CreateEdit = observer(() => {
             </Radio.Group>
             <div className={b('button-block')}>
               {isAllSelected ? (
-                <Button
-                  type='primary'
-                  onClick={onFinish}
-                  loading={id ? !!patchMerchantLoading : false}
-                >
+                <Button type='primary' onClick={onFinish} loading={patchMerchantLoading}>
                   {id ? t('merchants.save') : t('merchants.create')}
                 </Button>
               ) : (
