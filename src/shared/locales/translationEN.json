@@ -194,7 +194,7 @@
     "stock": {
       "title": "You don't have a promotion yet",
       "image_title": "Stock",
-      "description": "Promotions help motivate users to take actions or other text",
+      "description": "Promotions help motivate users to take action",
       "button": "Add promotion"
     },
     "rates": {
