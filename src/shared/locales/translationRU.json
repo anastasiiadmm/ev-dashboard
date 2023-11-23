@@ -177,5 +177,10 @@
     "Friday": "Пятница",
     "Saturday": "Суббота",
     "Sunday": "Воскресенье"
+  },
+  "banners": {
+    "add_banner": {
+      "creating_a_banner": "Создание баннера"
+    }
   }
 }
