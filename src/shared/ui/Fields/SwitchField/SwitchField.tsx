@@ -4,6 +4,7 @@ import { Form, Switch } from 'antd';
 interface Rule {}
 
 interface Props {
+  name?: string;
   label?: string;
   text?: string;
   rules?: Rule[];
@@ -19,6 +20,7 @@ const SwitchField: React.FC<Props> = ({
   className,
   inputClassName,
   text,
+  name,
 }) => {
   const handleChange = (checked: boolean) => {
     if (onChange) {
@@ -32,9 +34,12 @@ const SwitchField: React.FC<Props> = ({
       rules={rules}
       label={label}
       valuePropName='checked'
+      name={name}
     >
-      <Switch onChange={handleChange} className={inputClassName} />{' '}
-      <p className='switch-text'>{text}</p>
+      <div>
+        <Switch onChange={handleChange} className={inputClassName} />
+        <p className='switch-text'>{text}</p>
+      </div>
     </Form.Item>
   );
 };

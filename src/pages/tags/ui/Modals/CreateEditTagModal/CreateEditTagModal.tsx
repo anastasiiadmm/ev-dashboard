@@ -28,30 +28,30 @@ const CreateEditTagModal: React.FC<Props> = ({ textTitle, creating = false }) =>
 
       <Form
         form={form}
-        initialValues={{ remember: true }}
+        initialValues={{ remember: true, active: false }}
         onFinish={onFinish}
         autoComplete='off'
         layout='vertical'
         size='middle'
       >
         <FormField
-          data-testid='name_id'
-          id='name_id'
-          name='name_ky'
+          data-testid='title_ky_id'
+          id='title_ky_id'
+          name='title_ky'
           placeholder={t('tags.name_in_kyrgyz')}
           label={t('tags.name_in_kyrgyz')}
         />
         <FormField
-          data-testid='name_id'
-          id='name_id'
-          name='name_ky'
+          data-testid='title_ru_id'
+          id='title_ru_id'
+          name='title_ru'
           placeholder={t('tags.name_in_russian')}
           label={t('tags.name_in_russian')}
         />
         <FormField
-          data-testid='name_id'
-          id='name_id'
-          name='name_ky'
+          data-testid='title_en_id'
+          id='title_en_id'
+          name='title_en'
           placeholder={t('tags.name_in_eng')}
           label={t('tags.name_in_eng')}
         />
@@ -64,7 +64,7 @@ const CreateEditTagModal: React.FC<Props> = ({ textTitle, creating = false }) =>
           label={t('merchants.status')}
         />
 
-        <Button type='primary' style={{ width: '100%' }}>
+        <Button htmlType='submit' type='primary' style={{ width: '100%' }}>
           {creating ? t('merchants.create') : t('tags.save')}
         </Button>
       </Form>
