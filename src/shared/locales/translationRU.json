@@ -180,7 +180,20 @@
   },
   "banners": {
     "add_banner": {
-      "creating_a_banner": "Создание баннера"
+      "home": "Главная",
+      "title": "Создание баннера",
+      "text": "Информация о БАНЕРЕ",
+      "name_input": "Наименование баннера",
+      "link_input": "Ссылка на источник",
+      "name_button": "Название кнопки",
+      "color_button": "Цвет кнопки",
+      "merchant_label": "Мерчант",
+      "merchant_placeholder": "Выберите мерчанта",
+      "id_station": "ID станции",
+      "id_station_placeholder": "Все",
+      "status": "Статус",
+      "date_start": "Дата и время запуска",
+      "date_finish": "Дата и время отключения"
     }
   }
 }
