@@ -9,6 +9,7 @@ interface Props {
   text?: string;
   rules?: Rule[];
   className?: string;
+  defaultChecked?: boolean;
   onChange?: (checked: boolean) => void;
   inputClassName?: string;
 }
@@ -21,6 +22,7 @@ const SwitchField: React.FC<Props> = ({
   inputClassName,
   text,
   name,
+  defaultChecked,
 }) => {
   const handleChange = (checked: boolean) => {
     if (onChange) {
@@ -37,7 +39,12 @@ const SwitchField: React.FC<Props> = ({
       name={name}
     >
       <div>
-        <Switch onChange={handleChange} className={inputClassName} />
+        <Switch
+          key={`switch-${defaultChecked}`}
+          onChange={handleChange}
+          defaultChecked={defaultChecked}
+          className={inputClassName}
+        />{' '}
         <p className='switch-text'>{text}</p>
       </div>
     </Form.Item>

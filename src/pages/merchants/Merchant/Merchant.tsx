@@ -34,6 +34,7 @@ const Merchant = observer(() => {
       label: t('merchants.about_merchant') as string,
       children: (
         <CardMerchantInfo
+          merchantId={id}
           merchant={merchantDetail}
           merchantDetailLoading={merchantDetailLoading}
           classNameButton={b('button-style')}

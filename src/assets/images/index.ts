@@ -60,3 +60,4 @@ export { default as point } from './svg/icons/active/point.svg';
 
 // images
 export { default as notFoundImage } from './png/images/Add tasks-pana 1.png';
+export { default as emptyImage } from './png/images/empty-image.png';

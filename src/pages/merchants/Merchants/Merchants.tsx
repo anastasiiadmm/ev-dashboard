@@ -172,7 +172,7 @@ const Merchants = observer(() => {
         </div>
       </Row>
       <Row className={b('table-block')}>
-        <Link to='/merchants/create-merchant' className={b('add-block')}>
+        <Link to='/merchants/create-edit-merchant' className={b('add-block')}>
           <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
             {t('merchants.add_merchant')}
           </Button>
