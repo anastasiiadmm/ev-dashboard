@@ -8,7 +8,7 @@ import { Spin } from 'antd';
 
 import { HomePageAsync } from '~/pages/main';
 import { AuthAsync, ChangePasswordAsync, ResetPasswordAsync } from '~/pages/auth';
-import { CreateMerchantAsync, MerchantAsync, MerchantsAsync } from '~/pages/merchants';
+import { CreateEditMerchantAsync, MerchantAsync, MerchantsAsync } from '~/pages/merchants';
 import { CreateStation } from '~/pages/merchants/Merchant/ui';
 import { TagsAsync } from '~/pages/tags';
 import { authStore } from '~/shared/api/store';
@@ -69,7 +69,7 @@ const App: React.FC = observer(() => {
     return (
       <LanguageProvider>
         <LayoutComponent>
-          <Suspense fallback={<Spin />}>
+          <Suspense fallback={<Spin className='spin' />}>
             <Routes>
               <Route path='/' element={<HomePageAsync />} />
               <Route path='/11' element={<CreateBanner />} />
@@ -77,7 +77,10 @@ const App: React.FC = observer(() => {
                 <Route index element={<MerchantsAsync />} />
                 <Route path='/merchants/merchant/:id' element={<MerchantAsync />} />
                 <Route path='/merchants/merchant/:id/create-station' element={<CreateStation />} />
-                <Route path='/merchants/create-merchant' element={<CreateMerchantAsync />} />
+                <Route
+                  path='/merchants/create-edit-merchant/:id?'
+                  element={<CreateEditMerchantAsync />}
+                />
               </Route>
               <Route path='/tags'>
                 <Route index element={<TagsAsync />} />
@@ -90,7 +93,7 @@ const App: React.FC = observer(() => {
   } else {
     return (
       <>
-        <Suspense fallback={<Spin />}>
+        <Suspense fallback={<Spin className='spin' />}>
           <div className={b('localization-block')}>
             <LanguageSelect />
           </div>

@@ -12,3 +12,4 @@ export { default as AlertComponent } from './AlertComponent/AlertComponent';
 export { default as ActiveInactiveModal } from './ModalComponent/Modals/ActiveInactiveModal/ActiveInactiveModal';
 export { default as NotFoundImages } from './NotFoundImages/NotFoundImages';
 export { default as UploadFile } from './UploadFile/UploadFile.tsx';
+export { default as EmptyComponent } from './EmptyComponent/Empty.tsx';

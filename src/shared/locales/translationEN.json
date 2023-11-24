@@ -4,7 +4,8 @@
     "the_input_is_not_valid_email": "Your email address is not valid",
     "password_length": "Password must contain at least 8 characters",
     "wrong_password": "Wrong password",
-    "two_passwords_do_not_match": "Password mismatch"
+    "two_passwords_do_not_match": "Password mismatch",
+    "no_data_available": "No data available"
   },
   "alerts": {
     "incorrectly_filled_field": "Incorrectly filled field",
@@ -135,7 +136,10 @@
     "tariff_kwh": "som for 1 kWh for 1 min",
     "warning_personal_tariff": "*You can add a personal tariff, or skip it, then the tariff will be set by default",
     "length_of_cable": "Length of cable",
-    "save": "Save"
+    "edit_merchant": "Editing merchant",
+    "save": "Save",
+    "changes_saved": "Changes saved",
+    "the_merchant_account_has_been_successfully_updated": "The merchant account has been successfully updated."
   },
   "modals": {
     "cancel": "Cancel",
@@ -194,6 +198,32 @@
       "status": "Status",
       "date_start": "Launch date and time",
       "date_finish": "Shutdown date and time"
+    }
+  },
+  "empty": {
+    "banner": {
+      "title": "You don't have any advertising banners yet",
+      "image_title": "advertising banners",
+      "description": "Add an advertising banner for the application",
+      "button": "Add banner"
+    },
+    "fullscreen": {
+      "title": "You don't have fullscreens yet",
+      "image_title": "Fullscreens",
+      "description": "Add a full screen for the application",
+      "button": "Add fullscreen"
+    },
+    "stock": {
+      "title": "You don't have a promotion yet",
+      "image_title": "Stock",
+      "description": "Promotions help motivate users to take action",
+      "button": "Add promotion"
+    },
+    "rates": {
+      "title": "You don't have any tariffs yet",
+      "image_title": "Rates",
+      "description": "Add rates for the application",
+      "button": "Add tariff"
     }
   }
 }

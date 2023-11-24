@@ -1,3 +1,3 @@
 export { MerchantsAsync } from './Merchants/Merchants.async';
 export { MerchantAsync } from './Merchant/Merchant.async';
-export { CreateMerchantAsync } from './Create/CreateMerchant.async';
+export { CreateEditMerchantAsync } from './CreateEdit/CreateEditMerchant.async';
