@@ -127,7 +127,7 @@ class TagsStore implements TagsState {
     this.changeStatusesSuccess = value;
   }
 
-  async deleteTag(id: number | null) {
+  async deleteTag(id: number | null, queryString: string, currentLanguage: string) {
     try {
       runInAction(() => {
         this.deleteTagSuccess = false;
@@ -138,11 +138,7 @@ class TagsStore implements TagsState {
       await axiosApi.delete(`/common/tags/${id}/`);
 
       runInAction(() => {
-        if (!this.tags) {
-          this.tags = [];
-        } else {
-          this.tags = this.tags.filter((item) => item.id !== Number(id));
-        }
+        this.fetchTags(queryString, currentLanguage);
         this.deleteTagSuccess = true;
         this.deleteTagLoading = false;
         this.deleteTagError = null;
@@ -157,7 +153,7 @@ class TagsStore implements TagsState {
     }
   }
 
-  async createTag(data: ITagCreate) {
+  async createTag(data: ITagCreate, queryString: string, currentLanguage: string) {
     try {
       runInAction(() => {
         this.createTagSuccess = false;
@@ -165,23 +161,10 @@ class TagsStore implements TagsState {
         this.createTagError = null;
       });
 
-      const resp = await axiosApi.post(`/common/tags/`, data);
-      const updatedTags = resp.data;
+      await axiosApi.post(`/common/tags/`, data);
 
       runInAction(() => {
-        if (!this.tags) {
-          this.tags = [];
-        }
-
-        updatedTags.forEach((updatedTag: ITag) => {
-          const index = this.tags!.findIndex((tag) => tag.id === updatedTag.id);
-          if (index !== -1) {
-            this.tags![index] = updatedTag;
-          } else {
-            this.tags!.push(updatedTag);
-          }
-        });
-
+        this.fetchTags(queryString, currentLanguage);
         this.createTagSuccess = true;
         this.createTagLoading = false;
         this.createTagError = null;
@@ -200,7 +183,12 @@ class TagsStore implements TagsState {
     this.createTagSuccess = value;
   }
 
-  async updateTag(id: number | null, data: ITagCreate) {
+  async updateTag(
+    id: number | undefined,
+    data: ITagCreate,
+    queryString: string,
+    currentLanguage: string,
+  ) {
     try {
       runInAction(() => {
         this.updateTagSuccess = false;
@@ -208,23 +196,10 @@ class TagsStore implements TagsState {
         this.updateTagError = null;
       });
 
-      const resp = await axiosApi.patch(`/common/tags/${id}/`, data);
-      const updatedTags = resp.data;
+      await axiosApi.patch(`/common/tags/${id}/`, data);
 
       runInAction(() => {
-        if (!this.tags) {
-          this.tags = [];
-        }
-
-        updatedTags.forEach((updatedTag: ITag) => {
-          const index = this.tags!.findIndex((tag) => tag.id === updatedTag.id);
-          if (index !== -1) {
-            this.tags![index] = updatedTag;
-          } else {
-            this.tags!.push(updatedTag);
-          }
-        });
-
+        this.fetchTags(queryString, currentLanguage);
         this.updateTagSuccess = true;
         this.updateTagLoading = false;
         this.updateTagError = null;

@@ -12,6 +12,8 @@ import { ITag } from '~/pages/tags/interfaces';
 import { CreateEditTagModal } from '~/pages/tags';
 import { useModal, useNotification, useRowSelection, useTableFilter } from '~/shared/hooks';
 import { tagsStore } from '~/shared/api/store';
+import { getParams } from '~/shared/utils';
+import { useLanguage } from '~/shared/context';
 import './Tags.scss';
 
 const Tags = observer(() => {
@@ -41,6 +43,8 @@ const Tags = observer(() => {
     isDisabledButton,
     applyChangeStatus,
   } = useRowSelection(tags || [], tagsStore.changeTagsStatuses.bind(tagsStore));
+  const { currentLanguage } = useLanguage();
+  const [selectedTag, setSelectedTag] = useState<ITag | null>(null);
   const [selectedRowKey, setSelectedRowKey] = useState<number | null>(null);
   const [creating, setCreating] = useState(false);
   const { isModalOpen, showModal, handleOkCancel: handleModalOkCancel } = useModal(false);
@@ -54,6 +58,7 @@ const Tags = observer(() => {
     showModal: showTagModal,
     handleOkCancel: handleTagOkCancel,
   } = useModal(false);
+  console.log('selectedTag', selectedTag);
 
   useEffect(() => {
     if (changeStatusesSuccess) {
@@ -78,7 +83,7 @@ const Tags = observer(() => {
 
   const handleAgreeDeleteTagHandler = async () => {
     try {
-      await tagsStore.deleteTag(selectedRowKey);
+      await tagsStore.deleteTag(selectedRowKey, getParams({ page: 1 }), currentLanguage);
       handleDeleteOkCancel();
     } catch (e) {
       if (e instanceof Error) {
@@ -141,7 +146,10 @@ const Tags = observer(() => {
               }
             >
               <Button
-                onClick={showTagModal}
+                onClick={() => {
+                  showTagModal();
+                  setSelectedTag(record);
+                }}
                 className={b('add-button')}
                 icon={<img src={editColor} alt='plus' />}
               />
@@ -268,7 +276,10 @@ const Tags = observer(() => {
               ? (t('modals.creating_a_tag') as string)
               : (t('modals.editing_a_tag') as string)
           }
+          setCreating={setCreating}
+          handleTagOkCancel={handleTagOkCancel}
           creating={creating}
+          selectedTag={selectedTag}
         />
       </ModalComponent>
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Form, Switch } from 'antd';
 
-interface Rule {}
+import { IRule } from '~/shared/interfaces';
 
 interface Props {
   name?: string;
   label?: string;
   text?: string;
-  rules?: Rule[];
+  rules?: IRule[];
   className?: string;
   defaultChecked?: boolean;
   onChange?: (checked: boolean) => void;

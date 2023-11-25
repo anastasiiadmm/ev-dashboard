@@ -1,24 +1,98 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Form, Typography } from 'antd';
 import bem from 'easy-bem';
 import { useTranslation } from 'react-i18next';
+import { toJS } from 'mobx';
 
 import { FormField } from '~/shared/ui';
+import { tagsStore } from '~/shared/api/store';
+import { ITag, ITagCreate } from '~/pages/tags/interfaces';
+import { useLanguage } from '~/shared/context';
+import { getParams } from '~/shared/utils';
+import { useNotification } from '~/shared/hooks';
 import './CreateEditTagModal.scss';
 
 const { Title } = Typography;
 
 interface Props {
   textTitle: string;
+  selectedTag: ITag | null;
   creating?: boolean;
+  setCreating?: boolean | undefined;
+  handleTagOkCancel?: () => void;
 }
 
-const CreateEditTagModal: React.FC<Props> = ({ textTitle, creating = false }) => {
+const CreateEditTagModal: React.FC<Props> = ({
+  handleTagOkCancel,
+  textTitle,
+  creating = false,
+  setCreating,
+  selectedTag,
+}) => {
   const b = bem('CreateEditTagModal');
   const { t } = useTranslation();
   const [form] = Form.useForm();
+  const openNotification = useNotification();
+  const { currentLanguage } = useLanguage();
+  const { createTagSuccess, createTagLoading, updateTagSuccess, updateTagLoading } =
+    toJS(tagsStore);
 
-  const onFinish = () => {};
+  useEffect(() => {
+    if (!creating && selectedTag) {
+      form.setFieldsValue(selectedTag);
+    } else {
+      form.resetFields();
+    }
+  }, [creating, form, selectedTag]);
+
+  useEffect(() => {
+    if (createTagSuccess) {
+      if (handleTagOkCancel) {
+        handleTagOkCancel();
+      }
+      if (typeof setCreating === 'function') {
+        setCreating(false);
+      }
+    }
+    return () => {
+      tagsStore.setCreateTagSuccess(false);
+    };
+  }, [createTagSuccess, handleTagOkCancel, setCreating]);
+
+  useEffect(() => {
+    if (updateTagSuccess) {
+      if (handleTagOkCancel) {
+        handleTagOkCancel();
+      }
+      if (typeof setCreating === 'function') {
+        setCreating(false);
+      }
+    }
+    return () => {
+      tagsStore.setUpdateSuccess(false);
+    };
+  }, [updateTagSuccess, handleTagOkCancel, setCreating]);
+
+  const handleSwitchChange = (checked: boolean) => {
+    form.setFieldsValue({ active: checked });
+  };
+
+  const onFinish = async (values: ITagCreate) => {
+    try {
+      if (creating) {
+        await tagsStore.createTag(values, getParams({ page: 1 }), currentLanguage);
+      } else {
+        await tagsStore.updateTag(selectedTag?.id, values, getParams({ page: 1 }), currentLanguage);
+      }
+      form.resetFields();
+    } catch (e) {
+      if (e instanceof Error) {
+        openNotification('error', '', e.message);
+      } else {
+        console.error('Unexpected error type:', e);
+      }
+    }
+  };
 
   return (
     <div className={b('')}>
@@ -28,7 +102,7 @@ const CreateEditTagModal: React.FC<Props> = ({ textTitle, creating = false }) =>
 
       <Form
         form={form}
-        initialValues={{ remember: true, active: false }}
+        initialValues={{ active: false }}
         onFinish={onFinish}
         autoComplete='off'
         layout='vertical'
@@ -40,6 +114,12 @@ const CreateEditTagModal: React.FC<Props> = ({ textTitle, creating = false }) =>
           name='title_ky'
           placeholder={t('tags.name_in_kyrgyz')}
           label={t('tags.name_in_kyrgyz')}
+          rules={[
+            {
+              required: true,
+              message: '',
+            },
+          ]}
         />
         <FormField
           data-testid='title_ru_id'
@@ -47,6 +127,12 @@ const CreateEditTagModal: React.FC<Props> = ({ textTitle, creating = false }) =>
           name='title_ru'
           placeholder={t('tags.name_in_russian')}
           label={t('tags.name_in_russian')}
+          rules={[
+            {
+              required: true,
+              message: '',
+            },
+          ]}
         />
         <FormField
           data-testid='title_en_id'
@@ -54,6 +140,12 @@ const CreateEditTagModal: React.FC<Props> = ({ textTitle, creating = false }) =>
           name='title_en'
           placeholder={t('tags.name_in_eng')}
           label={t('tags.name_in_eng')}
+          rules={[
+            {
+              required: true,
+              message: '',
+            },
+          ]}
         />
         <FormField
           type='switch'
@@ -62,9 +154,16 @@ const CreateEditTagModal: React.FC<Props> = ({ textTitle, creating = false }) =>
           name='active'
           text={t('merchants.active')}
           label={t('merchants.status')}
+          onChange={handleSwitchChange}
+          defaultChecked={selectedTag ? selectedTag?.active : false}
         />
 
-        <Button htmlType='submit' type='primary' style={{ width: '100%' }}>
+        <Button
+          loading={createTagLoading || updateTagLoading}
+          htmlType='submit'
+          type='primary'
+          style={{ width: '100%' }}
+        >
           {creating ? t('merchants.create') : t('tags.save')}
         </Button>
       </Form>

@@ -1,7 +1,7 @@
 import { Form, Input } from 'antd';
 import React, { CSSProperties } from 'react';
 
-interface Rule {}
+import { IRule } from '~/shared/interfaces';
 
 interface Props {
   id?: string;
@@ -11,7 +11,7 @@ interface Props {
   defaultValue?: string;
   name?: string;
   inputType?: string;
-  rules?: Rule[];
+  rules?: IRule[];
   placeholder?: string;
   inputClassName?: string;
   onChange?: () => void;
