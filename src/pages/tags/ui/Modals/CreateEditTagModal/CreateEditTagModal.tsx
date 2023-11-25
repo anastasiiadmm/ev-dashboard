@@ -18,7 +18,7 @@ interface Props {
   textTitle: string;
   selectedTag: ITag | null;
   creating?: boolean;
-  setCreating?: boolean | undefined;
+  setCreating?: React.Dispatch<React.SetStateAction<boolean>>;
   handleTagOkCancel?: () => void;
 }
 
