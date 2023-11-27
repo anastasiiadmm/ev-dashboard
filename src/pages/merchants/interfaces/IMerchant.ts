@@ -73,7 +73,7 @@ export interface ICreateMerchant {
   phone: string;
   email: string;
   country: number;
-  district: number;
+  district?: number;
   city: number;
 }
 
