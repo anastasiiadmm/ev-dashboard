@@ -1,11 +1,12 @@
 import React from 'react';
-import { screen, render, fireEvent, waitFor, cleanup } from '@testing-library/react';
+import { act, screen, render, fireEvent, waitFor, cleanup } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import { BrowserRouter } from 'react-router-dom';
 
 import '../../__mocks__/react-i18next.mock';
 import '../../__mocks__/matchMedia.mock';
 import '../../__mocks__/i18nextMock';
+
 import { merchantStore } from "../../src/shared/api/store";
 import CreateEdit from "../../src/pages/merchants/CreateEdit/CreateEdit";
 
@@ -75,7 +76,6 @@ describe('Create Merchant UI Component', () => {
     const phone = screen.getByLabelText('merchants.phone');
     const email = screen.getByLabelText('merchants.your_email');
     const countrySelect = screen.getByLabelText('merchants.country');
-    const districtSelect = screen.getByLabelText('merchants.district');
     const settlementSelect = screen.getByLabelText('merchants.city');
     const address = screen.getByLabelText('merchants.street');
     const button = await screen.findByRole('button', { name: 'merchants.further' });
@@ -88,7 +88,6 @@ describe('Create Merchant UI Component', () => {
       fireEvent.change(phone, { target: { value: '+996555555555' } });
       fireEvent.change(email, { target: { value: 'test@gmail.com' } });
       expect(countrySelect).toBeInTheDocument();
-      expect(districtSelect).toBeInTheDocument();
       expect(settlementSelect).toBeInTheDocument();
       fireEvent.change(address, { target: { value: 'Test address' } });
       fireEvent.click(button);
@@ -136,11 +135,10 @@ describe('Create Merchant UI Component', () => {
         <CreateEdit />
       </BrowserRouter>
     );
-
     fireEvent.click(getByTestId('further-button'));
-
     const errorMessage = await findByText('alerts.one_or_more_of_the_required_fields_are_not_filled');
-    expect(errorMessage).toBeInTheDocument();
+    await act(async () => {
+      expect(errorMessage).toBeInTheDocument();
+    });
   });
-
 });

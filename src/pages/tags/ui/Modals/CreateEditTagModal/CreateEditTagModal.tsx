@@ -16,7 +16,7 @@ const { Title } = Typography;
 
 interface Props {
   textTitle: string;
-  selectedTag: ITag | null;
+  selectedTag?: ITag | null;
   creating?: boolean;
   setCreating?: React.Dispatch<React.SetStateAction<boolean>>;
   handleTagOkCancel?: () => void;

@@ -1,11 +1,12 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import { BrowserRouter } from 'react-router-dom';
 
 import '../../__mocks__/react-i18next.mock';
 import '../../__mocks__/matchMedia.mock';
 import '../../__mocks__/i18nextMock';
+
 import Merchant from "../../src/pages/merchants/Merchant/Merchant";
 
 const mockMerchant = [
@@ -53,12 +54,14 @@ afterEach(() => {
 });
 
 describe('Create Merchant UI Component', () => {
-  test('Render component toMatchSnapshot()', () => {
+  test('Render component toMatchSnapshot()', async () => {
     const { asFragment } = render(
       <BrowserRouter>
         <Merchant />
       </BrowserRouter>
     );
-    expect(asFragment()).toMatchSnapshot();
+    await act(async () => {
+      expect(asFragment()).toMatchSnapshot();
+    });
   });
 });

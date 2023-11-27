@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { act, render, cleanup, screen, fireEvent, waitFor } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import { BrowserRouter } from 'react-router-dom';
 
@@ -7,6 +7,7 @@ import '../../__mocks__/react-i18next.mock';
 import '../../__mocks__/matchMedia.mock';
 import '../../__mocks__/i18nextMock';
 import Tags from "../../src/pages/tags/Tags/Tags";
+import { CreateEditTagModal } from "../../src/pages/tags";
 
 beforeAll(() => {
   process.env.NODE_ENV = 'http://localhost/:8000/';
@@ -36,6 +37,10 @@ jest.mock('~/shared/api/store', () => ({
     ],
     fetchTags: jest.fn(),
     setChangeStatusesSuccess: jest.fn(),
+    setCreateTagSuccess: jest.fn(),
+    setUpdateSuccess: jest.fn(),
+    selectedTag: null,
+    createTagSuccess: false,
     changeTagsStatuses: jest.fn().mockImplementation(() => ({
       bind: jest.fn().mockImplementation(() => {
         return function() {
@@ -66,5 +71,60 @@ describe('Tags UI Component', () => {
     const tagElement2 = getAllByText('Tag 2');
     expect(tagElement1.length).toBe(2);
     expect(tagElement2.length).toBe(2);
+  });
+
+  test('Changing create/update tag modal form', async () => {
+    const handleTagOkCancel = jest.fn();
+
+    render(
+      <CreateEditTagModal handleTagOkCancel={handleTagOkCancel} creating textTitle='Creating new tag test' />
+    );
+
+    const name_in_kyrgyz = screen.getByLabelText('tags.name_in_kyrgyz');
+    const name_in_russian = screen.getByLabelText('tags.name_in_russian');
+    const name_in_eng = screen.getByLabelText('tags.name_in_eng');
+    const button = await screen.findByRole('button', { name: 'merchants.create' });
+
+    await act(async () => {
+      fireEvent.change(name_in_kyrgyz, { target: { value: 'test_tag' } });
+      fireEvent.change(name_in_russian, { target: { value: 'test_tag' } });
+      fireEvent.change(name_in_eng, { target: { value: 'test_tag' } });
+      fireEvent.click(button);
+    });
+  });
+
+  test('Changing create/update tag modal form with mocked selectedTag', async () => {
+    const handleTagOkCancel = jest.fn();
+
+    const mockedSelectedTag = {
+      id: 1,
+      title_ky: 'Mocked Tag',
+      title_ru: 'Моковый тег',
+      title_en: 'Mock Tag',
+      active: true,
+    };
+
+    render(
+      <CreateEditTagModal handleTagOkCancel={handleTagOkCancel} textTitle='Updating tag test' selectedTag={mockedSelectedTag} />
+    );
+    const name_in_kyrgyz = screen.getByLabelText('tags.name_in_kyrgyz');
+    const name_in_russian = screen.getByLabelText('tags.name_in_russian');
+    const name_in_eng = screen.getByLabelText('tags.name_in_eng');
+    const button = await screen.findByRole('button', { name: 'tags.save' });
+
+    await act(async () => {
+
+      await waitFor(() => {
+        expect(name_in_kyrgyz.value).toBe(mockedSelectedTag.title_ky);
+        expect(name_in_russian.value).toBe(mockedSelectedTag.title_ru);
+        expect(name_in_eng.value).toBe(mockedSelectedTag.title_en);
+      });
+
+      fireEvent.change(name_in_kyrgyz, { target: { value: 'updated_tag' } });
+      fireEvent.change(name_in_russian, { target: { value: 'updated_tag' } });
+      fireEvent.change(name_in_eng, { target: { value: 'updated_tag' } });
+
+      fireEvent.click(button);
+    });
   });
 });

@@ -16,7 +16,7 @@ import {
   FormField,
   ModalComponent,
 } from '~/shared/ui';
-import { useCurrentLocale } from '~/shared/hooks';
+import { useCurrentLocale, useModal } from '~/shared/hooks';
 import { ICreateMerchant } from '~/pages/merchants/interfaces';
 import { commonStore, merchantStore } from '~/shared/api/store';
 import { getParams } from '~/shared/utils';
@@ -36,14 +36,7 @@ const CreateEdit = observer(() => {
   const { t } = useTranslation();
   const { id } = useParams();
   const [form] = Form.useForm();
-  const {
-    countries,
-    countriesLoading,
-    settlements,
-    settlementsLoading,
-    districts,
-    districtsLoading,
-  } = toJS(commonStore);
+  const { countries, countriesLoading, settlements, settlementsLoading } = toJS(commonStore);
   const {
     createMerchantSuccess,
     merchantDetailForUpdate,
@@ -71,7 +64,6 @@ const CreateEdit = observer(() => {
     phone: '',
     email: '',
     country: 0,
-    district: 0,
     city: 0,
   });
   const [updatedData, setUpdatedData] = useState<ICreateMerchant | null>(null);
@@ -84,8 +76,12 @@ const CreateEdit = observer(() => {
     ky: false,
   });
   const isAllSelected = Object.values(radioButtonStates).every((value) => value);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
+  const { isModalOpen, showModal, handleOkCancel } = useModal(false);
+  const {
+    isModalOpen: isModalSuccessOpen,
+    showModal: showSuccessModal,
+    handleOkCancel: handleOkSuccessCancel,
+  } = useModal(false);
 
   const items = [
     { title: t('merchants.merchants'), href: '/merchants' },
@@ -133,8 +129,6 @@ const CreateEdit = observer(() => {
       fetchLocationData('countries');
     } else if (!settlements) {
       fetchLocationData('settlements');
-    } else if (!districts) {
-      fetchLocationData('districts');
     }
   }, [merchantDetailForUpdate]);
 
@@ -147,9 +141,6 @@ const CreateEdit = observer(() => {
         break;
       case !id && isCountrySelected && !isCitySelected:
         locationType = 'settlements';
-        break;
-      case !id && isCitySelected:
-        locationType = 'districts';
         break;
       default:
         return;
@@ -206,28 +197,12 @@ const CreateEdit = observer(() => {
     });
   }, []);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOkCancel = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
   const handleAgreeHandler = () => {
     navigate('/merchants');
   };
 
   const handleLanguageSelect = (lang: string) => {
     setSelectedLanguage(lang);
-  };
-
-  const showSuccessModal = () => {
-    setIsModalSuccessOpen(true);
-  };
-
-  const handleOkSuccessCancel = () => {
-    setIsModalSuccessOpen(!isModalOpen);
   };
 
   const getLanguageItemClassName = (itemValue: string) => {
@@ -432,16 +407,12 @@ const CreateEdit = observer(() => {
                       handleFormChange('country', value)
                     }
                   />
-
                   <FormField
-                    customStyle={{ width: '100%' }}
-                    type='select'
-                    data-testid='district_id'
-                    id='district_id'
-                    name='district'
-                    placeholder={t('merchants.district')}
-                    label={t('merchants.district')}
-                    loading={districtsLoading}
+                    data-testid='address_id'
+                    id='address_id'
+                    name={`address_${selectedLanguage}`}
+                    placeholder={t('merchants.street')}
+                    label={t('merchants.street')}
                     rules={[
                       {
                         required: true,
@@ -449,10 +420,8 @@ const CreateEdit = observer(() => {
                       },
                     ]}
                     error={error}
-                    disabled={!id && !isCitySelected}
-                    options={districts}
-                    handleChange={(value: string | number | boolean) =>
-                      handleFormChange('district', value)
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      handleFormChange(`address_${selectedLanguage}`, e.target.value)
                     }
                   />
                 </div>
@@ -477,24 +446,6 @@ const CreateEdit = observer(() => {
                     options={settlements}
                     handleChange={(value: string | number | boolean) =>
                       handleFormChange('city', value)
-                    }
-                  />
-
-                  <FormField
-                    data-testid='address_id'
-                    id='address_id'
-                    name={`address_${selectedLanguage}`}
-                    placeholder={t('merchants.street')}
-                    label={t('merchants.street')}
-                    rules={[
-                      {
-                        required: true,
-                        message: '',
-                      },
-                    ]}
-                    error={error}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                      handleFormChange(`address_${selectedLanguage}`, e.target.value)
                     }
                   />
                 </div>

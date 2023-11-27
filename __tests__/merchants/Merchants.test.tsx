@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import { BrowserRouter } from 'react-router-dom';
 
@@ -53,13 +53,15 @@ afterEach(() => {
 });
 
 describe('Create Merchant UI Component', () => {
-  test('Render component toMatchSnapshot()', () => {
+  test('Render component toMatchSnapshot()', async () => {
     const { asFragment } = render(
       <BrowserRouter>
         <Merchants />
       </BrowserRouter>
     );
-    expect(asFragment()).toMatchSnapshot();
+    await act(async () => {
+      expect(asFragment()).toMatchSnapshot();
+    });
   });
 
   test('renders merchant data correctly', async () => {
@@ -69,6 +71,8 @@ describe('Create Merchant UI Component', () => {
       </BrowserRouter>
     );
 
-    expect(getByTestId('merchants-component')).toBeInTheDocument();
+    await act(async () => {
+      expect(getByTestId('merchants-component')).toBeInTheDocument();
+    });
   });
 });
