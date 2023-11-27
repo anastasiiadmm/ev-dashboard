@@ -90,8 +90,36 @@
       color: variables.$black-color;
     }
   }
+
   &__second-text {
     color: variables.$second-color;
     font-weight: variables.$font-400;
+  }
+
+  &__container-open-modal {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    p {
+      color: variables.$title-color;
+    }
+    button {
+      width: 100%;
+      padding-right: 3px;
+      padding-left: 11px;
+      color: variables.$title-color;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  &__modal-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 590px;
   }
 }

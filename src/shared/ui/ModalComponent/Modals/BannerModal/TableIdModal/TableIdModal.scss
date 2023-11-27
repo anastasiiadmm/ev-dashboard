@@ -1,0 +1,14 @@
+@use '../../../../../../app/styles/variables' as variables;
+
+.TableIdModal {
+  &__modal-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 590px;
+  }
+
+  &__input {
+    margin: 0;
+  }
+}

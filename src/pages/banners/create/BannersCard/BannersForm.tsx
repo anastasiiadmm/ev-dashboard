@@ -1,19 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import bem from 'easy-bem';
-import { Form } from 'antd';
+import { Button, Form } from 'antd';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 
+import { chevronRight } from '~/assets/images';
+
 import { CardComponent, FormField, UploadFile } from '../../../../shared/ui';
 import SelectLanguageCard from '../SelectLanguageCard/SelectLanguageCard';
+import TableIdModal from '../../../../shared/ui/ModalComponent/Modals/BannerModal/TableIdModal/TableIdModal';
 
 import './BannersForm.scss';
+
+interface Modal {
+  merchant: boolean;
+  station: boolean;
+}
+
+interface Select {
+  id: number;
+  name: string;
+}
 
 const BannersForm = observer(() => {
   const b = bem('BannersForm');
   const { t } = useTranslation();
   const [form] = Form.useForm();
+  const [open, setOpen] = useState<Modal>({
+    merchant: false,
+    station: false,
+  });
+
+  const openCloseModal = (id: string) => {
+    switch (id) {
+      case 'MERCHANT':
+        return setOpen({ ...open, merchant: !open.merchant });
+      case 'STATION':
+        return setOpen({ ...open, station: !open.station });
+    }
+  };
+
+  const columns = [
+    { title: 'ID', dataIndex: 'id', key: 'id' },
+    { title: 'Name', dataIndex: 'name', key: 'name' },
+  ];
+
+  const saveHandler = (data: Select | undefined) => {
+    console.log(data);
+  };
 
   return (
     <>
@@ -76,18 +111,20 @@ const BannersForm = observer(() => {
               />
             </div>
             <div className={b('display-block')}>
-              <FormField
-                className={b('input')}
-                placeholder={t('banners.add_banner.merchant_placeholder')}
-                label={t('banners.add_banner.merchant_label')}
-                type='select'
-              />
-              <FormField
-                className={b('input')}
-                placeholder={t('banners.add_banner.id_station_placeholder')}
-                label={t('banners.add_banner.id_station')}
-                type='select'
-              />
+              <div className={b('container-open-modal')}>
+                <p>{t('banners.add_banner.merchant_label')}</p>
+                <Button className={b('button-select')} onClick={() => openCloseModal('MERCHANT')}>
+                  {t('banners.add_banner.merchant_placeholder')}
+                  <img src={chevronRight} alt='chevronrighticon' />
+                </Button>
+              </div>
+              <div className={b('container-open-modal')}>
+                <p>{t('banners.add_banner.id_station')}</p>
+                <Button className={b('button-select')} onClick={() => openCloseModal('STATION')}>
+                  {t('banners.add_banner.id_station_placeholder')}
+                  <img src={chevronRight} alt='chevronrighticon' />
+                </Button>
+              </div>
             </div>
             <div className={b('container-switch')}>
               <FormField
@@ -100,6 +137,26 @@ const BannersForm = observer(() => {
           </Form>
         </CardComponent>
         <SelectLanguageCard />
+        <TableIdModal
+          data={[]}
+          columns={columns}
+          isModalOpen={open.merchant}
+          handleCancel={() => openCloseModal('MERCHANT')}
+          handleOk={() => {}}
+          title='Выбрать ID мерчанта'
+          placeholder='Искать ID, наименование'
+          saveHandler={saveHandler}
+        />
+        <TableIdModal
+          data={[]}
+          columns={columns}
+          isModalOpen={open.station}
+          handleCancel={() => openCloseModal('STATION')}
+          handleOk={() => {}}
+          title='Выбрать станции'
+          placeholder='Искать ID, наименование станции'
+          saveHandler={saveHandler}
+        />
       </div>
     </>
   );
