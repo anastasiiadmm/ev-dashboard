@@ -26,7 +26,7 @@ const mockSettlements = [
 ];
 
 beforeAll(() => {
-  process.env.NODE_ENV = 'http://localhost/:8000/';
+  process.env.NODE_ENV = 'development';
 });
 
 jest.mock('react-i18next', () => ({
@@ -43,16 +43,16 @@ beforeEach(() => {
     districtsLoading: false,
     settlementsLoading: false,
   }));
-  jest.spyOn(merchantStore, 'postCreateMerchant').mockImplementation(() => Promise.resolve({ merchantStore: {
-      postCreateMerchant: jest.fn().mockImplementation(() => Promise.resolve({
-        name: 'Test Name',
-        agreementNumber: '1234',
-      }))
-    } }));
+  jest.spyOn(merchantStore, 'postCreateMerchant').mockImplementation(() =>
+    Promise.resolve({
+      name: 'Test Name',
+      agreementNumber: '1234',
+    })
+  );
 });
 
 jest.mock('~/shared/utils/config', () => ({
-  apiURL: 'http://localhost/:8000/',
+  apiURL: 'development',
 }));
 
 afterEach(() => {

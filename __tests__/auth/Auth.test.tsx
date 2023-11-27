@@ -10,11 +10,11 @@ import '../../__mocks__/i18nextMock';
 import Auth from "../../src/pages/auth/Auth/Auth";
 
 jest.mock('~/shared/utils/config', () => ({
-  apiURL: 'http://localhost/8000',
+  apiURL: 'development',
 }));
 
 beforeAll(() => {
-  process.env.NODE_ENV = 'http://localhost/:8000/';
+  process.env.NODE_ENV = 'development';
 });
 
 jest.mock('antd/lib/form/Form', () => {

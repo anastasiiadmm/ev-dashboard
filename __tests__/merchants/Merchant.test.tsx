@@ -32,7 +32,7 @@ const mockMerchant = [
 ];
 
 beforeAll(() => {
-  process.env.NODE_ENV = 'http://localhost/:8000/';
+  process.env.NODE_ENV = 'development';
   jest.mock("~/shared/api/store", () => ({
     merchantStore: {
       getMerchantDetail: jest.fn(() => Promise.resolve(mockMerchant)),
@@ -46,7 +46,7 @@ jest.mock('react-i18next', () => ({
 }));
 
 jest.mock('~/shared/utils/config', () => ({
-  apiURL: 'http://localhost/:8000/',
+  apiURL: 'development',
 }));
 
 afterEach(() => {

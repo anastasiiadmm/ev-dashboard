@@ -9,10 +9,6 @@ import '../../__mocks__/i18nextMock';
 import Tags from "../../src/pages/tags/Tags/Tags";
 import { CreateEditTagModal } from "../../src/pages/tags";
 
-beforeAll(() => {
-  process.env.NODE_ENV = 'http://localhost/:8000/';
-});
-
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({ t: key => key })
 }));
@@ -22,12 +18,14 @@ beforeEach(() => {
 });
 
 jest.mock('~/shared/utils/config', () => ({
-  apiURL: 'http://localhost/:8000/',
+  apiURL: 'http://localhost:8000',
 }));
 
 afterEach(() => {
   jest.restoreAllMocks();
 });
+
+jest.mock('axios');
 
 jest.mock('~/shared/api/store', () => ({
   tagsStore: {
