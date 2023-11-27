@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import '../../__mocks__/react-i18next.mock';
 import '../../__mocks__/matchMedia.mock';
 import '../../__mocks__/i18nextMock';
+
 import Merchant from "../../src/pages/merchants/Merchant/Merchant";
 
 const mockMerchant = [
@@ -31,7 +32,6 @@ const mockMerchant = [
 ];
 
 beforeAll(() => {
-  process.env.NODE_ENV = 'http://localhost/:8000/';
   jest.mock("~/shared/api/store", () => ({
     merchantStore: {
       getMerchantDetail: jest.fn(() => Promise.resolve(mockMerchant)),
@@ -45,7 +45,7 @@ jest.mock('react-i18next', () => ({
 }));
 
 jest.mock('~/shared/utils/config', () => ({
-  apiURL: 'http://localhost/:8000/',
+  apiURL: 'development',
 }));
 
 afterEach(() => {
@@ -53,7 +53,7 @@ afterEach(() => {
 });
 
 describe('Create Merchant UI Component', () => {
-  test('Render component toMatchSnapshot()', () => {
+  test('Render component toMatchSnapshot()', async () => {
     const { asFragment } = render(
       <BrowserRouter>
         <Merchant />

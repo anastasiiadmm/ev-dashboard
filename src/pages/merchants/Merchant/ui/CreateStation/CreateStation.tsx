@@ -10,7 +10,7 @@ import { eng, kg, rus } from '~/assets/images';
 import { ICreateConnector, ICreateMerchant, IModule } from '~/pages/merchants/interfaces';
 import { CardEVSEModule } from '~/pages/merchants/Merchant/ui';
 import { commonStore, merchantStore } from '~/shared/api/store';
-import { useCurrentLocale } from '~/shared/hooks';
+import { useCurrentLocale, useModal } from '~/shared/hooks';
 import {
   ActiveInactiveModal,
   AlertComponent,
@@ -49,6 +49,12 @@ const CreateStation = observer(() => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const currentLocale = useCurrentLocale();
+  const { isModalOpen, showModal, handleOkCancel } = useModal(false);
+  const {
+    isModalOpen: isModalSuccessOpen,
+    showModal: showSuccessModal,
+    handleOkCancel: handleOkSuccessCancel,
+  } = useModal(false);
   const [selectedLanguage, setSelectedLanguage] = useState(currentLocale);
   const [formData, setFormData] = useState<ICreateMerchant>({
     active: false,
@@ -79,8 +85,6 @@ const CreateStation = observer(() => {
     ky: false,
   });
   const isAllSelected = Object.values(radioButtonStates).every((value) => value);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
   const [modules, setModules] = useState<IModule[]>([]);
 
   const items = [
@@ -177,24 +181,8 @@ const CreateStation = observer(() => {
     });
   }, []);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOkCancel = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
   const handleAgreeHandler = () => {
     navigate('/merchants');
-  };
-
-  const showSuccessModal = () => {
-    setIsModalSuccessOpen(true);
-  };
-
-  const handleOkSuccessCancel = () => {
-    setIsModalSuccessOpen(!isModalOpen);
   };
 
   const onFinish = async () => {
@@ -692,22 +680,6 @@ const CreateStation = observer(() => {
           textTitle={t('modals.are_you_sure_you_want_to_cancel_your_changes') as string}
           infoText={t('modals.after_cancellation_all_data_will_be_lost') as string}
           handleOkCancel={handleOkCancel}
-          handleAgreeHandler={handleAgreeHandler}
-        />
-      </ModalComponent>
-
-      <ModalComponent
-        width={400}
-        isModalOpen={isModalSuccessOpen}
-        handleOk={handleOkSuccessCancel}
-        handleCancel={handleOkSuccessCancel}
-      >
-        <ActiveInactiveModal
-          hasCancelButton={false}
-          successModal
-          textTitle={t('modals.merchant_has_been_created') as string}
-          infoText={t('modals.a_new_merchant_account_has_been_successfully_created') as string}
-          handleOkCancel={handleOkSuccessCancel}
           handleAgreeHandler={handleAgreeHandler}
         />
       </ModalComponent>

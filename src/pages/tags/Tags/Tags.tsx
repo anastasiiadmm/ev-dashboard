@@ -10,8 +10,10 @@ import { add, deleteIcon, editColor, inactive, infoCircle, search, status } from
 import { IColumn } from '~/pages/merchants/interfaces';
 import { ITag } from '~/pages/tags/interfaces';
 import { CreateEditTagModal } from '~/pages/tags';
-import { useNotification, useRowSelection, useTableFilter } from '~/shared/hooks';
+import { useModal, useNotification, useRowSelection, useTableFilter } from '~/shared/hooks';
 import { tagsStore } from '~/shared/api/store';
+import { getParams } from '~/shared/utils';
+import { useLanguage } from '~/shared/context';
 import './Tags.scss';
 
 const Tags = observer(() => {
@@ -41,49 +43,30 @@ const Tags = observer(() => {
     isDisabledButton,
     applyChangeStatus,
   } = useRowSelection(tags || [], tagsStore.changeTagsStatuses.bind(tagsStore));
+  const { currentLanguage } = useLanguage();
+  const [selectedTag, setSelectedTag] = useState<ITag | null>(null);
   const [selectedRowKey, setSelectedRowKey] = useState<number | null>(null);
   const [creating, setCreating] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
-  const [isTagModalOpen, setIsTagModalOpen] = useState(false);
+  const { isModalOpen, showModal, handleOkCancel: handleModalOkCancel } = useModal(false);
+  const {
+    isModalOpen: isModalDeleteOpen,
+    showModal: showDeleteModal,
+    handleOkCancel: handleDeleteOkCancel,
+  } = useModal(false);
+  const {
+    isModalOpen: isTagModalOpen,
+    showModal: showTagModal,
+    handleOkCancel: handleTagOkCancel,
+  } = useModal(false);
 
   useEffect(() => {
     if (changeStatusesSuccess) {
-      handleOkCancel();
+      handleModalOkCancel();
     }
     return () => {
       tagsStore.setChangeStatusesSuccess(false);
     };
-  }, [changeStatusesSuccess]);
-
-  const showDeleteModal = () => {
-    setIsModalDeleteOpen(true);
-  };
-
-  const handleDeleteOkCancel = () => {
-    setIsModalDeleteOpen(!isModalDeleteOpen);
-  };
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOkCancel = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
-  const handleTagOkCancel = () => {
-    setIsTagModalOpen(!isTagModalOpen);
-  };
-
-  const showTagModal = (isCreating: boolean) => {
-    setCreating(isCreating);
-    setIsTagModalOpen(true);
-  };
-
-  const showEditModal = () => {
-    showTagModal(false);
-  };
+  }, [changeStatusesSuccess, handleModalOkCancel]);
 
   const handleAgreeHandler = async () => {
     try {
@@ -99,7 +82,7 @@ const Tags = observer(() => {
 
   const handleAgreeDeleteTagHandler = async () => {
     try {
-      await tagsStore.deleteTag(selectedRowKey);
+      await tagsStore.deleteTag(selectedRowKey, getParams({ page: 1 }), currentLanguage);
       handleDeleteOkCancel();
     } catch (e) {
       if (e instanceof Error) {
@@ -162,7 +145,10 @@ const Tags = observer(() => {
               }
             >
               <Button
-                onClick={showEditModal}
+                onClick={() => {
+                  showTagModal();
+                  setSelectedTag(record);
+                }}
                 className={b('add-button')}
                 icon={<img src={editColor} alt='plus' />}
               />
@@ -213,7 +199,10 @@ const Tags = observer(() => {
           className={b('button-style')}
           type='primary'
           icon={<img src={add} alt='add' />}
-          onClick={() => showTagModal(true)}
+          onClick={() => {
+            showTagModal();
+            setCreating(true);
+          }}
         >
           {t('tags.add_tag')}
         </Button>
@@ -250,8 +239,8 @@ const Tags = observer(() => {
       <ModalComponent
         width={311}
         isModalOpen={isModalOpen}
-        handleOk={handleOkCancel}
-        handleCancel={handleOkCancel}
+        handleOk={handleModalOkCancel}
+        handleCancel={handleModalOkCancel}
       >
         <ActiveInactiveModal
           textTitle={
@@ -264,7 +253,7 @@ const Tags = observer(() => {
               ? (t('tags.the_tags_you_select_will_not_be_active') as string)
               : (t('tags.the_tags_you_select_will_be_active') as string)
           }
-          handleOkCancel={handleOkCancel}
+          handleOkCancel={handleModalOkCancel}
           handleAgreeHandler={handleAgreeHandler}
           loadingStatus={changeStatusesLoading}
         />
@@ -275,7 +264,10 @@ const Tags = observer(() => {
         width={360}
         isModalOpen={isTagModalOpen}
         handleOk={handleTagOkCancel}
-        handleCancel={handleTagOkCancel}
+        handleCancel={() => {
+          handleTagOkCancel();
+          setCreating(false);
+        }}
       >
         <CreateEditTagModal
           textTitle={
@@ -283,7 +275,10 @@ const Tags = observer(() => {
               ? (t('modals.creating_a_tag') as string)
               : (t('modals.editing_a_tag') as string)
           }
+          setCreating={setCreating}
+          handleTagOkCancel={handleTagOkCancel}
           creating={creating}
+          selectedTag={selectedTag}
         />
       </ModalComponent>
 
