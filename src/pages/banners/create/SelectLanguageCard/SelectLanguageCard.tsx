@@ -8,8 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { eng, kg, rus } from '~/assets/images';
 import { useCurrentLocale } from '~/shared/hooks';
 import { merchantStore } from '~/shared/api/store';
-
-import { CardComponent } from '../../../../shared/ui';
+import { CardComponent } from '~/shared/ui';
 
 const { Title, Text } = Typography;
 

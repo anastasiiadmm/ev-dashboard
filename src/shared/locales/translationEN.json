@@ -184,7 +184,6 @@
   },
   "banners": {
     "add_banner": {
-      "home": "Home",
       "title": "Creating a banner",
       "text": "Information about BANNER",
       "name_input": "Banner name",

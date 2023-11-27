@@ -1,12 +1,12 @@
 import React from 'react';
 import bem from 'easy-bem';
 import { Form } from 'antd';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 
-import { CardComponent, FormField, UploadFile } from '../../../../shared/ui';
-import SelectLanguageCard from '../SelectLanguageCard/SelectLanguageCard';
+import { BreadcrumbComponent, CardComponent, FormField, UploadFile } from '~/shared/ui';
+
+import { SelectLanguageCard } from '../..';
 
 import './BannersForm.scss';
 
@@ -18,9 +18,9 @@ const BannersForm = observer(() => {
   return (
     <>
       <div className={b('container-meatballs')}>
-        <Link to=''>{t('banners.add_banner.home')}</Link>
-        <span>/</span>
-        <p className={b('second-text')}>{t('banners.add_banner.title')}</p>
+        <BreadcrumbComponent
+          items={[{ title: t('banners.add_banner.title'), href: '/create-banner' }]}
+        />
       </div>
       <div className={b('container-card')}>
         <CardComponent className={b('container')}>

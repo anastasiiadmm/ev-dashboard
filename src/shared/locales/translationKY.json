@@ -184,7 +184,6 @@
   },
   "banners": {
     "add_banner": {
-      "home": "Башаты",
       "title": "Баннер тузуу",
       "text": "Баннер жөнүндө маалымат",
       "name_input": "Баннердин аталышы",
@@ -195,7 +194,7 @@
       "merchant_placeholder": "Мерчантты тандагыла",
       "id_station": "ID станциялар ",
       "id_station_placeholder": "Баардык",
-      "status": "Статус",
+      "status": "Статусу",
       "date_start": "Ишке киргизүү күнү жана убактысы",
       "date_finish": "Өчүрүү күнү жана убактысы"
     }

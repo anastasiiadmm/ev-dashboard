@@ -83,15 +83,5 @@
 
   &__container-meatballs {
     margin: 20px 24px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    span {
-      color: variables.$black-color;
-    }
-  }
-  &__second-text {
-    color: variables.$second-color;
-    font-weight: variables.$font-400;
   }
 }
