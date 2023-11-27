@@ -9,14 +9,6 @@ import '../../__mocks__/i18nextMock';
 
 import Auth from "../../src/pages/auth/Auth/Auth";
 
-jest.mock('~/shared/utils/config', () => ({
-  apiURL: 'development',
-}));
-
-beforeAll(() => {
-  process.env.NODE_ENV = 'development';
-});
-
 jest.mock('antd/lib/form/Form', () => {
   const actualForm = jest.requireActual('antd/lib/form/Form');
   return {

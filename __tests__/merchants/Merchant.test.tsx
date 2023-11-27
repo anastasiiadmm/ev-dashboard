@@ -32,7 +32,6 @@ const mockMerchant = [
 ];
 
 beforeAll(() => {
-  process.env.NODE_ENV = 'development';
   jest.mock("~/shared/api/store", () => ({
     merchantStore: {
       getMerchantDetail: jest.fn(() => Promise.resolve(mockMerchant)),
