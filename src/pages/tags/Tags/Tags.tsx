@@ -58,7 +58,6 @@ const Tags = observer(() => {
     showModal: showTagModal,
     handleOkCancel: handleTagOkCancel,
   } = useModal(false);
-  console.log('selectedTag', selectedTag);
 
   useEffect(() => {
     if (changeStatusesSuccess) {
