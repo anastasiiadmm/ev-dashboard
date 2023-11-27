@@ -94,6 +94,26 @@ describe('Create Merchant UI Component', () => {
     });
   });
 
+  test('displays error message on form submission failure', async () => {
+    render(
+      <BrowserRouter>
+        <CreateEdit />
+      </BrowserRouter>
+    );
+
+    await waitFor( async () => {
+      fireEvent.change(screen.getByLabelText('merchants.name'), { target: { value: 'Test Name' } });
+      fireEvent.change(screen.getByLabelText('merchants.agreement_number'), { target: { value: '1234' } });
+      fireEvent.change(screen.getByLabelText('merchants.entity_full'), { target: { value: 'Test Name' } });
+      fireEvent.change(screen.getByLabelText('merchants.under_agency_agreement'), { target: { value: 'Test Name' } });
+      fireEvent.change(screen.getByLabelText('merchants.phone'), { target: { value: '+996555555555' } });
+      fireEvent.change(screen.getByLabelText('merchants.your_email'), { target: { value: 'test@gmail.com' } });
+      fireEvent.change(screen.getByLabelText('merchants.country'), { target: { value: 'Test address' } });
+      fireEvent.click(screen.getByRole('button', { name: 'merchants.further' }));
+      expect(await screen.getByText('alerts.one_or_more_of_the_required_fields_are_not_filled')).toBeInTheDocument();
+    });
+  });
+
   it('renders with correct language options', () => {
     const { getByText } = render(
       <BrowserRouter>
