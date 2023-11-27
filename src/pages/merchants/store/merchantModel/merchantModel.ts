@@ -12,7 +12,7 @@ import {
 import { IChangeStatuses, IError } from '~/shared/interfaces';
 import { getAxiosConfig } from '~/shared/utils';
 
-interface MerchantState {
+interface IMerchantState {
   merchants: IMerchant[] | null;
   merchantPagination: IMerchantPagination | null;
   merchantsLoading: boolean;
@@ -39,7 +39,7 @@ interface MerchantState {
   merchantDetailForUpdateError: AxiosError | null;
 }
 
-class MerchantStore implements MerchantState {
+class MerchantStore implements IMerchantState {
   merchants: IMerchant[] | null = null;
   merchantPagination: IMerchantPagination | null = {
     page: null,
@@ -245,15 +245,14 @@ class MerchantStore implements MerchantState {
     }
   }
 
-  async getMerchantDetailForUpdate(id: number | undefined) {
+  async getMerchantDetailForUpdate(id: string | undefined) {
     try {
       runInAction(() => {
         this.merchantDetailForUpdateLoading = true;
         this.merchantDetailForUpdateError = null;
       });
 
-      const resp = await axiosApi.get(`/merchants/for-update/${id}/`);
-      const data = resp.data;
+      const { data } = await axiosApi.get(`/merchants/for-update/${id}/`);
 
       runInAction(() => {
         this.merchantDetailForUpdate = data;
@@ -298,6 +297,10 @@ class MerchantStore implements MerchantState {
 
   setPatchMerchantStatusesSuccess(value: boolean) {
     this.patchMerchantSuccess = value;
+  }
+
+  setMerchantForUpdateNull() {
+    this.merchantDetailForUpdate = null;
   }
 }
 

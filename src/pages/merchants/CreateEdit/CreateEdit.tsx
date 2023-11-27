@@ -93,7 +93,7 @@ const CreateEdit = observer(() => {
 
   useEffect(() => {
     if (id) {
-      merchantStore.getMerchantDetailForUpdate(Number(id));
+      merchantStore.getMerchantDetailForUpdate(id as string);
     }
   }, [id]);
 
@@ -105,7 +105,7 @@ const CreateEdit = observer(() => {
     return () => {
       merchantStore.setCreateMerchantStatusesSuccess(false);
     };
-  }, [createMerchantSuccess]);
+  }, [createMerchantSuccess, showSuccessModal]);
 
   useEffect(() => {
     if (patchMerchantSuccess && id) {
@@ -113,9 +113,10 @@ const CreateEdit = observer(() => {
       showSuccessModal();
     }
     return () => {
+      merchantStore.setMerchantForUpdateNull();
       merchantStore.setPatchMerchantStatusesSuccess(false);
     };
-  }, [id, patchMerchantSuccess]);
+  }, [id, patchMerchantSuccess, showSuccessModal]);
 
   useEffect(() => {
     if (!id || !merchantDetailForUpdate) return;
@@ -255,7 +256,7 @@ const CreateEdit = observer(() => {
 
             <Form
               form={form}
-              initialValues={merchantDetailForUpdate || {}}
+              initialValues={!!id && merchantDetailForUpdate}
               onFinish={onFinish}
               autoComplete='off'
               layout='vertical'
