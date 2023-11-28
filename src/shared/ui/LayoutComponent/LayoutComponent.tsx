@@ -197,7 +197,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     ),
     getItem(
       t('menu.advertising_banners'),
-      '11',
+      'create-banner',
       <img src={template} alt='template' />,
       <img src={templateActive} alt='templateActive' />,
     ),

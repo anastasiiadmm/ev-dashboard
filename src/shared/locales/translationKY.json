@@ -182,6 +182,23 @@
     "Saturday": "Ишемби",
     "Sunday": "Жекшемби"
   },
+  "banners": {
+    "add_banner": {
+      "title": "Баннер тузуу",
+      "text": "Баннер жөнүндө маалымат",
+      "name_input": "Баннердин аталышы",
+      "link_input": "Маалымат булагынын шилтемеси",
+      "name_button": "Кнопканын аталышы",
+      "color_button": "Кнопканын түсү",
+      "merchant_label": "Мерчант",
+      "merchant_placeholder": "Мерчантты тандагыла",
+      "id_station": "ID станциялар ",
+      "id_station_placeholder": "Баардык",
+      "status": "Статусу",
+      "date_start": "Ишке киргизүү күнү жана убактысы",
+      "date_finish": "Өчүрүү күнү жана убактысы"
+    }
+  },
   "empty": {
     "banner": {
       "title": "Сизде азырынча баннерлер жок",

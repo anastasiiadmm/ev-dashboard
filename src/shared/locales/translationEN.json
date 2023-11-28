@@ -182,6 +182,23 @@
     "Saturday": "Saturday",
     "Sunday": "Sunday"
   },
+  "banners": {
+    "add_banner": {
+      "title": "Creating a banner",
+      "text": "Information about BANNER",
+      "name_input": "Banner name",
+      "link_input": "Source link",
+      "name_button": "Button name",
+      "color_button": "Button color",
+      "merchant_label": "Merchant",
+      "merchant_placeholder": "Select a merchant",
+      "id_station": "Station ID",
+      "id_station_placeholder": "All",
+      "status": "Status",
+      "date_start": "Launch date and time",
+      "date_finish": "Shutdown date and time"
+    }
+  },
   "empty": {
     "banner": {
       "title": "You don't have any advertising banners yet",
