@@ -481,8 +481,12 @@ const CreateEdit = observer(() => {
                   radioButtonStates[item.value as keyof typeof radioButtonStates] || false;
 
                 return (
-                  <CardComponent className={getLanguageItemClassName(item.value)} key={item.name}>
-                    <img src={item.icon} alt={item.name} />
+                  <div
+                    className={getLanguageItemClassName(item.value)}
+                    key={item.name}
+                    onClick={() => id && handleLanguageSelect(item.value)}
+                  >
+                    <img src={item.icon} alt={item.name} style={{ marginLeft: 8 }} />
                     <div className={b('button-info')}>
                       <Text style={{ margin: 0 }}>{item.name}</Text>
                       <Text type='secondary' style={{ margin: 0 }}>
@@ -494,7 +498,7 @@ const CreateEdit = observer(() => {
                       className={`radio-styles ${isChecked ? 'radio-group-button' : ''}`}
                       checked={isChecked}
                     />
-                  </CardComponent>
+                  </div>
                 );
               })}
             </Radio.Group>
