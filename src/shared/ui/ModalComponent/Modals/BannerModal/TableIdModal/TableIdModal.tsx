@@ -1,25 +1,22 @@
-import React from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import bem from 'easy-bem';
 import { Button } from 'antd';
 
-import { FormField, TableComponent } from '~/shared/ui';
-
-import ModalComponent from '../../../ModalComponent';
-
+import { FormField, ModalComponent, TableComponent } from '~/shared/ui';
 import './TableIdModal.scss';
 
 interface Props {
   isModalOpen: boolean;
   handleOk: () => void;
   handleCancel?: () => void;
-  data: Row[];
+  data: IData[];
   columns: IColumn[];
   title: string;
   placeholder: string;
-  saveHandler: (checked: Row | undefined) => void;
+  saveHandler: (checked: IData[] | undefined) => void;
 }
 
-interface Row {
+interface IData {
   id: number;
   name: string;
 }
@@ -34,13 +31,41 @@ const TableIdModal: React.FC<Props> = ({
   isModalOpen,
   handleCancel,
   handleOk,
+  data,
   columns,
   title,
   placeholder,
+  saveHandler,
 }) => {
   const b = bem('TableIdModal');
+  const [getData, setGetData] = useState<IData[]>();
+  const [filteredData, setFilteredData] = useState<IData[]>(data);
 
-  const selectIdHandler = () => {};
+  useEffect(() => {
+    setFilteredData(data);
+  }, [data]);
+
+  const handleFormChange = (value: string) => {
+    const lowerCaseValue = value.toLowerCase();
+    const filtered = data.filter(
+      (row) =>
+        row.id.toString().includes(lowerCaseValue) ||
+        row.name.toLowerCase().includes(lowerCaseValue),
+    );
+    setFilteredData(filtered);
+  };
+
+  const rowKey = (record: IData[]) => record
+
+  const rowSelection = {
+    onChange: (selectedRowKeys: IData[]) => {
+      setGetData(selectedRowKeys);
+    },
+  };
+
+  const selectIdHandler = () => {
+    saveHandler(getData);
+  };
 
   return (
     <ModalComponent
@@ -52,8 +77,28 @@ const TableIdModal: React.FC<Props> = ({
     >
       <div className={b('modal-container')}>
         <h2>{title}</h2>
-        <FormField className={b('input')} placeholder={placeholder} />
-        <TableComponent loading={false} columns={columns} scroll={{ x: 280, y: 400 }} />
+        <FormField
+          id='value'
+          name={`value`}
+          data-testid='value'
+          className={b('input')}
+          placeholder={placeholder}
+          rules={[
+            {
+              required: true,
+              message: '',
+            },
+          ]}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => handleFormChange(e.target.value)}
+        />
+        <TableComponent
+          rowKey={rowKey}
+          loading={false}
+          columns={columns}
+          data={filteredData}
+          rowSelection={rowSelection}
+          scroll={{ x: 0, y: 400 }}
+        />
         <Button type='primary' onClick={selectIdHandler}>
           Выбрать
         </Button>

@@ -89,3 +89,8 @@ export interface ITabs {
   label: string;
   children: string | JSX.Element;
 }
+
+export interface ISelectMerchant {
+  id: number;
+  name: string;
+}
