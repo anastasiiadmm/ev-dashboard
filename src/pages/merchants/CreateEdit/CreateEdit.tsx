@@ -256,7 +256,7 @@ const CreateEdit = observer(() => {
 
             <Form
               form={form}
-              initialValues={!!id && merchantDetailForUpdate}
+              initialValues={id ? toJS(merchantDetailForUpdate) ?? {} : undefined}
               onFinish={onFinish}
               autoComplete='off'
               layout='vertical'
