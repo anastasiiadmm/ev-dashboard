@@ -93,7 +93,7 @@ const CreateEdit = observer(() => {
 
   useEffect(() => {
     if (id) {
-      merchantStore.getMerchantDetailForUpdate(Number(id));
+      merchantStore.getMerchantDetailForUpdate(id as string);
     }
   }, [id]);
 
@@ -105,7 +105,7 @@ const CreateEdit = observer(() => {
     return () => {
       merchantStore.setCreateMerchantStatusesSuccess(false);
     };
-  }, [createMerchantSuccess]);
+  }, [createMerchantSuccess, showSuccessModal]);
 
   useEffect(() => {
     if (patchMerchantSuccess && id) {
@@ -113,9 +113,10 @@ const CreateEdit = observer(() => {
       showSuccessModal();
     }
     return () => {
+      merchantStore.setMerchantForUpdateNull();
       merchantStore.setPatchMerchantStatusesSuccess(false);
     };
-  }, [id, patchMerchantSuccess]);
+  }, [id, patchMerchantSuccess, showSuccessModal]);
 
   useEffect(() => {
     if (!id || !merchantDetailForUpdate) return;
@@ -255,7 +256,7 @@ const CreateEdit = observer(() => {
 
             <Form
               form={form}
-              initialValues={merchantDetailForUpdate || {}}
+              initialValues={id ? toJS(merchantDetailForUpdate) ?? {} : undefined}
               onFinish={onFinish}
               autoComplete='off'
               layout='vertical'
@@ -480,8 +481,12 @@ const CreateEdit = observer(() => {
                   radioButtonStates[item.value as keyof typeof radioButtonStates] || false;
 
                 return (
-                  <CardComponent className={getLanguageItemClassName(item.value)} key={item.name}>
-                    <img src={item.icon} alt={item.name} />
+                  <div
+                    className={getLanguageItemClassName(item.value)}
+                    key={item.name}
+                    onClick={() => id && handleLanguageSelect(item.value)}
+                  >
+                    <img src={item.icon} alt={item.name} style={{ marginLeft: 8 }} />
                     <div className={b('button-info')}>
                       <Text style={{ margin: 0 }}>{item.name}</Text>
                       <Text type='secondary' style={{ margin: 0 }}>
@@ -493,7 +498,7 @@ const CreateEdit = observer(() => {
                       className={`radio-styles ${isChecked ? 'radio-group-button' : ''}`}
                       checked={isChecked}
                     />
-                  </CardComponent>
+                  </div>
                 );
               })}
             </Radio.Group>

@@ -49,15 +49,17 @@
   }
 
   &__language-item {
+    cursor: pointer;
     background-color: variables.$gray-light-bg-color;
     border: none;
     margin-top: 8px;
+    display: flex;
+    border-radius: variables.$border-radius;
     > div {
       border: none !important;
       display: flex;
-      gap: 10px;
       justify-content: space-between;
-      padding: 10px !important;
+      padding: 8px 10px !important;
     }
   }
 
@@ -67,10 +69,13 @@
 
   &__button-info {
     width: 240px;
-    height: 40px;
+    height: 48px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    > span {
+      line-height: 1;
+    }
   }
 
   &__cancel-button {
