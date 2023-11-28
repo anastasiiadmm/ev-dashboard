@@ -197,7 +197,13 @@
       "id_station_placeholder": "Все",
       "status": "Статус",
       "date_start": "Дата и время запуска",
-      "date_finish": "Дата и время отключения"
+      "date_finish": "Дата и время отключения",
+      "choose_merchant": "Выбрать ID мерчанта",
+      "search_id_name_merchant": "Искать ID, наименование",
+      "choose": "Выбрать",
+      "choose_station": "Выбрать станции",
+      "search_station": "Искать ID, наименование станции",
+      "name_station": "Наименование станции"
     }
   },
   "empty": {

@@ -197,7 +197,13 @@
       "id_station_placeholder": "All",
       "status": "Status",
       "date_start": "Launch date and time",
-      "date_finish": "Shutdown date and time"
+      "date_finish": "Shutdown date and time",
+      "choose_merchant": "Select merchant ID",
+      "search_id_name_merchant": "Search ID, name",
+      "choose": "Choose",
+      "choose_station": "Select stations",
+      "search_station": "Search ID, station name",
+      "name_station": "Station name"
     }
   },
   "empty": {
