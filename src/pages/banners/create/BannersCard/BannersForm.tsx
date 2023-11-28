@@ -5,8 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 
 import { BreadcrumbComponent, CardComponent, FormField, UploadFile } from '~/shared/ui';
-
-import { SelectLanguageCard } from '../..';
+import { SelectLanguageCard } from '~/pages/banners';
 
 import './BannersForm.scss';
 
