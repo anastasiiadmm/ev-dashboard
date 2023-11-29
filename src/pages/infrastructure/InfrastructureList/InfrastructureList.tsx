@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import bem from 'easy-bem';
 import { toJS } from 'mobx';
@@ -28,6 +28,11 @@ const InfrastructureList = observer(() => {
     changeShowByHandler,
     onChangePageCheckHandler,
   } = useTableFilter(infrastructureStore.fetchInfrastructure.bind(infrastructureStore));
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+
+  const onSelectChange = (selectedRowKeys: React.Key[]) => {
+    setSelectedRowKeys(selectedRowKeys);
+  };
 
   const columns: IColumn[] = [
     {
@@ -122,7 +127,10 @@ const InfrastructureList = observer(() => {
     },
   ] as IColumn[];
 
-  const rowSelection = {};
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
 
   return (
     <Row justify='space-between' data-testid='infrastructure-component' className={b()}>

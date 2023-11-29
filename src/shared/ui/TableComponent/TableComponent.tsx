@@ -4,7 +4,7 @@ import { Key } from 'antd/lib/table/interface';
 import bem from 'easy-bem';
 
 import { PaginationComponent, NotFoundImages } from '~/shared/ui';
-import { IColumn, IMerchant, IMerchantPagination, IStation } from '~/pages/merchants/interfaces';
+import { IColumn, IMerchant, IStation } from '~/pages/merchants/interfaces';
 import { IPagination } from '~/shared/interfaces';
 import { ITag } from '~/pages/tags/interfaces';
 import './TableComponent.scss';
@@ -25,7 +25,7 @@ interface Props {
   changeShowByHandler?: ((value: string) => void | undefined) | undefined;
   disabledButton?: boolean;
   defaultSizeValue?: number | undefined;
-  pages?: IMerchantPagination | null;
+  pages?: IPagination | null;
   scroll?: { x?: string | number; y?: string | number } & {
     scrollToFirstRowOnChange?: boolean;
   };
