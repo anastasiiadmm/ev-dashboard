@@ -231,5 +231,8 @@
       "description": "Add rates for the application",
       "button": "Add tariff"
     }
+  },
+  "user": {
+    "manager": "Manager"
   }
 }
