@@ -89,7 +89,7 @@ const InfrastructureList = observer(() => {
       title: t('merchants.status'),
       dataIndex: 'active',
       render: (text: boolean) => {
-        return <img className={b('center-block')} src={text ? status : inactive} alt='status' />;
+        return <img style={{ marginLeft: 10 }} src={text ? status : inactive} alt='status' />;
       },
     },
     {
