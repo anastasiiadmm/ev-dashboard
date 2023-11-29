@@ -231,5 +231,8 @@
     "add_infrastructure": "Добавить инфраструктуру",
     "deactivate": "Деактивировать",
     "activate": "Активировать"
+  },
+  "user": {
+    "manager": "Менеджер"
   }
 }

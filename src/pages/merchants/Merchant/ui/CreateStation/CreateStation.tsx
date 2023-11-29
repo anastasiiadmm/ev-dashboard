@@ -123,8 +123,8 @@ const CreateStation = observer(() => {
     }
 
     const queryString = getParams({ location_type: locationType });
-    commonStore.fetchLocations(queryString);
-  }, [isCountrySelected, isCitySelected]);
+    commonStore.fetchLocations(queryString, currentLocale);
+  }, [isCountrySelected, isCitySelected, currentLocale]);
 
   const executionTypes = [
     {

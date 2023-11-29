@@ -364,7 +364,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
           <div className={b('select-block')}>
             <LanguageSelect />
             <Title level={5} style={{ margin: ' 0 10px' }}>
-              Tesla company
+              {t('user.manager')}
             </Title>
           </div>
         </Header>
