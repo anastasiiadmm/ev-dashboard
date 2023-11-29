@@ -135,7 +135,9 @@
     "tariff_kwh": "som for 1 kWh for 1 min",
     "warning_personal_tariff": "*You can add a personal tariff, or skip it, then the tariff will be set by default",
     "length_of_cable": "Length of cable",
-    "save": "Save"
+    "save": "Save",
+    "all_days": "All days",
+    "time": "Schedule"
   },
   "modals": {
     "cancel": "Cancel",

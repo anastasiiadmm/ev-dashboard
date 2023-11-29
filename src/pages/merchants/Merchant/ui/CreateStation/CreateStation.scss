@@ -30,6 +30,32 @@
     }
   }
 
+  &__add-schedule-block {
+    gap: 8px;
+  }
+
+  &__title {
+    color: variables.$title-color;
+  }
+
+  &__add-schedule {
+    width: 100%;
+    color: variables.$second-color;
+    padding: 4px 30px 4px 11px;
+    text-align: start;
+
+    > p {
+      width: 7px;
+      height: 10px;
+      position: absolute;
+      top: 10px;
+      right: 19px;
+      background-image: url("../../../../../assets/images/svg/icons/default/vector-arrow-right.svg");
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+  }
+
   &__switch-block {
     display: flex;
     align-items: flex-start;

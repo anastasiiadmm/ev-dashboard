@@ -1,0 +1,71 @@
+@use '../../../app/styles/variables' as variables;
+
+.TimePicker {
+  width: 84px;
+  height: 32px;
+  border: 1px solid variables.$border-table;
+  border-radius: 6px;
+
+  &.input {
+    margin: 0;
+    text-align: center;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}
+
+.react-datepicker {
+  border: 1px solid variables.$border-table;
+  border-radius: 6px;
+}
+
+.react-datepicker-popper {
+  inset: -1px auto auto 0px !important;
+}
+
+.react-datepicker__header {
+  background-color: variables.$white-color !important;
+  border-bottom: 1px solid variables.$border-table;
+  border-top-left-radius: 6px;
+  padding: 3px 0;
+}
+
+.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::after {
+  border-bottom-color: variables.$white-color !important;
+}
+
+.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::before {
+  border-bottom-color: variables.$border-table !important;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+  height: calc(182px + 1.7rem / 2);
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: variables.$light-green-color;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: variables.$light-green-color;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    background-color: variables.$green-color;
+  }
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+  background-color: variables.$green-color;
+  color: white;
+  font-weight: variables.$font-600;
+
+  &:hover {
+    background-color: variables.$green-color;
+  }
+}

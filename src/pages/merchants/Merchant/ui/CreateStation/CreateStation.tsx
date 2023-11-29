@@ -1,4 +1,4 @@
-import { Button, Form, Radio, Typography } from 'antd';
+import { Button, Flex, Form, Radio, Typography } from 'antd';
 import bem from 'easy-bem';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
@@ -373,23 +373,12 @@ const CreateStation = observer(() => {
               />
             </div>
             <div className={b('display-block')}>
-              <FormField
-                data-testid='schedule_id'
-                id='schedule_id'
-                name='schedule'
-                placeholder={t('merchants.operating_mode')}
-                F
-                label={t('merchants.operating_mode')}
-                rules={[
-                  {
-                    required: true,
-                    message: '',
-                  },
-                ]}
-                error={error}
-                onChange={handleOpenScheduleModal}
-              />
-              <Button onClick={handleOpenScheduleModal} />
+              <Flex vertical className={b('add-schedule-block')}>
+                <Text className={b('title')}>{t('merchants.operating_mode')}</Text>
+                <Button className={b('add-schedule')} onClick={handleOpenScheduleModal}>
+                  {t('merchants.operating_mode')} <p className={b('arrow-right')} />
+                </Button>
+              </Flex>
               <FormField
                 data-testid='environment_id'
                 id='environment_id'

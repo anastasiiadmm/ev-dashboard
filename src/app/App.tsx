@@ -7,11 +7,10 @@ import { Route, Routes } from 'react-router';
 import { Spin } from 'antd';
 
 import { HomePageAsync } from '~/pages/main';
-import { AuthAsync, ChangePasswordAsync, ResetPasswordAsync } from '~/pages/auth';
+import { AuthAsync, authStore, ChangePasswordAsync, ResetPasswordAsync } from '~/pages/auth';
 import { CreateMerchantAsync, MerchantAsync, MerchantsAsync } from '~/pages/merchants';
 import { CreateStation } from '~/pages/merchants/Merchant/ui';
 import { TagsAsync } from '~/pages/tags';
-import { authStore } from '~/shared/api/store';
 import { LanguageProvider } from '~/shared/context';
 import { LayoutComponent } from '~/shared/ui';
 import { LanguageSelect } from '~/shared/ui/Fields';

@@ -41,9 +41,10 @@ import {
   users,
   usersActive,
 } from '~/assets/images';
-import { authStore } from '~/shared/api/store';
+import { authStore } from '~/pages/auth';
 import { logoutLocalStorage } from '~/shared/utils/storage';
 import { LanguageSelect } from '~/shared/ui/Fields';
+
 import './LayoutComponent.scss';
 
 const { Header, Content, Sider } = Layout;

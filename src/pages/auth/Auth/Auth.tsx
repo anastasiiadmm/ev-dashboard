@@ -6,9 +6,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { logo } from '~/assets/images';
+import { authStore } from '~/pages/auth';
 import { IUser } from '~/pages/auth/interfaces/IUser';
-import { authStore } from '~/shared/api/store';
 import { FormField } from '~/shared/ui';
+
 import '~/pages/auth/Auth/Auth.scss';
 
 const { Text } = Typography;
