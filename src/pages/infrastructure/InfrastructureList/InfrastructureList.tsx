@@ -12,8 +12,8 @@ import { add, deleteIcon, editColor, inactive, infoCircle, search, status } from
 import { IInfrastructure } from '~/pages/infrastructure/interfaces';
 import { infrastructureStore } from '~/shared/api/store';
 import { FormField, TableComponent } from '~/shared/ui';
-import './InfrastructureList.scss';
 import { apiImageURL } from '~/shared/utils/config';
+import './InfrastructureList.scss';
 
 const InfrastructureList = observer(() => {
   const b = bem('InfrastructureList');
@@ -102,14 +102,7 @@ const InfrastructureList = observer(() => {
                 </div>
               }
             >
-              <Button
-                // onClick={() => {
-                //   showTagModal();
-                //   setSelectedTag(record);
-                // }}
-                className={b('add-button')}
-                icon={<img src={editColor} alt='plus' />}
-              />
+              <Button className={b('add-button')} icon={<img src={editColor} alt='plus' />} />
             </Tooltip>
             <Tooltip
               color='#707A94'
@@ -121,14 +114,7 @@ const InfrastructureList = observer(() => {
                 </div>
               }
             >
-              <Button
-                // onClick={() => {
-                //   showDeleteModal();
-                //   setSelectedRowKey(record.id);
-                // }}
-                className={b('delete-button')}
-                icon={<img src={deleteIcon} alt='plus' />}
-              />
+              <Button className={b('delete-button')} icon={<img src={deleteIcon} alt='plus' />} />
             </Tooltip>
           </div>
         );
