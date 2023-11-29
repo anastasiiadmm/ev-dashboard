@@ -55,6 +55,8 @@ const CreateStation = observer(() => {
     showModal: showSuccessModal,
     handleOkCancel: handleOkSuccessCancel,
   } = useModal(false);
+  const { isModalOpen: isModalScheduleOpen, handleOkCancel: handleOpenScheduleModal } =
+    useModal(false);
   const [selectedLanguage, setSelectedLanguage] = useState(currentLocale);
   const [formData, setFormData] = useState<ICreateMerchant>({
     active: false,
@@ -85,7 +87,6 @@ const CreateStation = observer(() => {
     ky: false,
   });
   const isAllSelected = Object.values(radioButtonStates).every((value) => value);
-  const [isModalScheduleOpen, setIsModalScheduleOpen] = useState(false);
   const [modules, setModules] = useState<IModule[]>([]);
 
   const items = [
@@ -184,10 +185,6 @@ const CreateStation = observer(() => {
 
   const handleAgreeHandler = () => {
     navigate('/merchants');
-  };
-
-  const handleOpenScheduleModal = () => {
-    setIsModalScheduleOpen(!isModalScheduleOpen);
   };
 
   const onFinish = async () => {
