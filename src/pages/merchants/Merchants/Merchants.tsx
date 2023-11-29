@@ -1,5 +1,5 @@
 import { Button, Form, Row, Tooltip } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import bem from 'easy-bem';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +10,7 @@ import { add, plus, active, status, x, search, infoCircle, inactive } from '~/as
 import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '~/shared/ui';
 import { IColumn, IMerchant } from '~/pages/merchants/interfaces';
 import { merchantStore } from '~/shared/api/store';
-import { useNotification, useRowSelection, useTableFilter } from '~/shared/hooks';
+import { useModal, useNotification, useRowSelection, useTableFilter } from '~/shared/hooks';
 import './Merchants.scss';
 
 const Merchants = observer(() => {
@@ -39,7 +39,7 @@ const Merchants = observer(() => {
     isDisabledButton,
     applyChangeStatus,
   } = useRowSelection(merchants || [], merchantStore.changeMerchantsStatuses.bind(merchantStore));
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isModalOpen, showModal, handleOkCancel } = useModal(false);
 
   useEffect(() => {
     if (changeMerchantStatusesSuccess) {
@@ -129,14 +129,6 @@ const Merchants = observer(() => {
       },
     },
   ] as IColumn[];
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOkCancel = () => {
-    setIsModalOpen(!isModalOpen);
-  };
 
   const handleAgreeHandler = async () => {
     try {

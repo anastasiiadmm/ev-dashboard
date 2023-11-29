@@ -232,6 +232,13 @@
       "button": "Тариф кошуу"
     }
   },
+  "infrastructure": {
+    "naming": "Аты ",
+    "search": "Издөө",
+    "add_infrastructure": "Инфраструктураны кошуу",
+    "deactivate": "Активдүүлүктөн чыгаруу",
+    "activate": "Активдештирүү"
+  },
   "user": {
     "manager": "Менеджер"
   }

@@ -232,6 +232,13 @@
       "button": "Добавить тариф"
     }
   },
+  "infrastructure": {
+    "naming": "Наименование ",
+    "search": "Искать",
+    "add_infrastructure": "Добавить инфраструктуру",
+    "deactivate": "Деактивировать",
+    "activate": "Активировать"
+  },
   "user": {
     "manager": "Менеджер"
   }
