@@ -123,7 +123,7 @@ const CreateEdit = observer(() => {
 
     const fetchLocationData = (locationType: string) => {
       const queryString = getParams({ location_type: locationType });
-      commonStore.fetchLocations(queryString);
+      commonStore.fetchLocations(queryString, currentLocale);
     };
 
     if (!countries) {
@@ -131,7 +131,7 @@ const CreateEdit = observer(() => {
     } else if (!settlements) {
       fetchLocationData('settlements');
     }
-  }, [merchantDetailForUpdate]);
+  }, [merchantDetailForUpdate, currentLocale]);
 
   useEffect(() => {
     let locationType;
@@ -148,8 +148,8 @@ const CreateEdit = observer(() => {
     }
 
     const queryString = getParams({ location_type: locationType });
-    commonStore.fetchLocations(queryString);
-  }, [isCountrySelected, isCitySelected, id]);
+    commonStore.fetchLocations(queryString, currentLocale);
+  }, [isCountrySelected, isCitySelected, id, currentLocale]);
 
   const handleFormChange = (key: string, value: string | number | boolean) => {
     if (id) {
