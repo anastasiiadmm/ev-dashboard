@@ -4,20 +4,20 @@ import { Key } from 'antd/lib/table/interface';
 import bem from 'easy-bem';
 
 import { PaginationComponent, NotFoundImages } from '~/shared/ui';
-import { IColumn, IMerchant, IStation } from '~/pages/merchants/interfaces';
+import { IColumn, IMerchant, ICreateSchedule, IStation } from '~/pages/merchants/interfaces';
 import { IPagination } from '~/shared/interfaces';
 import { ITag } from '~/pages/tags/interfaces';
 import './TableComponent.scss';
 
 interface Props {
-  data: readonly (IMerchant | IStation | ITag)[] | null | undefined;
+  data: readonly (IMerchant | IStation | ITag | ICreateSchedule)[] | null | undefined;
   columns: IColumn[];
-  rowKey: (record: IMerchant | IStation | ITag) => Key;
+  rowKey: (record: ICreateSchedule | IMerchant | IStation | ITag) => Key;
   rowSelection: {
     selectedRowKeys: React.Key[];
     onChange: (selectedRowKeys: React.Key[]) => void;
   };
-  loading: boolean;
+  loading?: boolean;
   params?: IPagination | null;
   pagePrevHandler?: (() => void | undefined) | undefined;
   pageNextHandler?: (() => void | undefined) | undefined;
@@ -29,6 +29,8 @@ interface Props {
   scroll?: { x?: string | number; y?: string | number } & {
     scrollToFirstRowOnChange?: boolean;
   };
+  pagination?: boolean;
+  notGrayRow?: boolean;
 }
 
 const TableComponent: React.FC<Props> = ({
@@ -45,13 +47,18 @@ const TableComponent: React.FC<Props> = ({
   defaultSizeValue,
   pages,
   onChangePageCheckHandler,
+  pagination = false,
+  notGrayRow = false,
 }) => {
   const b = bem('TableComponent');
-  const rowClassName = (_: IMerchant | IStation | ITag, index: number) => {
-    if (index % 2 === 0) {
-      return '';
+  const rowClassName = (_: IMerchant | IStation | ITag | ICreateSchedule, index: number) => {
+    if (!notGrayRow) {
+      if (index % 2 === 0) {
+        return '';
+      }
+      return 'gray-row';
     }
-    return 'gray-row';
+    return '';
   };
 
   const locale = {
@@ -71,15 +78,17 @@ const TableComponent: React.FC<Props> = ({
         pagination={false}
         rowClassName={rowClassName}
       />
-      <PaginationComponent
-        changeShowByHandler={changeShowByHandler}
-        params={params}
-        pagePrevHandler={pagePrevHandler}
-        pageNextHandler={pageNextHandler}
-        defaultSizeValue={defaultSizeValue}
-        onChangePageCheckHandler={onChangePageCheckHandler}
-        pages={pages}
-      />
+      {pagination && (
+        <PaginationComponent
+          changeShowByHandler={changeShowByHandler}
+          params={params}
+          pagePrevHandler={pagePrevHandler}
+          pageNextHandler={pageNextHandler}
+          defaultSizeValue={defaultSizeValue}
+          onChangePageCheckHandler={onChangePageCheckHandler}
+          pages={pages}
+        />
+      )}
     </div>
   );
 };

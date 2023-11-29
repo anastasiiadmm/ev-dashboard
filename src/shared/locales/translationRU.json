@@ -139,7 +139,14 @@
     "edit_merchant": "Редактирование мерчанта",
     "save": "Сохранить",
     "changes_saved": "Изменения сохранены",
-    "the_merchant_account_has_been_successfully_updated": "Учётная запись мерчанта была успешно обновлена."
+    "the_merchant_account_has_been_successfully_updated": "Учётная запись мерчанта была успешно обновлена.",
+    "all_days": "Все дни",
+    "time": "Время",
+    "add_break": "+ Добавить перерыв",
+    "break": "Перерыв",
+    "hour": "час",
+    "hours": "часа",
+    "clock": "часов"
   },
   "modals": {
     "cancel": "Отменить",

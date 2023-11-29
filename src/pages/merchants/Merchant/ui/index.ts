@@ -7,3 +7,4 @@ export { default as TableCell } from './TableCell/TableCell';
 export { default as CreateEditConnector } from './CreateEditConnector/CreateEditConnector';
 export { default as CardConnector } from './CardConnector/CardConnector';
 export { default as CardEVSEModule } from './CardEVSEModule/CardEVSEModule';
+export { default as ScheduleModal } from './ScheduleModal/ScheduleModal';

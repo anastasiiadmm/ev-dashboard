@@ -182,6 +182,7 @@ const TableStations = observer(() => {
           onChangePageCheckHandler={onChangePageCheckHandler}
           defaultSizeValue={filters?.page}
           pages={merchantDetailStationPagination}
+          pagination
         />
 
         {!!selectedRowKeys.length && (

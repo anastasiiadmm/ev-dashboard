@@ -16,10 +16,12 @@ export interface IStation {
 }
 
 export interface ICreateSchedule {
+  id: number;
   day: number;
   start_time: string;
   end_time: string;
   is_break: boolean;
+  break?: ICreateSchedule[];
 }
 
 export interface ICreateConnector {

@@ -168,6 +168,7 @@ const InfrastructureList = observer(() => {
           onChangePageCheckHandler={onChangePageCheckHandler}
           defaultSizeValue={filters?.page}
           pages={infrastructurePagination}
+          pagination
         />
       </Row>
     </Row>

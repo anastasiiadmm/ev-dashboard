@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import { apiURL } from '~/shared/utils/config';
 import { authStore } from '~/shared/api/store';
+import { apiURL } from '~/shared/utils/config';
 
 const axiosApi = axios.create({
   baseURL: apiURL,
