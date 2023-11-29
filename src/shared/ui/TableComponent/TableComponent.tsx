@@ -76,7 +76,7 @@ const TableComponent: React.FC<Props> = ({
   };
 
   return (
-    <div className={b()}>
+    <div className={b('a')}>
       <Table
         rowKey={rowKey}
         scroll={scroll}

@@ -8,14 +8,33 @@ interface IData {
   name: string;
 }
 
-interface BannerState {
+interface IFormData {
+  name_ru: string;
+  name_en: string;
+  name_ky: string;
+  source: string;
+  image: string;
+  category: number;
+  button_label: string;
+  button_color: string;
+  start_time: string;
+  start_date: string;
+  finish_time: string;
+  finish_date: string;
+  is_active: boolean;
+  link: string;
+  merchant: number;
+  stations: number[];
+}
+
+interface IBannerState {
   merchantsError: string | null;
   merchantsLoading: boolean;
   merchantId: IData[];
   stationId: IData[];
 }
 
-class BannerStore implements BannerState {
+class BannerStore implements IBannerState {
   merchantsError: string | null = null;
   merchantsLoading: boolean = false;
   merchantId: IData[] = [];
@@ -57,6 +76,14 @@ class BannerStore implements BannerState {
         this.merchantsLoading = false;
         this.merchantsError = error?.message || null;
       });
+    }
+  }
+  async postBanner(data: IFormData) {
+    try {
+      await axiosApi.post(``, data);
+      runInAction(() => {});
+    } catch (e) {
+      runInAction(() => {});
     }
   }
 }

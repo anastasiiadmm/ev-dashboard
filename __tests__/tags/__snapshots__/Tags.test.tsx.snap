@@ -75,7 +75,7 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
         </span>
       </button>
       <div
-        class="TableComponent"
+        class="TableComponent__a"
       >
         <div
           class="ant-table-wrapper css-dev-only-do-not-override-nllxry"

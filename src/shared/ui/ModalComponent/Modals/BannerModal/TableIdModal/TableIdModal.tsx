@@ -8,6 +8,7 @@ import { ICommon } from '~/pages/banners/interfaces';
 import { ITag } from '~/pages/tags/interfaces';
 import { ICreateSchedule, IMerchant, IStation } from '~/pages/merchants/interfaces';
 import './TableIdModal.scss';
+import { search } from '~/assets/images';
 
 interface Props {
   data: ICommon[];
@@ -80,7 +81,7 @@ const TableIdModal: React.FC<Props> = ({ data, columns, title, placeholder, save
         setGetData(resultArray);
       }
     },
-    selectedRowKeys: [],
+    // selectedRowKeys: [],
   };
 
   const selectIdHandler = () => {
@@ -90,18 +91,13 @@ const TableIdModal: React.FC<Props> = ({ data, columns, title, placeholder, save
   return (
     <Form className={b('modal-container')}>
       <h2>{title}</h2>
+      <img className={b('search-icon')} src={search} alt='searchicon' />
       <FormField
         id='value'
         name={`value`}
         data-testid='value'
         className={b('input')}
         placeholder={placeholder}
-        rules={[
-          {
-            required: true,
-            message: '',
-          },
-        ]}
         onChange={(e: ChangeEvent<HTMLInputElement>) => handleFormChange(e.target.value)}
       />
       <div className={b('container-table')}>

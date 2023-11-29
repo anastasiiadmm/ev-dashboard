@@ -6,32 +6,54 @@
     flex-direction: column;
     gap: 20px;
     max-height: 600px;
+    position: relative;
+  }
+
+  &__search-icon {
+    width: 20px;
+    position: absolute;
+    margin: 62px 10px;
+    z-index: 1;
   }
 
   &__container-table {
     overflow-y: scroll;
-
+    .ant-table-wrapper table {
+      border: none;
+      th {
+        background-color: variables.$input-bg;
+        color: variables.$title-color;
+        font-weight: variables.$font-400;
+        padding: 8px 12px;
+      }
+      tr {
+        background-color: #fff;
+      }
+    }
+    .ant-table-wrapper tfoot > tr > td {
+      padding: 14px 116px;
+    }
     &::-webkit-scrollbar {
       width: 4px;
       cursor: default;
       margin: 0;
     }
 
-    &::-webkit-scrollbar-track {
-      background: #fff;
-    }
-
     &::-webkit-scrollbar-thumb {
       background: variables.$green-color;
       border-radius: 100px;
-
       &:hover {
-        background: #838383;
+        background: variables.$link-turquoise-color;
       }
     }
   }
 
   &__input {
     margin: 0;
+    input {
+      border: 0;
+      background-color: variables.$input-bg;
+      padding: 8px 40px;
+    }
   }
 }
