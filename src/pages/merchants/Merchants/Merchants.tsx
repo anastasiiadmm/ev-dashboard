@@ -190,6 +190,7 @@ const Merchants = observer(() => {
           onChangePageCheckHandler={onChangePageCheckHandler}
           defaultSizeValue={filters?.page}
           pages={merchantPagination}
+          pagination
         />
 
         {!!selectedRowKeys.length && (

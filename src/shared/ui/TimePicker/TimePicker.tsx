@@ -1,8 +1,9 @@
 import bem from 'easy-bem';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-
 import 'react-datepicker/dist/react-datepicker.css';
+import { useTranslation } from 'react-i18next';
+
 import './TimePicker.scss';
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 
 const TimePicker: React.FC<Props> = ({ time, minTime, maxTime }) => {
   const b = bem('TimePicker input');
+  const { t } = useTranslation();
   const [startDate, setStartDate] = useState(time || null);
 
   return (
@@ -23,7 +25,7 @@ const TimePicker: React.FC<Props> = ({ time, minTime, maxTime }) => {
       showTimeSelect
       showTimeSelectOnly
       timeIntervals={15}
-      timeCaption='Время'
+      timeCaption={t('merchants.time')}
       dateFormat='HH:mm'
       timeFormat='HH:mm'
       minTime={minTime}

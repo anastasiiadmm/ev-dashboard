@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 import { IColumn, ICreateSchedule } from '~/pages/merchants/interfaces';
 import { TableComponent, TimePicker } from '~/shared/ui';
+import { dayMapping } from '~/shared/utils/constants.tsx';
 
 import './ScheduleModal.scss';
 
@@ -21,49 +22,49 @@ interface Props {
 const schedule: ICreateSchedule[] = [
   {
     id: 1,
-    day: 1,
+    day: 0,
     start_time: '10:15:22Z',
     end_time: '18:15:22Z',
     is_break: false,
   },
   {
     id: 2,
-    day: 2,
+    day: 1,
     start_time: '00:15:22Z',
     end_time: '23:15:22Z',
     is_break: false,
   },
   {
     id: 3,
-    day: 3,
+    day: 2,
     start_time: '14:15:22Z',
     end_time: '14:15:22Z',
     is_break: false,
   },
   {
     id: 4,
-    day: 4,
+    day: 3,
     start_time: '14:15:22Z',
     end_time: '14:15:22Z',
     is_break: false,
   },
   {
     id: 5,
-    day: 5,
+    day: 4,
     start_time: '00:15:22Z',
     end_time: '21:15:22Z',
     is_break: false,
   },
   {
     id: 6,
-    day: 6,
+    day: 5,
     start_time: '00:00:00Z',
     end_time: '23:45:00Z',
     is_break: false,
   },
   {
     id: 7,
-    day: 0,
+    day: 6,
     start_time: '',
     end_time: '',
     is_break: false,
@@ -99,7 +100,9 @@ const ScheduleModal: React.FC<Props> = ({ handleOkCancel }) => {
       render: (record: ICreateSchedule) => {
         return (
           <div className={b('block')}>
-            <span>{record.is_break ? 'Перерыв' : dayjs().day(record.day).format('dddd')}</span>
+            <span>
+              {record.is_break ? t('merchants.break') : t(`week_days.${dayMapping[record.day]}`)}
+            </span>
           </div>
         );
       },
@@ -123,11 +126,11 @@ const ScheduleModal: React.FC<Props> = ({ handleOkCancel }) => {
 
         const formatHours = (hours: number) => {
           if (hours === 1 || hours === 21) {
-            return `${hours} час`;
+            return `${hours} ${t('merchants.hour')}`;
           } else if ((hours > 1 && hours < 5) || hours > 21) {
-            return `${hours} часа`;
+            return `${hours} ${t('merchants.hours')}`;
           } else {
-            return `${hours} часов`;
+            return `${hours} ${t('merchants.clock')}`;
           }
         };
 
@@ -152,7 +155,7 @@ const ScheduleModal: React.FC<Props> = ({ handleOkCancel }) => {
                 type='link'
                 onClick={() => addBreak(record.day, record?.id as number)}
               >
-                + Добавить Перерыв
+                {t('merchants.add_break')}
               </Button>
             </div>
           </>
@@ -174,8 +177,7 @@ const ScheduleModal: React.FC<Props> = ({ handleOkCancel }) => {
     <div className={b()}>
       <div className={b('table-block')}>
         <TableComponent
-          scroll={{ x: 560 }}
-          pagination={false}
+          scroll={{ x: 0 }}
           rowKey={(record) => record.id.toString()}
           rowSelection={rowSelection}
           data={schedules || []}
@@ -184,7 +186,7 @@ const ScheduleModal: React.FC<Props> = ({ handleOkCancel }) => {
         />
       </div>
       <Button className={b('save-schedule')} type='primary' onClick={handleOkCancel}>
-        Сохранить
+        {t('merchants.save')}
       </Button>
     </div>
   );

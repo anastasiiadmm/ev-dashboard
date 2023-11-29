@@ -141,7 +141,12 @@
     "changes_saved": "Өзгөртүүлөр сакталды",
     "the_merchant_account_has_been_successfully_updated": "Сатуучунун эсеби ийгиликтүү жаңыртылды.",
     "all_days": "Бардык күндөр",
-    "time": "Убактысы"
+    "time": "Убактысы",
+    "add_break": "+ Тыныгуу кошуу",
+    "break": "Тыныгуу",
+    "hour": "саат",
+    "hours": "саат",
+    "clock": "саат"
   },
   "modals": {
     "cancel": "Жокко чыгаруу",

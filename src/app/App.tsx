@@ -1,8 +1,11 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
+import 'dayjs/locale/ky.js';
+import 'dayjs/locale/en';
 import bem from 'easy-bem';
 import { observer } from 'mobx-react-lite';
 import React, { useCallback, useEffect, Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Route, Routes } from 'react-router';
 import { Spin } from 'antd';
 
@@ -25,7 +28,8 @@ import { CreateBanner } from '~/pages/banners';
 
 const App: React.FC = observer(() => {
   const b = bem('Auth');
-  dayjs.locale('ru');
+  const { i18n } = useTranslation();
+  dayjs.locale(`${i18n.resolvedLanguage}`);
 
   const initializeApp = useCallback(() => {
     const tokensLocal = getUserLocalStorage();

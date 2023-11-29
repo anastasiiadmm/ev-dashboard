@@ -695,7 +695,7 @@ const CreateStation = observer(() => {
 
       <ModalComponent
         closeIcon
-        title='Режим работы'
+        title={t('merchants.operating_mode')}
         width={622}
         isModalOpen={isModalScheduleOpen}
         handleOk={handleOpenScheduleModal}
