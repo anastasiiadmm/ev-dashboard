@@ -2,13 +2,13 @@ import { AxiosError } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
-import { ITagPagination, ITag, ITagCreate } from '~/pages/tags/interfaces';
+import { ITag, ITagCreate } from '~/pages/tags/interfaces';
 import { getAxiosConfig } from '~/shared/utils';
-import { IChangeStatuses } from '~/shared/interfaces';
+import { IChangeStatuses, IPagination } from '~/shared/interfaces';
 
 interface TagsState {
   tags: ITag[] | null;
-  tagsPagination: ITagPagination | null;
+  tagsPagination: IPagination | null;
   tagsLoading: boolean;
   tagsError: string | null;
   changeStatusesSuccess: boolean;
@@ -27,7 +27,7 @@ interface TagsState {
 
 class TagsStore implements TagsState {
   tags: ITag[] | null = null;
-  tagsPagination: ITagPagination | null = {
+  tagsPagination: IPagination | null = {
     page: null,
     pages: null,
     size: null,

@@ -225,6 +225,13 @@
       "button": "Add tariff"
     }
   },
+  "infrastructure": {
+    "naming": "Name",
+    "search": "Search",
+    "add_infrastructure": "Add infrastructure",
+    "deactivate": "Deactivate",
+    "activate": "Activate"
+  },
   "user": {
     "manager": "Manager"
   }

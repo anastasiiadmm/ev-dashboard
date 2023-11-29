@@ -22,6 +22,7 @@ import {
   logoutLocalStorage,
 } from '~/shared/utils/storage';
 import { CreateBanner } from '~/pages/banners';
+import { InfrastructureListAsync } from '~/pages/infrastructure';
 
 const App: React.FC = observer(() => {
   const b = bem('Auth');
@@ -84,6 +85,9 @@ const App: React.FC = observer(() => {
               </Route>
               <Route path='/tags'>
                 <Route index element={<TagsAsync />} />
+              </Route>
+              <Route path='/infrastructure'>
+                <Route index element={<InfrastructureListAsync />} />
               </Route>
             </Routes>
           </Suspense>

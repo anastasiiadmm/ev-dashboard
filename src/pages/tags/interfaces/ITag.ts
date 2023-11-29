@@ -7,10 +7,3 @@ export interface ITag {
 }
 
 export type ITagCreate = Omit<ITag, 'id'>;
-
-export interface ITagPagination {
-  page: number | null;
-  pages: number | null;
-  size: number | null;
-  total: number | null;
-}

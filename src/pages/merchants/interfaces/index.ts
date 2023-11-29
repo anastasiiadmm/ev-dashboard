@@ -3,7 +3,6 @@ export type {
   ICreateMerchant,
   IColumn,
   ITabs,
-  IMerchantPagination,
   IQueryMerchant,
   IMerchantDetail,
   IMerchantStation,
