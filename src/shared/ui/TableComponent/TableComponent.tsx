@@ -10,20 +10,17 @@ import {
   IMerchant,
   IMerchantPagination,
   IStation,
-  ISelectMerchant,
 } from '~/pages/merchants/interfaces';
 import { IPagination } from '~/shared/interfaces';
 import { ITag } from '~/pages/tags/interfaces';
 import './TableComponent.scss';
+import { ICommon } from '~/pages/banners/interfaces';
 
 interface Props {
-  data?:
-    | readonly (IMerchant | IStation | ITag | ICreateSchedule | ISelectMerchant)[]
-    | null
-    | undefined;
-  columns?: IColumn[];
-  rowKey?: (record: ICreateSchedule | IMerchant | IStation | ITag | ISelectMerchant) => Key;
-  rowSelection?: {
+  data: readonly (IMerchant | IStation | ITag | ICreateSchedule | ICommon)[] | null | undefined;
+  columns: IColumn[];
+  rowKey: (record: ICreateSchedule | IMerchant | IStation | ITag | ICommon) => Key;
+  rowSelection: {
     selectedRowKeys: React.Key[];
     onChange: (selectedRowKeys: React.Key[]) => void;
   };
@@ -62,7 +59,7 @@ const TableComponent: React.FC<Props> = ({
 }) => {
   const b = bem('TableComponent');
   const rowClassName = (
-    _: IMerchant | IStation | ITag | ICreateSchedule | ISelectMerchant,
+    _: IMerchant | IStation | ITag | ICreateSchedule | ICommon,
     index: number,
   ) => {
     if (!notGrayRow) {

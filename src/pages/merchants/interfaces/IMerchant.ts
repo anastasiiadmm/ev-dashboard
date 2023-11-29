@@ -73,7 +73,7 @@ export interface ICreateMerchant {
   phone: string;
   email: string;
   country: number;
-  district: number;
+  district?: number;
   city: number;
 }
 
@@ -90,7 +90,3 @@ export interface ITabs {
   children: string | JSX.Element;
 }
 
-export interface ISelectMerchant {
-  id: number;
-  name: string;
-}

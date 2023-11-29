@@ -72,7 +72,7 @@ const App: React.FC = observer(() => {
           <Suspense fallback={<Spin className='spin' />}>
             <Routes>
               <Route path='/' element={<HomePageAsync />} />
-              <Route path='/11' element={<CreateBanner />} />
+              <Route path='/create-banner' element={<CreateBanner />} />
               <Route path='/merchants'>
                 <Route index element={<MerchantsAsync />} />
                 <Route path='/merchants/merchant/:id' element={<MerchantAsync />} />

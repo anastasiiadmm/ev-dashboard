@@ -1,1 +1,1 @@
-export const test = ''
+export type { ICommon } from './ICommon';

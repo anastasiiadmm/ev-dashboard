@@ -6,9 +6,7 @@ export interface ITag {
   active: boolean;
 }
 
-export interface ITagCreate {
-  active: boolean;
-}
+export type ITagCreate = Omit<ITag, 'id'>;
 
 export interface ITagPagination {
   page: number | null;

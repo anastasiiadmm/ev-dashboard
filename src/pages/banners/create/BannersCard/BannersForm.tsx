@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState, useMemo } from 'react';
 import bem from 'easy-bem';
 import { Button, Form, Radio, Typography } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
@@ -9,6 +9,7 @@ import { toJS } from 'mobx';
 import { useCurrentLocale } from '~/shared/hooks';
 import { eng, kg, chevronRight, rus, greenCheck } from '~/assets/images';
 import { bannerStore } from '~/pages/banners/';
+import { ICommon } from '~/pages/banners/interfaces';
 import {
   ActiveInactiveModal,
   CardComponent,
@@ -16,6 +17,7 @@ import {
   ModalComponent,
   UploadFile,
   TableIdModal,
+  BreadcrumbComponent,
 } from '~/shared/ui';
 const { Title, Text } = Typography;
 import './BannersForm.scss';
@@ -29,10 +31,11 @@ const languageItems = [
 interface Modal {
   merchant: boolean;
   station: boolean;
+  cancel: boolean;
 }
 
-interface Select {
-  id: number;
+interface IData {
+  id: string;
   name: string;
 }
 
@@ -47,18 +50,23 @@ const BannersForm = observer(() => {
   const [previousSelectedLanguage, setPreviousSelectedLanguage] = useState(selectedLanguage);
   const [error, setError] = useState<boolean>(false);
   const { merchantId, stationId } = toJS(bannerStore);
-  const [getId, setGetId] = useState<number>();
-  const [getName, setGetName] = useState<string>();
+  const [getMerchant, setGetMerchant] = useState<IData>({
+    id: '',
+    name: '',
+  });
+  const [getStation, setGetStation] = useState<IData>({
+    id: '',
+    name: '',
+  });
   const [radioButtonStates, setRadioButtonStates] = useState({
     ru: false,
     en: false,
     ky: false,
   });
-  const isAllSelected = Object.values(radioButtonStates).every((value) => value);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [open, setOpen] = useState<Modal>({
     merchant: false,
     station: false,
+    cancel: false,
   });
   const [formData, setFormData] = useState({
     name_ru: '',
@@ -75,19 +83,20 @@ const BannersForm = observer(() => {
     finish_date: '',
     is_active: false,
     link: '',
-    merchant: 0,
-    stations: [0],
+    merchant: +getMerchant.id,
+    stations: [getStation.id],
   });
+  const isAllSelected = Object.values(radioButtonStates).every((value) => value);
 
   useEffect(() => {
     bannerStore.merchantsForPromotions();
   }, []);
 
   useEffect(() => {
-    if (getId) {
-      bannerStore.stationForPromotions(getId);
+    if (getMerchant.id) {
+      bannerStore.stationForPromotions(+getMerchant.id);
     }
-  }, [getId]);
+  }, [getMerchant.id]);
 
   const openCloseModal = (id: string) => {
     switch (id) {
@@ -95,6 +104,8 @@ const BannersForm = observer(() => {
         return setOpen({ ...open, merchant: !open.merchant });
       case 'STATION':
         return setOpen({ ...open, station: !open.station });
+      case 'CANCEL':
+        return setOpen({ ...open, cancel: !open.cancel });
     }
   };
 
@@ -103,20 +114,19 @@ const BannersForm = observer(() => {
     { title: 'Name', dataIndex: 'name', key: 'name' },
   ];
 
-  const selectMerchant = (data: Select[] | undefined) => {
+  const selectMerchant = (data: ICommon[] | undefined) => {
     if (data) {
       data.map((el) => {
-        setGetId(el.id);
-        setGetName(el.name);
+        setGetMerchant({ ...getMerchant, id: el.id.toString(), name: el.name });
       });
     }
     openCloseModal('MERCHANT');
   };
-  const selectStation = (data: Select[] | undefined) => {
+
+  const selectStation = (data: ICommon[] | undefined) => {
     if (data) {
       data.map((el) => {
-        setGetId(el.id);
-        setGetName(el.name);
+        setGetStation({ ...getStation, id: el.id.toString(), name: el.name });
       });
     }
     openCloseModal('STATION');
@@ -162,14 +172,6 @@ const BannersForm = observer(() => {
     });
   }, [currentLocale]);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOkCancel = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
   const handleLanguageSelect = (lang: string) => {
     setSelectedLanguage(lang);
   };
@@ -200,9 +202,9 @@ const BannersForm = observer(() => {
   return (
     <>
       <div className={b('container-meatballs')}>
-        <Link to=''>{t('banners.add_banner.home')}</Link>
-        <span>/</span>
-        <p className={b('second-text')}>{t('banners.add_banner.title')}</p>
+        <BreadcrumbComponent
+          items={[{ title: t('banners.add_banner.title'), href: '/create-banner' }]}
+        />
       </div>
       <div className={b('container-card')}>
         <CardComponent className={b('container')}>
@@ -379,26 +381,30 @@ const BannersForm = observer(() => {
               <div className={b('container-open-modal')}>
                 <p>{t('banners.add_banner.merchant_label')}</p>
                 <Button
-                  className={getId ? b('button') : b('button-select')}
+                  className={getMerchant.id ? b('button') : b('button-select')}
                   onClick={() => openCloseModal('MERCHANT')}
                   style={{
                     borderColor: error ? 'red' : '',
                   }}
                 >
-                  {getName
-                    ? getName.length > 13
-                      ? `${getName.substring(0, 13)}...`
-                      : getName
+                  {getMerchant.name
+                    ? getMerchant.name.length > 13
+                      ? `${getMerchant.name.substring(0, 13)}...`
+                      : getMerchant.name
                     : t('banners.add_banner.merchant_placeholder')}
                   <img src={chevronRight} alt='chevronrighticon' />
                 </Button>
               </div>
 
-              {getId && (
+              {getMerchant.id && (
                 <div className={b('container-open-modal')}>
                   <p>{t('banners.add_banner.id_station')}</p>
                   <Button className={b('button')} onClick={() => openCloseModal('STATION')}>
-                    {t('banners.add_banner.id_station_placeholder')}
+                    {getStation.name
+                      ? getStation.name.length > 13
+                        ? `${getStation.name.substring(0, 13)}...`
+                        : getStation.name
+                      : t('banners.add_banner.id_station_placeholder')}
                     <img src={chevronRight} alt='chevronrighticon' />
                   </Button>
                 </div>
@@ -471,7 +477,11 @@ const BannersForm = observer(() => {
                 {t('merchants.further')}
               </Button>
             )}
-            <Button type='default' className={b('cancel-button')} onClick={showModal}>
+            <Button
+              type='default'
+              className={b('cancel-button')}
+              onClick={() => openCloseModal('CANCEL')}
+            >
               {t('merchants.cancel')}
             </Button>
           </div>
@@ -509,14 +519,14 @@ const BannersForm = observer(() => {
           </ModalComponent>
           <ModalComponent
             width={400}
-            isModalOpen={isModalOpen}
-            handleOk={handleOkCancel}
-            handleCancel={handleOkCancel}
+            isModalOpen={open.cancel}
+            handleOk={() => openCloseModal('CANCEL')}
+            handleCancel={() => openCloseModal('CANCEL')}
           >
             <ActiveInactiveModal
               textTitle={t('modals.are_you_sure_you_want_to_cancel_your_changes') as string}
               infoText={t('modals.after_cancellation_all_data_will_be_lost') as string}
-              handleOkCancel={handleOkCancel}
+              handleOkCancel={() => openCloseModal('CANCEL')}
               handleAgreeHandler={handleAgreeHandler}
             />
           </ModalComponent>
