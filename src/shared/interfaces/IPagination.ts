@@ -1,5 +1,6 @@
 export interface IPagination {
-  count: number;
-  next: string;
-  previous: string;
+  page: number | null;
+  pages: number | null;
+  size: number | null;
+  total: number | null;
 }
