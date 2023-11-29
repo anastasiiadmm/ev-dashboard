@@ -1,13 +1,15 @@
 import React from 'react';
 import { Form, Switch } from 'antd';
 
-interface Rule {}
+import { IRule } from '~/shared/interfaces';
 
 interface Props {
+  name?: string;
   label?: string;
   text?: string;
-  rules?: Rule[];
+  rules?: IRule[];
   className?: string;
+  defaultChecked?: boolean;
   onChange?: (checked: boolean) => void;
   inputClassName?: string;
 }
@@ -19,6 +21,8 @@ const SwitchField: React.FC<Props> = ({
   className,
   inputClassName,
   text,
+  name,
+  defaultChecked,
 }) => {
   const handleChange = (checked: boolean) => {
     if (onChange) {
@@ -32,9 +36,17 @@ const SwitchField: React.FC<Props> = ({
       rules={rules}
       label={label}
       valuePropName='checked'
+      name={name}
     >
-      <Switch onChange={handleChange} className={inputClassName} />{' '}
-      <p className='switch-text'>{text}</p>
+      <div>
+        <Switch
+          key={`switch-${defaultChecked}`}
+          onChange={handleChange}
+          defaultChecked={defaultChecked}
+          className={inputClassName}
+        />{' '}
+        <p className='switch-text'>{text}</p>
+      </div>
     </Form.Item>
   );
 };

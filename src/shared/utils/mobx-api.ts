@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { authStore } from '~/pages/auth';
+import { authStore } from '~/shared/api/store';
 import { apiURL } from '~/shared/utils/config';
 
 const axiosApi = axios.create({

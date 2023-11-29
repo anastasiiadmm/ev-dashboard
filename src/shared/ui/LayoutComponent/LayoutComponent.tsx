@@ -41,7 +41,7 @@ import {
   users,
   usersActive,
 } from '~/assets/images';
-import { authStore } from '~/pages/auth';
+import { authStore } from '~/shared/api/store';
 import { logoutLocalStorage } from '~/shared/utils/storage';
 import { LanguageSelect } from '~/shared/ui/Fields';
 
@@ -198,7 +198,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     ),
     getItem(
       t('menu.advertising_banners'),
-      '11',
+      'create-banner',
       <img src={template} alt='template' />,
       <img src={templateActive} alt='templateActive' />,
     ),

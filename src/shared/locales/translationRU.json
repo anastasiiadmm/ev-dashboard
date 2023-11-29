@@ -4,7 +4,8 @@
     "the_input_is_not_valid_email": "Неверный адрес электронной почты",
     "password_length": "Пароль должен содержать минимум 8 символов",
     "wrong_password": "Неправильный пароль",
-    "two_passwords_do_not_match": "Пароли не совпадают"
+    "two_passwords_do_not_match": "Пароли не совпадают",
+    "no_data_available": "Данные отсутствуют"
   },
   "alerts": {
     "incorrectly_filled_field": "Неправильно заполненное поле",
@@ -135,7 +136,10 @@
     "tariff_kwh": "сом за 1 кВтч за 1 мин",
     "warning_personal_tariff": "*Вы можете добавить персональный тариф, или пропустить, тогда тариф будет установлен по умолчанию",
     "length_of_cable": "Длина кабеля",
+    "edit_merchant": "Редактирование мерчанта",
     "save": "Сохранить",
+    "changes_saved": "Изменения сохранены",
+    "the_merchant_account_has_been_successfully_updated": "Учётная запись мерчанта была успешно обновлена.",
     "all_days": "Все дни",
     "time": "Время"
   },
@@ -179,5 +183,48 @@
     "Friday": "Пятница",
     "Saturday": "Суббота",
     "Sunday": "Воскресенье"
+  },
+  "banners": {
+    "add_banner": {
+      "title": "Создание баннера",
+      "text": "Информация о БАНЕРЕ",
+      "name_input": "Наименование баннера",
+      "link_input": "Ссылка на источник",
+      "name_button": "Название кнопки",
+      "color_button": "Цвет кнопки",
+      "merchant_label": "Мерчант",
+      "merchant_placeholder": "Выберите мерчанта",
+      "id_station": "ID станции",
+      "id_station_placeholder": "Все",
+      "status": "Статус",
+      "date_start": "Дата и время запуска",
+      "date_finish": "Дата и время отключения"
+    }
+  },
+  "empty": {
+    "banner": {
+      "title": "У вас пока нет рекламных баннеров",
+      "image_title": "Рекламные баннеры",
+      "description": "Добавьте рекламный баннер для приложения",
+      "button": "Добавить баннер"
+    },
+    "fullscreen": {
+      "title": "У вас пока нет фулскринов",
+      "image_title": "Фулскрины",
+      "description": "Добавьте фуллскрин для приложения",
+      "button": "Добавить фулскрин"
+    },
+    "stock": {
+      "title": "У вас пока нет акции",
+      "image_title": "Акции",
+      "description": "Акции помогают мотивировать пользователей в совершении действий",
+      "button": "Добавить акцию"
+    },
+    "rates": {
+      "title": "У вас пока нет тарифов",
+      "image_title": "Тарифы",
+      "description": "Добавьте тарифы для приложения",
+      "button": "Добавить тариф"
+    }
   }
 }
