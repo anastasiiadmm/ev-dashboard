@@ -2,7 +2,6 @@ import { AxiosError } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
-import { getAxiosConfig } from '~/shared/utils';
 import { IPagination } from '~/shared/interfaces';
 import { IInfrastructure } from '~/pages/infrastructure/interfaces';
 
@@ -28,16 +27,14 @@ class InfrastructureStore implements IInfrastructureState {
     makeAutoObservable(this);
   }
 
-  async fetchInfrastructure(queryString: string, currentLanguage: string) {
+  async fetchInfrastructure(queryString: string) {
     try {
       runInAction(() => {
         this.infrastructureLoading = true;
         this.infrastructureError = null;
       });
 
-      const config = getAxiosConfig(currentLanguage);
-
-      const resp = await axiosApi.get(`/common/tags/${queryString}`, config);
+      const resp = await axiosApi.get(`/common/surroundings/${queryString}`);
       const data = resp.data;
 
       runInAction(() => {

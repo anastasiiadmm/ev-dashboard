@@ -224,5 +224,12 @@
       "description": "Добавьте тарифы для приложения",
       "button": "Добавить тариф"
     }
+  },
+  "infrastructure": {
+    "naming": "Наименование ",
+    "search": "Искать",
+    "add_infrastructure": "Добавить инфраструктуру",
+    "deactivate": "Деактивировать",
+    "activate": "Активировать"
   }
 }

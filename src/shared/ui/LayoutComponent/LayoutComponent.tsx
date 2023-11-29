@@ -203,7 +203,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     ),
     getItem(
       t('menu.infrastructure_around_stations'),
-      '12',
+      '/infrastructure',
       <img src={officeBuilding} alt='officeBuilding' />,
       <img src={officeBuildingActive} alt='officeBuildingActive' />,
     ),

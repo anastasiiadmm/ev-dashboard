@@ -28,6 +28,13 @@ export const apiUrls = {
   [envs.production]: `${serverUrls[envs.production]}${apiPath}`,
 };
 
+export const apiImageUrls = {
+  [envs.local]: `${serverUrls[envs.local]}`,
+  [envs.development]: `${serverUrls[envs.development]}`,
+  [envs.staging]: `${serverUrls[envs.staging]}`,
+  [envs.production]: `${serverUrls[envs.production]}`,
+};
+
 export const dayMapping: { [key: number]: string } = {
   0: 'Monday',
   1: 'Tuesday',
