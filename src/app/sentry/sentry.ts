@@ -9,7 +9,6 @@ const initSentry = () => {
       dsn: VITE_API_SENTRY_DSN,
       integrations: [new BrowserTracing()],
       tracesSampleRate: 1.0,
-      debug: true,
     });
   }
 };
