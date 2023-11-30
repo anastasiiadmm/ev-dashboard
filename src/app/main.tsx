@@ -5,12 +5,15 @@ import { ConfigProvider } from 'antd';
 import { BrowserRouter } from 'react-router-dom';
 import { initReactI18next } from 'react-i18next';
 
+import initSentry from '~/app/sentry/sentry';
 import translationEN from '~/shared/locales/translationEN.json';
 import translationRU from '~/shared/locales/translationRU.json';
 import translationKY from '~/shared/locales/translationKY.json';
 import App from '~/app/App.tsx';
 import '~/app/styles/index.scss';
 import '~/app/styles/_mixins.scss';
+
+initSentry();
 
 i18n.use(initReactI18next).init({
   resources: {
