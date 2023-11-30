@@ -139,7 +139,14 @@
     "edit_merchant": "Editing merchant",
     "save": "Save",
     "changes_saved": "Changes saved",
-    "the_merchant_account_has_been_successfully_updated": "The merchant account has been successfully updated."
+    "the_merchant_account_has_been_successfully_updated": "The merchant account has been successfully updated.",
+    "all_days": "All days",
+    "time": "Schedule",
+    "add_break": "+ Add break",
+    "break": "Break",
+    "hour": "hour",
+    "hours": "hours",
+    "clock": "hours"
   },
   "modals": {
     "cancel": "Cancel",
@@ -193,7 +200,7 @@
       "merchant_label": "Merchant",
       "merchant_placeholder": "Select a merchant",
       "id_station": "Station ID",
-      "id_station_placeholder": "All",
+      "id_station_placeholder": "Select a station",
       "status": "Status",
       "date_start": "Launch date and time",
       "date_finish": "Shutdown date and time",
@@ -230,5 +237,15 @@
       "description": "Add rates for the application",
       "button": "Add tariff"
     }
+  },
+  "infrastructure": {
+    "naming": "Name",
+    "search": "Search",
+    "add_infrastructure": "Add infrastructure",
+    "deactivate": "Deactivate",
+    "activate": "Activate"
+  },
+  "user": {
+    "manager": "Manager"
   }
 }

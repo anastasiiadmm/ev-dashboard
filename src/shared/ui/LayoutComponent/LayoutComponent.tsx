@@ -44,6 +44,7 @@ import {
 import { authStore } from '~/shared/api/store';
 import { logoutLocalStorage } from '~/shared/utils/storage';
 import { LanguageSelect } from '~/shared/ui/Fields';
+
 import './LayoutComponent.scss';
 
 const { Header, Content, Sider } = Layout;
@@ -203,7 +204,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
     ),
     getItem(
       t('menu.infrastructure_around_stations'),
-      '12',
+      '/infrastructure',
       <img src={officeBuilding} alt='officeBuilding' />,
       <img src={officeBuildingActive} alt='officeBuildingActive' />,
     ),
@@ -364,7 +365,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
           <div className={b('select-block')}>
             <LanguageSelect />
             <Title level={5} style={{ margin: ' 0 10px' }}>
-              Tesla company
+              {t('user.manager')}
             </Title>
           </div>
         </Header>

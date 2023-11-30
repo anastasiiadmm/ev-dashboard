@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { chevronRight, chevronLeft } from '~/assets/images';
 import { FormField } from '~/shared/ui';
 import { IPagination } from '~/shared/interfaces';
-import { IMerchantPagination } from '~/pages/merchants/interfaces';
 import './PaginationComponent.scss';
 
 interface Props {
@@ -16,7 +15,7 @@ interface Props {
   pagePrevHandler?: (() => void | undefined) | undefined;
   pageNextHandler?: (() => void | undefined) | undefined;
   defaultSizeValue: number | undefined;
-  pages: IMerchantPagination | undefined | null;
+  pages: IPagination | undefined | null;
 }
 
 const options = [

@@ -9,6 +9,7 @@ import { logo } from '~/assets/images';
 import { IUser } from '~/pages/auth/interfaces/IUser';
 import { authStore } from '~/shared/api/store';
 import { FormField } from '~/shared/ui';
+
 import '~/pages/auth/Auth/Auth.scss';
 
 const { Text } = Typography;

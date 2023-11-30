@@ -2,29 +2,11 @@ import { AxiosError } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
+import { IFormData } from '~/pages/banners/interfaces';
 
 interface IData {
   id: number;
   name: string;
-}
-
-interface IFormData {
-  name_ru: string;
-  name_en: string;
-  name_ky: string;
-  source: string;
-  image: string;
-  category: number;
-  button_label: string;
-  button_color: string;
-  start_time: string;
-  start_date: string;
-  finish_time: string;
-  finish_date: string;
-  is_active: boolean;
-  link: string;
-  merchant: number;
-  stations: number[];
 }
 
 interface IBannerState {

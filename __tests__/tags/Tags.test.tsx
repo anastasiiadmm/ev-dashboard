@@ -10,7 +10,7 @@ import Tags from "../../src/pages/tags/Tags/Tags";
 import { CreateEditTagModal } from "../../src/pages/tags";
 
 jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ t: key => key })
+  useTranslation: () => ({ t: (key: never) => key })
 }));
 
 beforeEach(() => {

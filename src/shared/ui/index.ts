@@ -15,3 +15,4 @@ export { default as UploadFile } from './UploadFile/UploadFile.tsx';
 export { default as EmptyComponent } from './EmptyComponent/Empty.tsx';
 export { default as TableIdModal } from './ModalComponent/Modals/BannerModal/TableIdModal/TableIdModal.tsx';
 
+export { default as TimePicker } from './TimePicker/TimePicker.tsx';

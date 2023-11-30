@@ -1,15 +1,16 @@
 import React, { ChangeEvent, useEffect, useState, useMemo } from 'react';
 import bem from 'easy-bem';
-import { Button, Form, Radio, Typography } from 'antd';
+import { Button, DatePicker, Form, Radio, Typography, TimePicker } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
+import { Dayjs } from 'dayjs';
 
 import { useCurrentLocale, useModal } from '~/shared/hooks';
 import { eng, kg, chevronRight, rus, greenCheck } from '~/assets/images';
 import { bannerStore } from '~/pages/banners/';
-import { ICommon } from '~/pages/banners/interfaces';
+import { ICommon, IFormData } from '~/pages/banners/interfaces';
 import {
   ActiveInactiveModal,
   CardComponent,
@@ -59,7 +60,7 @@ const BannersForm = observer(() => {
     en: false,
     ky: false,
   });
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<IFormData>({
     name_ru: '',
     name_en: '',
     name_ky: '',
@@ -68,15 +69,16 @@ const BannersForm = observer(() => {
     category: 1,
     button_label: '',
     button_color: '',
-    start_time: '',
-    start_date: '',
-    finish_time: '',
-    finish_date: '',
+    start_time: null,
+    start_date: null,
+    finish_time: null,
+    finish_date: null,
     is_active: false,
     link: '',
     merchant: +getMerchant.id,
     stations: [+getStation.id],
   });
+
   const isAllSelected = Object.values(radioButtonStates).every((value) => value);
 
   useEffect(() => {
@@ -123,7 +125,7 @@ const BannersForm = observer(() => {
     openCloseModal('STATION');
   };
 
-  const handleFormChange = (key: string, value: string | number | boolean) => {
+  const handleFormChange = (key: string, value: string | number | boolean | null | Dayjs) => {
     setFormData((prevData) => ({
       ...prevData,
       [key]: value,
@@ -174,23 +176,25 @@ const BannersForm = observer(() => {
   const getLanguageItemClassName = (itemValue: string) => {
     const isActiveBorder =
       (itemValue === selectedLanguage && !isAllSelected) || itemValue === selectedLanguage;
-
-    return b('language-item') + (isActiveBorder ? ' active' : '');
+    return b(isActiveBorder ? 'border-item' : 'language-item');
   };
 
   const merchantName = getMerchant.name || t('banners.add_banner.merchant_placeholder');
   const displayedMerchantName =
-    merchantName.length > 16 ? `${merchantName.substring(0, 16)}...` : merchantName;
+    merchantName.length > 20 ? `${merchantName.substring(0, 20)}...` : merchantName;
 
-  const stationName = getStation.name || t('banners.add_banner.merchant_placeholder');
+  const stationName = getStation.name || t('banners.add_banner.id_station_placeholder');
   const displayeStationName =
-    stationName.length > 16 ? `${stationName.substring(0, 16)}...` : stationName;
+    stationName.length > 20 ? `${stationName.substring(0, 20)}...` : stationName;
+
+  const languageKey = `name_${selectedLanguage}` as keyof IFormData;
+  const isNameEmpty = !formData[languageKey];
 
   const onFinish = async () => {
     try {
       await form.validateFields();
       setError(false);
-      bannerStore.postBanner(formData)
+      bannerStore.postBanner(formData);
     } catch (error) {
       if (error) {
         setError(true);
@@ -226,11 +230,11 @@ const BannersForm = observer(() => {
               placeholder={t('banners.add_banner.name_input')}
               label={t('banners.add_banner.name_input')}
               id='name_id'
-              error={error}
-              name={`name_${selectedLanguage}`}
+              error={error && isNameEmpty}
+              name={languageKey}
               data-testid='name_id'
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleFormChange(`name_${selectedLanguage}`, e.target.value)
+                handleFormChange(languageKey, e.target.value)
               }
               rules={[
                 {
@@ -244,7 +248,7 @@ const BannersForm = observer(() => {
               placeholder={t('banners.add_banner.link_input')}
               label={t('banners.add_banner.link_input')}
               id='link_id'
-              error={error}
+              error={error && !formData.link}
               name={`link`}
               data-testid='link_id'
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -261,89 +265,70 @@ const BannersForm = observer(() => {
             <div className={b('container_label_field')}>
               <label>{t('banners.add_banner.date_start')}</label>
               <div className={b('container_time')}>
-                <FormField
-                  className={b('input')}
-                  inputType='time'
-                  id='start_time_id'
-                  error={error}
-                  name={`start_time`}
-                  data-testid='start_time_id'
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    handleFormChange(`start_time`, e.target.value)
-                  }
-                  rules={[
-                    {
-                      required: true,
-                      message: '',
-                    },
-                  ]}
-                />
-                <FormField
-                  className={b('input')}
-                  inputType='date'
-                  id='start_date_id'
-                  error={error}
-                  name={`start_date`}
-                  data-testid='start_date_id'
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    handleFormChange(`start_date`, e.target.value)
-                  }
-                  rules={[
-                    {
-                      required: true,
-                      message: '',
-                    },
-                  ]}
-                />
+                <div className={b('container_picker')}>
+                  <TimePicker
+                    className={b('timepicker')}
+                    id='start_id'
+                    name={`start_time`}
+                    placeholder='--:--'
+                    status={error && !formData.start_time ? 'error' : ''}
+                    data-testid='start_time_id'
+                    format='HH:mm'
+                    value={formData.start_time}
+                    onChange={(time: Dayjs | null) => handleFormChange(`start_time`, time)}
+                  />
+                </div>
+                <div className={b('container_picker')}>
+                  <DatePicker
+                    className={b('datepicker')}
+                    id='start_date_id'
+                    name={`start_date`}
+                    placeholder='yyyy-mm-dd'
+                    status={error && !formData.start_date ? 'error' : ''}
+                    data-testid='start_date_id'
+                    value={formData.start_date}
+                    onChange={(date: Dayjs | null) => handleFormChange(`start_date`, date)}
+                  />
+                </div>
               </div>
             </div>
             <div className={b('container_label_field')}>
               <label>{t('banners.add_banner.date_finish')}</label>
               <div className={b('container_time')}>
-                <FormField
-                  className={b('input')}
-                  inputType='time'
-                  id='finish_time_id'
-                  error={error}
-                  name={`finish_time`}
-                  data-testid='finish_time_id'
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    handleFormChange(`finish_time`, e.target.value)
-                  }
-                  rules={[
-                    {
-                      required: true,
-                      message: '',
-                    },
-                  ]}
-                />
-                <FormField
-                  className={b('input')}
-                  inputType='date'
-                  id='finish_date_id'
-                  error={error}
-                  name={`finish_date`}
-                  data-testid='finish_date_id'
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    handleFormChange(`finish_date`, e.target.value)
-                  }
-                  rules={[
-                    {
-                      required: true,
-                      message: '',
-                    },
-                  ]}
-                />
+                <div className={b('container_picker')}>
+                  <TimePicker
+                    className={b('timepicker')}
+                    id='finish_time_id'
+                    name={`finish_time`}
+                    placeholder='--:--'
+                    status={error && !formData.finish_time ? 'error' : ''}
+                    data-testid='finish_time_id'
+                    format='HH:mm'
+                    value={formData.finish_time}
+                    onChange={(time: Dayjs | null) => handleFormChange(`finish_time`, time)}
+                  />
+                </div>
+                <div className={b('container_picker')}>
+                  <DatePicker
+                    className={b('datepicker')}
+                    id='finish_date_id'
+                    name={`finish_date`}
+                    placeholder='yyyy-mm-dd'
+                    status={error && !formData.finish_date ? 'error' : ''}
+                    data-testid='finish_date_id'
+                    value={formData.finish_date}
+                    onChange={(date: Dayjs | null) => handleFormChange(`finish_date`, date)}
+                  />
+                </div>
               </div>
             </div>
-
             <div className={b('display-block')}>
               <FormField
                 className={b('input')}
                 placeholder={t('banners.add_banner.name_button')}
                 label={t('banners.add_banner.name_button')}
                 id='button_label_id'
-                error={error}
+                error={error && !formData.button_label}
                 name={`button_label`}
                 data-testid='button_label_id'
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -361,7 +346,7 @@ const BannersForm = observer(() => {
                 placeholder={t('banners.add_banner.color_button')}
                 label={t('banners.add_banner.color_button')}
                 id='button_color_id'
-                error={error}
+                error={error && !formData.button_color}
                 name={`button_color`}
                 data-testid='button_color_id'
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -382,6 +367,10 @@ const BannersForm = observer(() => {
                 <Button
                   className={getMerchant.id ? b('button') : b('button-select')}
                   onClick={() => openCloseModal('MERCHANT')}
+                  style={{
+                    borderColor: error && !getMerchant.name ? '#ff4b55' : '',
+                    color: !getMerchant.name ? '#bfbfbf' : '#707a94',
+                  }}
                 >
                   {displayedMerchantName}
                   <img src={chevronRight} alt='chevronrighticon' />
@@ -391,7 +380,14 @@ const BannersForm = observer(() => {
               {getMerchant.id && (
                 <div className={b('container-open-modal')}>
                   <p>{t('banners.add_banner.id_station')}</p>
-                  <Button className={b('button')} onClick={() => openCloseModal('STATION')}>
+                  <Button
+                    className={b('button')}
+                    onClick={() => openCloseModal('STATION')}
+                    style={{
+                      borderColor: error && !getStation.name ? '#ff4b55' : '',
+                      color: !getStation.name ? '#bfbfbf' : '#707a94',
+                    }}
+                  >
                     {displayeStationName}
                     <img src={chevronRight} alt='chevronrighticon' />
                   </Button>

@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 
 import axiosApi from '~/shared/utils/mobx-api';
 import { ICommon } from '~/pages/merchants/interfaces';
+import { getAxiosConfig } from '~/shared/utils';
 
 interface CommonState {
   countries: ICommon[] | null;
@@ -33,10 +34,9 @@ class CommonStore implements CommonState {
     makeAutoObservable(this);
   }
 
-  fetchLocations = async (query: string) => {
+  fetchLocations = async (query: string, currentLanguage: string) => {
     const params = new URLSearchParams(query);
     const locationType = params.get('location_type');
-
     switch (locationType) {
       case 'countries':
         this.countriesLoading = true;
@@ -50,11 +50,12 @@ class CommonStore implements CommonState {
       default:
         break;
     }
-
     this.setLoading(true);
 
+    const config = getAxiosConfig(currentLanguage);
+
     try {
-      const resp = await axiosApi.get(`/common/locations/${query}`);
+      const resp = await axiosApi.get(`/common/locations/${query}`, config);
 
       runInAction(() => {
         switch (locationType) {

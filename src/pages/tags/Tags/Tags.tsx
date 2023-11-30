@@ -219,6 +219,7 @@ const Tags = observer(() => {
           onChangePageCheckHandler={onChangePageCheckHandler}
           defaultSizeValue={filters?.page}
           pages={tagsPagination}
+          pagination
         />
 
         {!!selectedRowKeys.length && (

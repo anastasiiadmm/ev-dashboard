@@ -3,25 +3,25 @@
 exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
 <DocumentFragment>
   <div
-    class="ant-row ant-row-space-between Merchants css-dev-only-do-not-override-nllxry"
+    class="ant-row ant-row-space-between Merchants css-dev-only-do-not-override-2q8sxy"
     data-testid="merchants-component"
   >
     <div
-      class="ant-row Merchants__search-pagination-block css-dev-only-do-not-override-nllxry"
+      class="ant-row Merchants__search-pagination-block css-dev-only-do-not-override-2q8sxy"
     >
       <div>
         <form
-          class="ant-form ant-form-horizontal css-dev-only-do-not-override-nllxry"
+          class="ant-form ant-form-horizontal css-dev-only-do-not-override-2q8sxy"
         >
           <div
-            class="ant-form-item undefined custom-label css-dev-only-do-not-override-nllxry"
+            class="ant-form-item undefined custom-label css-dev-only-do-not-override-2q8sxy"
             style="width: 300px;"
           >
             <div
-              class="ant-row ant-form-item-row css-dev-only-do-not-override-nllxry"
+              class="ant-row ant-form-item-row css-dev-only-do-not-override-2q8sxy"
             >
               <div
-                class="ant-col ant-form-item-control css-dev-only-do-not-override-nllxry"
+                class="ant-col ant-form-item-control css-dev-only-do-not-override-2q8sxy"
               >
                 <div
                   class="ant-form-item-control-input"
@@ -30,7 +30,7 @@ exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
                     class="ant-form-item-control-input-content"
                   >
                     <span
-                      class="ant-input-affix-wrapper css-dev-only-do-not-override-nllxry"
+                      class="ant-input-affix-wrapper css-dev-only-do-not-override-2q8sxy"
                     >
                       <span
                         class="ant-input-prefix"
@@ -41,7 +41,7 @@ exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
                         />
                       </span>
                       <input
-                        class="ant-input css-dev-only-do-not-override-nllxry"
+                        class="ant-input css-dev-only-do-not-override-2q8sxy"
                         placeholder="merchants.search_among_merchants"
                         type="text"
                         value=""
@@ -56,14 +56,14 @@ exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
       </div>
     </div>
     <div
-      class="ant-row Merchants__table-block css-dev-only-do-not-override-nllxry"
+      class="ant-row Merchants__table-block css-dev-only-do-not-override-2q8sxy"
     >
       <a
         class="Merchants__add-block"
         href="/merchants/create-edit-merchant"
       >
         <button
-          class="ant-btn css-dev-only-do-not-override-nllxry ant-btn-primary Merchants__button-style"
+          class="ant-btn css-dev-only-do-not-override-2q8sxy ant-btn-primary Merchants__button-style"
           type="button"
         >
           <span
@@ -83,10 +83,10 @@ exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
         class="TableComponent__a"
       >
         <div
-          class="ant-table-wrapper css-dev-only-do-not-override-nllxry"
+          class="ant-table-wrapper css-dev-only-do-not-override-2q8sxy"
         >
           <div
-            class="ant-spin-nested-loading css-dev-only-do-not-override-nllxry"
+            class="ant-spin-nested-loading css-dev-only-do-not-override-2q8sxy"
           >
             <div
               class="ant-spin-container"
@@ -124,10 +124,10 @@ exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
                               class="ant-table-selection"
                             >
                               <label
-                                class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled css-dev-only-do-not-override-nllxry"
+                                class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled css-dev-only-do-not-override-2q8sxy"
                               >
                                 <span
-                                  class="ant-checkbox ant-wave-target css-dev-only-do-not-override-nllxry ant-checkbox-disabled"
+                                  class="ant-checkbox ant-wave-target css-dev-only-do-not-override-2q8sxy ant-checkbox-disabled"
                                 >
                                   <input
                                     aria-label="Select all"
@@ -356,7 +356,7 @@ exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
                             colspan="13"
                           >
                             <div
-                              class="css-dev-only-do-not-override-nllxry ant-empty"
+                              class="css-dev-only-do-not-override-2q8sxy ant-empty"
                             >
                               <div
                                 class="ant-empty-image"

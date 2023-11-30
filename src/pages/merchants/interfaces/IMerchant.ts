@@ -44,13 +44,6 @@ export interface IScheduleStation {
   breaks: string[];
 }
 
-export interface IMerchantPagination {
-  page: number | null;
-  pages: number | null;
-  size: number | null;
-  total: number | null;
-}
-
 export interface IQueryMerchant {
   page: number;
   search: string;

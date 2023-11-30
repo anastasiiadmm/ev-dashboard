@@ -6,15 +6,14 @@ import {
   ICreateMerchant,
   IMerchant,
   IMerchantDetail,
-  IMerchantPagination,
   IMerchantStation,
 } from '~/pages/merchants/interfaces';
-import { IChangeStatuses, IError } from '~/shared/interfaces';
+import { IChangeStatuses, IError, IPagination } from '~/shared/interfaces';
 import { getAxiosConfig } from '~/shared/utils';
 
 interface IMerchantState {
   merchants: IMerchant[] | null;
-  merchantPagination: IMerchantPagination | null;
+  merchantPagination: IPagination | null;
   merchantsLoading: boolean;
   merchantsError: string | null;
   commonError: IError | null;
@@ -31,7 +30,7 @@ interface IMerchantState {
   merchantDetailLoading: boolean;
   merchantDetailError: AxiosError | null;
   merchantDetailStation: IMerchantStation[] | null;
-  merchantDetailStationPagination: IMerchantPagination | null;
+  merchantDetailStationPagination: IPagination | null;
   merchantDetailStationLoading: boolean;
   merchantDetailStationError: AxiosError | null;
   merchantDetailForUpdate: ICreateMerchant | null | undefined;
@@ -41,7 +40,7 @@ interface IMerchantState {
 
 class MerchantStore implements IMerchantState {
   merchants: IMerchant[] | null = null;
-  merchantPagination: IMerchantPagination | null = {
+  merchantPagination: IPagination | null = {
     page: null,
     pages: null,
     size: null,
@@ -63,7 +62,7 @@ class MerchantStore implements IMerchantState {
   merchantDetailLoading: boolean = false;
   merchantDetailError: AxiosError | null = null;
   merchantDetailStation: IMerchantStation[] | null = null;
-  merchantDetailStationPagination: IMerchantPagination | null = {
+  merchantDetailStationPagination: IPagination | null = {
     page: null,
     pages: null,
     size: null,

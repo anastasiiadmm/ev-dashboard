@@ -1,4 +1,4 @@
-import { Button, Form, Radio, Typography } from 'antd';
+import { Button, Flex, Form, Radio, Typography } from 'antd';
 import bem from 'easy-bem';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { eng, kg, rus } from '~/assets/images';
 import { ICreateConnector, ICreateMerchant, IModule } from '~/pages/merchants/interfaces';
-import { CardEVSEModule } from '~/pages/merchants/Merchant/ui';
+import { CardEVSEModule, ScheduleModal } from '~/pages/merchants/Merchant/ui';
 import { commonStore, merchantStore } from '~/shared/api/store';
 import { useCurrentLocale, useModal } from '~/shared/hooks';
 import {
@@ -55,6 +55,8 @@ const CreateStation = observer(() => {
     showModal: showSuccessModal,
     handleOkCancel: handleOkSuccessCancel,
   } = useModal(false);
+  const { isModalOpen: isModalScheduleOpen, handleOkCancel: handleOpenScheduleModal } =
+    useModal(false);
   const [selectedLanguage, setSelectedLanguage] = useState(currentLocale);
   const [formData, setFormData] = useState<ICreateMerchant>({
     active: false,
@@ -123,8 +125,8 @@ const CreateStation = observer(() => {
     }
 
     const queryString = getParams({ location_type: locationType });
-    commonStore.fetchLocations(queryString);
-  }, [isCountrySelected, isCitySelected]);
+    commonStore.fetchLocations(queryString, currentLocale);
+  }, [isCountrySelected, isCitySelected, currentLocale]);
 
   const executionTypes = [
     {
@@ -356,24 +358,12 @@ const CreateStation = observer(() => {
               />
             </div>
             <div className={b('display-block')}>
-              <FormField
-                data-testid='schedule_id'
-                id='schedule_id'
-                name='schedule'
-                placeholder={t('merchants.operating_mode')}
-                F
-                label={t('merchants.operating_mode')}
-                rules={[
-                  {
-                    required: true,
-                    message: '',
-                  },
-                ]}
-                error={error}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handleFormChange('schedule', e.target.value)
-                }
-              />
+              <Flex vertical className={b('add-schedule-block')}>
+                <Text className={b('title')}>{t('merchants.operating_mode')}</Text>
+                <Button className={b('add-schedule')} onClick={handleOpenScheduleModal}>
+                  {t('merchants.operating_mode')} <p className={b('arrow-right')} />
+                </Button>
+              </Flex>
               <FormField
                 data-testid='environment_id'
                 id='environment_id'
@@ -698,6 +688,17 @@ const CreateStation = observer(() => {
           handleOkCancel={handleOkSuccessCancel}
           handleAgreeHandler={handleAgreeHandler}
         />
+      </ModalComponent>
+
+      <ModalComponent
+        closeIcon
+        title={t('merchants.operating_mode')}
+        width={622}
+        isModalOpen={isModalScheduleOpen}
+        handleOk={handleOpenScheduleModal}
+        handleCancel={handleOpenScheduleModal}
+      >
+        <ScheduleModal handleOkCancel={handleOpenScheduleModal} />
       </ModalComponent>
     </div>
   );

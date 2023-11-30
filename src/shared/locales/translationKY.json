@@ -139,7 +139,14 @@
     "edit_merchant": "Түзөтүүчү соодагер",
     "save": "Сактоо",
     "changes_saved": "Өзгөртүүлөр сакталды",
-    "the_merchant_account_has_been_successfully_updated": "Сатуучунун эсеби ийгиликтүү жаңыртылды."
+    "the_merchant_account_has_been_successfully_updated": "Сатуучунун эсеби ийгиликтүү жаңыртылды.",
+    "all_days": "Бардык күндөр",
+    "time": "Убактысы",
+    "add_break": "+ Тыныгуу кошуу",
+    "break": "Тыныгуу",
+    "hour": "саат",
+    "hours": "саат",
+    "clock": "саат"
   },
   "modals": {
     "cancel": "Жокко чыгаруу",
@@ -193,7 +200,7 @@
       "merchant_label": "Мерчант",
       "merchant_placeholder": "Мерчантты тандагыла",
       "id_station": "ID станциялар ",
-      "id_station_placeholder": "Баардык",
+      "id_station_placeholder": "Станцияны тандагыла",
       "status": "Статусу",
       "date_start": "Ишке киргизүү күнү жана убактысы",
       "date_finish": "Өчүрүү күнү жана убактысы",
@@ -230,5 +237,15 @@
       "description": "Тиркемелер үчүн тарифтерди кошуңуз",
       "button": "Тариф кошуу"
     }
+  },
+  "infrastructure": {
+    "naming": "Аты ",
+    "search": "Издөө",
+    "add_infrastructure": "Инфраструктураны кошуу",
+    "deactivate": "Активдүүлүктөн чыгаруу",
+    "activate": "Активдештирүү"
+  },
+  "user": {
+    "manager": "Менеджер"
   }
 }

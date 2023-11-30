@@ -3,18 +3,13 @@ import { Table } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import bem from 'easy-bem';
 
-import { PaginationComponent, NotFoundImages } from '~/shared/ui';
-import {
-  IColumn,
-  ICreateSchedule,
-  IMerchant,
-  IMerchantPagination,
-  IStation,
-} from '~/pages/merchants/interfaces';
+import { IColumn, ICreateSchedule, IMerchant, IStation } from '~/pages/merchants/interfaces';
 import { IPagination } from '~/shared/interfaces';
 import { ITag } from '~/pages/tags/interfaces';
-import './TableComponent.scss';
 import { ICommon } from '~/pages/banners/interfaces';
+import { NotFoundImages, PaginationComponent } from '~/shared/ui';
+import './TableComponent.scss';
+
 
 interface Props {
   data: readonly (IMerchant | IStation | ITag | ICreateSchedule | ICommon)[] | null | undefined;
@@ -32,7 +27,7 @@ interface Props {
   changeShowByHandler?: ((value: string) => void | undefined) | undefined;
   disabledButton?: boolean;
   defaultSizeValue?: number | undefined;
-  pages?: IMerchantPagination | null;
+  pages?: IPagination | null;
   scroll?: { x?: string | number; y?: string | number } & {
     scrollToFirstRowOnChange?: boolean;
   };
@@ -76,7 +71,7 @@ const TableComponent: React.FC<Props> = ({
   };
 
   return (
-    <div className={b('a')}>
+    <div className={b('')}>
       <Table
         rowKey={rowKey}
         scroll={scroll}

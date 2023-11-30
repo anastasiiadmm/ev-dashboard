@@ -8,7 +8,7 @@
     margin: 20px 24px;
   }
   &__container {
-    max-width: 532px;
+    width: 532px;
   }
 
   &__container_upload_file {
@@ -57,11 +57,40 @@
     align-items: center;
     gap: 12px;
     width: 48.6%;
+    margin-bottom: 8px;
     > div {
       width: 100%;
     }
   }
+  &__container_picker {
+    display: flex;
+    align-items: center;
+    position: relative;
+    > div {
+      border: 1px solid variables.$border-table;
+      span {
+        margin: 1px;
+        color: variables.$title-color;
+        svg {
+          width: 18px;
+          height: 16px;
+        }
+      }
+      img {
+        position: absolute;
+        right: 10px;
+        z-index: 0;
+      }
+    }
+  }
 
+  &__timepicker {
+    width: 95px;
+  }
+
+  &__datepicker {
+    width: 125px;
+  }
   &__container_snap {
     display: flex;
     align-items: end;
@@ -107,8 +136,7 @@
     button {
       padding-right: 3px;
       padding-left: 11px;
-      color: variables.$title-color;
-
+      border-color: variables.$border-table;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -119,7 +147,7 @@
     width: 100%;
   }
   &__button-select {
-    width: 183px;
+    width: 234px;
   }
 
   &__modal-container {
@@ -145,8 +173,17 @@
       padding: 10px !important;
     }
   }
-
-  .active-border {
+  &__border-item {
+    background-color: variables.$gray-light-bg-color;
+    border: none;
+    margin-top: 8px;
+    > div {
+      border: none !important;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      padding: 10px !important;
+    }
     border: 1px solid variables.$title-color;
   }
 

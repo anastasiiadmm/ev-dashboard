@@ -139,7 +139,14 @@
     "edit_merchant": "Редактирование мерчанта",
     "save": "Сохранить",
     "changes_saved": "Изменения сохранены",
-    "the_merchant_account_has_been_successfully_updated": "Учётная запись мерчанта была успешно обновлена."
+    "the_merchant_account_has_been_successfully_updated": "Учётная запись мерчанта была успешно обновлена.",
+    "all_days": "Все дни",
+    "time": "Время",
+    "add_break": "+ Добавить перерыв",
+    "break": "Перерыв",
+    "hour": "час",
+    "hours": "часа",
+    "clock": "часов"
   },
   "modals": {
     "cancel": "Отменить",
@@ -193,7 +200,7 @@
       "merchant_label": "Мерчант",
       "merchant_placeholder": "Выберите мерчанта",
       "id_station": "ID станции",
-      "id_station_placeholder": "Все",
+      "id_station_placeholder": "Выберите станцию",
       "status": "Статус",
       "date_start": "Дата и время запуска",
       "date_finish": "Дата и время отключения",
@@ -230,5 +237,15 @@
       "description": "Добавьте тарифы для приложения",
       "button": "Добавить тариф"
     }
+  },
+  "infrastructure": {
+    "naming": "Наименование ",
+    "search": "Искать",
+    "add_infrastructure": "Добавить инфраструктуру",
+    "deactivate": "Деактивировать",
+    "activate": "Активировать"
+  },
+  "user": {
+    "manager": "Менеджер"
   }
 }
