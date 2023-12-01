@@ -6,7 +6,6 @@ export type {
   IQueryMerchant,
   IMerchantDetail,
   IMerchantStation,
-  ISelectMerchant
 } from './IMerchant';
 export type { ICommon } from './ICommon';
 export type {
