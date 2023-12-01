@@ -3,16 +3,16 @@ import { useTranslation } from 'react-i18next';
 import bem from 'easy-bem';
 import { toJS } from 'mobx';
 import { Button, Form, Row, Tooltip } from 'antd';
-import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 
-import { useTableFilter } from '~/shared/hooks';
+import { useModal, useTableFilter } from '~/shared/hooks';
 import { IColumn } from '~/pages/merchants/interfaces';
 import { add, deleteIcon, editColor, inactive, infoCircle, search, status } from '~/assets/images';
 import { IInfrastructure } from '~/pages/infrastructure/interfaces';
 import { infrastructureStore } from '~/shared/api/store';
-import { FormField, TableComponent } from '~/shared/ui';
+import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '~/shared/ui';
 import { apiImageURL } from '~/shared/utils/config';
+import { CreateEditInfrastructureModal } from '~/pages/infrastructure';
 import './InfrastructureList.scss';
 
 const InfrastructureList = observer(() => {
@@ -28,11 +28,28 @@ const InfrastructureList = observer(() => {
     changeShowByHandler,
     onChangePageCheckHandler,
   } = useTableFilter(infrastructureStore.fetchInfrastructure.bind(infrastructureStore));
+  // const [selectedRowKey, setSelectedRowKey] = useState<number | null>(null); когда api буду подключать
+  const [selectedInfrastructure, setSelectedInfrastructure] = useState<IInfrastructure | null>(
+    null,
+  );
+  const [creating, setCreating] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const {
+    isModalOpen: isModalDeleteOpen,
+    showModal: showDeleteModal,
+    handleOkCancel: handleDeleteOkCancel,
+  } = useModal(false);
+  const {
+    isModalOpen: isInfrastructureModalOpen,
+    showModal: showInfrastructureModal,
+    handleOkCancel: handleInfrastructureOkCancel,
+  } = useModal(false);
 
   const onSelectChange = (selectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(selectedRowKeys);
   };
+
+  const handleAgreeDeleteTagHandler = async () => {};
 
   const columns: IColumn[] = [
     {
@@ -94,7 +111,7 @@ const InfrastructureList = observer(() => {
     },
     {
       title: t('merchants.action'),
-      render: () => {
+      render: (record: IInfrastructure) => {
         return (
           <div className={b('tags-block')}>
             <Tooltip
@@ -107,7 +124,14 @@ const InfrastructureList = observer(() => {
                 </div>
               }
             >
-              <Button className={b('add-button')} icon={<img src={editColor} alt='plus' />} />
+              <Button
+                onClick={() => {
+                  showInfrastructureModal();
+                  setSelectedInfrastructure(record);
+                }}
+                className={b('add-button')}
+                icon={<img src={editColor} alt='plus' />}
+              />
             </Tooltip>
             <Tooltip
               color='#707A94'
@@ -119,7 +143,14 @@ const InfrastructureList = observer(() => {
                 </div>
               }
             >
-              <Button className={b('delete-button')} icon={<img src={deleteIcon} alt='plus' />} />
+              <Button
+                onClick={() => {
+                  showDeleteModal();
+                  // setSelectedRowKey(record.id); добавлю в след таске когда буду подключать api
+                }}
+                className={b('delete-button')}
+                icon={<img src={deleteIcon} alt='plus' />}
+              />
             </Tooltip>
           </div>
         );
@@ -150,11 +181,17 @@ const InfrastructureList = observer(() => {
       </Row>
 
       <Row className={b('table-block')}>
-        <Link to='/infrastructure/create-infrastructure' className={b('add-block')}>
-          <Button className={b('button-style')} type='primary' icon={<img src={add} alt='add' />}>
-            {t('infrastructure.add_infrastructure')}
-          </Button>
-        </Link>
+        <Button
+          className={b('button-style')}
+          type='primary'
+          icon={<img src={add} alt='add' />}
+          onClick={() => {
+            showInfrastructureModal();
+            setCreating(true);
+          }}
+        >
+          {t('infrastructure.add_infrastructure')}
+        </Button>
 
         <TableComponent
           rowKey={(record) => record.id.toString()}
@@ -171,6 +208,44 @@ const InfrastructureList = observer(() => {
           pagination
         />
       </Row>
+
+      <ModalComponent
+        closeIcon
+        width={420}
+        isModalOpen={isInfrastructureModalOpen}
+        handleOk={handleInfrastructureOkCancel}
+        handleCancel={() => {
+          handleInfrastructureOkCancel();
+          setCreating(false);
+        }}
+      >
+        <CreateEditInfrastructureModal
+          textTitle={
+            creating
+              ? (t('infrastructure.creating_infrastructure') as string)
+              : (t('infrastructure.editing_an_infrastructure') as string)
+          }
+          setCreating={setCreating}
+          handleTagOkCancel={handleInfrastructureOkCancel}
+          creating={creating}
+          selectedInfrastructure={selectedInfrastructure}
+        />
+      </ModalComponent>
+
+      <ModalComponent
+        width={311}
+        isModalOpen={isModalDeleteOpen}
+        handleOk={handleDeleteOkCancel}
+        handleCancel={handleDeleteOkCancel}
+      >
+        <ActiveInactiveModal
+          textTitle={t('infrastructure.are_you_sure_you_want_to_delete') as string}
+          infoText={t('infrastructure.if_you_delete_it_you_won_t_be_able_to_restore') as string}
+          handleOkCancel={handleDeleteOkCancel}
+          loadingStatus={false}
+          handleAgreeHandler={handleAgreeDeleteTagHandler}
+        />
+      </ModalComponent>
     </Row>
   );
 });

@@ -27,6 +27,7 @@
 
   &__button-style {
     display: flex;
+    align-self: flex-end;
     align-items: center;
     width: 237px;
     margin-bottom: 18px;
@@ -100,5 +101,19 @@
     background-color: variables.$white-color !important;
     border-color: variables.$white-color !important;
     color: variables.$link-turquoise-color;
+  }
+
+  .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child {
+    inset-inline-start: 1px;
+  }
+
+  .ant-input-affix-wrapper {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+
+  .ant-input {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
   }
 }

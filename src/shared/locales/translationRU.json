@@ -146,7 +146,9 @@
     "break": "Перерыв",
     "hour": "час",
     "hours": "часа",
-    "clock": "часов"
+    "clock": "часов",
+    "save_coordinates": "Сохранить координаты",
+    "station_here": "Станция здесь"
   },
   "modals": {
     "cancel": "Отменить",
@@ -193,6 +195,7 @@
     "add_banner": {
       "title": "Создание баннера",
       "text": "Информация о БАНЕРЕ",
+      "title_image": "Перенесите или загрузите фото для баннера",
       "name_input": "Наименование баннера",
       "link_input": "Ссылка на источник",
       "name_button": "Название кнопки",
@@ -243,9 +246,23 @@
     "search": "Искать",
     "add_infrastructure": "Добавить инфраструктуру",
     "deactivate": "Деактивировать",
-    "activate": "Активировать"
+    "activate": "Активировать",
+    "are_you_sure_you_want_to_delete": "Вы действительно хотите удалить?",
+    "if_you_delete_it_you_won_t_be_able_to_restore": "Если вы удалите, то не сможете восстановить",
+    "creating_infrastructure": "Создание инфраструктуры",
+    "editing_an_infrastructure": "Редактирование инфраструктуры",
+    "name_in_kyrgyz": "Название на Кыргызском",
+    "name_in_russian": "Название на Русском",
+    "name_in_eng": "Название на Английском"
   },
   "user": {
     "manager": "Менеджер"
+  },
+  "image_upload": {
+    "transfer_or_download_infrastructure_icon": "Перенесите или загрузите иконку для инфраструктуры",
+    "download": "Загрузить",
+    "maximum_photo_size_256kb": "Максимальный размер фотографии 256кб",
+    "available_format_svg": "Доступный формат: svg",
+    "image_must_be_256KB_or_smaller": "Максимальный размер фотографии 256кб"
   }
 }

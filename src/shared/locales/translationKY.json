@@ -146,7 +146,9 @@
     "break": "Тыныгуу",
     "hour": "саат",
     "hours": "саат",
-    "clock": "саат"
+    "clock": "саат",
+    "save_coordinates": "Координаттарды сактоо",
+    "station_here": "Станция ушул жерде"
   },
   "modals": {
     "cancel": "Жокко чыгаруу",
@@ -193,6 +195,7 @@
     "add_banner": {
       "title": "Баннер тузуу",
       "text": "Баннер жөнүндө маалымат",
+      "title_image": "Баннер үчүн сүрөттү өткөрүп бериңиз же жүктөңүз",
       "name_input": "Баннердин аталышы",
       "link_input": "Маалымат булагынын шилтемеси",
       "name_button": "Кнопканын аталышы",
@@ -243,9 +246,23 @@
     "search": "Издөө",
     "add_infrastructure": "Инфраструктураны кошуу",
     "deactivate": "Активдүүлүктөн чыгаруу",
-    "activate": "Активдештирүү"
+    "activate": "Активдештирүү",
+    "are_you_sure_you_want_to_delete": "Сиз чын эле өчүрүүнү каалайсызбы?",
+    "if_you_delete_it_you_won_t_be_able_to_restore": "Эгерде сиз өчүрсөңүз, анда кайра калыбына келтирүү мүмкүн эмес",
+    "creating_infrastructure": "Инфраструктураны түзүү",
+    "editing_an_infrastructure": "Инфраструктураны редакциялоо",
+    "name_in_kyrgyz": "Кыргызча аты",
+    "name_in_russian": "Орусча аталышы",
+    "name_in_eng": "Англис тилиндеги аталыш"
   },
   "user": {
     "manager": "Менеджер"
+  },
+  "image_upload": {
+    "transfer_or_download_infrastructure_icon": "Инфраструктура үчүн иконканы алып өтүңүз же жүктөңүз",
+    "download": "Жүктөө",
+    "maximum_photo_size_256kb": "Сүрөттөрдүн максималдуу өлчөмү 256кб",
+    "available_format_svg": "Жеткиликтүү форматы: svg",
+    "image_must_be_256KB_or_smaller": "Сүрөт 256KB же андан кичине болушу керек"
   }
 }

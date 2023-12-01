@@ -84,20 +84,17 @@
     display: flex;
     align-items: center;
     position: relative;
+    input {
+      color: variables.$title-color;
+    }
     > div {
-      border: 1px solid variables.$border-table;
-      span {
-        margin: 1px;
-        color: variables.$title-color;
-        svg {
-          width: 18px;
-          height: 16px;
-        }
-      }
+      border-color: variables.$border-table;
       img {
         position: absolute;
         right: 10px;
+        top: 7px;
         z-index: 0;
+        height: 20px;
       }
     }
   }

@@ -1,14 +1,15 @@
 import React, { ChangeEvent, useEffect, useState, useMemo } from 'react';
 import bem from 'easy-bem';
-import { Button, DatePicker, Form, Radio, Typography, TimePicker } from 'antd';
+import { Button, DatePicker, Form, Radio, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
 import { Dayjs } from 'dayjs';
+import type { UploadFile } from 'antd/es/upload/interface';
 
 import { useCurrentLocale, useModal } from '~/shared/hooks';
-import { eng, kg, chevronRight, rus, greenCheck } from '~/assets/images';
+import { eng, kg, chevronRight, rus, greenCheck, clockIcon } from '~/assets/images';
 import { bannerStore } from '~/pages/banners/';
 import { ICommon, IFormData } from '~/pages/banners/interfaces';
 import {
@@ -16,10 +17,11 @@ import {
   CardComponent,
   FormField,
   ModalComponent,
-  UploadFile,
   TableIdModal,
   BreadcrumbComponent,
   AlertComponent,
+  UploadImageComponent,
+  TimePicker as TimePickerComponent,
 } from '~/shared/ui';
 import './BannersForm.scss';
 
@@ -49,6 +51,7 @@ const BannersForm = observer(() => {
   const [previousSelectedLanguage, setPreviousSelectedLanguage] = useState(selectedLanguage);
   const [error, setError] = useState<boolean>(false);
   const { merchantId, stationId } = toJS(bannerStore);
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [getMerchant, setGetMerchant] = useState<IData>({
     id: '',
     name: '',
@@ -219,13 +222,18 @@ const BannersForm = observer(() => {
               className={b('alert-styles')}
               message={t('alerts.incorrectly_filled_field') as string}
               description={t('alerts.one_or_more_of_the_required_fields_are_not_filled') as string}
-              type='error'
+              type='warning'
               showIcon
               closable
             />
           )}
           <div className={b('container-upload-file')}>
-            <UploadFile />
+            <UploadImageComponent
+              fileList={fileList}
+              setFileList={setFileList}
+              format='jpg'
+              title={t('banners.add_banner.title_image')}
+            />
           </div>
           <h2 className={b('info-banner-title')}>{t('banners.add_banner.text')}</h2>
           <Form
@@ -278,17 +286,10 @@ const BannersForm = observer(() => {
               <label>{t('banners.add_banner.date_start')}</label>
               <div className={b('container-time')}>
                 <div className={b('container-picker')}>
-                  <TimePicker
-                    className={b('timepicker')}
-                    id='start_id'
-                    name='start_time'
-                    placeholder='--:--'
-                    status={error && !formData.start_time ? 'error' : ''}
-                    data-testid='start_time_id'
-                    format='HH:mm'
-                    value={formData.start_time}
-                    onChange={(time: Dayjs | null) => handleFormChange(`start_time`, time)}
-                  />
+                  <div>
+                    <TimePickerComponent icon defaultValue='00:00' />
+                    <img src={clockIcon} alt='' />
+                  </div>
                 </div>
                 <div className={b('container-picker')}>
                   <DatePicker
@@ -308,17 +309,10 @@ const BannersForm = observer(() => {
               <label>{t('banners.add_banner.date_finish')}</label>
               <div className={b('container-time')}>
                 <div className={b('container-picker')}>
-                  <TimePicker
-                    className={b('timepicker')}
-                    id='finish_time_id'
-                    name='finish_time'
-                    placeholder='--:--'
-                    status={error && !formData.finish_time ? 'error' : ''}
-                    data-testid='finish_time_id'
-                    format='HH:mm'
-                    value={formData.finish_time}
-                    onChange={(time: Dayjs | null) => handleFormChange(`finish_time`, time)}
-                  />
+                  <div>
+                    <TimePickerComponent icon defaultValue='00:00' />
+                    <img src={clockIcon} alt='' />
+                  </div>
                 </div>
                 <div className={b('container-picker')}>
                   <DatePicker

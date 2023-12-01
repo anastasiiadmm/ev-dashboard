@@ -19,7 +19,8 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.ts",
       "\\.(css|less)$": "<rootDir>/assetsTransformer.ts",
       "^~/(.*)$": "<rootDir>/src/$1",
-      "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/__ mocks __/fileMock.js"
+      "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/__ mocks __/fileMock.js",
+      "react-leaflet": "<rootDir>/__mocks__/reactLeafletMock.js"
     },
     "transformIgnorePatterns": [
       "node_modules/(?!variables/.*|react-leaflet/)"
@@ -38,10 +39,12 @@
     "@sentry/react": "^7.83.0",
     "@sentry/tracing": "^7.83.0",
     "antd": "^5.9.4",
+    "antd-img-crop": "^4.18.0",
     "axios": "^1.5.1",
     "dayjs": "^1.11.10",
     "easy-bem": "^1.1.1",
     "i18next": "^23.6.0",
+    "leaflet": "^1.9.4",
     "mobx": "^6.10.2",
     "mobx-react-lite": "^4.0.5",
     "react": "^18.2.0",
@@ -49,6 +52,7 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^13.3.1",
     "react-input-mask": "3.0.0-alpha.2",
+    "react-leaflet": "^4.2.1",
     "react-router": "^6.18.0",
     "react-router-dom": "^6.18.0",
     "react-test-renderer": "^18.2.0",
@@ -81,6 +85,7 @@
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.5",
+    "@types/leaflet": "^1.9.8",
     "@types/react": "^18.2.27",
     "@types/react-datepicker": "^4.19.3",
     "@types/react-dom": "^18.2.12",
