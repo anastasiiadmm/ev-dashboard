@@ -41,14 +41,14 @@ export interface IModule {
   connectors: ICreateConnector[];
 }
 
-enum ExecutionType {
+export enum ExecutionType {
   Wall = 'wall',
   Floor = 'floor',
   Mobile = 'mobile',
 }
 
 export interface ICreateStation {
-  media_files: [
+  media_files?: [
     {
       content: 'http://example.com';
     },
@@ -62,7 +62,7 @@ export interface ICreateStation {
   name_en: string;
   name_ky: string;
   manufacturer: string;
-  execution_type: ExecutionType;
+  execution_type: ExecutionType.Wall;
   address_ru: string;
   address_en: string;
   address_ky: string;

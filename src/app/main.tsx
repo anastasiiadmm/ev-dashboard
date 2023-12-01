@@ -9,6 +9,7 @@ import translationEN from '~/shared/locales/translationEN.json';
 import translationRU from '~/shared/locales/translationRU.json';
 import translationKY from '~/shared/locales/translationKY.json';
 import App from '~/app/App.tsx';
+import 'leaflet/dist/leaflet.css';
 import '~/app/styles/index.scss';
 import '~/app/styles/_mixins.scss';
 

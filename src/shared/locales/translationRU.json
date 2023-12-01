@@ -146,7 +146,9 @@
     "break": "Перерыв",
     "hour": "час",
     "hours": "часа",
-    "clock": "часов"
+    "clock": "часов",
+    "save_coordinates": "Сохранить координаты",
+    "station_here": "Станция здесь"
   },
   "modals": {
     "cancel": "Отменить",

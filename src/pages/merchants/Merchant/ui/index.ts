@@ -8,3 +8,4 @@ export { default as CreateEditConnector } from './CreateEditConnector/CreateEdit
 export { default as CardConnector } from './CardConnector/CardConnector';
 export { default as CardEVSEModule } from './CardEVSEModule/CardEVSEModule';
 export { default as ScheduleModal } from './ScheduleModal/ScheduleModal';
+export { default as MapComponent } from './MapComponent/MapComponent';
