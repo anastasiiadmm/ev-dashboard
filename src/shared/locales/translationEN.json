@@ -239,9 +239,23 @@
     "search": "Search",
     "add_infrastructure": "Add infrastructure",
     "deactivate": "Deactivate",
-    "activate": "Activate"
+    "activate": "Activate",
+    "are_you_sure_you_want_to_delete": "Are you sure you want to delete?",
+    "if_you_delete_it_you_won_t_be_able_to_restore": "If you delete it, you won't be able to restore",
+    "creating_infrastructure": "Creation of infrastructure",
+    "editing_an_infrastructure": "Editing infrastructure",
+    "name_in_kyrgyz": "Name in Kyrgyz",
+    "name_in_russian": "Name in Russian",
+    "name_in_eng": "Title in English"
   },
   "user": {
     "manager": "Manager"
+  },
+  "image_upload": {
+    "transfer_or_download_infrastructure_icon": "Transfer or download infrastructure icon",
+    "download": "Download",
+    "maximum_photo_size_256kb": "Maximum photo size 256kb",
+    "available_format_svg": "Available format: svg",
+    "image_must_be_256KB_or_smaller": "Image must be 256KB or smaller"
   }
 }

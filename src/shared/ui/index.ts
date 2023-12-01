@@ -14,3 +14,4 @@ export { default as NotFoundImages } from './NotFoundImages/NotFoundImages';
 export { default as UploadFile } from './UploadFile/UploadFile.tsx';
 export { default as EmptyComponent } from './EmptyComponent/Empty.tsx';
 export { default as TimePicker } from './TimePicker/TimePicker.tsx';
+export { UploadImageComponent } from './UploadImageComponent/UploadImageComponent';

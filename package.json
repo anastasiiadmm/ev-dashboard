@@ -36,7 +36,10 @@
     "execute-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\""
   },
   "dependencies": {
+    "@sentry/react": "^7.83.0",
+    "@sentry/tracing": "^7.83.0",
     "antd": "^5.9.4",
+    "antd-img-crop": "^4.18.0",
     "axios": "^1.5.1",
     "dayjs": "^1.11.10",
     "easy-bem": "^1.1.1",
