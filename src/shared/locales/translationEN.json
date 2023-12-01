@@ -146,7 +146,9 @@
     "break": "Break",
     "hour": "hour",
     "hours": "hours",
-    "clock": "hours"
+    "clock": "hours",
+    "save_coordinates": "Save coordinates",
+    "station_here": "The station is here"
   },
   "modals": {
     "cancel": "Cancel",

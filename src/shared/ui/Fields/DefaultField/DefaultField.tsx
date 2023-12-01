@@ -8,7 +8,7 @@ interface Props {
   style?: CSSProperties;
   className?: string;
   label?: string;
-  defaultValue?: string;
+  defaultValue?: string | number;
   name?: string;
   inputType?: string;
   rules?: IRule[];

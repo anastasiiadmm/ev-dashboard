@@ -16,3 +16,5 @@ export type {
   ICreateConnector,
   IModule,
 } from './IStation';
+
+export { ExecutionType } from './IStation';

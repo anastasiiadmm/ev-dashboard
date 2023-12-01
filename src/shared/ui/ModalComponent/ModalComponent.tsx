@@ -3,7 +3,7 @@ import { Modal } from 'antd';
 
 interface Props {
   title?: string;
-  width?: number;
+  width?: string | number;
   closeIcon?: boolean;
   isModalOpen: boolean;
   handleOk: () => void;
