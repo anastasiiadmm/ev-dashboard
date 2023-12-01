@@ -20,7 +20,7 @@ variables:
   - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "docker rm -f $SERVICE_NAME && docker run --restart always -d --name $SERVICE_NAME $EXTRA_SERVICE_PARAMS $CI_REGISTRY_IMAGE/$CI_COMMIT_SHORT_SHA sh -c 'serve -s dist'"
 
 .build-and-push-script: &build-and-push
-  - docker build -t $SERVICE_NAME --cache-from $CI_REGISTRY_IMAGE/latest -f dockerfiles/app/Dockerfile --build-arg VITE_API_URL=$VITE_API_URL .
+  - docker build -t $SERVICE_NAME --cache-from $CI_REGISTRY_IMAGE/latest -f dockerfiles/app/Dockerfile --build-arg VITE_API_URL=$VITE_API_URL VITE_API_SENTRY_DSN=$VITE_API_SENTRY_DSN .
   - docker tag $SERVICE_NAME $CI_REGISTRY_IMAGE/$CI_COMMIT_SHORT_SHA
   - docker tag $SERVICE_NAME $CI_REGISTRY_IMAGE/latest
   - docker push $CI_REGISTRY_IMAGE/$CI_COMMIT_SHORT_SHA
