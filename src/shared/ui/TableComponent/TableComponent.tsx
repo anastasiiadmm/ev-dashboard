@@ -16,7 +16,7 @@ interface Props {
   columns: IColumn[];
   rowKey: (record: ICreateSchedule | IMerchant | IStation | ITag | ICommon) => Key;
   rowSelection: {
-    selectedRowKeys: React.Key[];
+    selectedRowKeys?: React.Key[];
     onChange: (selectedRowKeys: React.Key[]) => void;
   };
   loading?: boolean;

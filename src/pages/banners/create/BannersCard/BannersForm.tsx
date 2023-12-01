@@ -212,10 +212,10 @@ const BannersForm = observer(() => {
       <div className={b('container-card')}>
         <CardComponent className={b('container')}>
           <h1 className={b('title')}>{t('banners.add_banner.title')}</h1>
-          <div className={b('container_upload_file')}>
+          <div className={b('container-upload-file')}>
             <UploadFile />
           </div>
-          <h2 className={b('info_banner_title')}>{t('banners.add_banner.text')}</h2>
+          <h2 className={b('info-banner-title')}>{t('banners.add_banner.text')}</h2>
           <Form
             form={form}
             initialValues={{ remember: true }}
@@ -223,7 +223,7 @@ const BannersForm = observer(() => {
             autoComplete='off'
             layout='vertical'
             size='middle'
-            className={b('container_form')}
+            className={b('container-form')}
           >
             <FormField
               className={b('input')}
@@ -262,10 +262,10 @@ const BannersForm = observer(() => {
               ]}
             />
 
-            <div className={b('container_label_field')}>
+            <div className={b('container-label-field')}>
               <label>{t('banners.add_banner.date_start')}</label>
-              <div className={b('container_time')}>
-                <div className={b('container_picker')}>
+              <div className={b('container-time')}>
+                <div className={b('container-picker')}>
                   <TimePicker
                     className={b('timepicker')}
                     id='start_id'
@@ -278,7 +278,7 @@ const BannersForm = observer(() => {
                     onChange={(time: Dayjs | null) => handleFormChange(`start_time`, time)}
                   />
                 </div>
-                <div className={b('container_picker')}>
+                <div className={b('container-picker')}>
                   <DatePicker
                     className={b('datepicker')}
                     id='start_date_id'
@@ -292,10 +292,10 @@ const BannersForm = observer(() => {
                 </div>
               </div>
             </div>
-            <div className={b('container_label_field')}>
+            <div className={b('container-label-field')}>
               <label>{t('banners.add_banner.date_finish')}</label>
-              <div className={b('container_time')}>
-                <div className={b('container_picker')}>
+              <div className={b('container-time')}>
+                <div className={b('container-picker')}>
                   <TimePicker
                     className={b('timepicker')}
                     id='finish_time_id'
@@ -308,7 +308,7 @@ const BannersForm = observer(() => {
                     onChange={(time: Dayjs | null) => handleFormChange(`finish_time`, time)}
                   />
                 </div>
-                <div className={b('container_picker')}>
+                <div className={b('container-picker')}>
                   <DatePicker
                     className={b('datepicker')}
                     id='finish_date_id'

@@ -46,13 +46,12 @@ const TableIdModal: React.FC<Props> = ({ data, columns, title, placeholder, save
 
   const rowKey = (record: ICreateSchedule | IMerchant | IStation | ITag | ICommon) => {
     if ('id' in record && 'name' in record) {
-      return `${record.id}_${record.name}`;
+      return `${record.id}____${record.name}`;
     }
     return 'defaultKey';
   };
 
   const rowSelection: {
-    selectedRowKeys: React.Key[];
     onChange: (selectedRowKeys: React.Key[]) => void;
   } = {
     onChange: (selectedRowKeys: React.Key[]) => {
@@ -60,7 +59,7 @@ const TableIdModal: React.FC<Props> = ({ data, columns, title, placeholder, save
         const resultArray: ICommon[] = [];
 
         for (const key of inputArray) {
-          const match = key.match(/^(\d+)_([^]*)$/);
+          const match = key.match(/^(\d+)____([^]*)$/);
           if (match) {
             const id = parseInt(match[1], 10);
             const name = match[2];
@@ -81,7 +80,6 @@ const TableIdModal: React.FC<Props> = ({ data, columns, title, placeholder, save
         setGetData(resultArray);
       }
     },
-    // selectedRowKeys: [],
   };
 
   const selectIdHandler = () => {
