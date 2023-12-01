@@ -19,8 +19,8 @@ import {
   UploadFile,
   TableIdModal,
   BreadcrumbComponent,
+  AlertComponent,
 } from '~/shared/ui';
-const { Title, Text } = Typography;
 import './BannersForm.scss';
 
 const languageItems = [
@@ -28,6 +28,8 @@ const languageItems = [
   { name: 'Русский', value: 'ru', lang: 'Орусча', icon: rus },
   { name: 'Английский', value: 'en', lang: 'Англисча', icon: eng },
 ];
+
+const { Title, Text } = Typography;
 
 interface IData {
   id: string;
@@ -183,7 +185,6 @@ const BannersForm = observer(() => {
   const displayedMerchantName =
     merchantName.length > 20 ? `${merchantName.substring(0, 20)}...` : merchantName;
 
-    
   const stationName = getStation.name || t('banners.add_banner.id_station_placeholder');
   const displayeStationName =
     stationName.length > 20 ? `${stationName.substring(0, 20)}...` : stationName;
@@ -213,6 +214,16 @@ const BannersForm = observer(() => {
       <div className={b('container-card')}>
         <CardComponent className={b('container')}>
           <h1 className={b('title')}>{t('banners.add_banner.title')}</h1>
+          {error && (
+            <AlertComponent
+              className={b('alert-styles')}
+              message={t('alerts.incorrectly_filled_field') as string}
+              description={t('alerts.one_or_more_of_the_required_fields_are_not_filled') as string}
+              type='error'
+              showIcon
+              closable
+            />
+          )}
           <div className={b('container-upload-file')}>
             <UploadFile />
           </div>
@@ -250,7 +261,7 @@ const BannersForm = observer(() => {
               label={t('banners.add_banner.link_input')}
               id='link_id'
               error={error && !formData.link}
-              name={`link`}
+              name='link'
               data-testid='link_id'
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleFormChange(`link`, e.target.value)
@@ -270,7 +281,7 @@ const BannersForm = observer(() => {
                   <TimePicker
                     className={b('timepicker')}
                     id='start_id'
-                    name={`start_time`}
+                    name='start_time'
                     placeholder='--:--'
                     status={error && !formData.start_time ? 'error' : ''}
                     data-testid='start_time_id'
@@ -283,7 +294,7 @@ const BannersForm = observer(() => {
                   <DatePicker
                     className={b('datepicker')}
                     id='start_date_id'
-                    name={`start_date`}
+                    name='start_date'
                     placeholder='yyyy-mm-dd'
                     status={error && !formData.start_date ? 'error' : ''}
                     data-testid='start_date_id'
@@ -300,7 +311,7 @@ const BannersForm = observer(() => {
                   <TimePicker
                     className={b('timepicker')}
                     id='finish_time_id'
-                    name={`finish_time`}
+                    name='finish_time'
                     placeholder='--:--'
                     status={error && !formData.finish_time ? 'error' : ''}
                     data-testid='finish_time_id'
@@ -313,7 +324,7 @@ const BannersForm = observer(() => {
                   <DatePicker
                     className={b('datepicker')}
                     id='finish_date_id'
-                    name={`finish_date`}
+                    name='finish_date'
                     placeholder='yyyy-mm-dd'
                     status={error && !formData.finish_date ? 'error' : ''}
                     data-testid='finish_date_id'
@@ -330,7 +341,7 @@ const BannersForm = observer(() => {
                 label={t('banners.add_banner.name_button')}
                 id='button_label_id'
                 error={error && !formData.button_label}
-                name={`button_label`}
+                name='button_label'
                 data-testid='button_label_id'
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handleFormChange(`button_label`, e.target.value)
@@ -348,7 +359,7 @@ const BannersForm = observer(() => {
                 label={t('banners.add_banner.color_button')}
                 id='button_color_id'
                 error={error && !formData.button_color}
-                name={`button_color`}
+                name='button_color'
                 data-testid='button_color_id'
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handleFormChange(`button_color`, e.target.value)
@@ -427,7 +438,11 @@ const BannersForm = observer(() => {
                 radioButtonStates[item.value as keyof typeof radioButtonStates] || false;
 
               return (
-                <CardComponent className={getLanguageItemClassName(item.value)} key={item.name}>
+                <CardComponent
+                  className={getLanguageItemClassName(item.value)}
+                  key={item.name}
+                  onClick={() => handleLanguageSelect(item.value)}
+                >
                   <img src={item.icon} alt={item.name} />
                   <div className={b('button-info')}>
                     <Text style={{ margin: 0 }}>{item.name}</Text>

@@ -20,6 +20,24 @@
     font-size: 20px;
     color: variables.$black-color;
     font-weight: 600;
+    margin: 0 0 20px 0;
+  }
+
+  &__alert-styles {
+    margin: 20px 0;
+    padding: 12px;
+
+    .ant-alert-message {
+      color: variables.$red-color;
+      font-size: 12px;
+      font-weight: variables.$font-600;
+      text-transform: uppercase;
+    }
+
+    .ant-alert-description {
+      color: variables.$red-color;
+      font-size: 12px;
+    }
   }
 
   &__info-banner-title {
@@ -160,6 +178,7 @@
     background-color: variables.$gray-light-bg-color;
     border: 1px solid variables.$white-color;
     margin-top: 8px;
+    cursor: pointer;
     > div {
       border: none !important;
       display: flex;
@@ -172,6 +191,7 @@
     background-color: variables.$gray-light-bg-color;
     border: 1px solid variables.$title-color;
     margin-top: 8px;
+    cursor: pointer;
     > div {
       border: none !important;
       display: flex;
