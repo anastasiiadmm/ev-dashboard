@@ -1,0 +1,20 @@
+@use '../../../../../app/styles/variables' as variables;
+
+.CreateEditInfrastructureModal {
+  .switch-text {
+    display: inline-block;
+    margin-left: 8px;
+    font-weight: variables.$font-400 !important;
+  }
+
+  &__upload-validation-info {
+    margin: 12px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

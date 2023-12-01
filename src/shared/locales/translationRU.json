@@ -237,9 +237,23 @@
     "search": "Искать",
     "add_infrastructure": "Добавить инфраструктуру",
     "deactivate": "Деактивировать",
-    "activate": "Активировать"
+    "activate": "Активировать",
+    "are_you_sure_you_want_to_delete": "Вы действительно хотите удалить?",
+    "if_you_delete_it_you_won_t_be_able_to_restore": "Если вы удалите, то не сможете восстановить",
+    "creating_infrastructure": "Создание инфраструктуры",
+    "editing_an_infrastructure": "Редактирование инфраструктуры",
+    "name_in_kyrgyz": "Название на Кыргызском",
+    "name_in_russian": "Название на Русском",
+    "name_in_eng": "Название на Английском"
   },
   "user": {
     "manager": "Менеджер"
+  },
+  "image_upload": {
+    "transfer_or_download_infrastructure_icon": "Перенесите или загрузите иконку для инфраструктуры",
+    "download": "Загрузить",
+    "maximum_photo_size_256kb": "Максимальный размер фотографии 256кб",
+    "available_format_svg": "Доступный формат: svg",
+    "image_must_be_256KB_or_smaller": "Максимальный размер фотографии 256кб"
   }
 }
