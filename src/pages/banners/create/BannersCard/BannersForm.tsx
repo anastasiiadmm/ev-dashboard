@@ -183,6 +183,7 @@ const BannersForm = observer(() => {
   const displayedMerchantName =
     merchantName.length > 20 ? `${merchantName.substring(0, 20)}...` : merchantName;
 
+    
   const stationName = getStation.name || t('banners.add_banner.id_station_placeholder');
   const displayeStationName =
     stationName.length > 20 ? `${stationName.substring(0, 20)}...` : stationName;
