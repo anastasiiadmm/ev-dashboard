@@ -385,35 +385,50 @@ const CreateStation = observer(() => {
                 />
               </div>
               <div className={b('display-block')}>
-                <Flex vertical className={b('add-schedule-block')}>
+                <Flex vertical className={b('add-item-block')}>
                   <Text className={b('title')}>{t('merchants.operating_mode')}</Text>
-                  <Button className={b('add-schedule')} onClick={handleOpenScheduleModal}>
+                  <Button className={b('add-item')} onClick={handleOpenScheduleModal}>
                     {t('merchants.operating_mode')} <p className={b('arrow-right')} />
                   </Button>
                 </Flex>
-                <FormField
-                  data-testid='environment_id'
-                  id='environment_id'
-                  name='environment'
-                  className={b('infra-label')}
-                  placeholder={t('merchants.infrastructure_around_stations')}
-                  label={t('merchants.infrastructure_around_stations')}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    handleFormChange('environment', e.target.value)
-                  }
-                />
+                <Flex vertical className={b('add-item-block')}>
+                  <Text className={b('title')}>
+                    {t('merchants.infrastructure_around_stations')}
+                  </Text>
+                  <Button className={b('add-item')} onClick={handleOpenScheduleModal}>
+                    {t('merchants.infrastructure_around_stations')}{' '}
+                    <p className={b('arrow-right')} />
+                  </Button>
+                </Flex>
+                {/*<FormField*/}
+                {/*  data-testid='environment_id'*/}
+                {/*  id='environment_id'*/}
+                {/*  name='environment'*/}
+                {/*  className={b('infra-label')}*/}
+                {/*  placeholder={t('merchants.infrastructure_around_stations')}*/}
+                {/*  label={t('merchants.infrastructure_around_stations')}*/}
+                {/*  onChange={(e: ChangeEvent<HTMLInputElement>) =>*/}
+                {/*    handleFormChange('environment', e.target.value)*/}
+                {/*  }*/}
+                {/*/>*/}
               </div>
               <div className={b('display-block')}>
-                <FormField
-                  data-testid='tags_id'
-                  id='tags_id'
-                  name='tags'
-                  placeholder={t('merchants.tag')}
-                  label={t('merchants.tag')}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    handleFormChange('tags', e.target.value)
-                  }
-                />
+                <Flex vertical className={b('add-item-block')}>
+                  <Text className={b('title')}>{t('merchants.tag')}</Text>
+                  <Button className={b('add-item')} onClick={handleOpenScheduleModal}>
+                    {t('merchants.tag')} <p className={b('arrow-right')} />
+                  </Button>
+                </Flex>
+                {/*<FormField*/}
+                {/*  data-testid='tags_id'*/}
+                {/*  id='tags_id'*/}
+                {/*  name='tags'*/}
+                {/*  placeholder={t('merchants.tag')}*/}
+                {/*  label={t('merchants.tag')}*/}
+                {/*  onChange={(e: ChangeEvent<HTMLInputElement>) =>*/}
+                {/*    handleFormChange('tags', e.target.value)*/}
+                {/*  }*/}
+                {/*/>*/}
               </div>
 
               <p className={b('info')}>{t('merchants.column_information')}</p>

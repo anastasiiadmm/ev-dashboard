@@ -22,27 +22,43 @@
   }
 
   &__display-block {
-    display: flex;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
+
     > div {
       width: 100%;
     }
   }
 
-  &__add-schedule-block {
+  &__add-item-block {
     gap: 8px;
+    margin-bottom: 14px;
+
+    > span {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   &__title {
     color: variables.$title-color;
   }
 
-  &__add-schedule {
+  &__add-item {
     width: 100%;
     color: variables.$second-color;
     padding: 4px 30px 4px 11px;
     text-align: start;
+
+    > span {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
 
     > p {
       width: 7px;
