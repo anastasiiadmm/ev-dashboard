@@ -185,7 +185,7 @@ const BannersForm = observer(() => {
   };
 
   const merchantLength = getMerchant.id.length > 0;
-  const stationlength = getStation.id.length > 0
+  const stationlength = getStation.id.length > 0;
 
   const merchantName = Array.isArray(getMerchant.name)
     ? getMerchant.name.join(', ')
@@ -194,9 +194,7 @@ const BannersForm = observer(() => {
   const displayedMerchantName =
     merchantName.length > 23 ? `${merchantName.substring(0, 23)}...` : merchantName;
 
-  const stationName = Array.isArray(getStation.name)
-    ? getStation.name.join(', ')
-    : getStation.name;
+  const stationName = Array.isArray(getStation.name) ? getStation.name.join(', ') : getStation.name;
 
   const displayedStationName =
     stationName.length > 23 ? `${stationName.substring(0, 23)}...` : stationName;
@@ -419,7 +417,9 @@ const BannersForm = observer(() => {
                       color: !stationlength ? '#bfbfbf' : '#707a94',
                     }}
                   >
-                    {stationlength ? displayedStationName : t('banners.add_banner.id_station_placeholder')}
+                    {stationlength
+                      ? displayedStationName
+                      : t('banners.add_banner.id_station_placeholder')}
                     <img src={chevronRight} alt='chevronrighticon' />
                   </Button>
                 </div>
