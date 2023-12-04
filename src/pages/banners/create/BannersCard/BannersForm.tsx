@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import type { UploadFile } from 'antd/es/upload/interface';
 
 import { useCurrentLocale, useModal } from '~/shared/hooks';
-import { eng, kg, chevronRight, rus, greenCheck, clockIcon } from '~/assets/images';
+import { eng, kg, chevronRight, rus, greenCheck, clockIcon, calendarIcon } from '~/assets/images';
 import { bannerStore } from '~/pages/banners/';
 import { ICommon, IFormData } from '~/pages/banners/interfaces';
 import {
@@ -34,8 +34,8 @@ const languageItems = [
 const { Title, Text } = Typography;
 
 interface IData {
-  id: string;
-  name: string;
+  id: number[];
+  name: string[];
 }
 
 const BannersForm = observer(() => {
@@ -53,12 +53,12 @@ const BannersForm = observer(() => {
   const { merchantId, stationId } = toJS(bannerStore);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [getMerchant, setGetMerchant] = useState<IData>({
-    id: '',
-    name: '',
+    id: [],
+    name: [],
   });
   const [getStation, setGetStation] = useState<IData>({
-    id: '',
-    name: '',
+    id: [],
+    name: [],
   });
   const [radioButtonStates, setRadioButtonStates] = useState({
     ru: false,
@@ -80,8 +80,8 @@ const BannersForm = observer(() => {
     finish_date: null,
     is_active: false,
     link: '',
-    merchant: +getMerchant.id,
-    stations: [+getStation.id],
+    merchant: getMerchant.id,
+    stations: getStation.id,
   });
 
   const isAllSelected = Object.values(radioButtonStates).every((value) => value);
@@ -92,7 +92,7 @@ const BannersForm = observer(() => {
 
   useEffect(() => {
     if (getMerchant.id) {
-      bannerStore.stationForPromotions(+getMerchant.id);
+      bannerStore.stationForPromotions(getMerchant.id);
     }
   }, [getMerchant.id]);
 
@@ -113,21 +113,21 @@ const BannersForm = observer(() => {
   ];
 
   const selectMerchant = (data: ICommon[] | undefined) => {
-    if (data) {
-      data.map((el) => {
-        setGetMerchant({ ...getMerchant, id: el.id.toString(), name: el.name });
-      });
+    if (data && Array.isArray(data)) {
+      const ids = data.map((el) => el.id);
+      const names = data.map((el) => el.name);
+      setGetMerchant({ ...getMerchant, id: ids, name: names });
+      openCloseModal('MERCHANT');
     }
-    openCloseModal('MERCHANT');
   };
 
   const selectStation = (data: ICommon[] | undefined) => {
-    if (data) {
-      data.map((el) => {
-        setGetStation({ ...getStation, id: el.id.toString(), name: el.name });
-      });
+    if (data && Array.isArray(data)) {
+      const ids = data.map((el) => el.id);
+      const names = data.map((el) => el.name);
+      setGetStation({ ...getStation, id: ids, name: names });
+      openCloseModal('STATION');
     }
-    openCloseModal('STATION');
   };
 
   const handleFormChange = (key: string, value: string | number | boolean | null | Dayjs) => {
@@ -184,13 +184,22 @@ const BannersForm = observer(() => {
     return b(isActiveBorder ? 'border-item' : 'language-item');
   };
 
-  const merchantName = getMerchant.name || t('banners.add_banner.merchant_placeholder');
-  const displayedMerchantName =
-    merchantName.length > 20 ? `${merchantName.substring(0, 20)}...` : merchantName;
+  const merchantLength = getMerchant.id.length > 0;
+  const stationlength = getStation.id.length > 0
 
-  const stationName = getStation.name || t('banners.add_banner.id_station_placeholder');
-  const displayeStationName =
-    stationName.length > 20 ? `${stationName.substring(0, 20)}...` : stationName;
+  const merchantName = Array.isArray(getMerchant.name)
+    ? getMerchant.name.join(', ')
+    : getMerchant.name;
+
+  const displayedMerchantName =
+    merchantName.length > 23 ? `${merchantName.substring(0, 23)}...` : merchantName;
+
+  const stationName = Array.isArray(getStation.name)
+    ? getStation.name.join(', ')
+    : getStation.name;
+
+  const displayedStationName =
+    stationName.length > 23 ? `${stationName.substring(0, 23)}...` : stationName;
 
   const languageKey = `name_${selectedLanguage}` as keyof IFormData;
   const isNameEmpty = !formData[languageKey];
@@ -287,21 +296,28 @@ const BannersForm = observer(() => {
               <div className={b('container-time')}>
                 <div className={b('container-picker')}>
                   <div>
-                    <TimePickerComponent icon defaultValue='00:00' />
-                    <img src={clockIcon} alt='' />
+                    <TimePickerComponent icon id='start_time_id' time={new Date()} />
+                    <label htmlFor='start_time_id'>
+                      <img src={clockIcon} alt='clockicon' />
+                    </label>
                   </div>
                 </div>
                 <div className={b('container-picker')}>
-                  <DatePicker
-                    className={b('datepicker')}
-                    id='start_date_id'
-                    name='start_date'
-                    placeholder='yyyy-mm-dd'
-                    status={error && !formData.start_date ? 'error' : ''}
-                    data-testid='start_date_id'
-                    value={formData.start_date}
-                    onChange={(date: Dayjs | null) => handleFormChange(`start_date`, date)}
-                  />
+                  <div>
+                    <DatePicker
+                      suffixIcon
+                      className={b('datepicker')}
+                      id='start_date_id'
+                      name='start_date'
+                      placeholder='yyyy-mm-dd'
+                      data-testid='start_date_id'
+                      value={!formData.start_date ? dayjs() : formData.start_date}
+                      onChange={(date: Dayjs | null) => handleFormChange(`start_date`, date)}
+                    />
+                    <label htmlFor='start_date_id'>
+                      <img src={calendarIcon} alt='calendaricon' />
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -310,21 +326,28 @@ const BannersForm = observer(() => {
               <div className={b('container-time')}>
                 <div className={b('container-picker')}>
                   <div>
-                    <TimePickerComponent icon defaultValue='00:00' />
-                    <img src={clockIcon} alt='' />
+                    <TimePickerComponent icon id='finish_time_id' time={new Date()} />
+                    <label htmlFor='finish_time_id'>
+                      <img src={clockIcon} alt='clockicon' />
+                    </label>
                   </div>
                 </div>
                 <div className={b('container-picker')}>
-                  <DatePicker
-                    className={b('datepicker')}
-                    id='finish_date_id'
-                    name='finish_date'
-                    placeholder='yyyy-mm-dd'
-                    status={error && !formData.finish_date ? 'error' : ''}
-                    data-testid='finish_date_id'
-                    value={formData.finish_date}
-                    onChange={(date: Dayjs | null) => handleFormChange(`finish_date`, date)}
-                  />
+                  <div>
+                    <DatePicker
+                      suffixIcon
+                      className={b('datepicker')}
+                      id='finish_date_id'
+                      name='finish_date'
+                      placeholder='yyyy-mm-dd'
+                      data-testid='finish_date_id'
+                      value={!formData.finish_date ? dayjs() : formData.finish_date}
+                      onChange={(date: Dayjs | null) => handleFormChange(`finish_date`, date)}
+                    />
+                    <label htmlFor='finish_date_id'>
+                      <img src={calendarIcon} alt='calendaricon' />
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -371,30 +394,32 @@ const BannersForm = observer(() => {
               <div className={b('container-open-modal')}>
                 <p>{t('banners.add_banner.merchant_label')}</p>
                 <Button
-                  className={getMerchant.id ? b('button') : b('button-select')}
+                  className={merchantLength ? b('button') : b('button-select')}
                   onClick={() => openCloseModal('MERCHANT')}
                   style={{
-                    borderColor: error && !getMerchant.name ? '#ff4b55' : '',
-                    color: !getMerchant.name ? '#bfbfbf' : '#707a94',
+                    borderColor: error && !merchantLength ? '#ff4b55' : '',
+                    color: !merchantLength ? '#bfbfbf' : '#707a94',
                   }}
                 >
-                  {displayedMerchantName}
+                  {merchantLength
+                    ? displayedMerchantName
+                    : t('banners.add_banner.merchant_placeholder')}
                   <img src={chevronRight} alt='chevronrighticon' />
                 </Button>
               </div>
 
-              {getMerchant.id && (
+              {merchantLength && (
                 <div className={b('container-open-modal')}>
                   <p>{t('banners.add_banner.id_station')}</p>
                   <Button
                     className={b('button')}
                     onClick={() => openCloseModal('STATION')}
                     style={{
-                      borderColor: error && !getStation.name ? '#ff4b55' : '',
-                      color: !getStation.name ? '#bfbfbf' : '#707a94',
+                      borderColor: error && !stationlength ? '#ff4b55' : '',
+                      color: !stationlength ? '#bfbfbf' : '#707a94',
                     }}
                   >
-                    {displayeStationName}
+                    {stationlength ? displayedStationName : t('banners.add_banner.id_station_placeholder')}
                     <img src={chevronRight} alt='chevronrighticon' />
                   </Button>
                 </div>

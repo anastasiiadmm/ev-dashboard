@@ -19,6 +19,6 @@ export interface IFormData {
   finish_date: Dayjs | null;
   is_active: boolean;
   link: string;
-  merchant: number;
+  merchant: number[];
   stations: number[];
 }

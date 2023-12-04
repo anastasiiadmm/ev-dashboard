@@ -11,17 +11,18 @@ interface Props {
   minTime?: Date;
   maxTime?: Date;
   icon?: boolean;
-  defaultValue?: string;
+  id?: string;
 }
 
-const TimePicker: React.FC<Props> = ({ time, minTime, maxTime, icon = false, defaultValue }) => {
+const TimePicker: React.FC<Props> = ({ time, minTime, maxTime, icon = false, id }) => {
   const b = bem('TimePicker input');
   const { t } = useTranslation();
   const [startDate, setStartDate] = useState(time || null);
 
   return (
     <DatePicker
-      className={!icon ? b('TimePicker input') : 'icon' }
+      id={id}
+      className={!icon ? b('TimePicker input') : 'icon'}
       selected={startDate}
       onChange={(date) => setStartDate(date || null)}
       showTimeSelect
@@ -32,7 +33,6 @@ const TimePicker: React.FC<Props> = ({ time, minTime, maxTime, icon = false, def
       timeFormat='HH:mm'
       minTime={minTime}
       maxTime={maxTime}
-      value={defaultValue}
     />
   );
 };

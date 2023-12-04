@@ -90,7 +90,9 @@ const TableIdModal: React.FC<Props> = ({ data, columns, title, placeholder, save
     <Form className={b('modal-container')}>
       <h2>{title}</h2>
       <div className={b('container-field-icon')}>
-        <img className={b('search-icon')} src={search} alt='searchicon' />
+        <label htmlFor='value'>
+          <img className={b('search-icon')} src={search} alt='searchicon' />
+        </label>
         <FormField
           id='value'
           name={`value`}

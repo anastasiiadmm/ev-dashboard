@@ -41,7 +41,7 @@ class BannerStore implements IBannerState {
       });
     }
   }
-  async stationForPromotions(id: number | undefined) {
+  async stationForPromotions(id: number[] | undefined) {
     try {
       const resp = await axiosApi.get(`stations/for-promotion/`, {
         params: {

@@ -16,11 +16,16 @@
   }
 }
 .icon {
-  width: 95px;
+  width: 85px;
   height: 32px;
   border: 1px solid variables.$border-table;
   border-radius: 6px;
-  padding: 0 10px;
+  padding: 0 30px 0 10px;
+  transition: 0.3s;
+
+  &:hover {
+    border: 1px solid variables.$green-color;
+  }
 
   &.input {
     margin: 0;

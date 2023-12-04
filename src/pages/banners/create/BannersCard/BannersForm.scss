@@ -65,7 +65,7 @@
     gap: 4px;
     > label {
       color: variables.$second-color;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: variables.$font-400;
     }
   }
@@ -87,24 +87,19 @@
     input {
       color: variables.$title-color;
     }
-    > div {
-      border-color: variables.$border-table;
-      img {
-        position: absolute;
-        right: 10px;
-        top: 7px;
-        z-index: 0;
-        height: 20px;
-      }
+    img {
+      position: absolute;
+      right: 10px;
+      top: 6px;
+      z-index: 0;
+      height: 20px;
+      cursor: text;
     }
   }
 
-  &__timepicker {
-    width: 95px;
-  }
-
   &__datepicker {
-    width: 125px;
+    width: 135px;
+    border: 1px solid variables.$input-border;
   }
 
   &__container-switch {
