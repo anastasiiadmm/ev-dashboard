@@ -11,7 +11,7 @@ import './UploadImageComponent.scss';
 interface Props {
   fileList: UploadFile[] | [];
   setFileList: (fileList: UploadFile[]) => void;
-  format: 'jpg' | 'svg';
+  format: string;
   title: string;
 }
 
@@ -81,7 +81,7 @@ export const UploadImageComponent: React.FC<Props> = ({ fileList, setFileList, f
               args.onSuccess('ok');
             }
           }}
-          accept={`image/${format}+xml`}
+          accept={`image/${format}`}
         >
           {renderPhotos()}
         </Upload>
