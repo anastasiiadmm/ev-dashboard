@@ -148,7 +148,8 @@
     "hours": "hours",
     "clock": "hours",
     "save_coordinates": "Save coordinates",
-    "station_here": "The station is here"
+    "station_here": "The station is here",
+    "choose": "Choose"
   },
   "modals": {
     "cancel": "Cancel",

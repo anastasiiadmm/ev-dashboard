@@ -23,12 +23,8 @@
 
   &__display-block {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 49% 49%;
     gap: 12px;
-
-    > div {
-      width: 100%;
-    }
   }
 
   &__add-item-block {

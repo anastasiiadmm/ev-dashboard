@@ -148,7 +148,8 @@
     "hours": "саат",
     "clock": "саат",
     "save_coordinates": "Координаттарды сактоо",
-    "station_here": "Станция ушул жерде"
+    "station_here": "Станция ушул жерде",
+    "choose": "Тандоо"
   },
   "modals": {
     "cancel": "Жокко чыгаруу",
