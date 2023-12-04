@@ -10,16 +10,19 @@ interface Props {
   time?: Date;
   minTime?: Date;
   maxTime?: Date;
+  icon?: boolean;
+  id?: string;
 }
 
-const TimePicker: React.FC<Props> = ({ time, minTime, maxTime }) => {
+const TimePicker: React.FC<Props> = ({ time, minTime, maxTime, icon = false, id }) => {
   const b = bem('TimePicker input');
   const { t } = useTranslation();
   const [startDate, setStartDate] = useState(time || null);
 
   return (
     <DatePicker
-      className={b()}
+      id={id}
+      className={!icon ? b('TimePicker input') : 'icon'}
       selected={startDate}
       onChange={(date) => setStartDate(date || null)}
       showTimeSelect

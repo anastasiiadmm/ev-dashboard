@@ -38,7 +38,12 @@ const CreateEditInfrastructureModal: React.FC<Props> = ({ textTitle = false }) =
       </Title>
 
       <Form form={form} onFinish={onFinish} autoComplete='off' layout='vertical' size='middle'>
-        <UploadImageComponent fileList={fileList} setFileList={onFileChange} />
+        <UploadImageComponent
+          fileList={fileList}
+          setFileList={onFileChange}
+          title={t('image_upload.transfer_or_download_infrastructure_icon')}
+          format='svg+xml'
+        />
 
         <div className={b('upload-validation-info')}>
           <img src={informationCircleGray} alt='informationCircleGray' />

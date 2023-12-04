@@ -1,0 +1,64 @@
+@use '../../../../../../app/styles/variables' as variables;
+
+.TableIdModal {
+  &__modal-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 600px;
+  }
+
+  &__container-field-icon {
+    position: relative;
+  }
+
+  &__search-icon {
+    width: 20px;
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    left: 12px;
+    cursor: text;
+  }
+
+  &__container-table {
+    overflow-y: scroll;
+    .ant-table-wrapper table {
+      border: none;
+      th {
+        background-color: variables.$input-bg;
+        color: variables.$title-color;
+        font-weight: variables.$font-400;
+        padding: 8px 12px;
+      }
+      tr {
+        background-color: variables.$white-color;
+      }
+    }
+    .ant-table-wrapper tfoot > tr > td {
+      padding: 14px 16px;
+    }
+    &::-webkit-scrollbar {
+      width: 4px;
+      cursor: default;
+      margin: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: variables.$green-color;
+      border-radius: 100px;
+      &:hover {
+        background: variables.$link-turquoise-color;
+      }
+    }
+  }
+
+  &__input {
+    margin: 0;
+    input {
+      border: 0;
+      background-color: variables.$input-bg;
+      padding: 8px 40px;
+    }
+  }
+}

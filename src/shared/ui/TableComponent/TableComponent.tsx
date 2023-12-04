@@ -3,18 +3,20 @@ import { Table } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import bem from 'easy-bem';
 
-import { PaginationComponent, NotFoundImages } from '~/shared/ui';
-import { IColumn, IMerchant, ICreateSchedule, IStation } from '~/pages/merchants/interfaces';
+import { IColumn, ICreateSchedule, IMerchant, IStation } from '~/pages/merchants/interfaces';
 import { IPagination } from '~/shared/interfaces';
 import { ITag } from '~/pages/tags/interfaces';
+import { ICommon } from '~/pages/banners/interfaces';
+import { NotFoundImages, PaginationComponent } from '~/shared/ui';
 import './TableComponent.scss';
 
+
 interface Props {
-  data: readonly (IMerchant | IStation | ITag | ICreateSchedule)[] | null | undefined;
+  data: readonly (IMerchant | IStation | ITag | ICreateSchedule | ICommon)[] | null | undefined;
   columns: IColumn[];
-  rowKey: (record: ICreateSchedule | IMerchant | IStation | ITag) => Key;
+  rowKey: (record: ICreateSchedule | IMerchant | IStation | ITag | ICommon) => Key;
   rowSelection: {
-    selectedRowKeys: React.Key[];
+    selectedRowKeys?: React.Key[];
     onChange: (selectedRowKeys: React.Key[]) => void;
   };
   loading?: boolean;
@@ -51,7 +53,10 @@ const TableComponent: React.FC<Props> = ({
   notGrayRow = false,
 }) => {
   const b = bem('TableComponent');
-  const rowClassName = (_: IMerchant | IStation | ITag | ICreateSchedule, index: number) => {
+  const rowClassName = (
+    _: IMerchant | IStation | ITag | ICreateSchedule | ICommon,
+    index: number,
+  ) => {
     if (!notGrayRow) {
       if (index % 2 === 0) {
         return '';
@@ -66,7 +71,7 @@ const TableComponent: React.FC<Props> = ({
   };
 
   return (
-    <div className={b()}>
+    <div className={b('')}>
       <Table
         rowKey={rowKey}
         scroll={scroll}

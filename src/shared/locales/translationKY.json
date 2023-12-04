@@ -155,7 +155,7 @@
     "cancel": "Жокко чыгаруу",
     "okay": "Жакшы",
     "yes": "Ооба",
-    "are_you_sure_you_want_to_cancel_your_changes": "Вы действительно хотите отменить изменения?",
+    "are_you_sure_you_want_to_cancel_your_changes": "Өзгөртүүлөрүңүздү жокко чыгаргыңыз келеби?",
     "after_cancellation_all_data_will_be_lost": "Жокко чыгаргандан кийин, бардык маалыматтар жоголот.",
     "merchant_has_been_created": "Мерчант түзүлдү",
     "a_new_merchant_account_has_been_successfully_created": "Жаңы соодагер аккаунту ийгиликтүү түзүлдү.",
@@ -196,6 +196,7 @@
     "add_banner": {
       "title": "Баннер тузуу",
       "text": "Баннер жөнүндө маалымат",
+      "title_image": "Баннер үчүн сүрөттү өткөрүп бериңиз же жүктөңүз",
       "name_input": "Баннердин аталышы",
       "link_input": "Маалымат булагынын шилтемеси",
       "name_button": "Кнопканын аталышы",
@@ -203,10 +204,16 @@
       "merchant_label": "Мерчант",
       "merchant_placeholder": "Мерчантты тандагыла",
       "id_station": "ID станциялар ",
-      "id_station_placeholder": "Баардык",
+      "id_station_placeholder": "Станцияны тандагыла",
       "status": "Статусу",
       "date_start": "Ишке киргизүү күнү жана убактысы",
-      "date_finish": "Өчүрүү күнү жана убактысы"
+      "date_finish": "Өчүрүү күнү жана убактысы",
+      "choose_merchant": "Мерчанттын ID син тандагыла",
+      "search_id_name_merchant": "ID ни издөө, аталышы",
+      "choose": "Тандоо",
+      "choose_station": "Станцияны тандоо",
+      "search_station": "ID ни издөө, станциянын аталышы",
+      "name_station": "Станциянын аталышы"
     }
   },
   "empty": {
