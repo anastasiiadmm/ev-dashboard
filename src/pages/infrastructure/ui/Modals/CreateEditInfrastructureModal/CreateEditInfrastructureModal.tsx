@@ -42,7 +42,7 @@ const CreateEditInfrastructureModal: React.FC<Props> = ({ textTitle = false }) =
           fileList={fileList}
           setFileList={onFileChange}
           title={t('image_upload.transfer_or_download_infrastructure_icon')}
-          format='svg'
+          format='svg+xml'
         />
 
         <div className={b('upload-validation-info')}>

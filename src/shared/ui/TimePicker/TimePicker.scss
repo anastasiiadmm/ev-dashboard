@@ -16,7 +16,7 @@
   }
 }
 .icon {
-  width: 85px;
+  width: 102px;
   height: 32px;
   border: 1px solid variables.$border-table;
   border-radius: 6px;
@@ -31,10 +31,9 @@
     margin: 0;
     text-align: left;
     padding: 0 20px;
-
-    &:focus-visible {
-      outline: none;
-    }
+  }
+  &:focus-visible {
+    outline: none;
   }
 }
 
