@@ -218,7 +218,7 @@ const BannersForm = observer(() => {
     <>
       <div className={b('container-meatballs')}>
         <BreadcrumbComponent
-          items={[{ title: t('banners.add_banner.title'), href: '/create-banner' }]}
+          items={[{ title: t('banners.add_banner.title'), href: '/banners' }]}
         />
       </div>
       <div className={b('container-card')}>
