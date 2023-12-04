@@ -8,10 +8,10 @@
     margin: 20px 24px;
   }
   &__container {
-    max-width: 532px;
+    width: 532px;
   }
 
-  &__container_upload_file {
+  &__container-upload-file {
     max-width: 351px;
     margin: 20px 0;
   }
@@ -20,16 +20,34 @@
     font-size: 20px;
     color: variables.$black-color;
     font-weight: 600;
+    margin: 0 0 20px 0;
   }
 
-  &__info_banner_title {
+  &__alert-styles {
+    margin: 20px 0;
+    padding: 12px;
+
+    .ant-alert-message {
+      color: variables.$red-color;
+      font-size: 12px;
+      font-weight: variables.$font-600;
+      text-transform: uppercase;
+    }
+
+    .ant-alert-description {
+      color: variables.$red-color;
+      font-size: 12px;
+    }
+  }
+
+  &__info-banner-title {
     color: variables.$black-color;
     font-weight: variables.$font-600;
     font-size: 14px;
     text-transform: uppercase;
   }
 
-  &__container_form {
+  &__container-form {
     margin-top: 16px;
   }
 
@@ -41,31 +59,47 @@
       width: 100%;
     }
   }
-  &__container_label_field {
+  &__container-label-field {
     display: flex;
     flex-direction: column;
     gap: 4px;
     > label {
       color: variables.$second-color;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: variables.$font-400;
     }
   }
 
-  &__container_time {
+  &__container-time {
     display: flex;
     align-items: center;
     gap: 12px;
     width: 48.6%;
+    margin-bottom: 8px;
     > div {
       width: 100%;
     }
   }
-
-  &__container_snap {
+  &__container-picker {
     display: flex;
-    align-items: end;
-    gap: 12px;
+    align-items: center;
+    position: relative;
+    input {
+      color: variables.$title-color;
+    }
+    img {
+      position: absolute;
+      right: 10px;
+      top: 6px;
+      z-index: 0;
+      height: 20px;
+      cursor: text;
+    }
+  }
+
+  &__datepicker {
+    width: 120px;
+    border: 1px solid variables.$input-border;
   }
 
   &__container-switch {
@@ -83,5 +117,119 @@
 
   &__container-meatballs {
     margin: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    span {
+      color: variables.$black-color;
+    }
+  }
+
+  &__second-text {
+    color: variables.$second-color;
+    font-weight: variables.$font-400;
+  }
+
+  &__container-open-modal {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    p {
+      color: variables.$title-color;
+    }
+    button {
+      padding-right: 3px;
+      padding-left: 11px;
+      border-color: variables.$border-table;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  &__button {
+    width: 100%;
+  }
+  &__button-select {
+    width: 234px;
+  }
+
+  &__modal-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 590px;
+  }
+
+  &__lang-block {
+    width: 310px !important;
+  }
+
+  &__language-item {
+    background-color: variables.$gray-light-bg-color;
+    border: 1px solid variables.$white-color;
+    margin-top: 8px;
+    cursor: pointer;
+    > div {
+      border: none !important;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      padding: 10px !important;
+    }
+  }
+  &__border-item {
+    background-color: variables.$gray-light-bg-color;
+    border: 1px solid variables.$title-color;
+    margin-top: 8px;
+    cursor: pointer;
+    > div {
+      border: none !important;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      padding: 10px !important;
+    }
+  }
+
+  &__button-info {
+    width: 240px;
+    height: 40px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__radio-styles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .radio-group-button > span > span {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    margin-right: -3px;
+    border-color: transparent;
+    background-color: transparent;
+  }
+
+  &__button-block {
+    display: flex;
+    flex-direction: column;
+    margin-top: 28px;
+    > button {
+      margin-top: 8px;
+    }
+  }
+
+  &__cancel-button {
+    background-color: variables.$gray-light-bg-color;
+    color: variables.$black-color;
+    border: none;
   }
 }

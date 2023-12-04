@@ -11,9 +11,11 @@ import './UploadImageComponent.scss';
 interface Props {
   fileList: UploadFile[] | [];
   setFileList: (fileList: UploadFile[]) => void;
+  format: string;
+  title: string;
 }
 
-export const UploadImageComponent: React.FC<Props> = ({ fileList, setFileList }) => {
+export const UploadImageComponent: React.FC<Props> = ({ fileList, setFileList, format, title }) => {
   const b = bem('UploadImageComponent');
   const { t } = useTranslation();
 
@@ -45,7 +47,7 @@ export const UploadImageComponent: React.FC<Props> = ({ fileList, setFileList })
             alt='uploadImg'
             style={{ paddingTop: 16, display: 'inline-block' }}
           />
-          <p>{t('image_upload.transfer_or_download_infrastructure_icon')}</p>
+          <p>{title}</p>
           <Button type='link' style={{ marginBottom: 16 }}>
             {t('image_upload.download')}
           </Button>
@@ -79,7 +81,7 @@ export const UploadImageComponent: React.FC<Props> = ({ fileList, setFileList })
               args.onSuccess('ok');
             }
           }}
-          accept='image/svg+xml'
+          accept={`image/${format}`}
         >
           {renderPhotos()}
         </Upload>
