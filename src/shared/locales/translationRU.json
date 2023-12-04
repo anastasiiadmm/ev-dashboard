@@ -148,7 +148,8 @@
     "hours": "часа",
     "clock": "часов",
     "save_coordinates": "Сохранить координаты",
-    "station_here": "Станция здесь"
+    "station_here": "Станция здесь",
+    "choose": "Выбрать"
   },
   "modals": {
     "cancel": "Отменить",
