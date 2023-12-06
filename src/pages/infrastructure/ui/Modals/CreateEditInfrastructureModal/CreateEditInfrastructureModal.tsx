@@ -44,6 +44,7 @@ const CreateEditInfrastructureModal: React.FC<Props> = ({
       setFile(`${apiImageURL}${selectedInfrastructure?.icon_path}` as string);
     } else {
       form.resetFields();
+      setFile(null);
       if (setSelectedInfrastructure) {
         setSelectedInfrastructure(null);
       }

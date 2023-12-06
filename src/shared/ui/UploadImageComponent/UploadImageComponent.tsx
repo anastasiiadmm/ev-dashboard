@@ -19,28 +19,28 @@ export const UploadImageComponent: React.FC<Props> = ({ file, onFileChange, crea
   const b = bem('UploadImageComponent');
   const { t } = useTranslation();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+
   useEffect(() => {
-    if (file && !creating) {
+    if (creating) {
+      setFileList([]);
+    } else if (file && typeof file === 'string') {
       setFileList([
         {
           uid: '1',
           name: 'image',
-          url: file as string,
+          url: file,
         },
       ]);
-    } else if (creating) {
-      setFileList([]);
-      onFileChange(null);
     } else {
       setFileList([]);
     }
-  }, [creating, file, onFileChange]);
+  }, [creating, file]);
 
   const onChange: UploadProps['onChange'] = ({ file: newFile, fileList: updatedFileList }) => {
     setFileList(updatedFileList as UploadFile[]);
 
     if (newFile.status === 'uploading') {
-      onFileChange(newFile.originFileObj as File);
+      onFileChange(newFile.originFileObj);
     }
 
     if (newFile.status === 'removed') {
