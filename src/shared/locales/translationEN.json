@@ -149,7 +149,8 @@
     "hours": "hours",
     "clock": "hours",
     "save_coordinates": "Save coordinates",
-    "station_here": "The station is here"
+    "station_here": "The station is here",
+    "choose": "Choose"
   },
   "modals": {
     "cancel": "Cancel",
@@ -196,6 +197,7 @@
     "add_banner": {
       "title": "Creating a banner",
       "text": "Information about BANNER",
+      "title_image": "Transfer or upload a photo for the banner",
       "name_input": "Banner name",
       "link_input": "Source link",
       "name_button": "Button name",
@@ -203,10 +205,16 @@
       "merchant_label": "Merchant",
       "merchant_placeholder": "Select a merchant",
       "id_station": "Station ID",
-      "id_station_placeholder": "All",
+      "id_station_placeholder": "Select a station",
       "status": "Status",
       "date_start": "Launch date and time",
-      "date_finish": "Shutdown date and time"
+      "date_finish": "Shutdown date and time",
+      "choose_merchant": "Select merchant ID",
+      "search_id_name_merchant": "Search ID, name",
+      "choose": "Choose",
+      "choose_station": "Select stations",
+      "search_station": "Search ID, station name",
+      "name_station": "Station name"
     }
   },
   "empty": {

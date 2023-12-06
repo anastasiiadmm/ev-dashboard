@@ -122,6 +122,8 @@ const CreateEditInfrastructureModal: React.FC<Props> = ({
           selectedInfrastructure={selectedInfrastructure}
           file={file}
           onFileChange={onFileChange}
+          title={t('image_upload.transfer_or_download_infrastructure_icon')}
+          format='svg+xml'
         />
 
         <div className={b('upload-validation-info')}>

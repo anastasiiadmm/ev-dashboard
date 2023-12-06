@@ -15,6 +15,8 @@ import {
   IModule,
 } from '~/pages/merchants/interfaces';
 import { CardEVSEModule, MapComponent, ScheduleModal } from '~/pages/merchants/Merchant/ui';
+import InfrastructureModal from '~/pages/merchants/Merchant/ui/InfrastructureModal/InfrastructureModal.tsx';
+import TagsModal from '~/pages/merchants/Merchant/ui/TagsModal/TagsModal.tsx';
 import { commonStore, merchantStore } from '~/shared/api/store';
 import { useCurrentLocale, useModal } from '~/shared/hooks';
 import {
@@ -63,6 +65,9 @@ const CreateStation = observer(() => {
   } = useModal(false);
   const { isModalOpen: isModalScheduleOpen, handleOkCancel: handleOpenScheduleModal } =
     useModal(false);
+  const { isModalOpen: isModalInfrastructureOpen, handleOkCancel: handleOpenInfrastructureModal } =
+    useModal(false);
+  const { isModalOpen: isModalTagsOpen, handleOkCancel: handleOpenTagsModal } = useModal(false);
   const { isModalOpen: isModalMapOpen, handleOkCancel: handleOpenMapModal } = useModal(false);
   const [selectedLanguage, setSelectedLanguage] = useState(currentLocale);
   const [formData, setFormData] = useState<ICreateStation>({
@@ -385,35 +390,31 @@ const CreateStation = observer(() => {
                 />
               </div>
               <div className={b('display-block')}>
-                <Flex vertical className={b('add-schedule-block')}>
+                <Flex vertical className={b('add-item-block')}>
                   <Text className={b('title')}>{t('merchants.operating_mode')}</Text>
-                  <Button className={b('add-schedule')} onClick={handleOpenScheduleModal}>
+                  <Button className={b('add-item')} onClick={handleOpenScheduleModal}>
                     {t('merchants.operating_mode')} <p className={b('arrow-right')} />
                   </Button>
                 </Flex>
-                <FormField
-                  data-testid='environment_id'
-                  id='environment_id'
-                  name='environment'
-                  className={b('infra-label')}
-                  placeholder={t('merchants.infrastructure_around_stations')}
-                  label={t('merchants.infrastructure_around_stations')}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    handleFormChange('environment', e.target.value)
-                  }
-                />
+
+                <Flex vertical className={b('add-item-block')}>
+                  <Text className={b('title')}>
+                    {t('merchants.infrastructure_around_stations')}
+                  </Text>
+                  <Button className={b('add-item')} onClick={handleOpenInfrastructureModal}>
+                    {t('merchants.infrastructure_around_stations')}{' '}
+                    <p className={b('arrow-right')} />
+                  </Button>
+                </Flex>
               </div>
+
               <div className={b('display-block')}>
-                <FormField
-                  data-testid='tags_id'
-                  id='tags_id'
-                  name='tags'
-                  placeholder={t('merchants.tag')}
-                  label={t('merchants.tag')}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    handleFormChange('tags', e.target.value)
-                  }
-                />
+                <Flex vertical className={b('add-item-block')}>
+                  <Text className={b('title')}>{t('merchants.tag')}</Text>
+                  <Button className={b('add-item')} onClick={handleOpenTagsModal}>
+                    {t('merchants.tag')} <p className={b('arrow-right')} />
+                  </Button>
+                </Flex>
               </div>
 
               <p className={b('info')}>{t('merchants.column_information')}</p>
@@ -728,6 +729,28 @@ const CreateStation = observer(() => {
         handleCancel={handleOpenScheduleModal}
       >
         <ScheduleModal handleOkCancel={handleOpenScheduleModal} />
+      </ModalComponent>
+
+      <ModalComponent
+        closeIcon
+        title={t('merchants.infrastructure')}
+        width={352}
+        isModalOpen={isModalInfrastructureOpen}
+        handleOk={handleOpenInfrastructureModal}
+        handleCancel={handleOpenInfrastructureModal}
+      >
+        <InfrastructureModal language={selectedLanguage} />
+      </ModalComponent>
+
+      <ModalComponent
+        closeIcon
+        title={t('merchants.tags')}
+        width={352}
+        isModalOpen={isModalTagsOpen}
+        handleOk={handleOpenTagsModal}
+        handleCancel={handleOpenTagsModal}
+      >
+        <TagsModal language={selectedLanguage} />
       </ModalComponent>
     </div>
   );

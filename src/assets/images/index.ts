@@ -39,7 +39,9 @@ export { default as trendingDown } from './svg/icons/default/trending-down.svg';
 export { default as userGroup } from './svg/icons/default/user-group.svg';
 export { default as editColor } from './svg/icons/default/edit-color.svg';
 export { default as deleteIcon } from './svg/icons/default/Delete.svg';
+export { default as clockIcon } from './svg/icons/default/clock.svg';
 export { default as informationCircleGray } from './svg/icons/default/information-circle-gray.svg';
+export { default as calendarIcon } from './svg/icons/default/calendar.svg';
 export { default as uploadImg } from './svg/icons/default/bi_images.svg';
 export { default as cancel } from './svg/icons/default/Cancel.svg';
 

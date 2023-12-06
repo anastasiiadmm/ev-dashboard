@@ -149,7 +149,8 @@
     "hours": "часа",
     "clock": "часов",
     "save_coordinates": "Сохранить координаты",
-    "station_here": "Станция здесь"
+    "station_here": "Станция здесь",
+    "choose": "Выбрать"
   },
   "modals": {
     "cancel": "Отменить",
@@ -196,6 +197,7 @@
     "add_banner": {
       "title": "Создание баннера",
       "text": "Информация о БАНЕРЕ",
+      "title_image": "Перенесите или загрузите фото для баннера",
       "name_input": "Наименование баннера",
       "link_input": "Ссылка на источник",
       "name_button": "Название кнопки",
@@ -203,10 +205,16 @@
       "merchant_label": "Мерчант",
       "merchant_placeholder": "Выберите мерчанта",
       "id_station": "ID станции",
-      "id_station_placeholder": "Все",
+      "id_station_placeholder": "Выберите станцию",
       "status": "Статус",
       "date_start": "Дата и время запуска",
-      "date_finish": "Дата и время отключения"
+      "date_finish": "Дата и время отключения",
+      "choose_merchant": "Выбрать ID мерчанта",
+      "search_id_name_merchant": "Искать ID, наименование",
+      "choose": "Выбрать",
+      "choose_station": "Выбрать станции",
+      "search_station": "Искать ID, наименование станции",
+      "name_station": "Наименование станции"
     }
   },
   "empty": {

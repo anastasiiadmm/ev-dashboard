@@ -13,9 +13,17 @@ interface Props {
   onFileChange: (newFile: File | null) => void;
   selectedInfrastructure?: IInfrastructure | null | undefined;
   creating?: boolean | undefined;
+  format: string;
+  title: string;
 }
 
-export const UploadImageComponent: React.FC<Props> = ({ file, onFileChange, creating }) => {
+export const UploadImageComponent: React.FC<Props> = ({
+  file,
+  onFileChange,
+  creating,
+  format,
+  title,
+}) => {
   const b = bem('UploadImageComponent');
   const { t } = useTranslation();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -62,7 +70,7 @@ export const UploadImageComponent: React.FC<Props> = ({ file, onFileChange, crea
             alt='uploadImg'
             style={{ paddingTop: 16, display: 'inline-block' }}
           />
-          <p>{t('image_upload.transfer_or_download_infrastructure_icon')}</p>
+          <p>{title}</p>
           <Button type='link' style={{ marginBottom: 16 }}>
             {t('image_upload.download')}
           </Button>
@@ -115,7 +123,7 @@ export const UploadImageComponent: React.FC<Props> = ({ file, onFileChange, crea
             />
           ),
         }}
-        accept='image/svg+xml'
+        accept={`image/${format}`}
       >
         {renderPhotos()}
       </Upload>

@@ -1,0 +1,38 @@
+@use '../../../../../app/styles/variables' as variables;
+
+.InfrastructureModal {
+  &__infrastructure-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__infrastructure {
+    background-color: variables.$light-blue;
+    border-radius: 8px;
+    display: inline-block;
+    padding: 5px 7px;
+  }
+
+  &__icon-infrastructure {
+    width: 13px;
+    vertical-align: text-bottom;
+    margin-right: 4px;
+  }
+
+  &__table-container {
+    margin: 20px 0;
+  }
+
+  &__text-language {
+    color: variables.$second-color;
+  }
+
+  &__save-infrastructure {
+    width: 100%;
+  }
+
+  .ant-table-wrapper table {
+    border: none;
+  }
+}
