@@ -40,7 +40,7 @@ export const UploadImageComponent: React.FC<Props> = ({ file, onFileChange, crea
     setFileList(updatedFileList as UploadFile[]);
 
     if (newFile.status === 'uploading') {
-      onFileChange(newFile.originFileObj);
+      onFileChange(newFile.originFileObj as File);
     }
 
     if (newFile.status === 'removed') {
