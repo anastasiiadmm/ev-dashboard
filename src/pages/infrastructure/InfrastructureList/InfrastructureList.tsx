@@ -5,7 +5,7 @@ import { toJS } from 'mobx';
 import { Button, Form, Row, Tooltip } from 'antd';
 import { observer } from 'mobx-react-lite';
 
-import { useModal, useTableFilter } from '~/shared/hooks';
+import { useModal, useNotification, useTableFilter } from '~/shared/hooks';
 import { IColumn } from '~/pages/merchants/interfaces';
 import { add, deleteIcon, editColor, inactive, infoCircle, search, status } from '~/assets/images';
 import { IInfrastructure } from '~/pages/infrastructure/interfaces';
@@ -13,13 +13,20 @@ import { infrastructureStore } from '~/shared/api/store';
 import { ActiveInactiveModal, FormField, ModalComponent, TableComponent } from '~/shared/ui';
 import { apiImageURL } from '~/shared/utils/config';
 import { CreateEditInfrastructureModal } from '~/pages/infrastructure';
+import { getParams } from '~/shared/utils';
 import './InfrastructureList.scss';
 
 const InfrastructureList = observer(() => {
   const b = bem('InfrastructureList');
   const { t } = useTranslation();
-  const { infrastructure, infrastructurePagination, infrastructureLoading } =
-    toJS(infrastructureStore);
+  const openNotification = useNotification();
+  const {
+    infrastructure,
+    infrastructurePagination,
+    infrastructureLoading,
+    deleteInfrastructureLoading,
+    infrastructureCreateLoading,
+  } = toJS(infrastructureStore);
   const {
     filters,
     handleSearchChange,
@@ -28,7 +35,7 @@ const InfrastructureList = observer(() => {
     changeShowByHandler,
     onChangePageCheckHandler,
   } = useTableFilter(infrastructureStore.fetchInfrastructure.bind(infrastructureStore));
-  // const [selectedRowKey, setSelectedRowKey] = useState<number | null>(null); когда api буду подключать
+  const [selectedRowKey, setSelectedRowKey] = useState<number | null>(null);
   const [selectedInfrastructure, setSelectedInfrastructure] = useState<IInfrastructure | null>(
     null,
   );
@@ -49,7 +56,18 @@ const InfrastructureList = observer(() => {
     setSelectedRowKeys(selectedRowKeys);
   };
 
-  const handleAgreeDeleteTagHandler = async () => {};
+  const handleAgreeDeleteInfrastructureHandler = async () => {
+    try {
+      await infrastructureStore.deleteInfrastructure(selectedRowKey, getParams({ page: 1 }));
+      handleDeleteOkCancel();
+    } catch (e) {
+      if (e instanceof Error) {
+        openNotification('error', '', e.message);
+      } else {
+        console.error('Unexpected error type:', e);
+      }
+    }
+  };
 
   const columns: IColumn[] = [
     {
@@ -93,7 +111,7 @@ const InfrastructureList = observer(() => {
         return (
           <div className={b('infrastructure')}>
             <img
-              src={apiImageURL + record?.icon_path.replace('/app', '')}
+              src={apiImageURL + record?.icon_path}
               className={b('icon-infrastructure')}
               alt='icon'
             />
@@ -146,7 +164,7 @@ const InfrastructureList = observer(() => {
               <Button
                 onClick={() => {
                   showDeleteModal();
-                  // setSelectedRowKey(record.id); добавлю в след таске когда буду подключать api
+                  setSelectedRowKey(record.id);
                 }}
                 className={b('delete-button')}
                 icon={<img src={deleteIcon} alt='plus' />}
@@ -229,6 +247,7 @@ const InfrastructureList = observer(() => {
           handleTagOkCancel={handleInfrastructureOkCancel}
           creating={creating}
           selectedInfrastructure={selectedInfrastructure}
+          loading={infrastructureCreateLoading}
         />
       </ModalComponent>
 
@@ -242,8 +261,8 @@ const InfrastructureList = observer(() => {
           textTitle={t('infrastructure.are_you_sure_you_want_to_delete') as string}
           infoText={t('infrastructure.if_you_delete_it_you_won_t_be_able_to_restore') as string}
           handleOkCancel={handleDeleteOkCancel}
-          loadingStatus={false}
-          handleAgreeHandler={handleAgreeDeleteTagHandler}
+          loadingStatus={deleteInfrastructureLoading}
+          handleAgreeHandler={handleAgreeDeleteInfrastructureHandler}
         />
       </ModalComponent>
     </Row>

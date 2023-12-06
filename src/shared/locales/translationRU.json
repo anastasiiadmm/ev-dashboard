@@ -5,7 +5,8 @@
     "password_length": "Пароль должен содержать минимум 8 символов",
     "wrong_password": "Неправильный пароль",
     "two_passwords_do_not_match": "Пароли не совпадают",
-    "no_data_available": "Данные отсутствуют"
+    "no_data_available": "Данные отсутствуют",
+    "no_icon": "Загрузите иконку"
   },
   "alerts": {
     "incorrectly_filled_field": "Неправильно заполненное поле",
@@ -246,7 +247,8 @@
     "editing_an_infrastructure": "Редактирование инфраструктуры",
     "name_in_kyrgyz": "Название на Кыргызском",
     "name_in_russian": "Название на Русском",
-    "name_in_eng": "Название на Английском"
+    "name_in_eng": "Название на Английском",
+    "save": "Сохранить"
   },
   "user": {
     "manager": "Менеджер"

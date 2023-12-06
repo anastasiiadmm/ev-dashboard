@@ -40,6 +40,7 @@ export { default as userGroup } from './svg/icons/default/user-group.svg';
 export { default as editColor } from './svg/icons/default/edit-color.svg';
 export { default as deleteIcon } from './svg/icons/default/Delete.svg';
 export { default as informationCircleGray } from './svg/icons/default/information-circle-gray.svg';
+export { default as uploadImg } from './svg/icons/default/bi_images.svg';
 
 // Active icons
 export { default as circleActive } from './svg/icons/active/circle-active.svg';

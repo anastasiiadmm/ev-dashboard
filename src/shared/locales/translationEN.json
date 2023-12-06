@@ -5,7 +5,8 @@
     "password_length": "Password must contain at least 8 characters",
     "wrong_password": "Wrong password",
     "two_passwords_do_not_match": "Password mismatch",
-    "no_data_available": "No data available"
+    "no_data_available": "No data available",
+    "no_icon": "Upload icon"
   },
   "alerts": {
     "incorrectly_filled_field": "Incorrectly filled field",
@@ -246,7 +247,8 @@
     "editing_an_infrastructure": "Editing infrastructure",
     "name_in_kyrgyz": "Name in Kyrgyz",
     "name_in_russian": "Name in Russian",
-    "name_in_eng": "Title in English"
+    "name_in_eng": "Title in English",
+    "save": "Save"
   },
   "user": {
     "manager": "Manager"

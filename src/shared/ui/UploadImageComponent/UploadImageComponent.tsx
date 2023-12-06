@@ -1,43 +1,60 @@
+import React, { useEffect, useState } from 'react';
 import { Button, message, Upload } from 'antd';
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
-import ImgCrop from 'antd-img-crop';
 import bem from 'easy-bem';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
+import type { UploadProps, UploadFile } from 'antd/es/upload/interface';
 
-import uploadImg from '~/assets/images/svg/icons/default/bi_images.svg';
+import { IInfrastructure } from '~/pages/infrastructure/interfaces';
+import { uploadImg } from '~/assets/images';
 import './UploadImageComponent.scss';
 
 interface Props {
-  fileList: UploadFile[] | [];
-  setFileList: (fileList: UploadFile[]) => void;
+  file: File | string | null;
+  onFileChange: (newFile: File | null) => void;
+  selectedInfrastructure?: IInfrastructure | null | undefined;
+  creating?: boolean | undefined;
 }
 
-export const UploadImageComponent: React.FC<Props> = ({ fileList, setFileList }) => {
+export const UploadImageComponent: React.FC<Props> = ({ file, onFileChange, creating }) => {
   const b = bem('UploadImageComponent');
   const { t } = useTranslation();
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  useEffect(() => {
+    if (file && !creating) {
+      setFileList([
+        {
+          uid: '1',
+          name: 'image',
+          url: file as string,
+        },
+      ]);
+    } else if (creating) {
+      setFileList([]);
+      onFileChange(null);
+    } else {
+      setFileList([]);
+    }
+  }, [creating, file, onFileChange]);
 
-  const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
+  const onChange: UploadProps['onChange'] = ({ file: newFile, fileList: updatedFileList }) => {
+    setFileList(updatedFileList as UploadFile[]);
+
+    if (newFile.status === 'uploading') {
+      onFileChange(newFile.originFileObj as File);
+    }
+
+    if (newFile.status === 'removed') {
+      onFileChange(null);
+    }
   };
 
-  const onPreview = async (file: UploadFile) => {
-    let src = file.url || URL.createObjectURL(file.originFileObj as Blob);
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj as RcFile);
-        reader.onload = () => resolve(reader.result as string);
-      });
-    }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow?.document.write(image.outerHTML);
+  const onRemove = () => {
+    setFileList([]);
+    onFileChange(null);
   };
 
   const renderPhotos = () => {
-    if (!fileList.length) {
+    if (!file) {
       return (
         <div className={b('upload-image-block')}>
           <img
@@ -55,35 +72,41 @@ export const UploadImageComponent: React.FC<Props> = ({ fileList, setFileList })
     return null;
   };
 
-  const beforeUpload = (file: RcFile) => {
-    const isSizeValid = file?.size / 1024 <= 256;
+  const beforeUpload = (file: File) => {
+    const isSvg = file.type === 'image/svg+xml';
+    if (!isSvg) {
+      message.error(t('image_upload.only_svg_files_allowed'));
+      return Upload.LIST_IGNORE;
+    }
+
+    const isSizeValid = file.size / 1024 <= 256;
     if (!isSizeValid) {
       message.error(t('image_upload.image_must_be_256KB_or_smaller'));
+      return Upload.LIST_IGNORE;
     }
-    return isSizeValid;
+
+    return true;
   };
 
   return (
     <div>
-      <ImgCrop>
-        <Upload
-          data-testid='image-upload'
-          className={b('upload-field')}
-          listType='picture-card'
-          fileList={fileList}
-          onChange={onChange}
-          onPreview={onPreview}
-          beforeUpload={beforeUpload}
-          customRequest={(args) => {
-            if (args.onSuccess) {
-              args.onSuccess('ok');
-            }
-          }}
-          accept='image/svg+xml'
-        >
-          {renderPhotos()}
-        </Upload>
-      </ImgCrop>
+      <Upload
+        data-testid='image-upload'
+        className={b('upload-field')}
+        listType='picture-card'
+        fileList={fileList}
+        onChange={onChange}
+        onRemove={onRemove}
+        beforeUpload={beforeUpload}
+        customRequest={(args) => {
+          if (args.onSuccess) {
+            args.onSuccess('ok');
+          }
+        }}
+        accept='image/svg+xml'
+      >
+        {renderPhotos()}
+      </Upload>
     </div>
   );
 };
