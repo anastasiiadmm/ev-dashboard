@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import type { UploadProps, UploadFile } from 'antd/es/upload/interface';
 
 import { IInfrastructure } from '~/pages/infrastructure/interfaces';
-import { uploadImg } from '~/assets/images';
+import { cancel, uploadImg } from '~/assets/images';
 import './UploadImageComponent.scss';
 
 interface Props {
@@ -102,6 +102,18 @@ export const UploadImageComponent: React.FC<Props> = ({ file, onFileChange, crea
           if (args.onSuccess) {
             args.onSuccess('ok');
           }
+        }}
+        showUploadList={{
+          showPreviewIcon: false,
+          showRemoveIcon: true,
+          removeIcon: () => (
+            <img
+              src={cancel}
+              alt='cancel'
+              onClick={() => onFileChange(null)}
+              style={{ cursor: 'pointer', position: 'absolute', top: '-42px', right: '-39px' }}
+            />
+          ),
         }}
         accept='image/svg+xml'
       >

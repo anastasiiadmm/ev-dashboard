@@ -41,6 +41,7 @@ export { default as editColor } from './svg/icons/default/edit-color.svg';
 export { default as deleteIcon } from './svg/icons/default/Delete.svg';
 export { default as informationCircleGray } from './svg/icons/default/information-circle-gray.svg';
 export { default as uploadImg } from './svg/icons/default/bi_images.svg';
+export { default as cancel } from './svg/icons/default/Cancel.svg';
 
 // Active icons
 export { default as circleActive } from './svg/icons/active/circle-active.svg';
