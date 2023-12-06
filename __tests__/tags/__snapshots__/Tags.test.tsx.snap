@@ -3,25 +3,25 @@
 exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
 <DocumentFragment>
   <div
-    class="ant-row ant-row-space-between Tags css-dev-only-do-not-override-2q8sxy"
+    class="ant-row ant-row-space-between Tags css-dev-only-do-not-override-xu9wm8"
     data-testid="auth-component"
   >
     <div
-      class="ant-row Tags__search-pagination-block css-dev-only-do-not-override-2q8sxy"
+      class="ant-row Tags__search-pagination-block css-dev-only-do-not-override-xu9wm8"
     >
       <div>
         <form
-          class="ant-form ant-form-horizontal css-dev-only-do-not-override-2q8sxy"
+          class="ant-form ant-form-horizontal css-dev-only-do-not-override-xu9wm8"
         >
           <div
-            class="ant-form-item undefined custom-label css-dev-only-do-not-override-2q8sxy"
+            class="ant-form-item undefined custom-label css-dev-only-do-not-override-xu9wm8"
             style="width: 300px;"
           >
             <div
-              class="ant-row ant-form-item-row css-dev-only-do-not-override-2q8sxy"
+              class="ant-row ant-form-item-row css-dev-only-do-not-override-xu9wm8"
             >
               <div
-                class="ant-col ant-form-item-control css-dev-only-do-not-override-2q8sxy"
+                class="ant-col ant-form-item-control css-dev-only-do-not-override-xu9wm8"
               >
                 <div
                   class="ant-form-item-control-input"
@@ -30,7 +30,7 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                     class="ant-form-item-control-input-content"
                   >
                     <span
-                      class="ant-input-affix-wrapper css-dev-only-do-not-override-2q8sxy"
+                      class="ant-input-affix-wrapper css-dev-only-do-not-override-xu9wm8"
                     >
                       <span
                         class="ant-input-prefix"
@@ -41,7 +41,7 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                         />
                       </span>
                       <input
-                        class="ant-input css-dev-only-do-not-override-2q8sxy"
+                        class="ant-input css-dev-only-do-not-override-xu9wm8"
                         placeholder="tags.search_by"
                         type="text"
                         value=""
@@ -56,10 +56,10 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
       </div>
     </div>
     <div
-      class="ant-row Tags__table-block css-dev-only-do-not-override-2q8sxy"
+      class="ant-row Tags__table-block css-dev-only-do-not-override-xu9wm8"
     >
       <button
-        class="ant-btn css-dev-only-do-not-override-2q8sxy ant-btn-primary Tags__button-style"
+        class="ant-btn css-dev-only-do-not-override-xu9wm8 ant-btn-primary Tags__button-style"
         type="button"
       >
         <span
@@ -78,10 +78,10 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
         class="TableComponent"
       >
         <div
-          class="ant-table-wrapper css-dev-only-do-not-override-2q8sxy"
+          class="ant-table-wrapper css-dev-only-do-not-override-xu9wm8"
         >
           <div
-            class="ant-spin-nested-loading css-dev-only-do-not-override-2q8sxy"
+            class="ant-spin-nested-loading css-dev-only-do-not-override-xu9wm8"
           >
             <div
               class="ant-spin-container"
@@ -119,10 +119,10 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                               class="ant-table-selection"
                             >
                               <label
-                                class="ant-checkbox-wrapper css-dev-only-do-not-override-2q8sxy"
+                                class="ant-checkbox-wrapper css-dev-only-do-not-override-xu9wm8"
                               >
                                 <span
-                                  class="ant-checkbox ant-wave-target css-dev-only-do-not-override-2q8sxy"
+                                  class="ant-checkbox ant-wave-target css-dev-only-do-not-override-xu9wm8"
                                 >
                                   <input
                                     aria-label="Select all"
@@ -254,10 +254,10 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                             class="ant-table-cell ant-table-selection-column"
                           >
                             <label
-                              class="ant-checkbox-wrapper css-dev-only-do-not-override-2q8sxy"
+                              class="ant-checkbox-wrapper css-dev-only-do-not-override-xu9wm8"
                             >
                               <span
-                                class="ant-checkbox ant-wave-target css-dev-only-do-not-override-2q8sxy"
+                                class="ant-checkbox ant-wave-target css-dev-only-do-not-override-xu9wm8"
                               >
                                 <input
                                   class="ant-checkbox-input"
@@ -317,7 +317,7 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                               class="Tags__tags-block"
                             >
                               <button
-                                class="ant-btn css-dev-only-do-not-override-2q8sxy ant-btn-default ant-btn-icon-only Tags__add-button"
+                                class="ant-btn css-dev-only-do-not-override-xu9wm8 ant-btn-default ant-btn-icon-only Tags__add-button"
                                 type="button"
                               >
                                 <span
@@ -330,7 +330,7 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                                 </span>
                               </button>
                               <button
-                                class="ant-btn css-dev-only-do-not-override-2q8sxy ant-btn-default ant-btn-icon-only Tags__delete-button"
+                                class="ant-btn css-dev-only-do-not-override-xu9wm8 ant-btn-default ant-btn-icon-only Tags__delete-button"
                                 type="button"
                               >
                                 <span
@@ -353,10 +353,10 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                             class="ant-table-cell ant-table-selection-column"
                           >
                             <label
-                              class="ant-checkbox-wrapper css-dev-only-do-not-override-2q8sxy"
+                              class="ant-checkbox-wrapper css-dev-only-do-not-override-xu9wm8"
                             >
                               <span
-                                class="ant-checkbox ant-wave-target css-dev-only-do-not-override-2q8sxy"
+                                class="ant-checkbox ant-wave-target css-dev-only-do-not-override-xu9wm8"
                               >
                                 <input
                                   class="ant-checkbox-input"
@@ -416,7 +416,7 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                               class="Tags__tags-block"
                             >
                               <button
-                                class="ant-btn css-dev-only-do-not-override-2q8sxy ant-btn-default ant-btn-icon-only Tags__add-button"
+                                class="ant-btn css-dev-only-do-not-override-xu9wm8 ant-btn-default ant-btn-icon-only Tags__add-button"
                                 type="button"
                               >
                                 <span
@@ -429,7 +429,7 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                                 </span>
                               </button>
                               <button
-                                class="ant-btn css-dev-only-do-not-override-2q8sxy ant-btn-default ant-btn-icon-only Tags__delete-button"
+                                class="ant-btn css-dev-only-do-not-override-xu9wm8 ant-btn-default ant-btn-icon-only Tags__delete-button"
                                 type="button"
                               >
                                 <span
@@ -465,13 +465,13 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
             </p>
              
             <div
-              class="ant-form-item undefined custom-label css-dev-only-do-not-override-2q8sxy"
+              class="ant-form-item undefined custom-label css-dev-only-do-not-override-xu9wm8"
             >
               <div
-                class="ant-row ant-form-item-row css-dev-only-do-not-override-2q8sxy"
+                class="ant-row ant-form-item-row css-dev-only-do-not-override-xu9wm8"
               >
                 <div
-                  class="ant-col ant-form-item-control css-dev-only-do-not-override-2q8sxy"
+                  class="ant-col ant-form-item-control css-dev-only-do-not-override-xu9wm8"
                 >
                   <div
                     class="ant-form-item-control-input"
@@ -480,7 +480,7 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                       class="ant-form-item-control-input-content"
                     >
                       <div
-                        class="ant-select ant-select-in-form-item css-dev-only-do-not-override-2q8sxy ant-select-single ant-select-show-arrow"
+                        class="ant-select ant-select-in-form-item css-dev-only-do-not-override-xu9wm8 ant-select-single ant-select-show-arrow"
                         style="width: 65px;"
                       >
                         <div
@@ -555,16 +555,16 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
               table.page
             </p>
             <form
-              class="ant-form ant-form-horizontal css-dev-only-do-not-override-2q8sxy"
+              class="ant-form ant-form-horizontal css-dev-only-do-not-override-xu9wm8"
             >
               <div
-                class="ant-form-item undefined custom-label css-dev-only-do-not-override-2q8sxy"
+                class="ant-form-item undefined custom-label css-dev-only-do-not-override-xu9wm8"
               >
                 <div
-                  class="ant-row ant-form-item-row css-dev-only-do-not-override-2q8sxy"
+                  class="ant-row ant-form-item-row css-dev-only-do-not-override-xu9wm8"
                 >
                   <div
-                    class="ant-col ant-form-item-control css-dev-only-do-not-override-2q8sxy"
+                    class="ant-col ant-form-item-control css-dev-only-do-not-override-xu9wm8"
                   >
                     <div
                       class="ant-form-item-control-input"
@@ -573,7 +573,7 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
                         class="ant-form-item-control-input-content"
                       >
                         <input
-                          class="ant-input css-dev-only-do-not-override-2q8sxy PaginationComponent__input-style"
+                          class="ant-input css-dev-only-do-not-override-xu9wm8 PaginationComponent__input-style"
                           id="size"
                           name="size"
                           type="text"
@@ -593,7 +593,7 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
           </div>
           <div>
             <button
-              class="ant-btn css-dev-only-do-not-override-2q8sxy ant-btn-primary ant-btn-icon-only"
+              class="ant-btn css-dev-only-do-not-override-xu9wm8 ant-btn-primary ant-btn-icon-only"
               disabled=""
               style="margin-right: 8px;"
               type="button"
@@ -608,7 +608,7 @@ exports[`Tags UI Component Render component toMatchSnapshot() 1`] = `
               </span>
             </button>
             <button
-              class="ant-btn css-dev-only-do-not-override-2q8sxy ant-btn-primary ant-btn-icon-only"
+              class="ant-btn css-dev-only-do-not-override-xu9wm8 ant-btn-primary ant-btn-icon-only"
               disabled=""
               type="button"
             >

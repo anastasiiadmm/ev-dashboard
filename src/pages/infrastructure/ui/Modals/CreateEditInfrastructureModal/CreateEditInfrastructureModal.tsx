@@ -20,7 +20,7 @@ interface Props {
   loading: boolean;
   creating?: boolean;
   setCreating?: React.Dispatch<React.SetStateAction<boolean>>;
-  handleTagOkCancel?: () => void;
+  handleInfrastructureOkCancel?: () => void;
   setSelectedInfrastructure?: React.Dispatch<React.SetStateAction<IInfrastructure | null>>;
 }
 
@@ -30,7 +30,7 @@ const CreateEditInfrastructureModal: React.FC<Props> = ({
   selectedInfrastructure,
   creating,
   setSelectedInfrastructure,
-  handleTagOkCancel,
+  handleInfrastructureOkCancel,
 }) => {
   const b = bem('CreateEditInfrastructureModal');
   const openNotification = useNotification();
@@ -88,8 +88,8 @@ const CreateEditInfrastructureModal: React.FC<Props> = ({
             getParams({ page: 1 }),
           );
         }
-        if (handleTagOkCancel) {
-          handleTagOkCancel();
+        if (handleInfrastructureOkCancel) {
+          handleInfrastructureOkCancel();
         }
       } else {
         message.error(t('errors.no_icon'));

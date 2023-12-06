@@ -244,7 +244,7 @@ const InfrastructureList = observer(() => {
               : (t('infrastructure.editing_an_infrastructure') as string)
           }
           setCreating={setCreating}
-          handleTagOkCancel={handleInfrastructureOkCancel}
+          handleInfrastructureOkCancel={handleInfrastructureOkCancel}
           creating={creating}
           selectedInfrastructure={selectedInfrastructure}
           loading={infrastructureCreateLoading}

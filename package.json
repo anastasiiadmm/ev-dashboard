@@ -45,6 +45,7 @@
     "dayjs": "^1.11.10",
     "easy-bem": "^1.1.1",
     "i18next": "^23.6.0",
+    "jest-fetch-mock": "^3.0.3",
     "leaflet": "^1.9.4",
     "mobx": "^6.10.2",
     "mobx-react-lite": "^4.0.5",
