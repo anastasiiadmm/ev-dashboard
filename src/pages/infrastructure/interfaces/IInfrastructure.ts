@@ -6,3 +6,11 @@ export interface IInfrastructure {
   title_ky: string;
   active: boolean;
 }
+
+export interface IInfrastructureCreate {
+  icon: string;
+  title_ru: string;
+  title_en: string;
+  title_ky: string;
+  active: boolean;
+}

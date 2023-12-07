@@ -3,11 +3,11 @@
 exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
 <DocumentFragment>
   <div
-    class="ant-row ant-row-space-between Merchant css-dev-only-do-not-override-2q8sxy"
+    class="ant-row ant-row-space-between Merchant css-dev-only-do-not-override-xu9wm8"
     data-testid="merchant-component"
   >
     <div
-      class="ant-skeleton css-dev-only-do-not-override-2q8sxy"
+      class="ant-skeleton css-dev-only-do-not-override-xu9wm8"
     >
       <div
         class="ant-skeleton-content"
@@ -28,7 +28,7 @@ exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
       </div>
     </div>
     <div
-      class="ant-tabs ant-tabs-top css-dev-only-do-not-override-2q8sxy"
+      class="ant-tabs ant-tabs-top css-dev-only-do-not-override-xu9wm8"
     >
       <div
         class="ant-tabs-nav"
@@ -127,7 +127,7 @@ exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
             tabindex="0"
           >
             <div
-              class="ant-skeleton css-dev-only-do-not-override-2q8sxy"
+              class="ant-skeleton css-dev-only-do-not-override-xu9wm8"
             >
               <div
                 class="ant-skeleton-content"

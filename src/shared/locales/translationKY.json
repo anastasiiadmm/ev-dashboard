@@ -5,7 +5,8 @@
     "password_length": "Сырсөз кеминде 8 белгиден турушу керек",
     "wrong_password": "Пароль туура эмес",
     "two_passwords_do_not_match": "Сырсөз дал келбейт",
-    "no_data_available": "Дайындар жок"
+    "no_data_available": "Дайындар жок",
+    "no_icon": "Жүктөп берүү сөлөкөтү"
   },
   "alerts": {
     "incorrectly_filled_field": "Туура эмес толтурулган тилке",
@@ -254,7 +255,10 @@
     "editing_an_infrastructure": "Инфраструктураны редакциялоо",
     "name_in_kyrgyz": "Кыргызча аты",
     "name_in_russian": "Орусча аталышы",
-    "name_in_eng": "Англис тилиндеги аталыш"
+    "name_in_eng": "Англис тилиндеги аталыш",
+    "save": "Сактоо",
+    "edit_infrastructure": "Инфраструктураны түзөтүү",
+    "delete_infrastructure": "Инфраструктураны жок кылуу"
   },
   "user": {
     "manager": "Менеджер"

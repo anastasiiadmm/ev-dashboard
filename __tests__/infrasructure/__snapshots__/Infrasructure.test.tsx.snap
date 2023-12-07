@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
+exports[`Infrastructure UI Component Render component toMatchSnapshot() 1`] = `
 <DocumentFragment>
   <div
-    class="ant-row ant-row-space-between Merchants css-dev-only-do-not-override-xu9wm8"
-    data-testid="merchants-component"
+    class="ant-row ant-row-space-between InfrastructureList css-dev-only-do-not-override-xu9wm8"
+    data-testid="infrastructure-component"
   >
     <div
-      class="ant-row Merchants__search-pagination-block css-dev-only-do-not-override-xu9wm8"
+      class="ant-row InfrastructureList__search-pagination-block css-dev-only-do-not-override-xu9wm8"
     >
       <div>
         <form
@@ -42,7 +42,7 @@ exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
                       </span>
                       <input
                         class="ant-input css-dev-only-do-not-override-xu9wm8"
-                        placeholder="merchants.search_among_merchants"
+                        placeholder="infrastructure.search"
                         type="text"
                         value=""
                       />
@@ -56,29 +56,24 @@ exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
       </div>
     </div>
     <div
-      class="ant-row Merchants__table-block css-dev-only-do-not-override-xu9wm8"
+      class="ant-row InfrastructureList__table-block css-dev-only-do-not-override-xu9wm8"
     >
-      <a
-        class="Merchants__add-block"
-        href="/merchants/create-edit-merchant"
+      <button
+        class="ant-btn css-dev-only-do-not-override-xu9wm8 ant-btn-primary InfrastructureList__button-style"
+        type="button"
       >
-        <button
-          class="ant-btn css-dev-only-do-not-override-xu9wm8 ant-btn-primary Merchants__button-style"
-          type="button"
+        <span
+          class="ant-btn-icon"
         >
-          <span
-            class="ant-btn-icon"
-          >
-            <img
-              alt="add"
-              src="[object Object]"
-            />
-          </span>
-          <span>
-            merchants.add_merchant
-          </span>
-        </button>
-      </a>
+          <img
+            alt="add"
+            src="[object Object]"
+          />
+        </span>
+        <span>
+          infrastructure.add_infrastructure
+        </span>
+      </button>
       <div
         class="TableComponent"
       >
@@ -146,73 +141,31 @@ exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
                             class="ant-table-cell"
                             scope="col"
                           >
-                            ID
+                            №
                           </th>
                           <th
                             class="ant-table-cell"
                             scope="col"
                           >
-                            merchants.name
+                            infrastructure.naming KG
                           </th>
                           <th
                             class="ant-table-cell"
                             scope="col"
                           >
-                            merchants.agreement_number
+                            infrastructure.naming RU
                           </th>
                           <th
                             class="ant-table-cell"
                             scope="col"
                           >
-                            %
-                          </th>
-                          <th
-                            class="ant-table-cell"
-                            scope="col"
-                          >
-                            merchants.contacts
-                          </th>
-                          <th
-                            class="ant-table-cell"
-                            scope="col"
-                          >
-                            merchants.location
-                          </th>
-                          <th
-                            class="ant-table-cell"
-                            scope="col"
-                          >
-                            merchants.legal_name
+                            infrastructure.naming ENG
                           </th>
                           <th
                             class="ant-table-cell"
                             scope="col"
                           >
                             merchants.status
-                          </th>
-                          <th
-                            class="ant-table-cell"
-                            scope="col"
-                          >
-                            merchants.number_of_stations
-                          </th>
-                          <th
-                            class="ant-table-cell"
-                            scope="col"
-                          >
-                            <img
-                              alt="active"
-                              src="[object Object]"
-                            />
-                          </th>
-                          <th
-                            class="ant-table-cell"
-                            scope="col"
-                          >
-                            <img
-                              alt="x"
-                              src="[object Object]"
-                            />
                           </th>
                           <th
                             class="ant-table-cell"
@@ -293,67 +246,13 @@ exports[`Create Merchant UI Component Render component toMatchSnapshot() 1`] = `
                                
                             </div>
                           </td>
-                          <td
-                            style="padding: 0px; border: 0px; height: 0px;"
-                          >
-                            <div
-                              style="height: 0px; overflow: hidden;"
-                            >
-                               
-                            </div>
-                          </td>
-                          <td
-                            style="padding: 0px; border: 0px; height: 0px;"
-                          >
-                            <div
-                              style="height: 0px; overflow: hidden;"
-                            >
-                               
-                            </div>
-                          </td>
-                          <td
-                            style="padding: 0px; border: 0px; height: 0px;"
-                          >
-                            <div
-                              style="height: 0px; overflow: hidden;"
-                            >
-                               
-                            </div>
-                          </td>
-                          <td
-                            style="padding: 0px; border: 0px; height: 0px;"
-                          >
-                            <div
-                              style="height: 0px; overflow: hidden;"
-                            >
-                               
-                            </div>
-                          </td>
-                          <td
-                            style="padding: 0px; border: 0px; height: 0px;"
-                          >
-                            <div
-                              style="height: 0px; overflow: hidden;"
-                            >
-                               
-                            </div>
-                          </td>
-                          <td
-                            style="padding: 0px; border: 0px; height: 0px;"
-                          >
-                            <div
-                              style="height: 0px; overflow: hidden;"
-                            >
-                               
-                            </div>
-                          </td>
                         </tr>
                         <tr
                           class="ant-table-placeholder"
                         >
                           <td
                             class="ant-table-cell"
-                            colspan="13"
+                            colspan="7"
                           >
                             <div
                               class="css-dev-only-do-not-override-xu9wm8 ant-empty"
