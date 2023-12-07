@@ -79,8 +79,8 @@ const App: React.FC = observer(() => {
               <Route path='/' element={<HomePageAsync />} />
               <Route path='/banners'>
                 <Route index element={<HomePageBanner />} />
-                <Route path='/banners/create-banner/:id?' element={<CreateBanner variant={true} />} />
-                <Route path='/banners/create-fullscreen/:id?' element={<CreateBanner variant={false} />} />
+                <Route path='/banners/create-banner/:id?' element={<CreateBanner variant />} />
+                <Route path='/banners/create-fullscreen/:id?' element={<CreateBanner />} />
               </Route>
               <Route path='/merchants'>
                 <Route index element={<MerchantsAsync />} />

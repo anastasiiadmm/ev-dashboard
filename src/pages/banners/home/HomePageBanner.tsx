@@ -21,22 +21,22 @@ const HomePageBanner = observer(() => {
     {
       key: '1',
       label: t('banners.tabs.banners') as string,
-      children: <BannerPage variant={true} archive={false} />,
+      children: <BannerPage variant />,
     },
     {
       key: '2',
       label: t('banners.tabs.fullscreen') as string,
-      children: <BannerPage variant={false} archive={false} />,
+      children: <BannerPage />,
     },
     {
       key: '3',
       label: t('banners.tabs.archive_banner') as string,
-      children: <BannerPage variant={true} archive={true} />,
+      children: <BannerPage variant archive />,
     },
     {
       key: '4',
       label: t('banners.tabs.archive_fullscreens') as string,
-      children: <BannerPage variant={false} archive={true} />,
+      children: <BannerPage archive />,
     },
   ];
   return (

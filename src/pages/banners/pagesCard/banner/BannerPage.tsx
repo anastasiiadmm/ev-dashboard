@@ -22,11 +22,11 @@ interface IData {
 }
 
 interface Props {
-  archive: boolean;
-  variant: boolean;
+  archive?: boolean;
+  variant?: boolean;
 }
 
-const BannerPage: React.FC<Props> = observer(({ archive, variant }) => {
+const BannerPage: React.FC<Props> = observer(({ archive = false, variant = false }) => {
   const b = bem('BannerPage');
   const { t } = useTranslation();
   const navigate = useNavigate();

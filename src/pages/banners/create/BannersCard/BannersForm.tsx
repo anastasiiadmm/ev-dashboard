@@ -39,10 +39,10 @@ interface IData {
 }
 
 interface Props {
-  variant: boolean;
+  variant?: boolean;
 }
 
-const BannersForm: FC<Props> = observer(({ variant }) => {
+const BannersForm: FC<Props> = observer(({ variant = false }) => {
   const b = bem('BannersForm');
   const { t } = useTranslation();
   const [form] = Form.useForm();
@@ -293,7 +293,7 @@ const BannersForm: FC<Props> = observer(({ variant }) => {
           <Form
             form={form}
             initialValues={
-              id
+              id // сделаю когда буду подключать api
                 ? toJS({
                     name_ru: data?.name,
                     name_ky: data?.name,
