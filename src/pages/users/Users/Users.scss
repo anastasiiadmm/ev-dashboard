@@ -86,4 +86,34 @@
     background-color: variables.$gray-bg-color;
     border-color: variables.$gray-bg-color;
   }
+
+  &__table-block {
+    width: 100%;
+    position: relative;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__center-block {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  &__car-info-tooltip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  &__tooltip-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__tooltip-text .ant-typography {
+    line-height: 1.2;
+  }
 }

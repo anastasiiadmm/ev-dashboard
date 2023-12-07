@@ -273,6 +273,18 @@
   "users": {
     "personal_account": "Лицевой счет",
     "phone": "Номер телефона",
-    "period": "Период"
+    "period": "Период",
+    "name": "Фамилия Имя",
+    "you_don_t_have_any_users_yet": "У вас пока еще нет пользователей",
+    "gender": "Пол",
+    "birthday": "Дата Рождения",
+    "age": "Возраст",
+    "registration_date": "Дата регистрации",
+    "phone_number": "Номер телефона",
+    "email": "Почта",
+    "car": "Машина",
+    "balance": "Баланс",
+    "licence": "Права",
+    "car_make": "Марка машины"
   }
 }

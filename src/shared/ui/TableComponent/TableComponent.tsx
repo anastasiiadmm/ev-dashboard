@@ -14,10 +14,10 @@ interface Props {
   data: readonly (IMerchant | IStation | ITag | ICreateSchedule | ICommon)[] | null | undefined;
   columns: IColumn[];
   rowKey: (record: ICreateSchedule | IMerchant | IStation | ITag | ICommon) => Key;
-  rowSelection: {
+  rowSelection?: {
     selectedRowKeys?: React.Key[];
     onChange: (selectedRowKeys: React.Key[]) => void;
-  };
+  } | null;
   loading?: boolean;
   params?: IPagination | null;
   pagePrevHandler?: (() => void | undefined) | undefined;

@@ -273,6 +273,18 @@
   "users": {
     "personal_account": "Personal account",
     "phone": "Phone number",
-    "period": "Period"
+    "period": "Period",
+    "name": "Last name First name",
+    "you_don_t_have_any_users_yet": "You don't have any users yet",
+    "gender": "Gender",
+    "birthday": "Birthday",
+    "age": "Age",
+    "registration_date": "Registration date",
+    "phone_number": "Phone number",
+    "email": "Email",
+    "car": "Car",
+    "balance": "Balance",
+    "licence": "Driver license",
+    "car_make": "Car make"
   }
 }
