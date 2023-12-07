@@ -26,7 +26,7 @@ interface Props {
 
 const CreateEditInfrastructureModal: React.FC<Props> = ({
   textTitle = false,
-  loading,
+  loading = false,
   selectedInfrastructure,
   creating,
   setSelectedInfrastructure,
