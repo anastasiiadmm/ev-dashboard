@@ -59,7 +59,7 @@ const Cards: React.FC<Props> = ({
       </div>
       <div className={b('container-name-meatballs')}>
         <h3>{name}</h3>
-        <div style={{ marginTop: !image ? '-4.5rem' : '', width: '28px' }}>
+        <div style={{ marginTop: !image ? '-4.5rem' : '', width: '9%' }}>
           <MeatBalls items={itemsMeatBalls} change={(key: number) => openCloseModal(key, id)} />
         </div>
       </div>
@@ -67,12 +67,16 @@ const Cards: React.FC<Props> = ({
         <div className={b('container-time')}>
           <div>
             <label>{t('banners.add_banner.date_start')}</label>
-            <p>{t('banners.time.from')} {starts_at}</p>
+            <p>
+              {t('banners.time.from')} {starts_at}
+            </p>
           </div>
           <span />
           <div>
             <label>{t('banners.add_banner.date_finish')}</label>
-            <p>{t('banners.time.to')} {ends_at}</p>
+            <p>
+              {t('banners.time.to')} {ends_at}
+            </p>
           </div>
         </div>
         <div

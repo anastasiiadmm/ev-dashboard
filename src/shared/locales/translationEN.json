@@ -194,6 +194,13 @@
     "Sunday": "Sunday"
   },
   "banners": {
+    "add_fullscreen": {
+      "edit_title": "Edit fullscreen",
+      "title": "Creation fullscreen",
+      "text": "Information about FULLSCREEN",
+      "name_input": "Fullscreen name",
+      "title_image": "Transfer or upload a photo for the fullscreen"
+    },
     "add_banner": {
       "edit_title": "Editing a banner",
       "title": "Creating a banner",
@@ -232,6 +239,20 @@
     "time": {
       "to": "To",
       "from": "From"
+    },
+    "modal_success": {
+      "create": {
+        "title": "Banner created",
+        "description": "The new advertising banner has been successfully created"
+      },
+      "edit": {
+        "title": "Changes saved",
+        "description": "The banner has been successfully updated"
+      }
+    },
+    "meatballs": {
+      "edit": "Edit",
+      "delete": "Delete"
     }
   },
   "empty": {

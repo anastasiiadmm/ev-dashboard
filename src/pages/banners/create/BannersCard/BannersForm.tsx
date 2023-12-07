@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState, useMemo } from 'react';
+import React, { ChangeEvent, useEffect, useState, useMemo, FC } from 'react';
 import bem from 'easy-bem';
 import { Button, DatePicker, Form, Radio, Typography } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -10,7 +10,7 @@ import type { UploadFile } from 'antd/es/upload/interface';
 
 import { useCurrentLocale, useModal } from '~/shared/hooks';
 import { eng, kg, chevronRight, rus, greenCheck, clockIcon, calendarIcon } from '~/assets/images';
-import { bannerStore } from '~/pages/banners/';
+import { bannerStore, response, responseFullscreen } from '~/pages/banners/';
 import { ICommon, IFormData } from '~/pages/banners/interfaces';
 import {
   ActiveInactiveModal,
@@ -38,7 +38,11 @@ interface IData {
   name: string[];
 }
 
-const BannersForm = observer(() => {
+interface Props {
+  variant: boolean;
+}
+
+const BannersForm: FC<Props> = observer(({ variant }) => {
   const b = bem('BannersForm');
   const { t } = useTranslation();
   const [form] = Form.useForm();
@@ -67,7 +71,7 @@ const BannersForm = observer(() => {
     en: false,
     ky: false,
   });
-  const [updatedData, setUpdatedData] = useState<IFormData>();
+  const [updatedData, setUpdatedData] = useState<IFormData | undefined>();
   const [formData, setFormData] = useState<IFormData>({
     name_ru: '',
     name_en: '',
@@ -86,6 +90,12 @@ const BannersForm = observer(() => {
     merchant: getMerchant.id,
     stations: getStation.id,
   });
+
+  const db = variant ? response.results : responseFullscreen.results;
+  let data;
+  if (id) {
+    data = db.find((el) => el.id === +id);
+  }
 
   const isAllSelected = Object.values(radioButtonStates).every((value) => value);
 
@@ -219,10 +229,11 @@ const BannersForm = observer(() => {
       await form.validateFields();
       setError(false);
       if (id) {
-        await bannerStore.patchBanner(id, formData);
+        await bannerStore.patchBanner(id, updatedData);
       } else {
         await bannerStore.postBanner(formData);
       }
+      openCloseModal('SUCCESS');
     } catch (error) {
       if (error) {
         setError(true);
@@ -236,7 +247,11 @@ const BannersForm = observer(() => {
         <BreadcrumbComponent
           items={[
             {
-              title: t(id ? 'banners.add_banner.edit_title' : 'banners.add_banner.title'),
+              title: t(
+                id
+                  ? `banners.${variant ? 'add_banner' : 'add_fullscreen'}.edit_title`
+                  : `banners.${variant ? 'add_banner' : 'add_fullscreen'}.title`,
+              ),
               href: '/banners',
             },
           ]}
@@ -245,7 +260,11 @@ const BannersForm = observer(() => {
       <div className={b('container-card')}>
         <CardComponent className={b('container')}>
           <h1 className={b('title')}>
-            {t(id ? 'banners.add_banner.edit_title' : 'banners.add_banner.title')}
+            {t(
+              id
+                ? `banners.${variant ? 'add_banner' : 'add_fullscreen'}.edit_title`
+                : `banners.${variant ? 'add_banner' : 'add_fullscreen'}.title`,
+            )}
           </h1>
           {error && (
             <AlertComponent
@@ -262,14 +281,27 @@ const BannersForm = observer(() => {
               bannersCreate
               bannersFileList={fileList}
               setBannersFileList={setFileList}
-              format='jpeg'
-              title={t('banners.add_banner.title_image') as string}
+              format='png'
+              title={
+                t(`banners.${variant ? 'add_banner' : 'add_fullscreen'}.title_image`) as string
+              }
             />
           </div>
-          <h2 className={b('info-banner-title')}>{t('banners.add_banner.text')}</h2>
+          <h2 className={b('info-banner-title')}>
+            {t(`banners.${variant ? 'add_banner' : 'add_fullscreen'}.text`)}
+          </h2>
           <Form
             form={form}
-            initialValues={id ? toJS({}) ?? {} : { remember: true }}
+            initialValues={
+              id
+                ? toJS({
+                    name_ru: data?.name,
+                    name_ky: data?.name,
+                    name_en: data?.name,
+                    is_active: data?.is_active,
+                  }) ?? {}
+                : { remember: true }
+            }
             onFinish={() => {}}
             autoComplete='off'
             layout='vertical'
@@ -278,8 +310,8 @@ const BannersForm = observer(() => {
           >
             <FormField
               className={b('input')}
-              placeholder={t('banners.add_banner.name_input')}
-              label={t('banners.add_banner.name_input')}
+              placeholder={t(`banners.${variant ? 'add_banner' : 'add_fullscreen'}.name_input`)}
+              label={t(`banners.${variant ? 'add_banner' : 'add_fullscreen'}.name_input`)}
               id='name_id'
               error={error && isNameEmpty}
               name={languageKey}
@@ -453,9 +485,9 @@ const BannersForm = observer(() => {
               <FormField
                 className={b('input')}
                 type='switch'
-                data-testid='active_id'
-                id='active_id'
-                name='active'
+                data-testid='is_active_id'
+                id='is_active_id'
+                name='is_active'
                 defaultChecked={error}
                 label={t('merchants.status')}
                 onChange={(checked: boolean) => handleFormChange('is_active', checked)}
@@ -583,16 +615,8 @@ const BannersForm = observer(() => {
             <ActiveInactiveModal
               hasCancelButton={false}
               successModal
-              textTitle={
-                id
-                  ? (t('merchants.changes_saved') as string)
-                  : (t('modals.merchant_has_been_created') as string)
-              }
-              infoText={
-                id
-                  ? (t('merchants.the_merchant_account_has_been_successfully_updated') as string)
-                  : (t('modals.a_new_merchant_account_has_been_successfully_created') as string)
-              }
+              textTitle={t(`banners.modal_success.${id ? 'edit' : 'create'}.title`) as string}
+              infoText={t(`banners.modal_success.${id ? 'edit' : 'create'}.description`) as string}
               handleOkCancel={() => openCloseModal('SUCCESS')}
               handleAgreeHandler={handleAgreeHandler}
             />

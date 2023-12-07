@@ -4,7 +4,7 @@ import { Tabs } from 'antd';
 import bem from 'easy-bem';
 import { useTranslation } from 'react-i18next';
 
-import { BannerPage, FullscreenPage } from '~/pages/banners';
+import { BannerPage } from '~/pages/banners';
 
 import './HomePageBanner.scss';
 
@@ -21,22 +21,22 @@ const HomePageBanner = observer(() => {
     {
       key: '1',
       label: t('banners.tabs.banners') as string,
-      children: <BannerPage archive={false} />,
+      children: <BannerPage variant={true} archive={false} />,
     },
     {
       key: '2',
       label: t('banners.tabs.fullscreen') as string,
-      children: <FullscreenPage archive={false} />,
+      children: <BannerPage variant={false} archive={false} />,
     },
     {
       key: '3',
       label: t('banners.tabs.archive_banner') as string,
-      children: <BannerPage archive={true} />,
+      children: <BannerPage variant={true} archive={true} />,
     },
     {
       key: '4',
       label: t('banners.tabs.archive_fullscreens') as string,
-      children: <FullscreenPage archive={true} />,
+      children: <BannerPage variant={false} archive={true} />,
     },
   ];
   return (

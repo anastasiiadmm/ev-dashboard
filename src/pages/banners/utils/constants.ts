@@ -48,3 +48,46 @@ export const response = {
     },
   ],
 };
+
+export const responseFullscreen = {
+  count: 123,
+  next: 'http://api.example.org/accounts/?page=4',
+  previous: 'http://api.example.org/accounts/?page=2',
+  results: [
+    {
+      id: 0,
+      name: 'stringfull',
+      starts_at: '2019-08-24 14:15:22',
+      ends_at: '2019-08-24 14:15:22',
+      is_active: true,
+    },
+    {
+      id: 1,
+      name: 'secondfull',
+      starts_at: '2019-08-24 14:15:22',
+      ends_at: '2019-08-24 14:15:22',
+      is_active: false,
+    },
+    {
+      id: 2,
+      name: 'three',
+      starts_at: '2019-08-24 14:15:22',
+      ends_at: '2019-08-24 14:15:22',
+      is_active: false,
+    },
+    {
+      id: 3,
+      name: 'four',
+      starts_at: '2019-08-24 14:15:22',
+      ends_at: '2019-08-24 14:15:22',
+      is_active: true,
+    },
+    {
+      id: 4,
+      name: 'five',
+      starts_at: '2019-08-24 14:15:22',
+      ends_at: '2019-08-24 14:15:22',
+      is_active: false,
+    },
+  ],
+};

@@ -5,29 +5,28 @@ import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 
-import { ModalComponent } from '~/shared/ui';
-import Empty from '~/shared/ui/EmptyComponent/Empty';
+import { EmptyComponent, ModalComponent } from '~/shared/ui';
 import { deleteIcon, editColor, meatballIcon } from '~/assets/images';
 import { useModal } from '~/shared/hooks';
-import { response, Cards, ModalDelete } from '~/pages/banners';
+import { response, Cards, ModalDelete, responseFullscreen } from '~/pages/banners';
 
 import './BannerPage.scss';
 
 interface IData {
   id: number;
   name: string;
-  image_path: string;
+  image_path?: string;
   starts_at: string;
   ends_at: string;
   is_active: boolean;
 }
-[];
 
 interface Props {
   archive: boolean;
+  variant: boolean;
 }
 
-const BannerPage: React.FC<Props> = observer(({ archive }) => {
+const BannerPage: React.FC<Props> = observer(({ archive, variant }) => {
   const b = bem('BannerPage');
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -35,9 +34,11 @@ const BannerPage: React.FC<Props> = observer(({ archive }) => {
   const [getId, setGetId] = useState<number>();
   const [data, setData] = useState<IData[]>();
 
+  const switching = variant ? response.results : responseFullscreen.results;
+
   useEffect(() => {
-    setData(response.results);
-  }, []);
+    setData(switching);
+  }, [switching]);
 
   const itemsMeatBalls = [
     {
@@ -46,12 +47,12 @@ const BannerPage: React.FC<Props> = observer(({ archive }) => {
       children: [
         {
           icon: <img src={editColor} alt='iconmeat' />,
-          label: 'Редактировать',
+          label: t('banners.meatballs.edit'),
           key: 1,
         },
         {
           icon: <img src={deleteIcon} alt='iconmeat' />,
-          label: 'Удалить',
+          label: t('banners.meatballs.delete'),
           key: 2,
         },
       ],
@@ -72,13 +73,13 @@ const BannerPage: React.FC<Props> = observer(({ archive }) => {
   };
 
   const addBannerClickHandler = () => {
-    navigate('/banners/create-banner');
+    navigate(`/banners/create-${variant ? 'banner' : 'fullscreen'}`);
   };
 
   const openCloseModal = (key: number, id: number) => {
     switch (key) {
       case 1:
-        return navigate(`/banners/create-banner/${id}`);
+        return navigate(`/banners/create-${variant ? 'banner' : 'fullscreen'}/${id}`);
       case 2:
         setGetId(id);
         return modalDelete.handleOkCancel();
@@ -99,7 +100,7 @@ const BannerPage: React.FC<Props> = observer(({ archive }) => {
       <div className={b('container-button')}>
         {data && (
           <Button type='primary' onClick={addBannerClickHandler}>
-            + {t('empty.banner.button')}
+            + {t(`empty.${variant ? 'banner' : 'fullscreen'}.button`)}
           </Button>
         )}
       </div>
@@ -126,7 +127,7 @@ const BannerPage: React.FC<Props> = observer(({ archive }) => {
               })}
           </div>
         ) : (
-          <Empty variant='banner' onClick={addBannerClickHandler} />
+          <EmptyComponent variant='banner' onClick={addBannerClickHandler} />
         )}
       </div>
       <ModalComponent

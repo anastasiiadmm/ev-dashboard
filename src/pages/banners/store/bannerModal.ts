@@ -58,17 +58,21 @@ class BannerStore implements IBannerState {
     }
   }
 
-  // пока времменно  
+  // пока времменно
 
   async postBanner(data: IFormData) {
     try {
-      await axiosApi.post(`ads/banners/`, data);
+      await axiosApi.post(`ads/banners/`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       runInAction(() => {});
     } catch (e) {
       runInAction(() => {});
     }
   }
-  async patchBanner(id: string, data: IFormData) {
+  async patchBanner(id: string, data: IFormData | undefined) {
     try {
       await axiosApi.patch(`ads/banners/${id}`, data);
       runInAction(() => {});
