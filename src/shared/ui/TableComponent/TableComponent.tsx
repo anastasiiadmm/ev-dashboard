@@ -10,7 +10,6 @@ import { ICommon } from '~/pages/banners/interfaces';
 import { NotFoundImages, PaginationComponent } from '~/shared/ui';
 import './TableComponent.scss';
 
-
 interface Props {
   data: readonly (IMerchant | IStation | ITag | ICreateSchedule | ICommon)[] | null | undefined;
   columns: IColumn[];

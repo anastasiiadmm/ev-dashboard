@@ -1,45 +1,85 @@
+import React, { useEffect, useState } from 'react';
 import { Button, message, Upload } from 'antd';
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
-import ImgCrop from 'antd-img-crop';
 import bem from 'easy-bem';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
+import type { UploadProps, UploadFile } from 'antd/es/upload/interface';
 
-import uploadImg from '~/assets/images/svg/icons/default/bi_images.svg';
+import { cancel, uploadImg } from '~/assets/images';
 import './UploadImageComponent.scss';
 
 interface Props {
-  fileList: UploadFile[] | [];
-  setFileList: (fileList: UploadFile[]) => void;
+  file?: File | string | null;
+  onFileChange?: (newFile: File | null) => void;
+  creating?: boolean | undefined;
+  bannersCreate?: boolean | undefined;
+  fileListUpload?: UploadFile[] | [];
   format: string;
   title: string;
+  bannersFileList?: UploadFile[] | [];
+  setBannersFileList?: (fileList: UploadFile[]) => void;
 }
 
-export const UploadImageComponent: React.FC<Props> = ({ fileList, setFileList, format, title }) => {
+export const UploadImageComponent: React.FC<Props> = ({
+  file,
+  onFileChange,
+  creating,
+  format,
+  title,
+  bannersFileList,
+  setBannersFileList,
+  bannersCreate,
+}) => {
   const b = bem('UploadImageComponent');
   const { t } = useTranslation();
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
-  const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
+  useEffect(() => {
+    if (creating) {
+      setFileList([]);
+    } else if (file && typeof file === 'string' && !bannersCreate) {
+      setFileList([
+        {
+          uid: '1',
+          name: 'image',
+          url: file,
+        },
+      ]);
+    } else {
+      setFileList([]);
+    }
+  }, [bannersCreate, creating, file]);
+
+  const onChange: UploadProps['onChange'] = ({ file: newFile, fileList: updatedFileList }) => {
+    if (!bannersCreate) {
+      setFileList(updatedFileList as UploadFile[]);
+    } else {
+      if (setBannersFileList) {
+        setBannersFileList(updatedFileList);
+      }
+    }
+
+    if (newFile.status === 'uploading') {
+      if (onFileChange) {
+        onFileChange(newFile.originFileObj as File);
+      }
+    }
+
+    if (newFile.status === 'removed') {
+      if (onFileChange) {
+        onFileChange(null);
+      }
+    }
   };
 
-  const onPreview = async (file: UploadFile) => {
-    let src = file.url || URL.createObjectURL(file.originFileObj as Blob);
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj as RcFile);
-        reader.onload = () => resolve(reader.result as string);
-      });
+  const onRemove = () => {
+    setFileList([]);
+    if (onFileChange) {
+      onFileChange(null);
     }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow?.document.write(image.outerHTML);
   };
 
   const renderPhotos = () => {
-    if (!fileList.length) {
+    if (bannersCreate ? !bannersFileList?.length : !file) {
       return (
         <div className={b('upload-image-block')}>
           <img
@@ -57,35 +97,47 @@ export const UploadImageComponent: React.FC<Props> = ({ fileList, setFileList, f
     return null;
   };
 
-  const beforeUpload = (file: RcFile) => {
-    const isSizeValid = file?.size / 1024 <= 256;
+  const beforeUpload = (file: File) => {
+    const isSizeValid = file.size / 1024 <= 256;
     if (!isSizeValid) {
       message.error(t('image_upload.image_must_be_256KB_or_smaller'));
+      return Upload.LIST_IGNORE;
     }
-    return isSizeValid;
+
+    return true;
   };
 
   return (
     <div>
-      <ImgCrop>
-        <Upload
-          data-testid='image-upload'
-          className={b('upload-field')}
-          listType='picture-card'
-          fileList={fileList}
-          onChange={onChange}
-          onPreview={onPreview}
-          beforeUpload={beforeUpload}
-          customRequest={(args) => {
-            if (args.onSuccess) {
-              args.onSuccess('ok');
-            }
-          }}
-          accept={`image/${format}`}
-        >
-          {renderPhotos()}
-        </Upload>
-      </ImgCrop>
+      <Upload
+        data-testid='image-upload'
+        className={b('upload-field')}
+        listType='picture-card'
+        fileList={bannersCreate ? bannersFileList : fileList}
+        onChange={onChange}
+        onRemove={onRemove}
+        beforeUpload={beforeUpload}
+        customRequest={(args) => {
+          if (args.onSuccess) {
+            args.onSuccess('ok');
+          }
+        }}
+        showUploadList={{
+          showPreviewIcon: false,
+          showRemoveIcon: true,
+          removeIcon: () => (
+            <img
+              src={cancel}
+              alt='cancel'
+              onClick={() => onFileChange && onFileChange(null)}
+              style={{ cursor: 'pointer', position: 'absolute', top: '-42px', right: '-39px' }}
+            />
+          ),
+        }}
+        accept={`image/${format}`}
+      >
+        {renderPhotos()}
+      </Upload>
     </div>
   );
 };

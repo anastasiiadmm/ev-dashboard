@@ -259,10 +259,11 @@ const BannersForm = observer(() => {
           )}
           <div className={b('container-upload-file')}>
             <UploadImageComponent
-              fileList={fileList}
-              setFileList={setFileList}
+              bannersCreate
+              bannersFileList={fileList}
+              setBannersFileList={setFileList}
               format='jpeg'
-              title={t('banners.add_banner.title_image')}
+              title={t('banners.add_banner.title_image') as string}
             />
           </div>
           <h2 className={b('info-banner-title')}>{t('banners.add_banner.text')}</h2>

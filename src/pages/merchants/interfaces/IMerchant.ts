@@ -82,4 +82,3 @@ export interface ITabs {
   label: string;
   children: string | JSX.Element;
 }
-

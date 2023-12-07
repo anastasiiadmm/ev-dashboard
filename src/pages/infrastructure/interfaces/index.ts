@@ -1,1 +1,1 @@
-export type { IInfrastructure } from './IInfrastructure';
+export type { IInfrastructure, IInfrastructureCreate } from './IInfrastructure';

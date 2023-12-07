@@ -5,7 +5,8 @@
     "password_length": "Пароль должен содержать минимум 8 символов",
     "wrong_password": "Неправильный пароль",
     "two_passwords_do_not_match": "Пароли не совпадают",
-    "no_data_available": "Данные отсутствуют"
+    "no_data_available": "Данные отсутствуют",
+    "no_icon": "Загрузите иконку"
   },
   "alerts": {
     "incorrectly_filled_field": "Неправильно заполненное поле",
@@ -148,7 +149,8 @@
     "hours": "часа",
     "clock": "часов",
     "save_coordinates": "Сохранить координаты",
-    "station_here": "Станция здесь"
+    "station_here": "Станция здесь",
+    "choose": "Выбрать"
   },
   "modals": {
     "cancel": "Отменить",
@@ -270,7 +272,10 @@
     "editing_an_infrastructure": "Редактирование инфраструктуры",
     "name_in_kyrgyz": "Название на Кыргызском",
     "name_in_russian": "Название на Русском",
-    "name_in_eng": "Название на Английском"
+    "name_in_eng": "Название на Английском",
+    "save": "Сохранить",
+    "edit_infrastructure": "Редактировать инфраструктуру",
+    "delete_infrastructure": "Удалить инфраструктуру"
   },
   "user": {
     "manager": "Менеджер"

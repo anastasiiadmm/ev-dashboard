@@ -44,6 +44,8 @@ export { default as informationCircleGray } from './svg/icons/default/informatio
 export { default as calendarIcon } from './svg/icons/default/calendar.svg';
 export { default as redxcircle } from './svg/icons/default/redxcircle.svg'
 export { default as meatballIcon } from './svg/icons/default/meatball.svg'
+export { default as uploadImg } from './svg/icons/default/bi_images.svg';
+export { default as cancel } from './svg/icons/default/Cancel.svg';
 
 // Active icons
 export { default as circleActive } from './svg/icons/active/circle-active.svg';

@@ -36,6 +36,7 @@
     "execute-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\""
   },
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "@sentry/react": "^7.83.0",
     "@sentry/tracing": "^7.83.0",
     "antd": "^5.9.4",
@@ -44,6 +45,7 @@
     "dayjs": "^1.11.10",
     "easy-bem": "^1.1.1",
     "i18next": "^23.6.0",
+    "jest-fetch-mock": "^3.0.3",
     "leaflet": "^1.9.4",
     "mobx": "^6.10.2",
     "mobx-react-lite": "^4.0.5",
