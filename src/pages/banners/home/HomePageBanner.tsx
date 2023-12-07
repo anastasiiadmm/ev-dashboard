@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Tabs } from 'antd';
 import bem from 'easy-bem';
+import { useTranslation } from 'react-i18next';
 
 import { BannerPage, FullscreenPage } from '~/pages/banners';
 
 import './HomePageBanner.scss';
 
 const HomePageBanner = observer(() => {
+  const { t } = useTranslation();
   const b = bem('HomePageBanner');
   const [activeKey, setActiveKey] = useState<string>('1');
 
@@ -18,23 +20,23 @@ const HomePageBanner = observer(() => {
   const items = [
     {
       key: '1',
-      label: 'Банера' as string,
-      children: <BannerPage />,
+      label: t('banners.tabs.banners') as string,
+      children: <BannerPage archive={false} />,
     },
     {
       key: '2',
-      label: 'Фулскрин' as string,
-      children: <FullscreenPage />,
+      label: t('banners.tabs.fullscreen') as string,
+      children: <FullscreenPage archive={false} />,
     },
     {
       key: '3',
-      label: 'Архив (банера)' as string,
-      children: <h1>Архив (банера)</h1>,
+      label: t('banners.tabs.archive_banner') as string,
+      children: <BannerPage archive={true} />,
     },
     {
       key: '4',
-      label: 'Архив (фулскрины)' as string,
-      children: <h1>Архив (фулскрины)</h1>,
+      label: t('banners.tabs.archive_fullscreens') as string,
+      children: <FullscreenPage archive={true} />,
     },
   ];
   return (

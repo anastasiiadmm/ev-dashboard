@@ -1,0 +1,14 @@
+.FullscreenPage {
+  &__container-result {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px 0 0 0;
+  }
+
+  &__container-button {
+    display: flex;
+    justify-content: end;
+    gap: 8px;
+  }
+}

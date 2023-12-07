@@ -1,0 +1,33 @@
+@use '../../../../app/styles/variables' as variables;
+
+.ModalDelete {
+  &__image-title-modaldelete {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    img {
+      margin: 5px 3px;
+    }
+  }
+
+  &__container-description-modal {
+    width: 220px;
+    h2 {
+      font-size: 18px;
+      margin: 0 0 8px 0;
+    }
+    p {
+      color: #4d5566;
+      font-size: 14px;
+      font-weight: 400;
+      margin: 0 0 20px 0;
+    }
+  }
+
+  &__container-button {
+    display: flex;
+    justify-content: end;
+    gap: 8px;
+  }
+  
+}

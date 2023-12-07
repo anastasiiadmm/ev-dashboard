@@ -21,6 +21,7 @@ class BannerStore implements IBannerState {
   merchantsLoading: boolean = false;
   merchantId: IData[] = [];
   stationId: IData[] = [];
+  bannerData: [] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -43,11 +44,7 @@ class BannerStore implements IBannerState {
   }
   async stationForPromotions(id: number[] | undefined) {
     try {
-      const resp = await axiosApi.get(`stations/for-promotion/`, {
-        params: {
-          merchant: id,
-        },
-      });
+      const resp = await axiosApi.get(`stations/for-promotion/?merchant=${id}`);
       const data = resp.data;
       runInAction(() => {
         this.stationId = data?.results;
@@ -60,9 +57,20 @@ class BannerStore implements IBannerState {
       });
     }
   }
+
+  // пока времменно  
+
   async postBanner(data: IFormData) {
     try {
-      await axiosApi.post(``, data);
+      await axiosApi.post(`ads/banners/`, data);
+      runInAction(() => {});
+    } catch (e) {
+      runInAction(() => {});
+    }
+  }
+  async patchBanner(id: string, data: IFormData) {
+    try {
+      await axiosApi.patch(`ads/banners/${id}`, data);
       runInAction(() => {});
     } catch (e) {
       runInAction(() => {});

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState, useMemo } from 'react';
 import bem from 'easy-bem';
 import { Button, DatePicker, Form, Radio, Typography } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
@@ -43,9 +43,11 @@ const BannersForm = observer(() => {
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const { id } = useParams();
   const merchantModal = useModal();
   const stationModal = useModal();
   const cancelModal = useModal();
+  const succesModal = useModal();
   const currentLocale = useCurrentLocale();
   const [selectedLanguage, setSelectedLanguage] = useState(currentLocale);
   const [previousSelectedLanguage, setPreviousSelectedLanguage] = useState(selectedLanguage);
@@ -65,6 +67,7 @@ const BannersForm = observer(() => {
     en: false,
     ky: false,
   });
+  const [updatedData, setUpdatedData] = useState<IFormData>();
   const [formData, setFormData] = useState<IFormData>({
     name_ru: '',
     name_en: '',
@@ -104,6 +107,8 @@ const BannersForm = observer(() => {
         return stationModal.handleOkCancel();
       case 'CANCEL':
         return cancelModal.handleOkCancel();
+      case 'SUCCESS':
+        return succesModal.handleOkCancel();
     }
   };
 
@@ -131,10 +136,17 @@ const BannersForm = observer(() => {
   };
 
   const handleFormChange = (key: string, value: string | number | boolean | null | Dayjs) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [key]: value,
-    }));
+    if (id) {
+      setUpdatedData({
+        ...(updatedData as IFormData),
+        [key]: value,
+      });
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [key]: value,
+      }));
+    }
   };
 
   const handleNextLanguage = async () => {
@@ -175,12 +187,12 @@ const BannersForm = observer(() => {
   };
 
   const handleAgreeHandler = () => {
-    navigate('/');
+    navigate('/banners');
   };
 
   const getLanguageItemClassName = (itemValue: string) => {
     const isActiveBorder =
-      (itemValue === selectedLanguage && !isAllSelected) || itemValue === selectedLanguage;
+      (itemValue === selectedLanguage && !isAllSelected) || (id && itemValue === selectedLanguage);
     return b(isActiveBorder ? 'border-item' : 'language-item');
   };
 
@@ -206,7 +218,11 @@ const BannersForm = observer(() => {
     try {
       await form.validateFields();
       setError(false);
-      bannerStore.postBanner(formData);
+      if (id) {
+        await bannerStore.patchBanner(id, formData);
+      } else {
+        await bannerStore.postBanner(formData);
+      }
     } catch (error) {
       if (error) {
         setError(true);
@@ -218,12 +234,19 @@ const BannersForm = observer(() => {
     <>
       <div className={b('container-meatballs')}>
         <BreadcrumbComponent
-          items={[{ title: t('banners.add_banner.title'), href: '/banners' }]}
+          items={[
+            {
+              title: t(id ? 'banners.add_banner.edit_title' : 'banners.add_banner.title'),
+              href: '/banners',
+            },
+          ]}
         />
       </div>
       <div className={b('container-card')}>
         <CardComponent className={b('container')}>
-          <h1 className={b('title')}>{t('banners.add_banner.title')}</h1>
+          <h1 className={b('title')}>
+            {t(id ? 'banners.add_banner.edit_title' : 'banners.add_banner.title')}
+          </h1>
           {error && (
             <AlertComponent
               className={b('alert-styles')}
@@ -245,7 +268,7 @@ const BannersForm = observer(() => {
           <h2 className={b('info-banner-title')}>{t('banners.add_banner.text')}</h2>
           <Form
             form={form}
-            initialValues={{ remember: true }}
+            initialValues={id ? toJS({}) ?? {} : { remember: true }}
             onFinish={() => {}}
             autoComplete='off'
             layout='vertical'
@@ -449,7 +472,7 @@ const BannersForm = observer(() => {
           </Text>
           <Radio.Group
             style={{ width: 260 }}
-            onChange={(e) => handleLanguageSelect(e.target.value)}
+            onChange={(e) => id && handleLanguageSelect(e.target.value)}
             value={selectedLanguage}
           >
             {sortedLanguageItems.map((item) => {
@@ -460,7 +483,7 @@ const BannersForm = observer(() => {
                 <CardComponent
                   className={getLanguageItemClassName(item.value)}
                   key={item.name}
-                  onClick={() => handleLanguageSelect(item.value)}
+                  onClick={() => id && handleLanguageSelect(item.value)}
                 >
                   <img src={item.icon} alt={item.name} />
                   <div className={b('button-info')}>
@@ -489,7 +512,7 @@ const BannersForm = observer(() => {
           <div className={b('button-block')}>
             {isAllSelected ? (
               <Button type='primary' onClick={onFinish}>
-                {t('merchants.save')}
+                {id ? t('merchants.save') : t('merchants.create')}
               </Button>
             ) : (
               <Button type='primary' data-testid='further-button' onClick={handleNextLanguage}>
@@ -546,6 +569,30 @@ const BannersForm = observer(() => {
               textTitle={t('modals.are_you_sure_you_want_to_cancel_your_changes') as string}
               infoText={t('modals.after_cancellation_all_data_will_be_lost') as string}
               handleOkCancel={() => openCloseModal('CANCEL')}
+              handleAgreeHandler={handleAgreeHandler}
+            />
+          </ModalComponent>
+
+          <ModalComponent
+            width={400}
+            isModalOpen={succesModal.isModalOpen}
+            handleOk={() => openCloseModal('SUCCESS')}
+            handleCancel={() => openCloseModal('SUCCESS')}
+          >
+            <ActiveInactiveModal
+              hasCancelButton={false}
+              successModal
+              textTitle={
+                id
+                  ? (t('merchants.changes_saved') as string)
+                  : (t('modals.merchant_has_been_created') as string)
+              }
+              infoText={
+                id
+                  ? (t('merchants.the_merchant_account_has_been_successfully_updated') as string)
+                  : (t('modals.a_new_merchant_account_has_been_successfully_created') as string)
+              }
+              handleOkCancel={() => openCloseModal('SUCCESS')}
               handleAgreeHandler={handleAgreeHandler}
             />
           </ModalComponent>

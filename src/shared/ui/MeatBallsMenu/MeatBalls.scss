@@ -1,0 +1,21 @@
+@use '../../../app/styles/variables' as variables;
+
+:where(.css-dev-only-do-not-override-180dakh).ant-menu-horizontal .ant-menu-item,
+:where(.css-dev-only-do-not-override-180dakh).ant-menu-horizontal .ant-menu-submenu {
+  padding-inline: 0;
+  height: 24px;
+  width: 24px;
+  div {
+    margin: -10px 0 0 5.5px;
+  }
+}
+
+.MeatBalls {
+  &__container {
+    ul {
+      border: 1px solid variables.$input-border;
+      background-color: variables.$gray-light-bg-color;
+      border-radius: 6px;
+    }
+  }
+}
