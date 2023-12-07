@@ -256,7 +256,9 @@
     "name_in_kyrgyz": "Кыргызча аты",
     "name_in_russian": "Орусча аталышы",
     "name_in_eng": "Англис тилиндеги аталыш",
-    "save": "Сактоо"
+    "save": "Сактоо",
+    "edit_infrastructure": "Инфраструктураны түзөтүү",
+    "delete_infrastructure": "Инфраструктураны жок кылуу"
   },
   "user": {
     "manager": "Менеджер"

@@ -138,7 +138,7 @@ const InfrastructureList = observer(() => {
               title={
                 <div className={b('info')}>
                   <img src={infoCircle} alt='infoCircle' />
-                  <p>{t('tags.edit_tag')}</p>
+                  <p>{t('infrastructure.edit_infrastructure')}</p>
                 </div>
               }
             >
@@ -157,7 +157,7 @@ const InfrastructureList = observer(() => {
               title={
                 <div className={b('info')}>
                   <img src={infoCircle} alt='infoCircle' />
-                  <p>{t('tags.delete_tag')}</p>
+                  <p>{t('infrastructure.delete_infrastructure')}</p>
                 </div>
               }
             >

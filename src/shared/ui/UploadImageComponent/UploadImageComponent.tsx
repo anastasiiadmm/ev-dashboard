@@ -4,17 +4,19 @@ import bem from 'easy-bem';
 import { useTranslation } from 'react-i18next';
 import type { UploadProps, UploadFile } from 'antd/es/upload/interface';
 
-import { IInfrastructure } from '~/pages/infrastructure/interfaces';
 import { cancel, uploadImg } from '~/assets/images';
 import './UploadImageComponent.scss';
 
 interface Props {
-  file: File | string | null;
-  onFileChange: (newFile: File | null) => void;
-  selectedInfrastructure?: IInfrastructure | null | undefined;
+  file?: File | string | null;
+  onFileChange?: (newFile: File | null) => void;
   creating?: boolean | undefined;
+  bannersCreate?: boolean | undefined;
+  fileListUpload?: UploadFile[] | [];
   format: string;
   title: string;
+  bannersFileList?: UploadFile[] | [];
+  setBannersFileList?: (fileList: UploadFile[]) => void;
 }
 
 export const UploadImageComponent: React.FC<Props> = ({
@@ -23,6 +25,9 @@ export const UploadImageComponent: React.FC<Props> = ({
   creating,
   format,
   title,
+  bannersFileList,
+  setBannersFileList,
+  bannersCreate,
 }) => {
   const b = bem('UploadImageComponent');
   const { t } = useTranslation();
@@ -31,7 +36,7 @@ export const UploadImageComponent: React.FC<Props> = ({
   useEffect(() => {
     if (creating) {
       setFileList([]);
-    } else if (file && typeof file === 'string') {
+    } else if (file && typeof file === 'string' && !bannersCreate) {
       setFileList([
         {
           uid: '1',
@@ -42,27 +47,39 @@ export const UploadImageComponent: React.FC<Props> = ({
     } else {
       setFileList([]);
     }
-  }, [creating, file]);
+  }, [bannersCreate, creating, file]);
 
   const onChange: UploadProps['onChange'] = ({ file: newFile, fileList: updatedFileList }) => {
-    setFileList(updatedFileList as UploadFile[]);
+    if (!bannersCreate) {
+      setFileList(updatedFileList as UploadFile[]);
+    } else {
+      if (setBannersFileList) {
+        setBannersFileList(updatedFileList);
+      }
+    }
 
     if (newFile.status === 'uploading') {
-      onFileChange(newFile.originFileObj as File);
+      if (onFileChange) {
+        onFileChange(newFile.originFileObj as File);
+      }
     }
 
     if (newFile.status === 'removed') {
-      onFileChange(null);
+      if (onFileChange) {
+        onFileChange(null);
+      }
     }
   };
 
   const onRemove = () => {
     setFileList([]);
-    onFileChange(null);
+    if (onFileChange) {
+      onFileChange(null);
+    }
   };
 
   const renderPhotos = () => {
-    if (!file) {
+    if (bannersCreate ? !bannersFileList?.length : !file) {
       return (
         <div className={b('upload-image-block')}>
           <img
@@ -81,12 +98,6 @@ export const UploadImageComponent: React.FC<Props> = ({
   };
 
   const beforeUpload = (file: File) => {
-    const isSvg = file.type === 'image/svg+xml';
-    if (!isSvg) {
-      message.error(t('image_upload.only_svg_files_allowed'));
-      return Upload.LIST_IGNORE;
-    }
-
     const isSizeValid = file.size / 1024 <= 256;
     if (!isSizeValid) {
       message.error(t('image_upload.image_must_be_256KB_or_smaller'));
@@ -102,7 +113,7 @@ export const UploadImageComponent: React.FC<Props> = ({
         data-testid='image-upload'
         className={b('upload-field')}
         listType='picture-card'
-        fileList={fileList}
+        fileList={bannersCreate ? bannersFileList : fileList}
         onChange={onChange}
         onRemove={onRemove}
         beforeUpload={beforeUpload}
@@ -118,7 +129,7 @@ export const UploadImageComponent: React.FC<Props> = ({
             <img
               src={cancel}
               alt='cancel'
-              onClick={() => onFileChange(null)}
+              onClick={() => onFileChange && onFileChange(null)}
               style={{ cursor: 'pointer', position: 'absolute', top: '-42px', right: '-39px' }}
             />
           ),

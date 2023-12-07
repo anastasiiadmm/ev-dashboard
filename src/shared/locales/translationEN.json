@@ -256,7 +256,9 @@
     "name_in_kyrgyz": "Name in Kyrgyz",
     "name_in_russian": "Name in Russian",
     "name_in_eng": "Title in English",
-    "save": "Save"
+    "save": "Save",
+    "edit_infrastructure": "Edit infrastructure",
+    "delete_infrastructure": "Delete infrastructure"
   },
   "user": {
     "manager": "Manager"

@@ -256,7 +256,9 @@
     "name_in_kyrgyz": "Название на Кыргызском",
     "name_in_russian": "Название на Русском",
     "name_in_eng": "Название на Английском",
-    "save": "Сохранить"
+    "save": "Сохранить",
+    "edit_infrastructure": "Редактировать инфраструктуру",
+    "delete_infrastructure": "Удалить инфраструктуру"
   },
   "user": {
     "manager": "Менеджер"

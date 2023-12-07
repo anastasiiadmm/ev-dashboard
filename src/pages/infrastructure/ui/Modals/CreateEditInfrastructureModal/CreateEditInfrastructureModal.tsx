@@ -119,10 +119,9 @@ const CreateEditInfrastructureModal: React.FC<Props> = ({
       >
         <UploadImageComponent
           creating={creating}
-          selectedInfrastructure={selectedInfrastructure}
           file={file}
           onFileChange={onFileChange}
-          title={t('image_upload.transfer_or_download_infrastructure_icon')}
+          title={t('image_upload.transfer_or_download_infrastructure_icon') as string}
           format='svg+xml'
         />
 
