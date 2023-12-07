@@ -269,5 +269,10 @@
     "maximum_photo_size_256kb": "Maximum photo size 256kb",
     "available_format_svg": "Available format: svg",
     "image_must_be_256KB_or_smaller": "Image must be 256KB or smaller"
+  },
+  "users": {
+    "personal_account": "Personal account",
+    "phone": "Phone number",
+    "period": "Period"
   }
 }

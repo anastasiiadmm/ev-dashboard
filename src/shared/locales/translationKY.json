@@ -269,5 +269,10 @@
     "maximum_photo_size_256kb": "Сүрөттөрдүн максималдуу өлчөмү 256кб",
     "available_format_svg": "Жеткиликтүү форматы: svg",
     "image_must_be_256KB_or_smaller": "Сүрөт 256KB же андан кичине болушу керек"
+  },
+  "users": {
+    "personal_account": "Өздүк эсеп",
+    "phone": "Телефон номуру",
+    "period": "Мезгил"
   }
 }

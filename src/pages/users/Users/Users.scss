@@ -1,0 +1,89 @@
+@use '../../../app/styles/variables' as variables;
+
+.Users {
+  &__search-pagination-block {
+    box-sizing: border-box !important;
+    z-index: 999;
+    width: calc(100% + 40px);
+    margin: 0;
+    background: #ffffff;
+    padding: 16px 16px 0 16px;
+    border-top: 1px solid variables.$gray-bg-color;
+    border-left: 1px solid variables.$gray-bg-color;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__form-styles {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__container-picker {
+    display: flex;
+    align-items: center;
+    position: relative;
+    > div {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    input {
+      color: variables.$title-color;
+    }
+    img {
+      position: absolute;
+      right: 7px;
+      top: 6px;
+      z-index: 0;
+      height: 20px;
+      cursor: text;
+    }
+  }
+
+  &__filters-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__button-select {
+    margin-bottom: 0;
+  }
+
+  &__button-select .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    border: 1px solid variables.$link-turquoise-color;
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  &__button-select .ant-select-selection-item {
+    color: variables.$link-turquoise-color;
+    font-weight: variables.$font-600;
+  }
+
+  &__button-select .ant-select .ant-select-arrow {
+    color: variables.$link-turquoise-color;
+    inset-inline-end: 52px;
+  }
+
+  &__datepicker {
+    width: 152px;
+    border: 1px solid variables.$input-border;
+  }
+
+  .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child {
+    inset-inline-start: 1px;
+  }
+
+  &__search-input .ant-input-affix-wrapper {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+
+  &__search-input .ant-input {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+}

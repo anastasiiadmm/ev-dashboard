@@ -269,5 +269,10 @@
     "maximum_photo_size_256kb": "Максимальный размер фотографии 256кб",
     "available_format_svg": "Доступный формат: svg",
     "image_must_be_256KB_or_smaller": "Максимальный размер фотографии 256кб"
+  },
+  "users": {
+    "personal_account": "Лицевой счет",
+    "phone": "Номер телефона",
+    "period": "Период"
   }
 }
