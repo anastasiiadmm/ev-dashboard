@@ -307,5 +307,26 @@
     "maximum_photo_size_256kb": "Сүрөттөрдүн максималдуу өлчөмү 256кб",
     "available_format_svg": "Жеткиликтүү форматы: svg",
     "image_must_be_256KB_or_smaller": "Сүрөт 256KB же андан кичине болушу керек"
+  },
+  "users": {
+    "personal_account": "Өздүк эсеп",
+    "phone": "Телефон номуру",
+    "period": "Мезгил",
+    "name": "Аты-жөнү",
+    "you_don_t_have_any_users_yet": "Сизде азырынча колдонуучулар жок",
+    "gender": "Жынысы",
+    "birthday": "Туулган күнү",
+    "age": "Жашы",
+    "registration_date": "Каттоо датасы",
+    "phone_number": "Телефон номуру",
+    "email": "Почта дареги",
+    "car": "Машина",
+    "balance": "Баланс",
+    "licence": "Aйдоочулук күбөлүк",
+    "car_make": "Машина жасоо",
+    "model": "Модел",
+    "year": "Жыл",
+    "color": "Түс",
+    "download": "Жүктөө"
   }
 }

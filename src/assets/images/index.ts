@@ -46,6 +46,10 @@ export { default as redxcircle } from './svg/icons/default/redxcircle.svg'
 export { default as meatballIcon } from './svg/icons/default/meatball.svg'
 export { default as uploadImg } from './svg/icons/default/bi_images.svg';
 export { default as cancel } from './svg/icons/default/Cancel.svg';
+export { default as carpoolDriver } from './svg/icons/default/Carpool-rafiki 1.svg';
+export { default as car } from './svg/icons/default/car.svg';
+export { default as licence } from './svg/icons/default/licence.svg';
+export { default as licenceInactive } from './svg/icons/default/licence-inactive.svg';
 
 // Active icons
 export { default as circleActive } from './svg/icons/active/circle-active.svg';

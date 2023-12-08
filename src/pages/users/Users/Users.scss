@@ -1,0 +1,105 @@
+@use '../../../app/styles/variables' as variables;
+
+.Users {
+  &__search-pagination-block {
+    box-sizing: border-box !important;
+    z-index: 999;
+    width: calc(100% + 40px);
+    margin: 0;
+    background: #ffffff;
+    padding: 16px 16px 0 16px;
+    border-top: 1px solid variables.$gray-bg-color;
+    border-left: 1px solid variables.$gray-bg-color;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__form-styles {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__container-picker {
+    display: flex;
+    align-items: center;
+    position: relative;
+    > div {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    input {
+      color: variables.$title-color;
+    }
+    img {
+      position: absolute;
+      right: 7px;
+      top: 6px;
+      z-index: 0;
+      height: 20px;
+      cursor: text;
+    }
+  }
+
+  &__filters-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__button-select {
+    margin-bottom: 0;
+    color: variables.$link-turquoise-color;
+    border-color: variables.$link-turquoise-color;
+  }
+
+  &__datepicker {
+    width: 195px;
+    border: 1px solid variables.$input-border;
+  }
+
+  .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child {
+    inset-inline-start: 1px;
+  }
+
+  &__search-input .ant-input-affix-wrapper {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+
+  &__search-input .ant-input {
+    background-color: variables.$gray-bg-color;
+    border-color: variables.$gray-bg-color;
+  }
+
+  &__table-block {
+    width: 100%;
+    position: relative;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__center-block {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  &__car-info-tooltip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  &__tooltip-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__tooltip-text .ant-typography {
+    line-height: 1.2;
+  }
+}

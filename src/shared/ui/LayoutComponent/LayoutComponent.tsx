@@ -140,7 +140,7 @@ const LayoutComponent: React.FC<Props> = ({ children }) => {
       [
         getItem(
           t('menu.users'),
-          '5',
+          '/users',
           <img src={circle} alt='circle' />,
           <img src={circleActive} alt='circleActive' />,
         ),

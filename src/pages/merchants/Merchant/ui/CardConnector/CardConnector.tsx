@@ -58,6 +58,7 @@ const CardConnector: React.FC<Props> = ({
       name: 'R4',
     },
   ];
+
   const handleEditConnector = () => {
     onEditConnector();
     connector.id = connector.connector_id;

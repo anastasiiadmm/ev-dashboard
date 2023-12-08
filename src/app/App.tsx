@@ -26,6 +26,7 @@ import {
 } from '~/shared/utils/storage';
 import { CreateBanner, HomePageBanner } from '~/pages/banners';
 import { InfrastructureListAsync } from '~/pages/infrastructure';
+import { UsersAsync } from '~/pages/users';
 
 const App: React.FC = observer(() => {
   const b = bem('Auth');
@@ -93,6 +94,9 @@ const App: React.FC = observer(() => {
               </Route>
               <Route path='/tags'>
                 <Route index element={<TagsAsync />} />
+              </Route>
+              <Route path='/users'>
+                <Route index element={<UsersAsync />} />
               </Route>
               <Route path='/infrastructure'>
                 <Route index element={<InfrastructureListAsync />} />

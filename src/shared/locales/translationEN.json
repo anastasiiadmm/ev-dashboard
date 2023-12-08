@@ -307,5 +307,26 @@
     "maximum_photo_size_256kb": "Maximum photo size 256kb",
     "available_format_svg": "Available format: svg",
     "image_must_be_256KB_or_smaller": "Image must be 256KB or smaller"
+  },
+  "users": {
+    "personal_account": "Personal account",
+    "phone": "Phone number",
+    "period": "Period",
+    "name": "Last name First name",
+    "you_don_t_have_any_users_yet": "You don't have any users yet",
+    "gender": "Gender",
+    "birthday": "Birthday",
+    "age": "Age",
+    "registration_date": "Registration date",
+    "phone_number": "Phone number",
+    "email": "Email",
+    "car": "Car",
+    "balance": "Balance",
+    "licence": "Driver license",
+    "car_make": "Car make",
+    "model": "Model",
+    "year": "Year",
+    "color": "Color",
+    "download": "Download"
   }
 }
