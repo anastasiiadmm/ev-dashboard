@@ -50,26 +50,12 @@
 
   &__button-select {
     margin-bottom: 0;
-  }
-
-  &__button-select .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-    border: 1px solid variables.$link-turquoise-color;
-    border-radius: 6px;
-    text-align: center;
-  }
-
-  &__button-select .ant-select-selection-item {
     color: variables.$link-turquoise-color;
-    font-weight: variables.$font-600;
-  }
-
-  &__button-select .ant-select .ant-select-arrow {
-    color: variables.$link-turquoise-color;
-    inset-inline-end: 52px;
+    border-color: variables.$link-turquoise-color;
   }
 
   &__datepicker {
-    width: 152px;
+    width: 195px;
     border: 1px solid variables.$input-border;
   }
 

@@ -285,6 +285,10 @@
     "car": "Car",
     "balance": "Balance",
     "licence": "Driver license",
-    "car_make": "Car make"
+    "car_make": "Car make",
+    "model": "Model",
+    "year": "Year",
+    "color": "Color",
+    "download": "Download"
   }
 }
