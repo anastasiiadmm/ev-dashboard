@@ -18,10 +18,10 @@ interface Props {
     | undefined;
   columns: IColumn[];
   rowKey: (record: ICreateSchedule | IMerchant | IStation | ITag | ICommon | IUser) => Key;
-  rowSelection: {
+  rowSelection?: {
     selectedRowKeys?: React.Key[];
     onChange: (selectedRowKeys: React.Key[]) => void;
-  } | null;
+  };
   loading?: boolean;
   params?: IPagination | null;
   pagePrevHandler?: (() => void | undefined) | undefined;
