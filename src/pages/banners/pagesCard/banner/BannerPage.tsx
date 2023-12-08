@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 
 import { EmptyComponent, ModalComponent } from '~/shared/ui';
-import { deleteIcon, editColor, meatballIcon } from '~/assets/images';
+import { deleteIcon, editColor } from '~/assets/images';
 import { useModal } from '~/shared/hooks';
 import { response, Cards, ModalDelete, responseFullscreen } from '~/pages/banners';
 
@@ -40,22 +40,16 @@ const BannerPage: React.FC<Props> = observer(({ archive = false, variant = false
     setData(switching);
   }, [switching]);
 
-  const itemsMeatBalls = [
+  const items = [
     {
-      icon: <img src={meatballIcon} alt='iconmeat' />,
-      key: 'menu',
-      children: [
-        {
-          icon: <img src={editColor} alt='iconmeat' />,
-          label: t('banners.meatballs.edit'),
-          key: 1,
-        },
-        {
-          icon: <img src={deleteIcon} alt='iconmeat' />,
-          label: t('banners.meatballs.delete'),
-          key: 2,
-        },
-      ],
+      icon: <img src={editColor} alt='iconmeat' />,
+      label: t('banners.meatballs.edit'),
+      key: 1,
+    },
+    {
+      icon: <img src={deleteIcon} alt='iconmeat' />,
+      label: t('banners.meatballs.delete'),
+      key: 2,
     },
   ];
 
@@ -119,7 +113,7 @@ const BannerPage: React.FC<Props> = observer(({ archive = false, variant = false
                     is_active={el.is_active}
                     starts_at={el.starts_at}
                     ends_at={el.ends_at}
-                    itemsMeatBalls={itemsMeatBalls}
+                    itemsDrop={items}
                     modalHandler={(key: number, id: number) => openCloseModal(key, id)}
                     switchHandler={(event: boolean, id: number) => handleSwitchChange(event, id)}
                   />

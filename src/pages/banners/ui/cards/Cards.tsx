@@ -5,7 +5,14 @@ import { useTranslation } from 'react-i18next';
 import './Cards.scss';
 import { FormField, MeatBalls } from '~/shared/ui';
 
+interface IItemsDrop {
+  icon?: React.ReactNode;
+  label?: React.ReactNode | string;
+  key: number;
+}
+
 interface Props {
+  itemsDrop: IItemsDrop[];
   id: number;
   name: string;
   is_active: boolean;
@@ -14,20 +21,10 @@ interface Props {
   image?: string;
   modalHandler: (key: number, id: number) => void;
   switchHandler: (e: boolean, id: number) => void;
-  itemsMeatBalls: {
-    label?: React.ReactNode | string;
-    key: string;
-    icon?: React.ReactNode;
-    children: {
-      icon?: React.ReactNode;
-      label: string;
-      key: number;
-    }[];
-  }[];
 }
 
 const Cards: React.FC<Props> = ({
-  itemsMeatBalls,
+  itemsDrop,
   id,
   name,
   is_active,
@@ -59,8 +56,8 @@ const Cards: React.FC<Props> = ({
       </div>
       <div className={b('container-name-meatballs')}>
         <h3>{name}</h3>
-        <div style={{ marginTop: !image ? '-4.5rem' : '', width: '9%' }}>
-          <MeatBalls items={itemsMeatBalls} change={(key: number) => openCloseModal(key, id)} />
+        <div style={{ marginTop: !image ? '-4.5rem' : '' }}>
+          <MeatBalls items={itemsDrop} change={(key: number) => openCloseModal(key, id)} />
         </div>
       </div>
       <div className={b('container-description')}>
