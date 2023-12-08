@@ -24,7 +24,7 @@ import {
   getUserLocalStorage,
   logoutLocalStorage,
 } from '~/shared/utils/storage';
-import { CreateBanner } from '~/pages/banners';
+import { CreateBanner, HomePageBanner } from '~/pages/banners';
 import { InfrastructureListAsync } from '~/pages/infrastructure';
 
 const App: React.FC = observer(() => {
@@ -77,7 +77,11 @@ const App: React.FC = observer(() => {
           <Suspense fallback={<Spin className='spin' />}>
             <Routes>
               <Route path='/' element={<HomePageAsync />} />
-              <Route path='/create-banner' element={<CreateBanner />} />
+              <Route path='/banners'>
+                <Route index element={<HomePageBanner />} />
+                <Route path='/banners/create-banner/:id?' element={<CreateBanner variant />} />
+                <Route path='/banners/create-fullscreen/:id?' element={<CreateBanner />} />
+              </Route>
               <Route path='/merchants'>
                 <Route index element={<MerchantsAsync />} />
                 <Route path='/merchants/merchant/:id' element={<MerchantAsync />} />

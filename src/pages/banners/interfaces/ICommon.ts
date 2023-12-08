@@ -8,9 +8,9 @@ export interface IFormData {
   name_ru: string;
   name_en: string;
   name_ky: string;
-  source: string;
+  source?: string;
   image: string;
-  category: number;
+  category?: number;
   button_label: string;
   button_color: string;
   start_time: null;
@@ -18,7 +18,7 @@ export interface IFormData {
   finish_time: null;
   finish_date: Dayjs | null;
   is_active: boolean;
-  link: string;
-  merchant: number[];
-  stations: number[];
+  link?: string;
+  merchant?: number[];
+  stations?: number[];
 }

@@ -194,7 +194,15 @@
     "Sunday": "Sunday"
   },
   "banners": {
+    "add_fullscreen": {
+      "edit_title": "Edit fullscreen",
+      "title": "Creation fullscreen",
+      "text": "Information about FULLSCREEN",
+      "name_input": "Fullscreen name",
+      "title_image": "Transfer or upload a photo for the fullscreen"
+    },
     "add_banner": {
+      "edit_title": "Editing a banner",
       "title": "Creating a banner",
       "text": "Information about BANNER",
       "title_image": "Transfer or upload a photo for the banner",
@@ -215,6 +223,36 @@
       "choose_station": "Select stations",
       "search_station": "Search ID, station name",
       "name_station": "Station name"
+    },
+    "tabs": {
+      "banners": "Banner",
+      "fullscreen": "Fullscreen",
+      "archive_banner": "Archive (banner)",
+      "archive_fullscreens": "Archive (fullscreen)"
+    },
+    "modal_delete": {
+      "title": "Are you sure you want to delete?",
+      "description": "If you delete it, you won't be able to restore it",
+      "cancel": "Cancel",
+      "delete": "Delete"
+    },
+    "time": {
+      "to": "To",
+      "from": "From"
+    },
+    "modal_success": {
+      "create": {
+        "title": "Banner created",
+        "description": "The new advertising banner has been successfully created"
+      },
+      "edit": {
+        "title": "Changes saved",
+        "description": "The banner has been successfully updated"
+      }
+    },
+    "meatballs": {
+      "edit": "Edit",
+      "delete": "Delete"
     }
   },
   "empty": {

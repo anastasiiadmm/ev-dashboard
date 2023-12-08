@@ -1,0 +1,157 @@
+@use '../../../../app/styles/variables' as variables;
+
+.Cards {
+  &__container-item {
+    background-color: variables.$white-color;
+    width: 351px;
+    border-radius: 8px;
+    overflow: hidden;
+    h3 {
+      color: variables.$black-color;
+      font-size: 15px;
+      font-weight: variables.$font-600;
+    }
+  }
+
+  &__container-description {
+    padding: 11.5px 16px 6px 16px;
+  }
+
+  &__fullscreen-style {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 351px;
+
+    div {
+      border-radius: 8px;
+      padding: 3px 15px 3px 8px;
+      margin: 12px 16px 0 16px;
+
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      p {
+        width: 6px;
+        height: 6px;
+        border-radius: 99px;
+      }
+      span {
+        font-size: 12px;
+        font-weight: variables.$font-400;
+        letter-spacing: 0.48px;
+      }
+    }
+    .active-true {
+      background-color: variables.$green-bg-active;
+      span {
+        color: variables.$green-active-color;
+      }
+      p {
+        background-color: variables.$green-active-color;
+      }
+    }
+    .active-false {
+      background-color: #fac3c3;
+      span {
+        color: variables.$red-color-first;
+      }
+      p {
+        background-color: variables.$red-color-first;
+      }
+    }
+  }
+
+  &__banner-style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 351px;
+    height: 120px;
+
+    position: relative;
+    img {
+      width: 351px;
+    }
+    div {
+      position: absolute;
+      border-radius: 8px;
+      top: 10px;
+      left: 10px;
+      padding: 3px 15px 3px 8px;
+
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      p {
+        width: 6px;
+        height: 6px;
+        border-radius: 99px;
+      }
+      span {
+        font-size: 12px;
+        font-weight: variables.$font-400;
+        letter-spacing: 0.48px;
+      }
+    }
+    .active-true {
+      background-color: variables.$green-bg-active;
+      span {
+        color: variables.$green-active-color;
+      }
+      p {
+        background-color: variables.$green-active-color;
+      }
+    }
+    .active-false {
+      background-color: #fac3c3;
+      span {
+        color: variables.$red-color-first;
+      }
+      p {
+        background-color: variables.$red-color-first;
+      }
+    }
+  }
+
+  &__container-name-meatballs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11.5px 16px 0 16px;
+  }
+
+  &__container-time {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+    div {
+      width: 150px;
+    }
+    label {
+      color: variables.$title-color;
+      font-size: 12px;
+      font-weight: variables.$font-400;
+    }
+    p {
+      color: variables.$time-color;
+      font-size: 13px;
+      font-weight: variables.$font-400;
+    }
+    span {
+      background-color: variables.$gray-light-bg-color;
+      width: 1px;
+    }
+  }
+
+  &__container-switch {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    div {
+      margin: 0;
+    }
+  }
+}
