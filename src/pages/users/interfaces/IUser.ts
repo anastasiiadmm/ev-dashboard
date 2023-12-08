@@ -1,17 +1,17 @@
 export interface IUser {
   id: number;
-  phone: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  date_of_birth: string;
+  personal_account: string;
+  name: string;
+  gender: string;
+  birthday: string;
   age: number;
-  account_balance: string;
-  is_active: boolean;
-  gender: number;
-  registered_on: string;
-  vehicles: IVehicle[];
-  access: boolean;
+  registration_date: string;
+  phone_number: string;
+  email: string;
+  car: IVehicle[];
+  balance: string;
+  active: boolean;
+  licence: boolean;
 }
 
 export interface IVehicle {

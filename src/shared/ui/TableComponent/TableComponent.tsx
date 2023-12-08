@@ -8,13 +8,17 @@ import { IPagination } from '~/shared/interfaces';
 import { ITag } from '~/pages/tags/interfaces';
 import { ICommon } from '~/pages/banners/interfaces';
 import { NotFoundImages, PaginationComponent } from '~/shared/ui';
+import { IUser } from '~/pages/users/interfaces';
 import './TableComponent.scss';
 
 interface Props {
-  data: readonly (IMerchant | IStation | ITag | ICreateSchedule | ICommon)[] | null | undefined;
+  data:
+    | readonly (IMerchant | IStation | ITag | ICreateSchedule | ICommon | IUser)[]
+    | null
+    | undefined;
   columns: IColumn[];
-  rowKey: (record: ICreateSchedule | IMerchant | IStation | ITag | ICommon) => Key;
-  rowSelection?: {
+  rowKey: (record: ICreateSchedule | IMerchant | IStation | ITag | ICommon | IUser) => Key;
+  rowSelection: {
     selectedRowKeys?: React.Key[];
     onChange: (selectedRowKeys: React.Key[]) => void;
   } | null;

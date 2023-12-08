@@ -17,6 +17,7 @@ import {
   status,
 } from '~/assets/images';
 import { IColumn } from '~/pages/merchants/interfaces';
+import { IUser } from '~/pages/users/interfaces';
 import './Users.scss';
 
 const { Text } = Typography;
@@ -37,7 +38,7 @@ const Users = () => {
   const { t } = useTranslation();
   const [selectedRowKeys] = useState<React.Key[]>([]);
 
-  const users = [
+  const users: IUser[] = [
     {
       id: 1,
       personal_account: '117878',
@@ -121,9 +122,9 @@ const Users = () => {
     {
       title: t('users.name'),
       width: 140,
-      render: (text: string, record: string) => {
+      render: (record: IUser) => {
         return (
-          <Link to={`/users/user/${record?.id}`} className={b('title')}>
+          <Link to={`/users/user/${record?.id as number}`} className={b('title')}>
             {record?.name}
           </Link>
         );
@@ -160,7 +161,7 @@ const Users = () => {
     },
     {
       title: t('users.car'),
-      render: (text, record) => {
+      render: (record: IUser) => {
         return (
           <Tooltip
             color='#fff'
